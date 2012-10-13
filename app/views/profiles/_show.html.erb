@@ -1,0 +1,58 @@
+<div id="Tweet">
+  <div id="title">Tweets
+    <%= will_paginate @tweets, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
+    <span id="success" style="display: none;color: green;float: right;">Successfully deleted this tweet.</span>
+  </div>
+  <% if @tweets.present? %>
+    <% for tweet in @tweets %>
+      <div id="tweet_<%= tweet.id %>" style="position: relative;">
+        <table>
+          <tr>
+            <td>
+              <%= image_tag tweet.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
+            </td>
+            <td valign="top"><%= link_to_function tweet.user.username, "profile_summary(#{tweet.user.id})", :remote => true %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= tweet.body %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <% if tweet.user.id != current_user.id %>
+                <div style="float: right;">
+                  <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,tweet.user.id,false) %>
+                  <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,tweet.user.id) %>
+                  <% if !@user_follower.present?%>
+                    <%= link_to 'Follow',follow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'post', :class => 'button medium green' %>
+                  <% elsif !@user_follow %>
+                    <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
+                  <% elsif @user_follow%>
+                    <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'put', :class => 'button medium green' %>
+                  <% end %>
+                </div>
+              <% end %>
+              <% if tweet.user.id == current_user.id %>
+                <div id="delete_<%= tweet.id %>" style="float: right;display: none;">
+                  <%= link_to "Delete", user_tweet_path(current_user.id,tweet), :method => :delete,:confirm => "Are you Sure..", :remote => true, :class => 'button medium red' %>
+                </div>
+                <script>
+                  $('#tweet_<%= tweet.id %>').hover(function(){
+                    $('#delete_<%= tweet.id %>').show();
+                  });
+                  $('#tweet_<%= tweet.id %>').mouseleave(function(){
+                    $('#delete_<%= tweet.id %>').hide();
+                  });
+                </script>
+              <% end %>
+            </td>
+          </tr>
+        </table>          <hr />
+
+      </div>
+    <% end %>
+  <% else %>
+    <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Tweets.</span>
+  <% end %>
+</div>

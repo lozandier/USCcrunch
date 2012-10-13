@@ -1,0 +1,70 @@
+<div class="content">
+  <div id="sign_in">
+    <h3>Sign in</h3>
+    <div id="error" style="display :none;color :red; font-size: 14px;position: relative;z-index: 1001;">Invalid Email/Password</div>
+    <div id="error1" style="display :none;color :red;font-size: 14px;position: relative;z-index: 1001;">You need to sign in or sign up before continuing. </div>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name),:remote => true) do |f| %>
+      <p><%= f.label :email, "Email:" %><br />
+        <%= f.email_field :email %></p>
+
+      <p><%= f.label :password, "Password:" %><br />
+        <%= f.password_field :password %></p>
+      <p>
+        <button type="submit" class="button medium green">Sign in</button>
+        <%= link_to "Forgot Password?", new_user_password_path, :class => 'button medium black' %><br /><br />
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), :class => 'button medium black' %><br />
+      </p>
+    <% end %>
+  </div>
+  <div id="sign_up">
+    <h3>Sign up </h3>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+
+      <p><%= f.label :email, "Email:" %><br />
+        <%= f.email_field :email %>
+        <%= validation_error(resource.errors["email"]) %></p>
+      <p><%= f.label :username, "User Name:" %><br />
+        <%= f.text_field :username %>
+        <%= validation_error(resource.errors["username"]) %></p>
+
+      <p><%= f.label :password, "Password:" %><br />
+        <%= f.password_field :password %>
+        <%= validation_error(resource.errors["password"]) %></p>
+
+      <p><%= f.label :password_confirmation, "Password Confirmation:" %><br />
+        <%= f.password_field :password_confirmation %>
+        <%= validation_error(resource.errors["password_confirmation"]) %></p>
+
+      <p><%#= f.submit "Sign up" %>
+        <button type="submit" class="button medium green">Sign up</button></p>
+      <% end %>
+  </div>
+</div>
+<script>
+  $(document).ajaxError(function(e, XHR, options){
+    val1 = $('#user_email').val();
+    val2 = $('#user_password').val();
+    if (XHR.status == 401){
+      if(val1 != '' || val2 != ''){
+        $("#error1").hide();
+        $("#error").show();
+      }else{
+        $("#error").hide();
+        $("#error1").show();
+      }
+    }
+  });
+
+  function password(){
+    $("#login_form1").hide();
+    $("#div-regForm1").show();
+  }
+
+  function confirmations(){
+    $("#login_form1").hide();
+    $("#div-regForm1").hide();
+    $("#confirmation_email").show();
+  }
+
+
+</script>

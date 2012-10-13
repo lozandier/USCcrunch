@@ -1,0 +1,37 @@
+#formDiv{
+    background-color: white;
+    float: left;
+    padding-bottom: 20px;
+    padding-left: 17px;
+    padding-right: 17px;
+    padding-top: 20px;
+    position: relative;
+    width: 300px;
+    top: 45px;
+}
+
+#sign_in{
+    background-color: white;
+    float: right;
+    left: -83px;
+    padding-bottom: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 12px;
+    position: relative;
+    top: 30px;
+    width: 300px;
+}
+
+#sign_up{
+    background-color: white;
+    float: right;
+    left: 253px;
+    padding-bottom: 20px;
+    padding-left: 17px;
+    padding-right: 17px;
+    padding-top: 20px;
+    position: relative;
+    top: 345px;
+    width: 300px;
+}

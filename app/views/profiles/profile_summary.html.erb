@@ -1,0 +1,65 @@
+<div id="simple-overlay-title">Profile Summary</div>
+<div id="simple-overlay-content">
+  <div style="margin: -45px 8px;float :right;">
+    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0, :onclick => "hide_popup();")%>
+  </div>
+  <div style="float: left;">
+    <%= image_tag(@user.avatar.url(:original) , :style=>"width:25px;height: 25px;") %>
+  </div>
+  <table style="font-size: 15px;left: -60px;position: relative;top: -8px;width: 360px;">
+    <tr>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td><%= link_to "More Details", profile_path(@user), :style => 'font-size: 12px;text-decoration:none;' %></td>
+    </tr>
+  </table>
+  <hr />
+  <div style="font-size: 16px;">
+    <table cellpadding="20px" width="100%">
+      <tr>
+        <td>
+          <%= @user.tweets.count %> <br /><%= link_to "Tweets", profile_path(@user) %>
+        </td>
+        <td>
+          <%= @user.sent_follows.where("status = #{true}").count %><br /><%= link_to "Following", following_profile_path(@user)%>
+        </td>
+        <td id="follow">
+          <%= @user.received_follows.where("status = #{true}").count %> <br /><%= link_to "Followers", following_profile_path(@user)%>
+        </td>
+      </tr>
+    </table>
+    <hr />
+    <div>
+      <% if @user.id != current_user.id %>
+        <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,@user.id,false) %>
+        <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,@user.id) %>
+        <% if !@user_follower.present?%>
+          <%= link_to 'Follow',follow_user_follow_path(current_user.id,@user.id),:remote => true,:method => 'post', :class => 'button medium green' %>
+        <% elsif !@user_follow %>
+          <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,@user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
+        <% elsif @user_follow%>
+          <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,@user.id),:remote => true,:method => 'put', :class => 'button medium green' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% if @tweets.present? %>
+    <% for tweet in @tweets %>
+      <table>
+        <tr>
+          <td>
+            <%= image_tag tweet.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
+          </td>
+          <td valign="top"><%= tweet.user.username %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= tweet.body %></td>
+        </tr>
+      </table><hr />
+    <% end %>
+  <% else %>
+    No Tweets.
+  <% end %>
+</div>

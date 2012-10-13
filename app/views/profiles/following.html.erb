@@ -1,0 +1,43 @@
+<div class="content">
+  <%= render :partial => 'user_show' %>
+  <div id="profile-index">
+    <div id="Tweet">
+      <div id="title">Following
+      </div>
+      <% if @followers.present? %>
+        <% for follow in @followers %>
+          <table>
+            <tr>
+              <td>
+                <%= image_tag follow.receiver.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
+              </td>
+              <td valign="top"><%= link_to_function follow.receiver.username, "profile_summary(#{follow.receiver.id})", :remote => true %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><%= follow.receiver.email %></td>
+            </tr>
+          </table>
+          <% if follow.receiver.id != current_user.id %>
+            <div style="float: right;margin: -17px 1px;">
+              <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,follow.receiver.id,false) %>
+              <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,follow.receiver.id) %>
+              <% if !@user_follower.present?%>
+                <%= link_to 'Follow',follow_user_follow_path(current_user.id,follow.receiver.id),:remote => true,:method => 'post', :class => 'button medium green' %>
+              <% elsif !@user_follow %>
+                <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,follow.receiver.id),:remote => true,:method => 'put', :class => 'button medium red' %>
+              <% elsif @user_follow%>
+                <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,follow.receiver.id),:remote => true,:method => 'put', :class => 'button medium green' %>
+              <% end %>
+            </div>
+          <% else %>
+            <%= link_to "Edit Profile", edit_profile_path(current_user), :class => 'button medium green', :style => "float: right;margin: -17px 1px;" %>
+          <% end %><hr />
+        <% end %>
+      <% else %>
+        <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No One Following.</span>
+      <% end %>
+    </div>
+  </div>
+</div>
+

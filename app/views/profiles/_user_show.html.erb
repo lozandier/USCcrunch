@@ -1,0 +1,28 @@
+<div id="Profile">
+  <div style="float: left;">
+    <%= image_tag(@user.avatar.url(:original) , :style=>"width:100px;height: 100px;border-radius: 5px;margin: -11px 2px;") %>
+  </div>
+  <table style="position: relative;top: -11px;">
+    <tr>
+      <td><%= link_to @user.username, profile_path(@user) %></td>
+    </tr>
+    <tr>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
+  <div style="float: right;position: relative;top: -47px;">
+    <% if @user.id == current_user.id %>
+      <%= link_to "Edit Profile", edit_profile_path(current_user), :class => 'button' %>
+    <% end %>
+    <div style="line-height:normal;padding: 10px;font-size: 12px;">
+      <b><%= @user.tweets.count %></b>&nbsp;<%= link_to "Tweets", profile_path(@user)%><br /><hr />
+      <b><%= @user.sent_follows.where("status = #{true}").count %></b>&nbsp;<%= link_to "Following", following_profile_path(@user)%><br /><hr />
+      <b><%= @user.received_follows.where("status = #{true}").count %></b>&nbsp;<%= link_to "Followers", followers_profile_path(@user)%>
+    </div>
+  </div>
+  <% if @user.id != current_user.id %>
+    <div style="float: left;left: -115px;position: relative;top: 94px;min-height: 215px;min-width: 380px;">
+      <%= render :partial => 'tweets/form'%>
+    </div>
+  <% end %>
+</div>
