@@ -3,7 +3,7 @@
   <head>
     <title>My Greatest Web App</title>
     <%= stylesheet_link_tag "application", "jquery.notifyBar","simple-overlay.css", "login", "button","jquery.simplyscroll" %>
-    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.remotipart","jquery.simplyscroll","scrollup","jquery.iframe-transport" %>
+    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.remotipart","jquery.simplyscroll","jquery.iframe-transport" %>
     <%= csrf_meta_tags %>
     <% ['notice', 'error', 'warning'].each do |f|%>
       <% if flash[f.to_sym]%>

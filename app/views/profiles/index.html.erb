@@ -20,14 +20,13 @@
         <td>
           <%= current_user.sent_follows.where("status = #{true}").count %> <br /><%= link_to "Following", following_profile_path(current_user)%>
         </td>
-        <td id="follow">
+        <td>
           <%= current_user.received_follows.where("status = #{true}").count %> <br /><%= link_to "Followers", followers_profile_path(current_user)%>
         </td>
       </tr>
     </table><hr />
   </div>
   <div id="users">
-    <script type="text/javascript" src="/assets/jquery.simplyscroll.js"></script>
     <div id="simple-overlay-content" style="height: 400px;">
       <div id="title">
         Who to follow
@@ -48,15 +47,15 @@
                   <td><%= user.email %></td>
                 </tr>
               </table>
-              <div style="float: right;margin: -17px 1px;">
+              <div id="follows" style="float: right;margin: -17px 1px;">
                 <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,user.id,false) %>
                 <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,user.id) %>
                 <% if !@user_follower.present?%>
-                  <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'button medium green' %>
+                  <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'button medium green', :id => "follow_#{user.id}" %>
                 <% elsif !@user_follow %>
-                  <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
+                  <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium red', :id => "unfollow_#{user.id}" %>
                 <% elsif @user_follow%>
-                  <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium green' %>
+                  <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium green', :id => "update_follow_#{user.id}" %>
                 <% end %>
               </div><hr />
             </li>
