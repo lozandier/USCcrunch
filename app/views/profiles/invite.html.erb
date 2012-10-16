@@ -1,11 +1,17 @@
-<div style="float: left;left: -115px;position: relative;top: 94px;min-height: 215px;min-width: 380px;">
-  <div id="simple-overlay-content">
+<div style="float: left;left: -1px;min-height: 110px;position: relative;top: 94px;">
+  <div id="simple-overlay-content" style="width: 500px;">
     <%= form_for @invite, :url => invitation_profiles_path(@invite) do |f| %>
       <table>
         <tr>
+          <td>Friend Emails:</td>
           <td>
             <%= f.text_area :email, :cols => 30, :rows => 2 %>
           </td>
+          <td><%= validation_error(@invite.errors["email"]) %></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><%= f.text_area :body, :cols => 30, :rows => 2 %></td>
         </tr>
         <tr>
           <td><%= f.submit "Invite", :class => 'button medium black'%></td>

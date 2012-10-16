@@ -72,6 +72,8 @@ class ProfilesController < ApplicationController
       flash[:notice] = "Success"
       UserMailer.send_invitation(@invite).deliver
       redirect_to profiles_path
+    else
+      render :action => 'invite'
     end
   end
 end
