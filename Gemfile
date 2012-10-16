@@ -16,6 +16,14 @@ gem 'quiet_assets'
 gem 'thin'
 
 
+group :production do
+  gem 'therubyracer-heroku', '0.8.1.pre3' # you will need this too
+  gem 'pg'
+end
+
+
+
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
