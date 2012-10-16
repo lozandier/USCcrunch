@@ -60,7 +60,7 @@ WebApp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  config.action_mailer.default_url_options = { :host => 'ltwitter.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'ancient-anchorage-2110.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
@@ -71,7 +71,6 @@ WebApp::Application.configure do
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
-
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
