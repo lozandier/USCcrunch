@@ -60,17 +60,18 @@ WebApp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  config.action_mailer.default_url_options = { :host => 'ancient-anchorage-2110.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'ltwitter.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
     #:domain               => 'baci.lindsaar.net',
-    :user_name            => 'k.ashok502@gmail.com',
-    :password             => 'ashokkumar',
+    :user_name            => 'rails.dev.app@gmail.com',
+    :password             => 'pa55w0rd!@#',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }
+
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
