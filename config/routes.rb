@@ -1,7 +1,9 @@
 WebApp::Application.routes.draw do
 
-  
-
+  devise_for :users,:controllers => {:sessions => 'sessions'}
+  devise_scope :user do
+    get "sign_out", :to => "devise/sessions#destroy",:as => "logout"
+  end
 
   devise_for :admins,:controllers => {:sessions => "admin/sessions",:passwords => "admin/passwords"}
   devise_scope :admin do
@@ -15,17 +17,8 @@ WebApp::Application.routes.draw do
   end
 
   resources :schools do
-    resources :students do
-      collection do
-        post :upload_csv
-      end
-    end
+    resources :students
     resources :teachers
-  end
-
-  devise_for :users,:controllers => {:sessions => 'sessions'}
-  devise_scope :user do
-    get "sign_out", :to => "devise/sessions#destroy",:as => "logout"
   end
 
   resources :profiles do
