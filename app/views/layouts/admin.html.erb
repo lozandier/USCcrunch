@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Greatest Web App</title>
+    <%= stylesheet_link_tag "application", "jquery.notifyBar","simple-overlay.css", "login", "button","jquery.simplyscroll" %>
+    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.remotipart","jquery.simplyscroll","jquery.iframe-transport" %>
+    <%= csrf_meta_tags %>
+    <% ['notice', 'error', 'warning'].each do |f|%>
+      <% if flash[f.to_sym]%>
+        <script type="text/javascript" >
+          jQuery(function () {
+            jQuery.notifyBar({
+              cls: "<%= f %>",
+              html: "<%=  flash[f.to_sym] %>",
+              delay: 3000,
+              animationSpeed: "normal"
+            });
+          });
+        </script>
+      <%end%>
+    <%end%>
+  </head>
+
+  <body>
+    <div id="page-body">
+      <div class="wrapper">
+        <!-- tr layout test -->
+        <div id="header">
+          <div id="login-logout-links" style="float: left; margin-right:25px;">
+            <% if current_user %>
+              <%= link_to "Home", profiles_path, :class => "header_links button", :style => "margin: -3px 2px;" %>
+            <% else %>
+              <%= link_to "Home", root_path, :class => "header_links button", :style => "margin: -3px 2px;" %>
+            <% end %>
+            <%= link_to "Getting Started", "" , :class => "header_links button", :style => "margin: -3px 2px;"%>
+            <%= link_to "About", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
+            <%= link_to "Contact", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
+            <%= link_to "About", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
+            <div class="menubanner">
+              <% if !current_admin %>
+                <div class="menubanneritem">Hello Guest.<%= link_to "Login here >>", new_admin_session_path, :class => 'btn btn-login button', :style => "margin: -3px 2px;"  %></div>
+              <% else %>
+                <%= link_to "Dashboard", admin_dashboards_path, :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
+                <%= link_to "Create School Admin", new_admin_school_path, :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
+                <%= link_to "Logout", destroy_admin_session_path,:method => 'delete', :class => "menubanneritem button", :style => 'float:right;margin: -3px 2px;'  %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% if @profile_subtab %>
+          <div style="text-align: center;">
+            <%= link_to "My Account", "", :class => 'button' %>
+          </div>
+        <% end %>
+        <div id='ajax_loader_big_div' style='z-index:1000000;'>
+          <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
+        </div>
+        <%= yield %>
+      </div>
+    </div>
+    <div id='overlay' style='filter:alpha(opacity=50);'></div>
+    <div align='center' id='popup_box'>
+      <div style='float: right; margin-top: -40px;margin-right:-40px'>
+      </div>
+      <div id='popup_body' style='float:right'></div>
+    </div>
+  </body>
+</html>

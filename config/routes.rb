@@ -1,4 +1,28 @@
 WebApp::Application.routes.draw do
+
+  
+
+
+  devise_for :admins,:controllers => {:sessions => "admin/sessions",:passwords => "admin/passwords"}
+  devise_scope :admin do
+    get "admin_login",:to => "admin/sessions#new" ,:as => "admin_login"
+    get "admin_sign_out", :to => "admin/sessions#destroy",:as => "admin_logout"
+  end
+
+  namespace :admin do
+    resources :dashboards
+    resources :schools
+  end
+
+  resources :schools do
+    resources :students do
+      collection do
+        post :upload_csv
+      end
+    end
+    resources :teachers
+  end
+
   devise_for :users,:controllers => {:sessions => 'sessions'}
   devise_scope :user do
     get "sign_out", :to => "devise/sessions#destroy",:as => "logout"
@@ -14,6 +38,8 @@ WebApp::Application.routes.draw do
     collection do
       get :edit_password
       put :update_password
+      get :invite
+      post :invitation
     end
   end
 

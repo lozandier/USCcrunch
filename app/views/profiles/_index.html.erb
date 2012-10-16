@@ -16,25 +16,21 @@
             <td></td>
             <td><%= tweet.body %></td>
           </tr>
-          <tr>
-            <td></td>
-            <td>
-              <% if tweet.user.id == current_user.id %>
-                <div id="delete_<%= tweet.id %>" style="float: right;display: none;">
-                  <%= link_to "Delete", user_tweet_path(current_user.id,tweet), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red' %>
-                </div>
-                <script>
-                  $('#tweet_<%= tweet.id %>').hover(function(){
-                    $('#delete_<%= tweet.id %>').show();
-                  });
-                  $('#tweet_<%= tweet.id %>').mouseleave(function(){
-                    $('#delete_<%= tweet.id %>').hide();
-                  });
-                </script>
-              <% end %>
-            </td>
-          </tr>
-        </table><hr />
+        </table>
+        <% if tweet.user.id == current_user.id %>
+          <div id="delete_<%= tweet.id %>" style="float: right;margin: -17px 1px;display: none;">
+            <%= link_to "Delete", user_tweet_path(current_user.id,tweet), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red' %>
+          </div>
+          <script>
+            $('#tweet_<%= tweet.id %>').hover(function(){
+              $('#delete_<%= tweet.id %>').show();
+            });
+            $('#tweet_<%= tweet.id %>').mouseleave(function(){
+              $('#delete_<%= tweet.id %>').hide();
+            });
+          </script>
+        <% end %>
+        <hr />
       </div>
     <% end %>
   <% else %>

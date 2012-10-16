@@ -46,9 +46,9 @@
   </div>
   <% if @tweets.present? %>
     <% for tweet in @tweets %>
-      <table>
+      <table width="100%">
         <tr>
-          <td>
+          <td width="5%">
             <%= image_tag tweet.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
           </td>
           <td valign="top"><%= tweet.user.username %></td>

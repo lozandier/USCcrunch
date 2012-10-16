@@ -12,6 +12,8 @@ gem "prototype-rails","~> 3.2.1"
 gem "friendly_id", "~> 4.0.1"
 gem 'remotipart', '~> 1.0'
 gem 'will_paginate', '>= 3.0.pre'
+gem 'quiet_assets'
+gem 'thin'
 
 
 # Gems used only for assets and not required

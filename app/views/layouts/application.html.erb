@@ -41,6 +41,7 @@
                 <div class="menubanneritem">Hello Guest.<%= link_to "Login here >>", new_user_session_path, :class => 'btn btn-login button', :style => "margin: -3px 2px;"  %></div>
               <% else %>
                 <%= link_to "My Account", profile_path(current_user), :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
+                <%= link_to "Invite", invite_profiles_path(current_user), :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
                 <%= link_to "Logout", destroy_user_session_path,:method => 'delete', :class => "menubanneritem button", :style => 'float:right;margin: -3px 2px;'  %>
               <% end %>
             </div>

@@ -16,4 +16,20 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
     end
   end
+
+  private
+  def is_admin?
+    unless current_admin
+      flash[:error] = 'Please Login.'
+      redirect_to '/'
+    end
+  end
+
+  def get_layout?
+    return "admin"
+  end
+
+  def layout?
+    return "school"
+  end
 end

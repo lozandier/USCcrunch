@@ -1,0 +1,25 @@
+<div id="Tweet-summary" style="background-color: #F9F9F9;float: left;min-height: 100px;position: absolute;top: 113px;left: 0px;border-radius: 5px;width: 440px;">
+  <div id="title">Schools
+    <span id="success" style="display: none;color: green;float: right;">Successfully deleted this tweet.</span>
+  </div>
+  <% if @schools.present? %>
+    <% for school in @schools %>
+      <div id="tweet_<%= school.id %>">
+        <table>
+          <tr>
+            <td></td>
+            <td><%= school.school_name %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= school.email %></td>
+          </tr>
+        </table>
+        <hr />
+      </div>
+    <% end %>
+  <% else %>
+    <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Tweets.</span>
+  <% end %>
+</div>
+

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me,:username,:avatar
+  attr_accessible :email, :password, :password_confirmation, :remember_me,:username,:avatar,:school_id
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
   has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "100x100>"}, :default_url => "/assets/ima.png"
   validates :username,:presence => true

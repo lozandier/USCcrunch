@@ -1,0 +1,35 @@
+<div id="sign_in" style="float: left;left: 0px;position: relative;top: 94px;min-height: 115px;min-width: 520px;">
+  <h3>Send Invitation To Student</h3>
+  <%= form_for @student, :url => school_students_path(@school) do |f| %>
+    <table>
+      <tr>
+        <td>Student Name:</td>
+        <td><%= f.text_field :name%></td>
+        <td><%= validation_error(@student.errors["name"])%></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><%= f.text_field :email %></td>
+        <td><%= validation_error(@student.errors["email"])%></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "Send Invitation", :class => 'button medium green'%></td>
+      </tr>
+    </table>
+  <% end %>
+</div>
+(OR)
+
+<div id="sign_in" style="float: right;
+     left: 14px;
+     min-height: 115px;
+     min-width: 410px;
+     position: relative;
+     top: -81px;">
+  <h3>Send Invitation To Student</h3>
+  <%= form_for @student, :url => upload_csv_school_students_path(@school), :html => {:multipart => true, :method => 'POST'} do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Upload" %>
+  <% end %>
+</div>

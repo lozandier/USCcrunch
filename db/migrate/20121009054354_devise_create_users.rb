@@ -25,6 +25,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.datetime :avatar_updated_at
       t.string :location
       t.string :slug
+      t.integer :school_id
 
       ## Confirmable
       t.string   :confirmation_token

@@ -61,4 +61,17 @@ class ProfilesController < ApplicationController
     @tweet = @user.tweets.new(params[:tweet])
     @followers = Follow.where("status = #{true} and user_id = #{@user.id}")
   end
+
+  def invite
+    @invite = Invitation.new
+  end
+
+  def invitation
+    @invite = Invitation.new(params[:invitation])
+    if @invite.save
+      flash[:notice] = "Success"
+      UserMailer.send_invitation(@invite).deliver
+      redirect_to profiles_path
+    end
+  end
 end

@@ -1,0 +1,16 @@
+<div style="float: left;left: -115px;position: relative;top: 94px;min-height: 215px;min-width: 380px;">
+  <div id="simple-overlay-content">
+    <%= form_for @invite, :url => invitation_profiles_path(@invite) do |f| %>
+      <table>
+        <tr>
+          <td>
+            <%= f.text_area :email, :cols => 30, :rows => 2 %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= f.submit "Invite", :class => 'button medium black'%></td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div id="sign_in" style="float: left;left: 0px;position: relative;top: 94px;min-height: 115px;min-width: 520px;">
+  <h3>Create School Admin</h3>
+  <%= form_for @school, :url => admin_schools_path do |f| %>
+    <table>
+      <tr>
+        <td>School Name:</td>
+        <td><%= f.text_field :school_name%></td>
+        <td><%= validation_error(@school.errors["school_name"])%></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><%= f.text_field :email %></td>
+        <td><%= validation_error(@school.errors["email"])%></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "Create School Admin ", :class => 'button medium green'%></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

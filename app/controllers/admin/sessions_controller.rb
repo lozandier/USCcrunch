@@ -1,0 +1,23 @@
+class Admin::SessionsController < Devise::SessionsController
+  layout :get_layout?
+
+  def new
+  end
+
+  def create
+    puts "VVVVVVVVVVVV"
+    puts warden.authenticate!(:scope => resource)
+    puts resource = warden.authenticate!(:scope => resource)
+    puts "VVVVVVVVVVVV"
+    puts resource.errors.inspect
+    puts "VVVVVVVVVVVBBBBBB"
+    redirect_to admin_dashboards_path
+  end
+
+  def destroy
+    signed_in = signed_in?(resource_name)
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :signed_out if signed_in
+    redirect_to "/"
+  end
+end

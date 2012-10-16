@@ -1,0 +1,22 @@
+<div id="sign_in">
+  <h3>Sign in</h3>
+  <% flash.each do |key, value| %>
+    <div class="flash <%= key %>" style="color: red;margin-left: 17px; margin-top: -63px;position: absolute;width: 277px;">Invalid Username or password.</div>
+  <% end %>
+  <div class="flash" style="color :#2A6C86;float: left;margin-top:15px;margin-left:12px;"></div>
+  <%= form_for resource, :as => resource_name, :url => admin_session_path  do |f| %>
+    <p><%= f.label :email, "Email:" %><br />
+      <%= f.email_field :email %></p>
+
+    <p><%= f.label :password, "Password:" %><br />
+      <%= f.password_field :password %></p>
+    <p>
+      <button type="submit" class="button medium green">Sign in</button>
+    </p>
+  <% end %>
+</div>
+
+
+
+
+
