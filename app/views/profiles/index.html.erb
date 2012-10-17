@@ -1,73 +1,60 @@
-<div class="content">
-  <div id="Profile-summary">
-    <div style="float: left;">
-      <%= image_tag(current_user.avatar.url(:original) , :style=>"width:32px;height: 32px;border-radius: 5px;") %>
+<div class="span4">
+  <div class="box_l1_hp">
+    <%= image_tag(current_user.avatar.url(:original),:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
+    <h3 class="profile_name"><%= current_user.username %></h3>
+    <%= link_to "View my profile page", profile_path(current_user), :class => "view_my_profile_page" %>
+    <div class="posts_count">
+      <%= current_user.tweets.count %><br />POSTS
     </div>
-    <table style="margin: -4px 30px;font-size: 15px;">
-      <tr>
-        <td><%= link_to current_user.username, profile_path(current_user) %></td>
-      </tr>
-      <tr>
-        <td><%= current_user.email %></td>
-      </tr>
-    </table><br /><br />
-    <hr />
-    <table cellpadding="20px" width="100%">
-      <tr>
-        <td>
-          <%= current_user.tweets.count %> <br /><%= link_to "Tweets", profile_path(current_user)%>
-        </td>
-        <td>
-          <%= current_user.sent_follows.where("status = #{true}").count %> <br /><%= link_to "Following", following_profile_path(current_user)%>
-        </td>
-        <td>
-          <%= current_user.received_follows.where("status = #{true}").count %> <br /><%= link_to "Followers", followers_profile_path(current_user)%>
-        </td>
-      </tr>
-    </table><hr />
-  </div>
-  <div id="users">
-    <div id="simple-overlay-content" style="height: 400px;">
-      <div id="title">
-        Who to follow
-      </div><hr />
-      <% if @users.present? %>
-        <ul id="scroller">
-          <% for user in @users %>
-            <li>
-              <table>
-                <tr>
-                  <td>
-                    <%= image_tag user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
-                  </td>
-                  <td valign="top"><%= link_to_function user.username, "profile_summary(#{user.id})", :remote => true %></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><%= user.email %></td>
-                </tr>
-              </table>
-              <div id="follows" style="float: right;margin: -17px 1px;">
-                <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,user.id,false) %>
-                <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,user.id) %>
-                <% if !@user_follower.present?%>
-                  <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'button medium green', :id => "follow_#{user.id}" %>
-                <% elsif !@user_follow %>
-                  <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium red', :id => "unfollow_#{user.id}" %>
-                <% elsif @user_follow%>
-                  <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'button medium green', :id => "update_follow_#{user.id}" %>
-                <% end %>
-              </div><hr />
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Users To Follow</span>
-      <% end %>
+    <div class="replies_count">
+      <%= current_user.tweets.count %><br />REPLIES
     </div>
+    <input class="compose_new_post" type="text" placeholder="Compose new Post..." />
   </div>
-  <div id="profile-index">
-    <%= render :partial => 'index' %>
+
+  <div class="box_l2_hp">
+    <% if @users.present? %>
+      <ul id="scroller">
+        <% for user in @users %>
+          <li>
+            <table>
+              <tr>
+                <td>
+                  <%= image_tag user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
+                </td>
+                <td valign="top"><%= link_to_function user.username, "profile_summary(#{user.id})", :remote => true %></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><%= user.email %></td>
+              </tr>
+            </table>
+            <div id="follows" style="float: right;margin: -17px 1px;">
+              <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,user.id,false) %>
+              <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,user.id) %>
+              <% if !@user_follower.present?%>
+                <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'btn', :id => "follow_#{user.id}" %>
+              <% elsif !@user_follow %>
+                <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "unfollow_#{user.id}" %>
+              <% elsif @user_follow%>
+                <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "update_follow_#{user.id}" %>
+              <% end %>
+            </div><hr />
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Users To Follow</span>
+    <% end %>
+  </div>
+
+  <div class="box_l3_hp">
+    <div class="link_box">
+      &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
+    </div>
   </div>
 </div>
 
+<div class="span8">
+  <%= render :partial => 'index' %>
+</div>

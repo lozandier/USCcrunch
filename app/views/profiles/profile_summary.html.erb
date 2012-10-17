@@ -1,7 +1,7 @@
 <div id="simple-overlay-title">Profile Summary</div>
 <div id="simple-overlay-content">
   <div style="margin: -45px 8px;float :right;">
-    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0, :onclick => "hide_popup();")%>
+    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
   </div>
   <div style="float: left;">
     <%= image_tag(@user.avatar.url(:original) , :style=>"width:25px;height: 25px;") %>

@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :is_login?
+  layout :get_layout
 
   def index
     @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")

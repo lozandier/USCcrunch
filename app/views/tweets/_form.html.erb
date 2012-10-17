@@ -1,35 +1,13 @@
 <div id="UserComment">
-  <div id="simple-overlay-content">
-    <div>Tweet to <%= @user.username %></div>
-    <hr />
-    <%= form_for @tweet, :url => user_tweets_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
-      <table>
-        <tr>
-          <td><%= f.text_area :body, :cols => 30, :rows => 1, :placeholder => "Compose Tweet Here.." %>
-            <%= validation_error(@tweet.errors['body'])%></td>
-        </tr>
-        <tr id="img_preview" style="display: none;">
-          <td>
-            <%= image_tag(@tweet.document.url(:original),:width => '30px', :height => '30px', :id => 'img_show')%>
-          </td>
-        </tr>
-        <tr>
-          <td class="hide"><%= f.file_field :document, :id => 'small_img', :onChange => 'readURL(this)' %></td>
-        </tr>
-        <tr>
-          <td valign="bottom" class="hide"><%= f.submit "Tweet", :class => 'button medium black'%></td>
-        </tr>
-      </table>
-    <% end %>
-  </div>
+  <%= form_for @tweet, :url => user_tweets_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
+    <table>
+      <tr>
+        <td><%= f.text_area :body, :cols => 30, :rows => 1, :placeholder => "Compose Tweet Here.." %>
+          <%= validation_error(@tweet.errors['body'])%></td>
+      </tr>
+      <tr>
+        <td valign="bottom"><%= f.submit "Post", :class => 'btn'%></td>
+      </tr>
+    </table>
+  <% end %>
 </div>
-<script>
-  $("#tweet_body").focus(function(){
-    $(this).css('min-height','70px');
-  });
-
-  $("#tweet_body").blur(function(){
-    $(this).css('min-height','20px');
-  });
-
-</script>

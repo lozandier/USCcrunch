@@ -1,2 +1,28 @@
-<div class="content">
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="span8 offset2">
+        <div id="myCarousel" class="carousel slide">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="active item"><%= image_tag("/assets/imac.png", :alt => "app")%></div>
+            <div class="item"><%= image_tag("/assets/ipad.png", :alt => "app")%></div>
+          </div>
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+        <h1>Not your regular web application</h1>
+        <p>The next big thing is arround the corner and you'll be part of it.</p>
+      </div>
+    </div>
+</header>
+
+<div class="strip">
+  <div class="container">
+    <div class="row">
+      <p>Empowered by more than 40.000 customers around the world. Developers, Y U no signup? <%= link_to "SIGNUP NOW!", new_user_session_path, :class => 'btn btn-primary' %></p>
+    </div>
+  </div>
+</div>
 </div>

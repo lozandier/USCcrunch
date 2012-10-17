@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>Eduposts</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <%= stylesheet_link_tag "/assets/bootstrap_files/bootstrap","simple-overlay", "jquery.notifyBar","/assets/bootstrap_files/bootstrap-responsive","jquery.simplyscroll" %>
+    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.simplyscroll","jquery.remotipart","/assets/bootstrap_files/bootstrap-transition.js","/assets/bootstrap_files/bootstrap-alert.js","/assets/bootstrap_files/bootstrap-modal.js","/assets/bootstrap_files/bootstrap-dropdown.js","/assets/bootstrap_files/bootstrap-scrollspy.js","/assets/bootstrap_files/bootstrap-tab.js","/assets/bootstrap_files/bootstrap-tooltip.js","/assets/bootstrap_files/bootstrap-popover.js","/assets/bootstrap_files/bootstrap-button.js","/assets/bootstrap_files/bootstrap-collapse.js","/assets/bootstrap_files/bootstrap-carousel.js","/assets/bootstrap_files/bootstrap-typeahead.js" %>
+    <%= csrf_meta_tags %>
+    <% ['notice', 'error', 'warning'].each do |f|%>
+      <% if flash[f.to_sym]%>
+        <script type="text/javascript" >
+          jQuery(function () {
+            jQuery.notifyBar({
+              cls: "<%= f %>",
+              html: "<%=  flash[f.to_sym] %>",
+              delay: 3000,
+              animationSpeed: "normal"
+            });
+          });
+        </script>
+      <%end%>
+    <%end%>
+    <style>
+      body { padding-top: 105px; }
+    </style>
+  </head>
+  <body style="padding-top: 60px;">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <!--<a class="brand" href="index.html"><img src="images/logo.png" height="85px" width="115px"/></a>-->
+          <img class="paper_plane" src="/assets/paper_plane_icon.png" height="50px" width="50px"/>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <%= link_to image_tag("/assets/home_icon_default.png", :height => "15px", :width => "15px")+'Home', profiles_path  %>
+              </li>
+              <li>
+                <%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "15px", :width => "15px")+"Me", profile_path(current_user) %>
+              </li>
+              <li>
+                <%= link_to "Class", "" %>
+              </li>
+            </ul>
+
+            <ul class="nav pull-right">
+              <div class="btn-group">
+                <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
+                  <img src="/assets/settings_default.png" heigt="15px" width="15px"/>
+                  <span class="caret"></span>
+                </a>
+                <a class="btn btn-primary href="#">
+                   <img src="/assets/new_post_icon.png" heigt="15px" width="15px"/>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- dropdown menu links -->
+                  <li><%= link_to "My Profile", profile_path(current_user)%></li>
+                  <li><%= link_to "Edit Profile", edit_profile_path(current_user) %></li>
+                  <li><%= link_to "SignOut", destroy_user_session_path, :method => 'delete' %></li>
+                </ul>
+              </div>
+            </ul>
+            <form class="navbar-search pull-right">
+              <input type="text" class="search-query" placeholder="Search">
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div id='ajax_loader_big_div' style='z-index:1000000;display: none;'>
+      <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
+    </div>
+    <div class="container">
+      <div class="row-fluid">
+        <%= yield %>
+      </div>
+    </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <p>Designed by @heyallanmoreno</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div id='overlay' style='filter:alpha(opacity=50);'></div>
+  <div align='center' id='popup_box'>
+    <div style='float: right; margin-top: -40px;margin-right:-40px'>
+    </div>
+    <div id='popup_body' style='float:right'></div>
+  </div>
+</body>
+</html>

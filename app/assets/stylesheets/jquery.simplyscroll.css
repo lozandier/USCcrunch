@@ -185,7 +185,7 @@ Note all DIVs are generated and should not be hard-coded
 }
 
 .vert .simply-scroll-clip {
-    width: 510px;
+    width: 360px;
     height: 300px;
 }
 
@@ -193,7 +193,7 @@ Note all DIVs are generated and should not be hard-coded
 
 .vert .simply-scroll-list li {
     height: auto;
-    width: 510px;
+    width: 360px;
 }
 .vert .simply-scroll-list li img {}
 

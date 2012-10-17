@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
       redirect_to '/'
     end
   end
-
   private
   def is_admin?
     unless current_admin
@@ -25,8 +24,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_layout?
-    return "admin"
+  def get_layout
+    if current_user
+      return "eduposts"
+    else
+      return "application"
+    end
   end
 
   def layout?

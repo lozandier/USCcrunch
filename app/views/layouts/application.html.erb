@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
   <head>
     <title>My Greatest Web App</title>
-    <%= stylesheet_link_tag "application", "jquery.notifyBar","simple-overlay.css", "login", "button","jquery.simplyscroll" %>
-    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.remotipart","jquery.simplyscroll","jquery.iframe-transport" %>
+    <%= stylesheet_link_tag "bootstrap", "jquery.notifyBar","bootstrap-responsive", "base","jquery.simplyscroll","green","red","blue","styleswitch" %>
+    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.simplyscroll","jquery.remotipart","bootstrap.min","script","jquery.iframe-transport","styleswitch" %>
     <%= csrf_meta_tags %>
     <% ['notice', 'error', 'warning'].each do |f|%>
       <% if flash[f.to_sym]%>
@@ -19,50 +19,55 @@
         </script>
       <%end%>
     <%end%>
+    <style>
+      body { padding-top: 105px; }
+    </style>
   </head>
-
   <body>
-    <div id="page-body">
-      <div class="wrapper">
-        <!-- tr layout test -->
-        <div id="header">
-          <div id="login-logout-links" style="float: left; margin-right:25px;">
-            <% if current_user %>
-              <%= link_to "Home", profiles_path, :class => "header_links button", :style => "margin: -3px 2px;" %>
-            <% else %>
-              <%= link_to "Home", root_path, :class => "header_links button", :style => "margin: -3px 2px;" %>
-            <% end %>
-            <%= link_to "Getting Started", "" , :class => "header_links button", :style => "margin: -3px 2px;"%>
-            <%= link_to "About", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
-            <%= link_to "Contact", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
-            <%= link_to "About", "", :class => "header_links button", :style => "margin: -3px 2px;" %>
-            <div class="menubanner">
-              <% if !current_user %>
-                <div class="menubanneritem">Hello Guest.<%= link_to "Login here >>", new_user_session_path, :class => 'btn btn-login button', :style => "margin: -3px 2px;"  %></div>
-              <% else %>
-                <%= link_to "My Account", profile_path(current_user), :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
-                <%= link_to "Invite", invite_profiles_path(current_user), :class => "menubanneritem button", :style => "margin: -3px 2px;"  %>
-                <%= link_to "Logout", destroy_user_session_path,:method => 'delete', :class => "menubanneritem button", :style => 'float:right;margin: -3px 2px;'  %>
-              <% end %>
-            </div>
-          </div>
+    <!--Delete this-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <i class="icon icon-reorder"></i> Menu
+          </a>
+          <a class="brand">Ambrosia</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <% if current_user %>
+                  <%= link_to "Home", profiles_path %>
+                <% else %>
+                  <%= link_to "Home", root_path %>
+                <% end %></li>
+              <li><%= link_to "Getting started", "" %></li>
+              <li><%= link_to "Blog", "" %></li>
+              <li><%= link_to "About", "" %></li>
+              <li><%= link_to "Contact", "" %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <% if @profile_subtab %>
-          <div style="text-align: center;">
-            <%= link_to "My Account", profile_path(current_user), :class => 'button' %>
-          </div>
-        <% end %>
-        <div id='ajax_loader_big_div' style='z-index:1000000;'>
-          <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
+      </div>
+      <div class="sub-navbar">
+        <div class="container">
+          <p><i class="icon icon-user"></i> Hello, Guest. <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %></p>
         </div>
-        <%= yield %>
       </div>
     </div>
-    <div id='overlay' style='filter:alpha(opacity=50);'></div>
-    <div align='center' id='popup_box'>
-      <div style='float: right; margin-top: -40px;margin-right:-40px'>
-      </div>
-      <div id='popup_body' style='float:right'></div>
+
+    <div id='ajax_loader_big_div' style='z-index:1000000;display: none;'>
+      <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
     </div>
-  </body>
+    <%= yield %>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <p>Designed by @heyallanmoreno</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>

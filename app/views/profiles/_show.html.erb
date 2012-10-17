@@ -1,59 +1,57 @@
-<div id="Tweet">
-  <div id="title">Tweets
-    <%= will_paginate @tweets, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
-    <span id="success" style="display: none;color: green;float: right;">Successfully deleted this tweet.</span>
-  </div>
-  <% if @tweets.present? %>
-    <% for tweet in @tweets %>
-      <div id="tweet_<%= tweet.id %>" style="position: relative;">
-        <table>
-          <tr>
-            <td>
-              <%= image_tag tweet.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
-            </td>
-            <td valign="top"><%= link_to_function tweet.user.username, "profile_summary(#{tweet.user.id})", :remote => true %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><%= tweet.body %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
+<div class="row-fluid">
 
-            </td>
-          </tr>
-        </table>
-        <% if tweet.user.id != current_user.id %>
-          <div style="float: right;margin: -17px 1px;">
-            <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,tweet.user.id,false) %>
-            <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,tweet.user.id) %>
-            <% if !@user_follower.present?%>
-              <%= link_to 'Follow',follow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'post', :class => 'button medium green' %>
-            <% elsif !@user_follow %>
-              <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
-            <% elsif @user_follow%>
-              <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,tweet.user.id),:remote => true,:method => 'put', :class => 'button medium green' %>
-            <% end %>
-          </div>
-        <% end %>
-        <% if tweet.user.id == current_user.id %>
-          <div id="delete_<%= tweet.id %>" style="float: right;margin: -17px 1px;display: none;">
-            <%= link_to "Delete", user_tweet_path(current_user.id,tweet), :method => :delete,:confirm => "Are you Sure..", :remote => true, :class => 'button medium red' %>
-          </div>
-          <script>
-            $('#tweet_<%= tweet.id %>').hover(function(){
-              $('#delete_<%= tweet.id %>').show();
-            });
-            $('#tweet_<%= tweet.id %>').mouseleave(function(){
-              $('#delete_<%= tweet.id %>').hide();
-            });
-          </script>
-        <% end %>
-        <hr />
+  <div class="span4">
+    <% if @user.id != current_user.id %>
+      <div class="box_l1_up">
+        <div class="post_to_box">
+          <h5>Post to <%= @user.username %></h5>
+          <%= render :partial => 'tweets/form'%>
+        </div>
       </div>
     <% end %>
-  <% else %>
-    <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Tweets.</span>
-  <% end %>
+
+    <div class="box_l2_hp">
+    			This box has not been decided what to be used for.
+    </div>
+
+    <div class="box_l3_hp">
+      <div class="link_box">
+        &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
+      </div>
+    </div>
+
+  </div>
+
+  <div class="span8">
+    <div class="box_r1_hp">
+      <h2 class="posts_title">Posts</h2>
+      <hr />
+      <% if @tweets.present? %>
+        <% for tweet in @tweets %>
+          <div class="posts_box">
+            <div style="float:left;clear:both;"><%= image_tag tweet.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
+            <div class="post" style="border-bottom: 1px solid grey;height: auto;">
+              <h5 class="post_name"><%= tweet.user.username %></h5>
+              <div class="post_at">&nbsp<%= tweet.user.email %></div>
+              <div class="post_time"><%= time_ago_in_words(tweet.created_at) %></div>
+              <div class="post_text"><%= tweet.body %></div>
+              <div class="action_row">
+                <a href="#">Expand</a>
+                &nbsp&nbsp
+                <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
+                &nbsp&nbsp
+                <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Repost</a>
+                &nbsp&nbsp
+                <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
+      <% end %>
+    </div>
+
+  </div>
+
 </div>

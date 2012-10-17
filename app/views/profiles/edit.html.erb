@@ -1,44 +1,45 @@
-<div id="Profile">
-  <div style="float: left;">
-    <%= image_tag(@user.avatar.url(:original) , :style=>"width:100px;height: 100px;border-radius: 5px;margin: -11px 2px;") %>
+<div class="span4">
+
+  <div class="box_l1_ep">
+    <%= image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+    <h3 class="profile_name"><%= @user.username %></h3>
+    <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
   </div>
-  <table style="position: relative;top: -11px;">
-    <tr>
-      <td><%= link_to @user.username, profile_path(@user) %></td>
-    </tr>
-    <tr>
-      <td><%= @user.email %></td>
-    </tr>
-  </table>
-  <div style="float: right;position: relative;top: -47px;">
-    <%= link_to "Edit Profile", edit_profile_path(current_user), :class => 'button' %>
-    <div style="line-height:normal;padding: 10px;font-size: 12px;">
-      <b><%= @user.tweets.count %></b>&nbsp;<%= link_to "Tweets", profile_path(@user)%><br /><hr />
-      <b><%= @user.sent_follows.where("status = #{true}").count %></b>&nbsp;<%= link_to "Following", following_profile_path(@user)%><br /><hr />
-      <b><%= @user.received_follows.where("status = #{true}").count %></b>&nbsp;<%= link_to "Followers", followers_profile_path(@user)%>
+
+  <div class="box_l1_hp">
+    <%= link_to "Profile", edit_profile_path(@user) %><br /><hr />
+    <%= link_to "Password", edit_password_profiles_path %>
+  </div>
+
+  <div class="box_l3_hp">
+    <div class="link_box">
+      &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
     </div>
   </div>
-  <div style="float: left;left: -115px;position: relative;top: 112px;min-height: 215px;min-width: 380px;background-color: white;">
-    <%= link_to "Passwords", edit_password_profiles_path , :class => 'button medium black', :style => 'margin: 20px 115px;' %><hr />
-    <%= link_to "Profiles", edit_profile_path(current_user), :class => 'button medium black', :style => 'margin: 20px 115px;' %><hr />
-  </div>
 </div>
-<div id="sign_up" style="left: 0;position: relative;top: 50px;width: 460px;background-color: #F9F9F9;">
-  <h3>Edit Profile</h3>
-  <%= form_for(@user, :url => profile_path(@user)) do |f| %>
-    <p><%= f.label :email, "Email:" %><br />
-      <%= f.email_field :email %>
-      <%= validation_error(@user.errors["email"]) %></p>
 
-    <p><%= f.label :username, "User Name:" %><br />
-      <%= f.text_field :username %>
-      <%= validation_error(@user.errors["username"]) %></p>
+<div class="span8">
+  <div class="box_r1_ep">
+    <h2 class="posts_title">Profile</h2>
+    <div class="profile_note">This information appears on your public profile, search results, and beyond.</div>
+    <div class="edit_profile_right_column">
+      <%= form_for(@user, :url => profile_path(@user)) do |f| %>
+        <%= f.label :email, "Email:" %>
+        <%= f.email_field :email, :readonly => true %>
+        <%= validation_error(@user.errors["email"]) %>
 
-    <p><%= f.label :avatar, "Profile Picture:" %><br />
-      <%= f.file_field :avatar %>
-      <%= validation_error(@user.errors["avatar"]) %></p>
+        <%= f.label :username, "User Name:" %>
+        <%= f.text_field :username %>
+        <%= validation_error(@user.errors["username"]) %>
 
-    <p>
-      <button type="submit" class="button medium green">Update Profile</button></p>
-    <% end %>
+        <%= f.label :avatar, "Profile Picture:" %>
+        <%= f.file_field :avatar %>
+        <%= validation_error(@user.errors["avatar"]) %>
+
+        <p>
+          <button type="submit" class="btn btn-info">Update Profile</button></p>
+        <% end %>
+
+    </div>
+  </div>
 </div>
