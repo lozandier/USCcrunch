@@ -54,7 +54,6 @@ function readURL(input) {
 
         reader.readAsDataURL(input.files[0]);
         $("#img_preview").show();
-        $("#small_img").hide();
     }
     return true;
 }

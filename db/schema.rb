@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121016092939) do
+ActiveRecord::Schema.define(:version => 20121018065752) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(:version => 20121016092939) do
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
+  create_table "favorites", :force => true do |t|
+    t.integer  "tweet_id"
+    t.integer  "user_id"
+    t.boolean  "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "follows", :force => true do |t|
     t.integer  "user_id"
     t.integer  "receiver_id"
@@ -47,17 +55,6 @@ ActiveRecord::Schema.define(:version => 20121016092939) do
     t.string   "username"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "locations", :force => true do |t|
-    t.string   "zipcode",    :limit => 6
-    t.string   "city",       :limit => 25
-    t.string   "state_code", :limit => 3
-    t.string   "state_name", :limit => 25
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
   end
 
   create_table "schools", :force => true do |t|
@@ -126,6 +123,10 @@ ActiveRecord::Schema.define(:version => 20121016092939) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "state"
+    t.text     "bio"
+    t.string   "major"
+    t.string   "website"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

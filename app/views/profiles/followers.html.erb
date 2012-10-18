@@ -33,13 +33,13 @@
             <div class="post" style="border-bottom: 1px solid grey;height: auto;">
               <h5 class="post_name"><%= follow.user.username %></h5>
               <div class="post_at">&nbsp<%= follow.user.email %></div>
-              <div class="action_row">
+              <div class="action_row" style="float: right;margin: -30px 1px;">
                 <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,follow.user.id,false) %>
                 <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,follow.user.id) %>
                 <% if !@user_follower.present?%>
                   <%= link_to 'Follow',follow_user_follow_path(current_user.id,follow.user.id),:remote => true,:method => 'post', :class => 'button medium green' %>
                 <% elsif !@user_follow %>
-                  <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,follow.user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
+                  <%= link_to 'Following',unfollow_user_follow_path(current_user.id,follow.user.id),:remote => true,:method => 'put', :class => 'button medium red' %>
                 <% elsif @user_follow%>
                   <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,follow.user.id),:remote => true,:method => 'put', :class => 'button medium green' %>
                 <% end %>

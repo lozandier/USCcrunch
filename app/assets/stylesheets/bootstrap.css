@@ -8,6 +8,15 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
 */
 
+#ajax_loader_big_div{
+    display:none;
+    height:auto;
+    left:50%;
+    position:fixed;
+    top:35%;
+    z-index:4;
+}
+
 article,
 aside,
 details,

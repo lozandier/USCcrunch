@@ -3,4 +3,5 @@ class Tweet < ActiveRecord::Base
   attr_accessible :user_id,:receiver_id, :body,:document
   validates :body, :presence => true
   has_attached_file :document, :styles => {:medium => "300x300>", :thumb => "100x100>"}
+  has_one :favorite, :dependent => :destroy
 end

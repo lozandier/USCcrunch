@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <title>My Greatest Web App</title>
-    <%= stylesheet_link_tag "bootstrap", "jquery.notifyBar","bootstrap-responsive", "base","jquery.simplyscroll","green","red","blue","styleswitch" %>
+    <%= stylesheet_link_tag "bootstrap", "jquery.notifyBar","bootstrap-responsive","font-awesome.css", "base","jquery.simplyscroll","green","red","blue","styleswitch" %>
     <%= javascript_include_tag "application", "jquery.notifyBar","jquery.simplyscroll","jquery.remotipart","bootstrap.min","script","jquery.iframe-transport","styleswitch" %>
     <%= csrf_meta_tags %>
     <% ['notice', 'error', 'warning'].each do |f|%>
@@ -25,6 +25,11 @@
   </head>
   <body>
     <!--Delete this-->
+    <div class="switcher">
+      <i class="icon icon-bookmark green"></i>  <%= link_to 'Default theme',"javascript:chooseStyle('none', 60)",:checked => "checked"%><br />
+      <i class="icon icon-bookmark blue"></i> <%= link_to 'Blue theme',"javascript:chooseStyle('blue', 60)"%> <br />
+      <i class="icon icon-bookmark red"></i> <%= link_to 'Red theme',"javascript:chooseStyle('red', 60)"%>
+    </div>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -50,7 +55,13 @@
       </div>
       <div class="sub-navbar">
         <div class="container">
-          <p><i class="icon icon-user"></i> Hello, Guest. <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %></p>
+          <p><i class="icon icon-user"></i> Hello, Guest.
+            <% if params[:controller] == "sessions" or params[:action] == 'create'%>
+              Thanks for loging in.
+            <% else %>
+              <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %>
+            <% end %>
+          </p>
         </div>
       </div>
     </div>
@@ -71,3 +82,4 @@
   </footer>
 </body>
 </html>
+

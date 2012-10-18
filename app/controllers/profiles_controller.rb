@@ -4,13 +4,13 @@ class ProfilesController < ApplicationController
 
   def index
     @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")
-    @tweets = Tweet.paginate :page => params[:index_page], :per_page => 10
+    @tweets = Tweet.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def show
     @user = User.find(params[:id])
     @tweet = @user.tweets.new(params[:tweet])
-    @tweets = Tweet.where("user_id = '#{@user.id}'").paginate :page => params[:index_page], :per_page => 10
+    @tweets = Tweet.where("user_id = '#{@user.id}'").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def edit

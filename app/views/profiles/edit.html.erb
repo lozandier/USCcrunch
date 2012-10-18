@@ -24,22 +24,48 @@
     <div class="profile_note">This information appears on your public profile, search results, and beyond.</div>
     <div class="edit_profile_right_column">
       <%= form_for(@user, :url => profile_path(@user)) do |f| %>
-        <%= f.label :email, "Email:" %>
-        <%= f.email_field :email, :readonly => true %>
-        <%= validation_error(@user.errors["email"]) %>
+        <table width="100%" cellpadding="20%">
+          <tr>
+            <td><%= f.label :avatar, "Photo" %></td>
+            <td id="img_preview">
+              <%= image_tag(@user.avatar.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show')%>
+              <%= f.file_field :avatar, :onChange => 'readURL(this)' %></td>
+            <td><%= validation_error(@user.errors["avatar"]) %></td>
+          </tr>
 
-        <%= f.label :username, "User Name:" %>
-        <%= f.text_field :username %>
-        <%= validation_error(@user.errors["username"]) %>
+          <tr>
+            <td><%= f.label :username, "Username" %></td>
+            <td><%= f.text_field :username %></td>
+            <td><%= validation_error(@user.errors["username"]) %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :email, "Email" %></td>
+            <td><%= f.email_field :email, :readonly => true %></td>
+            <td> <%= validation_error(@user.errors["email"]) %></td>
+          </tr>
+          <tr>
+            <td> <%= f.label :state, "From" %></td>
+            <td> <%= f.text_field :state %></td>
+          </tr>
+          <tr>
+            <td> <%= f.label :major, "Major" %></td>
+            <td> <%= f.text_field :major %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :bio, "Bio" %></td>
+            <td><%= f.text_area :bio, :rows => 3 %></td>
+          </tr>
 
-        <%= f.label :avatar, "Profile Picture:" %>
-        <%= f.file_field :avatar %>
-        <%= validation_error(@user.errors["avatar"]) %>
-
-        <p>
-          <button type="submit" class="btn btn-info">Update Profile</button></p>
-        <% end %>
-
+          <tr>
+            <td><%= f.label :website, "Website" %></td>
+            <td><%= f.text_field :website %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><button type="submit" class="btn btn-info">Save Changes</button></td>
+          </tr>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>

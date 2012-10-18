@@ -1,6 +1,6 @@
 <div class="box_r1_hp">
   <h2 class="posts_title">
-    Posts
+    Posts <%= will_paginate @tweets, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
     <span id="success" style="display: none;color: green;float: right;">Successfully deleted this tweet.</span>
   </h2><hr />
   <% if @tweets.present? %>
@@ -17,13 +17,19 @@
             &nbsp&nbsp
             <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
             &nbsp&nbsp
-            <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Repost</a>
+            <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<%= link_to "Repost", repost_user_tweets_path(tweet), :method => 'POST', :remote => true %>
             &nbsp&nbsp
-            <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+            <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp
+            <% if !tweet.favorite.present? || !current_user.favorite_for(tweet).present? %>
+              <%= link_to 'Favorite',favourite_user_tweets_path(tweet.id),:remote => true,:method => 'post' %>
+            <% elsif tweet.favorite.status == true %>
+              <%= link_to 'Favorited',update_favourite_user_tweets_path(tweet.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+            <%elsif tweet.favorite.status == false%>
+              <%= link_to 'Favorite',update_mark_favourite_user_tweets_path(tweet.id),:remote => true,:method => 'put' %>
+            <% end %>
           </div>
         </div>
       </div>
-      <hr/>
     <% end %>
   <% else %>
     <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>

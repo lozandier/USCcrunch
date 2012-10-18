@@ -35,7 +35,7 @@
               <% if !@user_follower.present?%>
                 <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'btn', :id => "follow_#{user.id}" %>
               <% elsif !@user_follow %>
-                <%= link_to 'Unfollow',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "unfollow_#{user.id}" %>
+                <%= link_to 'Following',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "unfollow_#{user.id}" %>
               <% elsif @user_follow%>
                 <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "update_follow_#{user.id}" %>
               <% end %>

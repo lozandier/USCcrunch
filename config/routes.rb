@@ -37,7 +37,14 @@ WebApp::Application.routes.draw do
   end
 
   resources :users do
-    resources :tweets
+    resources :tweets do
+      collection do
+        post :repost
+        post :favourite
+        put :update_favourite
+        put :update_mark_favourite
+      end
+    end
     resources :follows do
       member do
         post :follow
