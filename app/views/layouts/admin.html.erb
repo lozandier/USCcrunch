@@ -38,7 +38,7 @@
                   <%= link_to "Dashboard", admin_dashboards_path, :class => "menubanneritem button" %>
                 </li>
               <% end %>
-              <% if params[:controller] == 'admin/schools' %>
+              <% if params[:controller] == 'admin/schools' and params[:action] == "new" %>
                 <li class="active">
                   <%= link_to "Create School Admin", new_admin_school_path, :class => "menubanneritem button"  %>
                 </li>

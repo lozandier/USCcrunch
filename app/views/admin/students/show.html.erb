@@ -53,11 +53,11 @@
                 </span>
                 &nbsp&nbsp
                 <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
-                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',"",:remote => true,:method => 'post' %>
                 <% elsif post.favorite.status == true %>
-                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',"",:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
                 <%elsif post.favorite.status == false%>
-                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',"",:remote => true,:method => 'put' %>
                 <% end %>
               </div>
             </div>
