@@ -6,7 +6,7 @@
       <h2 class="profile_name"><%= @user.username %></h2>
       <h4 class="at_name"><%= @user.email %></h4>
       <div class="location"><%= @user.state%></div>
-      <%= link_to @user.website, @user.website, :target => "_blank", :class => "website" %>
+      <a class="website" href=""><%= @user.website %></a>
     </div>
     <div class="profile_box_right">
       <button type="button" class="btn"><%= image_tag("/assets/my_tweets_icon_default.png", :height => "15px", :width => "15px") %></button>

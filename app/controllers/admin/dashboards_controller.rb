@@ -1,6 +1,6 @@
 class Admin::DashboardsController < ApplicationController
   before_filter :is_admin?
-  layout :get_layout?
+  layout :layout?
 
   def index
     @schools = School.all

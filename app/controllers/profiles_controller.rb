@@ -4,13 +4,14 @@ class ProfilesController < ApplicationController
 
   def index
     @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")
-    @tweets = Tweet.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @post = current_user.tweets.new(params[:tweet])
+    @posts = Tweet.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def show
     @user = User.find(params[:id])
-    @tweet = @user.tweets.new(params[:tweet])
-    @tweets = Tweet.where("user_id = '#{@user.id}'").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @post = @user.tweets.new(params[:tweet])
+    @posts = Tweet.where("user_id = '#{@user.id}'").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def edit
@@ -30,7 +31,7 @@ class ProfilesController < ApplicationController
 
   def profile_summary
     @user = User.find(params[:id])
-    @tweets = @user.tweets.paginate :page => params[:index_page], :per_page => 3
+    @posts = @user.tweets.paginate :page => params[:index_page], :per_page => 3
     render :layout => false
   end
 
@@ -51,7 +52,7 @@ class ProfilesController < ApplicationController
 
   def followers
     @user = User.find(params[:id])
-    @tweet = @user.tweets.new(params[:tweet])
+    @post = @user.tweets.new(params[:tweet])
     @users = User.where("confirmation_token IS NULL and id != '#{@user.id}'")
     @followers = @user.received_follows.where("status = #{true}")
   end
@@ -59,7 +60,7 @@ class ProfilesController < ApplicationController
   def following
     @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")
     @user = User.find(params[:id])
-    @tweet = @user.tweets.new(params[:tweet])
+    @post = @user.tweets.new(params[:tweet])
     @followers = Follow.where("status = #{true} and user_id = #{@user.id}")
   end
 

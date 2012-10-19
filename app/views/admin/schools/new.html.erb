@@ -1,7 +1,17 @@
-<div id="sign_in" style="float: left;left: 0px;position: relative;top: 94px;min-height: 115px;min-width: 520px;">
-  <h3>Create School Admin</h3>
+<div id="Tweet-summary" style="float: left;left: 400px;position: absolute;top: 52px;width: 35%;">
+  <div id="title">Send School Invitation</div><br />
   <%= form_for @school, :url => admin_schools_path do |f| %>
-    <table>
+    <table width="100%">
+      <tr>
+        <td>First Name:</td>
+        <td><%= f.text_field :first_name%></td>
+        <td><%= validation_error(@school.errors["first_name"])%></td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
+        <td><%= f.text_field :last_name%></td>
+        <td><%= validation_error(@school.errors["last_name"])%></td>
+      </tr>
       <tr>
         <td>School Name:</td>
         <td><%= f.text_field :school_name%></td>
@@ -14,7 +24,7 @@
       </tr>
       <tr>
         <td></td>
-        <td><%= f.submit "Create School Admin ", :class => 'button medium green'%></td>
+        <td><%= f.submit "Send Invitation", :class => 'btn'%></td>
       </tr>
     </table>
   <% end %>

@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  layout :layout?
+  layout :get_layout
 
   def new
     @school = School.find(params[:school_id])
@@ -11,6 +11,7 @@ class TeachersController < ApplicationController
     @teacher = @school.teachers.new(params[:teacher])
     if @teacher.save
       flash[:notice] = "Success"
+      UserMailer.sent_teacher_invitation(@teacher,@student).deliver
       redirect_to school_path(@school)
     else
       render :action => "new"

@@ -6,7 +6,7 @@
       <div class="box_l1_up">
         <div class="post_to_box">
           <h5>Post to <%= @user.username %></h5>
-          <%= render :partial => 'tweets/form'%>
+          <%= render :partial => 'posts/form'%>
         </div>
       </div>
     <% end %>
@@ -25,7 +25,7 @@
 
   <div class="span8">
     <div class="box_r1_hp">
-      <h2 class="posts_title">Followers</h2><hr />
+      <h2 class="posts_title">Following</h2><hr />
       <% if @followers.present? %>
         <% for follow in @followers %>
           <div class="posts_box">

@@ -1,5 +1,11 @@
 WebApp::Application.routes.draw do
 
+  devise_for :schools,:controller => {:sessions => 'school_sessions'}
+  devise_scope :school do
+    get 'school_login',:to => "school_sessions#new",:as => "school_login"
+  end
+
+
   devise_for :users,:controllers => {:sessions => 'sessions'}
   devise_scope :user do
     get "sign_out", :to => "devise/sessions#destroy",:as => "logout"
@@ -14,11 +20,22 @@ WebApp::Application.routes.draw do
   namespace :admin do
     resources :dashboards
     resources :schools
+    resources :students do
+      member do
+        get :followers
+        get :following
+      end
+    end
   end
 
   resources :schools do
     resources :students
     resources :teachers
+    resources :upload_csvs do
+      collection do
+        post :upload_csv
+      end
+    end
   end
 
   resources :profiles do
@@ -37,7 +54,7 @@ WebApp::Application.routes.draw do
   end
 
   resources :users do
-    resources :tweets do
+    resources :posts do
       collection do
         post :repost
         post :favourite

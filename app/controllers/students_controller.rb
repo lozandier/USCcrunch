@@ -1,4 +1,5 @@
 class StudentsController < ApplicationController
+  layout :get_layout
   def new
     @school = School.find(params[:school_id])
     @student = @school.students.new
@@ -12,6 +13,7 @@ class StudentsController < ApplicationController
       UserMailer.sent_student_invitation(@school,@student).deliver
       redirect_to school_path(@school)
     else
+      flash[:error] = "Failed to Send Invitation"
       render :action => 'new'
     end
   end

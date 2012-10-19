@@ -44,22 +44,22 @@
       <% end %>
     </div>
   </div>
-  <% if @tweets.present? %>
-    <% for tweet in @tweets %>
+  <% if @posts.present? %>
+    <% for post in @posts %>
       <table width="100%">
         <tr>
           <td width="5%">
-            <%= image_tag tweet.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
+            <%= image_tag post.user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
           </td>
-          <td valign="top"><%= tweet.user.username %></td>
+          <td valign="top"><%= post.user.username %></td>
         </tr>
         <tr>
           <td></td>
-          <td><%= tweet.body %></td>
+          <td><%= post.body %></td>
         </tr>
       </table><hr />
     <% end %>
   <% else %>
-    No Tweets.
+    No Posts.
   <% end %>
 </div>

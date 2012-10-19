@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
     if resource_or_scope.is_a?(User)
       flash[:notice] = "Successfully Login!"
       profiles_path
+    else
+      '/'
     end
   end
 
@@ -24,15 +26,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_layout
-    if current_user
-      return "eduposts"
-    else
-      return "application"
+
+
+  def layout?
+    if current_admin
+      return 'admin'
     end
   end
 
-  def layout?
+  def get_layout
     return "school"
   end
+
 end

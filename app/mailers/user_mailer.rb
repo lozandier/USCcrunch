@@ -8,12 +8,18 @@ class UserMailer < ActionMailer::Base
 
   def send_school_invitation(school)
     @school = school
-    mail(:to => school.email ,:from => 'k.ashok502@gmail.com', :subject => "Invitation to Join SmartQuotez")
+    mail(:to => school.email ,:from => 'k.ashok502@gmail.com', :subject => "School #{@school.school_name} Created.")
   end
 
   def sent_student_invitation(school,student)
     @school = school
     @student = student
     mail(:to => student.email, :from => school.email, :subject => "HI")
+  end
+
+  def sent_teacher_invitation(school,teacher)
+    @school = school
+    @teacher = teacher
+    mail(:to => teacher.email, :from => school.email, :subject => "HI")
   end
 end

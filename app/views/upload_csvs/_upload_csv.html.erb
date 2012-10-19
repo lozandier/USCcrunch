@@ -1,0 +1,12 @@
+<%= form_for :student, :url => upload_csv_school_upload_csvs_path(@school), :html => {:multipart => true} do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label :csv, "Select csv file" %></td>
+      <td><%= f.file_field :csv %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "Upload" %></td>
+    </tr>
+  </table>
+<% end %> 

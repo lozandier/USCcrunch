@@ -1,14 +1,12 @@
 class Admin::SessionsController < Devise::SessionsController
-  layout :get_layout?
+  layout :layout?
 
   def new
   end
 
   def create
     puts "VVVVVVVVVVVV"
-    puts warden.authenticate!(:scope => resource)
-    puts resource = warden.authenticate!(:scope => resource)
-    puts "VVVVVVVVVVVV"
+    resource = warden.authenticate!(:scope => resource_name)
     puts resource.errors.inspect
     puts "VVVVVVVVVVVBBBBBB"
     redirect_to admin_dashboards_path
