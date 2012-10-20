@@ -29,33 +29,9 @@
         <div class="container">
           <div class="nav-collapse collapse">
             <ul class="nav" style="margin: -8px 10px 0 0;">
-              <% if params[:controller] == 'admin/dashboards' %>
-                <li class="active">
-                  <%= link_to "Dashboard", school_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Dashboard", school_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% end %>
-              <% if params[:controller] == 'admin/students' %>
-                <li class="active">
-                  <%= link_to "Invite Students", new_school_student_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Invite Students", new_school_student_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% end %>
-              <% if params[:controller] == 'admin/dashboards' %>
-                <li class="active">
-                  <%= link_to "Invite Teachers", new_school_teacher_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Invite Teachers", new_school_teacher_path(@school), :class => "menubanneritem button" %>
-                </li>
-              <% end %>
+              <li class="<%=  params[:controller] == "schools" && params[:action] == "show" ? "active" : ""%>"><%= link_to "Dashboard", school_path(@school), :class => "menubanneritem button" %></li>
+              <li class="<%=  params[:controller] == "students" && params[:action] == "new" || params[:action] == 'create' ? "active" : ""%>"><%= link_to "Invite Students", new_school_student_path(@school), :class => "menubanneritem button" %></li>
+              <li class="<%=  params[:controller] == "teachers" && params[:action] == "new" || params[:action] == 'create' ? "active" : ""%>"><%= link_to "Invite Teachers", new_school_teacher_path(@school), :class => "menubanneritem button" %></li>
             </ul>
             <ul class="nav pull-right">
               <div class="btn-group">

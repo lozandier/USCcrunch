@@ -35,6 +35,10 @@ class ApplicationController < ActionController::Base
   end
 
   def get_layout
+    return "eduposts"
+  end
+
+  def get_school_layout
     return "school"
   end
 

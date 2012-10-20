@@ -29,46 +29,13 @@
         <div class="container">
           <div class="nav-collapse collapse">
             <ul class="nav" style="margin: -8px 10px 0 0;">
-              <% if params[:controller] == 'admin/dashboards' %>
-                <li class="active">
-                  <%= link_to "Dashboard", admin_dashboards_path, :class => "menubanneritem button" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Dashboard", admin_dashboards_path, :class => "menubanneritem button" %>
-                </li>
-              <% end %>
-              <% if params[:controller] == 'admin/schools' and params[:action] == "new" %>
-                <li class="active">
-                  <%= link_to "Create School Admin", new_admin_school_path, :class => "menubanneritem button"  %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Create School Admin", new_admin_school_path, :class => "menubanneritem button"  %>
-                </li>
-              <% end %>
-              <% if params[:controller] == 'admin/schools' %>
-                <li class="active">
-                  <%= link_to "Schools", admin_schools_path, :class => "menubanneritem button" %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Schools", admin_schools_path, :class => "menubanneritem button" %>
-                </li>
-              <% end %>
-              <% if params[:controller] == 'admin/students' %>
-                <li class="active">
-                  <%= link_to "Students", admin_students_path, :class => "menubanneritem button"  %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to "Students", admin_students_path, :class => "menubanneritem button"  %>
-                </li>
-              <% end %>
+              <li class="<%= (params[:controller] == 'admin/dashboards'&& params[:action] == 'index') ? "active" : ""  %>"><%= link_to "Dashboard", admin_dashboards_path, :class => "menubanneritem button" %></li>
+              <li class="<%= (params[:controller] == 'admin/schools'&& params[:action] == 'new' || params[:action] == 'create') ? "active" : ""  %>"><%= link_to "Create School Admin", new_admin_school_path, :class => "menubanneritem button"  %></li>
+              <li class="<%= (params[:controller] == 'admin/schools'&& params[:action] == 'index') ? "active" : ""  %>"><%= link_to "Schools", admin_schools_path, :class => "menubanneritem button" %></li>
+              <li class="<%= (params[:controller] == 'admin/students'&& params[:action] == 'index') ? "active" : ""  %>"><%= link_to "Students", admin_students_path, :class => "menubanneritem button"  %></li>
             </ul>
             <ul class="nav pull-right">
               <div class="btn-group">
-                <!-- dropdown menu links -->
                 <%= link_to "Logout", destroy_admin_session_path,:method => 'delete', :class => "menubanneritem button" %>
               </div>
             </ul>

@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  layout :get_layout
+  layout :get_school_layout
   def new
     @school = School.find(params[:school_id])
     @student = @school.students.new
