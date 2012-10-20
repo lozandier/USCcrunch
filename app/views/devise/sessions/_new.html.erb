@@ -1,112 +1,107 @@
-<div class="main">
-  <div class="container">
-    <h2><span>Start using our web app</span></h2>
-    <div class="row">
-      <div class="span5">
-        <strong>Log in for members:</strong>
-        <br/>
-        <br/>
-        <div id="error" style="display :none;color :red; font-size: 14px;position: relative;z-index: 1001;">Invalid Email/Password</div>
-        <div id="error1" style="display :none;color :red;font-size: 14px;position: relative;z-index: 1001;">You need to sign in or sign up before continuing. </div>
-        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class =>"form-horizontal" },:remote => true) do |f| %>
-          <div class="control-group">
-            <label class="control-label" for="inputEmail">Email or Username</label>
-            <div class="controls">
-              <%= f.email_field :email, :class => 'input-xlarge', :id => "inputEmail", :placeholder => "Email" %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">Password</label>
-            <div class="controls">
-              <%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> Remember me
-              </label>
-              <button type="submit" class="btn">Log In</button>
-              <br/>
-
-            </div>
-          </div>
-          <%= link_to "Recover password or username &raquo;".html_safe, new_user_password_path %></a>
-          <hr>
-          <strong>Or login with your social profiles:</strong><br/>
-          <a href="#" class="btn btn-facebook"><i class="icon icon-facebook"></i> Facebook</a>
-          <a href="#" class="btn btn-twitter"><i class="icon icon-twitter"></i> Twitter</a>
-          <hr>
-        <% end %>
-      </div><!--/span5-->
-
-      <div class="span5">
-        <strong>Create an account if you are new here:</strong>
-        <br/>
-        <br/>
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class =>"form-horizontal" }) do |f| %>
-          <div class="control-group">
-            <label class="control-label" for="inputEmail">Email or Username</label>
-            <div class="controls">
-              <%= f.email_field :email, :class => 'input-xlarge', :id => "inputEmail", :placeholder => "Email" %>
-              <%= validation_error(resource.errors["email"]) %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">User Name</label>
-            <div class="controls">
-              <%= f.text_field :username, :class => 'input-xlarge', :placeholder => "Username" %>
-              <%= validation_error(resource.errors["username"]) %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">Create a password</label>
-            <div class="controls">
-              <%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
-              <%= validation_error(resource.errors["password"]) %>
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">Confirm password</label>
-            <div class="controls">
-              <%= f.password_field :password_confirmation, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
-              <%= validation_error(resource.errors["password_confirmation"]) %>
-            </div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"><a href="#">I agree terms and conditions</a>
-              </label>
-              <button type="submit" class="btn">Create account</button>
-            </div>
-          </div>
-          <hr>
-          <strong>Or create an account with your social profiles:</strong><br/>
-          <a href="#" class="btn btn-facebook"><i class="icon icon-facebook"></i> Facebook</a>
-          <a href="#" class="btn btn-twitter"><i class="icon icon-twitter"></i> Twitter</a>
-          <hr>
-        <% end %>
-      </div><!--/span5-->
-    </div><!--/row-->
-
-    <div class="row">
-      <div class="span12">
-        <strong>Terms and conditions:</strong>
-        <p>This Agreement sets out the legally binding terms between you and EMG. This Agreement applies to all Users of the Service, including users who listen to or share audio content and or its associated metadata, information, and other materials or services on the Site. This Agreement applies to all Users regardless of if they are using the Service anonymously or as a registered user. If you choose to use the Service, you will be agreeing to abide by all of the terms and conditions of this Terms and Conditions of Use Agreement (the "Agreement"). EMG may, in its sole discretion, change, add or remove portions of this Agreement at any time, and by continuing to use the Service you agree to be bound by such revisions or modifications. If EMG does so, such changes will be posted on the Service, or sent to you via e-mail.</p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="span12">
-        <div class="alert alert-block">
-          <strong>Privacy policy:</strong> For clarification purposes, you retain all of your ownership rights in your User Content. However, unless EMG indicates otherwise, by submitting User Content to the Service you grant EMG and its affiliates a nonexclusive, royalty-free, perpetual, irrevocable, and fully sublicensable right to use, display, perform, reproduce, publish, and distribute such User Content throughout the world via the Service. You also grant each user of the Service a non-exclusive license to access your User Content through the Service, and to use, reproduce, distribute, display and perform such User Content as permitted through the functionality of the Service and under this Agreement. You grant EMG and it affiliates the right to use the name that you submit in connection with such User Content.
+<h2><span>Start using our web app</span></h2>
+<div class="row">
+  <div class="span5">
+    <strong>Log in for members:</strong>
+    <br/>
+    <br/>
+    <div id="error" style="display :none;color :red; font-size: 14px;position: relative;z-index: 1001;">Invalid Email/Password</div>
+    <div id="error1" style="display :none;color :red;font-size: 14px;position: relative;z-index: 1001;">You need to sign in or sign up before continuing. </div>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class =>"form-horizontal" },:remote => true) do |f| %>
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Email or Username</label>
+        <div class="controls">
+          <%= f.email_field :email, :class => 'input-xlarge', :id => "inputEmail", :placeholder => "Email" %>
         </div>
       </div>
-    </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">Password</label>
+        <div class="controls">
+          <%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox"> Remember me
+          </label>
+          <button type="submit" class="btn">Log In</button>
+          <br/>
 
-  </div><!--/container-->
-</div><!--/main-->
+        </div>
+      </div>
+      <%= link_to "Recover password or username &raquo;".html_safe, new_user_password_path %></a>
+      <hr>
+      <strong>Or login with your social profiles:</strong><br/>
+      <a href="#" class="btn btn-facebook"><i class="icon icon-facebook"></i> Facebook</a>
+      <a href="#" class="btn btn-twitter"><i class="icon icon-twitter"></i> Twitter</a>
+      <hr>
+    <% end %>
+  </div><!--/span5-->
+
+  <div class="span5">
+    <strong>Create an account if you are new here:</strong>
+    <br/>
+    <br/>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class =>"form-horizontal" }) do |f| %>
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Email or Username</label>
+        <div class="controls">
+          <%= f.email_field :email, :class => 'input-xlarge', :id => "inputEmail", :placeholder => "Email" %>
+          <%= validation_error(resource.errors["email"]) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">User Name</label>
+        <div class="controls">
+          <%= f.text_field :username, :class => 'input-xlarge', :placeholder => "Username" %>
+          <%= validation_error(resource.errors["username"]) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">Create a password</label>
+        <div class="controls">
+          <%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
+          <%= validation_error(resource.errors["password"]) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">Confirm password</label>
+        <div class="controls">
+          <%= f.password_field :password_confirmation, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
+          <%= validation_error(resource.errors["password_confirmation"]) %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <label class="checkbox">
+            <input type="checkbox"><a href="#">I agree terms and conditions</a>
+          </label>
+          <button type="submit" class="btn">Create account</button>
+        </div>
+      </div>
+      <hr>
+      <strong>Or create an account with your social profiles:</strong><br/>
+      <a href="#" class="btn btn-facebook"><i class="icon icon-facebook"></i> Facebook</a>
+      <a href="#" class="btn btn-twitter"><i class="icon icon-twitter"></i> Twitter</a>
+      <hr>
+    <% end %>
+  </div><!--/span5-->
+</div><!--/row-->
+
+<div class="row">
+  <div class="span12">
+    <strong>Terms and conditions:</strong>
+    <p>This Agreement sets out the legally binding terms between you and EMG. This Agreement applies to all Users of the Service, including users who listen to or share audio content and or its associated metadata, information, and other materials or services on the Site. This Agreement applies to all Users regardless of if they are using the Service anonymously or as a registered user. If you choose to use the Service, you will be agreeing to abide by all of the terms and conditions of this Terms and Conditions of Use Agreement (the "Agreement"). EMG may, in its sole discretion, change, add or remove portions of this Agreement at any time, and by continuing to use the Service you agree to be bound by such revisions or modifications. If EMG does so, such changes will be posted on the Service, or sent to you via e-mail.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="alert alert-block">
+      <strong>Privacy policy:</strong> For clarification purposes, you retain all of your ownership rights in your User Content. However, unless EMG indicates otherwise, by submitting User Content to the Service you grant EMG and its affiliates a nonexclusive, royalty-free, perpetual, irrevocable, and fully sublicensable right to use, display, perform, reproduce, publish, and distribute such User Content throughout the world via the Service. You also grant each user of the Service a non-exclusive license to access your User Content through the Service, and to use, reproduce, distribute, display and perform such User Content as permitted through the functionality of the Service and under this Agreement. You grant EMG and it affiliates the right to use the name that you submit in connection with such User Content.
+    </div>
+  </div>
+</div>
 
 <script>
   $(document).ajaxError(function(e, XHR, options){

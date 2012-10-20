@@ -7,7 +7,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     render :update do |page|
-      resource = warden.authenticate!(:scope => resource)
+      resource = warden.authenticate!(:scope => resource_name)
       flash[:notice] = 'Signed in Successfully'
       page.redirect_to after_sign_in_path_for(current_user)
     end
