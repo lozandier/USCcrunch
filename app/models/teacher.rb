@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
   attr_accessible :email, :school_id,:name
   validates :email, :name, :presence => true
-  belongs_to :school
+  belongs_to :school_admin
   before_validation :email_valide
 
   def email_valide

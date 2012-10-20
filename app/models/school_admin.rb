@@ -1,4 +1,4 @@
-class School < ActiveRecord::Base
+class SchoolAdmin < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -9,6 +9,8 @@ class School < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,:first_name,:last_name,:school_name,:reset_password_token
   validates :school_name, :email,:first_name,:last_name, :presence => true
   validates_uniqueness_of :school_name, :email
+  has_many :students, :dependent => :destroy
+  has_many :teachers, :dependent => :destroy
   validates :password, :presence =>true,
     :length => { :minimum => 6, :maximum => 15 },
     :confirmation =>true, :unless => lambda {|u| u.password.nil? },:on => :update

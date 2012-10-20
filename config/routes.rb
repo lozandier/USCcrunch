@@ -1,10 +1,7 @@
 WebApp::Application.routes.draw do
 
-  devise_for :schools,:controller => {:sessions => 'school_sessions'}
-  devise_scope :school do
-    get 'school_login',:to => "school_sessions#new",:as => "school_login"
-  end
 
+  devise_for :school_admins,:controllers => {:sessions => 'school_sessions'}
 
   devise_for :users,:controllers => {:sessions => 'sessions'}
   devise_scope :user do
@@ -71,7 +68,7 @@ WebApp::Application.routes.draw do
     end
   end
 
-  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

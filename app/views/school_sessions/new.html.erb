@@ -11,7 +11,7 @@
             <div class="flash <%= key %>" style="color :red;position: absolute;margin: 12px 173px;"> Invalid Username or password. </div>
           <% end %>
           <div class="flash" style="color :#2A6C86;float: left;margin-top:15px;margin-left:12px;"><%= image_tag("/assets/admin panel txt.png",:width => "135",:height => "14")%></div><br /><br />
-          <%= form_for resource, :as => resource_name, :url => school_session_path do |f| %>
+          <%= form_for resource, :as => resource_name, :url => school_admin_session_path do |f| %>
             <table cellspacing="0px" cellpadding="4px" width="88%" style="margin-left:37px;">
               <tr>
                 <td></td>

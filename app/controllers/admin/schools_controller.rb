@@ -3,15 +3,11 @@ class Admin::SchoolsController < ApplicationController
   layout :layout?
 
   def new
-    @school = School.new
-  end
-
-  def index
-    @schools = School.all
+    @school = SchoolAdmin.new
   end
 
   def create
-    @school = School.new(params[:school])
+    @school = SchoolAdmin.new(params[:school_admin])
     @school.password = 'kapil123'
     @school.password_confirmation = 'kapil123'
     if @school.save

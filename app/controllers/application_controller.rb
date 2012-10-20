@@ -26,6 +26,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def is_school?
+    unless current_school_admin
+      flash[:error] = 'Please Login.'
+      redirect_to '/'
+    end
+  end
+
 
 
   def layout?
@@ -39,7 +46,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_school_layout
-    return "school"
+    if current_school_admin
+      return "school"
+    end
   end
 
 end

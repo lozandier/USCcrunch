@@ -23,7 +23,7 @@ class UploadCsvsController < ApplicationController
         redirect_to school_path(@school)
       end
     else
-      render :text => "<script>alert('Upload any csv file.');</script>"
+      render :action => "/schools/#{@school.id}/students/new"
     end
   end
 
