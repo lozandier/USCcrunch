@@ -7,8 +7,9 @@ class ApplicationController < ActionController::Base
     if resource_or_scope.is_a?(User)
       flash[:notice] = "Successfully Login!"
       profiles_path
-    else
-      '/'
+    elsif resource_or_scope.is_a?(SchoolAdmin)
+      flash[:notice] = "Successfully Login!"
+      school_path(current_school_admin)
     end
   end
 

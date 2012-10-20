@@ -8,7 +8,7 @@ class SchoolSessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name)
     puts resource.errors.inspect
     puts "VVVVVVVVVVVBBBBBB"
-    redirect_to school_path(current_school_admin)
+    redirect_to after_sign_in_path_for(current_school_admin)
   end
 
   def destroy

@@ -6,7 +6,7 @@
   <body class="account register" style="background:#232323;">
     <div align="center" id="page" style="width: 635px;height: 347px;">
       <div id="session_content" style="padding: 4px;">
-        <div style="background-image :url('/assets/grey box(centre).png');width: 523px;height: 213px;margin-top:12px;">
+        <div style="background-color: #EEEEEE;width: 523px;height: 213px;margin-top:12px;">
           <div><br /><br />
             <%= form_for(@school, :url => school_path(@school), :html => { :method => :put }) do |f| %>
               <%= f.hidden_field :reset_password_token %>

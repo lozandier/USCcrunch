@@ -1,7 +1,7 @@
 WebApp::Application.routes.draw do
 
 
-  devise_for :school_admins,:controllers => {:sessions => 'school_sessions'}
+  devise_for :school_admins,:controllers => {:sessions => 'school_sessions', :passwords => 'school_passwords'}
 
   devise_for :users,:controllers => {:sessions => 'sessions'}
   devise_scope :user do
