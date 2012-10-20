@@ -3,7 +3,12 @@
   <%= form_for @student, :url => school_students_path(@school) do |f| %>
     <table>
       <tr>
-        <td>Student Name:</td>
+        <td>First Name:</td>
+        <td><%= f.text_field :first_name%></td>
+        <td><%= validation_error(@student.errors["first_name"])%></td>
+      </tr>
+      <tr>
+        <td>Last Name:</td>
         <td><%= f.text_field :name%></td>
         <td><%= validation_error(@student.errors["name"])%></td>
       </tr>

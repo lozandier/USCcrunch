@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
-  attr_accessible :email, :school_id,:name,:first_name,:date_of_birth
+  attr_accessible :email, :school_admin_id,:name,:first_name,:date_of_birth
   belongs_to :school_admin
+  validates :email,:name,:first_name, :presence => true
   #  before_validation :email_valide
   #
   #  def email_valide
