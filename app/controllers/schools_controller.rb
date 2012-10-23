@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_filter :is_school?, :except => ['edit', 'update']
+  before_filter :is_school?, :except => ['edit', 'update', 'destroy']
   layout :get_school_layout
   def show
     @school = SchoolAdmin.find(params[:id])
@@ -25,8 +25,12 @@ class SchoolsController < ApplicationController
   end
 
   def destroy
-    session[:school_id] = nil
-    session.delete(:school_id)
-    redirect_to root_path, :notice => "Logged out"
+    @school = SchoolAdmin.find(params[:id])
+    if @school.destroy
+      render :update do |page|
+        flash[:notice] = "Successfully deleted this school."
+        page.reload
+      end
+    end
   end
 end

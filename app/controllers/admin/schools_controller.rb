@@ -20,4 +20,5 @@ class Admin::SchoolsController < ApplicationController
       render :action => 'new'
     end
   end
+
 end
