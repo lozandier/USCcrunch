@@ -3,8 +3,7 @@ class SchoolsController < ApplicationController
   layout :get_school_layout
   def show
     @school = SchoolAdmin.find(params[:id])
-    @students = Student.all
-    @teachers = Teacher.all
+    @students = User.where("school_admin_id = '#{current_school_admin.id}'").all
   end
 
   def edit
@@ -18,9 +17,7 @@ class SchoolsController < ApplicationController
     @school = SchoolAdmin.find(params[:id])
     if @school.update_attributes(params[:school_admin])
       @school.update_attribute(:reset_password_token,nil)
-      flash[:notice] = "Loggened in successful."
-      sign_in(:school_admin, @school, :bypass => true)
-      redirect_to school_path(current_school_admin)
+      redirect_to login_home_index_path
     else
       flash.now[:notice] = "Loggened in failed."
       render :action => 'edit',:layout => false

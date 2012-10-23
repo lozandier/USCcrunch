@@ -25,11 +25,13 @@
   </head>
   <body>
     <!--Delete this-->
-    <div class="switcher">
-      <i class="icon icon-bookmark green"></i>  <%= link_to 'Default theme',"javascript:chooseStyle('none', 60)",:checked => "checked"%><br />
-      <i class="icon icon-bookmark blue"></i> <%= link_to 'Blue theme',"javascript:chooseStyle('blue', 60)"%> <br />
-      <i class="icon icon-bookmark red"></i> <%= link_to 'Red theme',"javascript:chooseStyle('red', 60)"%>
-    </div>
+    <% if params[:action] != 'login' %>
+      <div class="switcher">
+        <i class="icon icon-bookmark green"></i>  <%= link_to 'Default theme',"javascript:chooseStyle('none', 60)",:checked => "checked"%><br />
+        <i class="icon icon-bookmark blue"></i> <%= link_to 'Blue theme',"javascript:chooseStyle('blue', 60)"%> <br />
+        <i class="icon icon-bookmark red"></i> <%= link_to 'Red theme',"javascript:chooseStyle('red', 60)"%>
+      </div>
+    <% end %>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -55,13 +57,15 @@
       </div>
       <div class="sub-navbar">
         <div class="container">
-          <p><i class="icon icon-user"></i> Hello, Guest.
-            <% if params[:controller] == "sessions" or params[:action] == 'create'%>
-              Thanks for loging in.
-            <% else %>
-              <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %>
-            <% end %>
-          </p>
+          <% if params[:action] != 'login' %>
+            <p><i class="icon icon-user"></i> Hello, Guest.
+              <% if params[:controller] == "sessions" or params[:action] == 'create' %>
+                Thanks for loging in.
+              <% else %>
+                <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %>
+              <% end %>
+            </p>
+          <% end %>
         </div>
       </div>
     </div>

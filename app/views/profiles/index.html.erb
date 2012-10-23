@@ -13,39 +13,7 @@
   </div>
 
   <div class="box_l2_hp">
-    <% if @users.present? %>
-      <ul id="scroller">
-        <% for user in @users %>
-          <li>
-            <table>
-              <tr>
-                <td>
-                  <%= image_tag user.avatar.url(:original), :style=>"width:25px;height: 25px;border-radius: 5px;')" %>
-                </td>
-                <td valign="top"><%= link_to_function user.username, "profile_summary(#{user.id})", :remote => true %></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td><%= user.email %></td>
-              </tr>
-            </table>
-            <div id="follows" style="float: right;margin: -17px 1px;">
-              <% @user_follow=Follow.find_by_user_id_and_receiver_id_and_status(current_user.id,user.id,false) %>
-              <% @user_follower=Follow.find_by_user_id_and_receiver_id(current_user.id,user.id) %>
-              <% if !@user_follower.present?%>
-                <%= link_to 'Follow',follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'post', :class => 'btn', :id => "follow_#{user.id}" %>
-              <% elsif !@user_follow %>
-                <%= link_to 'Following',unfollow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "unfollow_#{user.id}" %>
-              <% elsif @user_follow%>
-                <%= link_to 'Follow',update_follow_user_follow_path(current_user.id,user.id),:remote => true,:method => 'put', :class => 'btn', :id => "update_follow_#{user.id}" %>
-              <% end %>
-            </div><hr />
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Users To Follow</span>
-    <% end %>
+    This box has not been decided what to be used for.
   </div>
 
   <div class="box_l3_hp">

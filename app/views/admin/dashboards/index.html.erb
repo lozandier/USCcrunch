@@ -6,7 +6,7 @@
   <% if @schools.present? %>
     <table border="1" width="100%">
       <tr>
-        <th>School Name</th>
+        <th>Admin Name</th>
         <th>Email</th>
         <th>School Name</th>
       </tr>
@@ -22,28 +22,3 @@
     <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Schools.</span>
   <% end %>
 </div><br />
-
-<div id="Tweet-summary" style="float: left;
-     left: 210px;
-     position: relative;
-     top: -15px;
-     width: 40%;">
-  <div id="title">Students</div>
-  <% if @students.present? %>
-    <table border="1" width="100%">
-      <tr>
-        <th>Student Name</th>
-        <th>Email</th>
-      </tr>
-      <% for student in @students %>
-        <tr style="text-align: center;">
-          <td><%= student.email %></td>
-          <td><%= link_to student.username, admin_student_path(student) %></td>
-        </tr>
-      <% end %>
-    </table>
-  <% else %>
-    <span style="color: red;font-size: 15px;left: 166px;position: relative;top: 17px;">No Students.</span>
-  <% end %>
-</div>
-

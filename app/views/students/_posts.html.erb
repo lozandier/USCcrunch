@@ -1,0 +1,28 @@
+<div class="box_r1_hp">
+  <h2 class="posts_title">
+    Posts <%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
+    <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+  </h2>
+  <%= link_to "Back", school_path(current_school_admin) , :style => 'font-size: 16px;margin-left: 23px;text-align: center;'%>
+  <hr />
+  <% if @posts.present? %>
+    <% for post in @posts %>
+      <div class="posts_box" id="post_<%= post.id %>">
+        <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
+        <div class="post" style="border-bottom: 1px solid grey;height: auto;">
+          <h5 class="post_name"><%= link_to_function post.user.username, "profile_summary(#{post.user.id})", :remote => true %></h5>
+          <div class="post_at">&nbsp<%= post.user.email %></div>
+          <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
+          <div class="post_text"><%= post.body %></div>
+          <div class="action_row" style="float: right;">
+            <span id="delete_<%= post.id %>" >
+              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
+  <% end %>
+</div>

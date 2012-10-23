@@ -3,7 +3,6 @@ class Admin::DashboardsController < ApplicationController
   layout :layout?
 
   def index
-    @schools = School.all
-    @students = User.all
+    @schools = SchoolAdmin.all
   end
 end

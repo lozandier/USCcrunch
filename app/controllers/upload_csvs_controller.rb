@@ -10,13 +10,17 @@ class UploadCsvsController < ApplicationController
           row = row.collect{|s| s.gsub("\"", "")}
           # row = row[0].to_s.split("\t").collect(&:strip)
 
-          Student.create({
+          @student = User.create({
               :school_admin_id => @school.id,
               :email => row[0],
               :first_name => row[1],
-              :name => row[2],
-              :date_of_birth => row[3],
+              :last_name => row[2],
+              :role => 'student',
+              :password => 'ashok123',
+              :password_confirmation => 'ashok123'
             })
+          @student.generate_password_reset_code
+          UserMailer.sent_student_invitation(@school,@student).deliver
         end
 
         flash[:notice] = "Uploading completed."

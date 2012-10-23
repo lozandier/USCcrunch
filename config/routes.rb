@@ -25,8 +25,16 @@ WebApp::Application.routes.draw do
     end
   end
 
+  resources :students
+
   resources :schools do
-    resources :students
+    resources :students do
+      member do
+        get :followers
+        get :following
+        get :posts
+      end
+    end
     resources :teachers
     resources :upload_csvs do
       collection do
@@ -127,4 +135,9 @@ WebApp::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
   root :to => 'home#index'
+  resources :home do
+    collection do
+      get :login
+    end
+  end
 end

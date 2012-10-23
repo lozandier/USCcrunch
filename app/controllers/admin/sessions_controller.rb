@@ -9,6 +9,7 @@ class Admin::SessionsController < Devise::SessionsController
     resource = warden.authenticate!(:scope => resource_name)
     puts resource.errors.inspect
     puts "VVVVVVVVVVVBBBBBB"
+    flash[:notice] = "Successfully Login.."
     redirect_to admin_dashboards_path
   end
 

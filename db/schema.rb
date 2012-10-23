@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121020115451) do
+ActiveRecord::Schema.define(:version => 20121023062544) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -73,10 +73,12 @@ ActiveRecord::Schema.define(:version => 20121020115451) do
     t.string   "school_name"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "slug"
   end
 
   add_index "school_admins", ["email"], :name => "index_school_admins_on_email", :unique => true
   add_index "school_admins", ["reset_password_token"], :name => "index_school_admins_on_reset_password_token", :unique => true
+  add_index "school_admins", ["slug"], :name => "index_school_admins_on_slug"
 
   create_table "schools", :force => true do |t|
     t.string   "school_name"
@@ -163,6 +165,10 @@ ActiveRecord::Schema.define(:version => 20121020115451) do
     t.text     "bio"
     t.string   "major"
     t.string   "website"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "role"
+    t.integer  "school_admin_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

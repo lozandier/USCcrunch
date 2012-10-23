@@ -74,7 +74,7 @@ class PostsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @post = @user.tweets.find(params[:id])
-    if  @post.destroy
+    if @post.destroy
       respond_to do |format|
         format.js{@post}
       end
