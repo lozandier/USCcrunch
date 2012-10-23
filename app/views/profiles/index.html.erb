@@ -9,7 +9,15 @@
     <div class="replies_count">
       <%= current_user.tweets.count %><br />REPLIES
     </div>
-    <input class="compose_new_post" type="text" placeholder="Compose new Post..." />
+    <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
+      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"Compose new Post..." %>
+      <div class="input-container" id="img_preview">
+        <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show')%></div>
+      <div class="fakeupload">
+        <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      </div>
+      <%= f.submit 'Submit'%>
+    <% end %>
   </div>
 
   <div class="box_l2_hp">

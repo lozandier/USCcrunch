@@ -66,6 +66,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#img_show').attr('src', e.target.result);
+            $('#realupload').hide();
         }
 
         reader.readAsDataURL(input.files[0]);

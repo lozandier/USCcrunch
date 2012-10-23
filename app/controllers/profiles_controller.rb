@@ -63,4 +63,30 @@ class ProfilesController < ApplicationController
     @post = @user.tweets.new(params[:tweet])
     @followers = Follow.where("status = #{true} and user_id = #{@user.id}")
   end
+
+  def compose_message
+    if params[:tweet][:body].blank?
+      render :update do |page|
+        page.alert("Can't be blank.")
+      end
+    else
+      @tweet = Tweet.new(params[:tweet])
+      @tweet.user_id = current_user.id
+      body = params[:tweet][:body].split(' ')[0]
+      @user = User.find_by_username(body)
+      @tweet.receiver_id = @user.present? ? @user.id : nil
+      if @tweet.save
+        render :update do |page|
+          page.alert('Success')
+          page.reload
+        end
+      else
+        if remotipart_submitted?
+          render :update do |page|
+            page.alert('Uploading file is not correct format.')
+          end
+        end
+      end
+    end
+  end
 end
