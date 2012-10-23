@@ -1,4 +1,4 @@
-<%= form_for :user, :url => student_upload_csv_school_upload_csvs_path(@school), :html => {:multipart => true}, :remote => true do |f| %>
+<%= form_for :user, :url => teacher_upload_csv_school_upload_csvs_path(@school), :html => {:multipart => true}, :remote => true do |f| %>
   <table>
     <tr>
       <td><%= f.label :csv, "Select csv file" %></td>

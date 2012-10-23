@@ -4,7 +4,11 @@ class HomeController < ApplicationController
     
   end
 
-  def login
+  def student_login
     
+  end
+
+  def school_login
+
   end
 end

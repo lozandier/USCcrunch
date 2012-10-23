@@ -1,6 +1,6 @@
 class SchoolsController < ApplicationController
   before_filter :is_school?, :except => ['edit', 'update', 'destroy']
-  layout :get_school_layout
+  layout :get_school_layout, :except => ['edit', 'update']
   def show
     @school = SchoolAdmin.find(params[:id])
     @students = User.where("school_admin_id = '#{current_school_admin.id}'").all
@@ -17,10 +17,10 @@ class SchoolsController < ApplicationController
     @school = SchoolAdmin.find(params[:id])
     if @school.update_attributes(params[:school_admin])
       @school.update_attribute(:reset_password_token,nil)
-      redirect_to login_home_index_path
+      redirect_to school_login_home_index_path
     else
-      flash.now[:notice] = "Loggened in failed."
-      render :action => 'edit',:layout => false
+      flash.now[:error] = "Loggened in failed."
+      render :action => 'edit'
     end
   end
 

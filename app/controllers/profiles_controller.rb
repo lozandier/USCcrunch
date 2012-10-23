@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   layout :get_layout
 
   def index
-    @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")
+    @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
     @posts = Tweet.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
@@ -62,20 +62,5 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
     @followers = Follow.where("status = #{true} and user_id = #{@user.id}")
-  end
-
-  def invite
-    @invite = Invitation.new
-  end
-
-  def invitation
-    @invite = Invitation.new(params[:invitation])
-    if @invite.save
-      flash[:notice] = "Success"
-      UserMailer.send_invitation(@invite).deliver
-      redirect_to profiles_path
-    else
-      render :action => 'invite'
-    end
   end
 end

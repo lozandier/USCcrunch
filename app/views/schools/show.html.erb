@@ -2,7 +2,7 @@
      left: 14px;top: 3px;
      position: relative;
      width: 100%;">
-  <div id="title">Students</div>
+  <div id="title">Users</div>
   <% if @students.present? %>
     <table border="1" width="100%">
       <tr>
@@ -11,6 +11,7 @@
         <th>Email</th>
         <th>User Name</th>
         <th>Status</th>
+        <th>Role</th>
         <th></th>
       </tr>
       <% for school in @students %>
@@ -30,8 +31,11 @@
               Invitation Sent
             <% end %>
           </td>
+          <td><%= school.role %></td>
           <td>
-            <%= link_to "View Posts", posts_school_student_path(@school, school)%> |
+            <% if school.reset_password_token == nil %>
+              <%= link_to "View Posts", posts_school_student_path(@school, school)%> |
+            <% end %>
             <%= link_to "Delete", student_path(school), :remote => true, :method => :delete, :confirm => "Are You Sure.." %>
           </td>
         </tr>

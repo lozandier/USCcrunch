@@ -58,11 +58,12 @@
       <div class="sub-navbar">
         <div class="container">
           <% if params[:action] != 'login' %>
-            <p><i class="icon icon-user"></i> Hello, Guest.
-              <% if params[:controller] == "sessions" or params[:action] == 'create' %>
-                Thanks for loging in.
-              <% else %>
+            <% if params[:controller] == "home" %>
+              <p><i class="icon icon-user"></i> Hello, Student.
                 <%= link_to "Login here ", new_user_session_path, :class => 'btn btn-login' %>
+                <span style="float:right;"><i class="icon icon-user"></i>
+                  Hello, School Admin.<%= link_to "Login here ", new_school_admin_session_path, :class => 'btn btn-login' %>
+                </span>
               <% end %>
             </p>
           <% end %>

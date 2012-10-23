@@ -6,7 +6,8 @@
   <% if @schools.present? %>
     <table border="1" width="100%">
       <tr>
-        <th>Admin Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Email</th>
         <th>School Name</th>
         <th></th>
@@ -14,6 +15,7 @@
       <% for school in @schools %>
         <tr style="text-align: center;">
           <td><%= school.first_name %></td>
+          <td><%= school.last_name %></td>
           <td><%= school.email %></td>
           <td><%= school.school_name %></td>
           <td><%= link_to "Delete", school_path(school), :method => :delete, :confirm => "Are You Sure..", :remote => true %></td>

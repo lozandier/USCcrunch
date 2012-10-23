@@ -21,6 +21,22 @@ $(document).ready(function(){
     });
 });
 
+function get_username(ht){
+    $.ajax({
+        url:"/students/username",
+        data: {
+            username: $(ht).val()
+        },
+        type: "PUT",
+        success: function(data){
+            if(data == "Error"){
+                alert("Error. Please try again");
+            }else{
+        }
+        }
+    });
+}
+
 function profile_summary(user){
     $.ajax({
         url: '/profiles/'+user+'/profile_summary',

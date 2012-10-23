@@ -25,7 +25,11 @@ WebApp::Application.routes.draw do
     end
   end
 
-  resources :students
+  resources :students do
+    collection do
+      put :username
+    end
+  end
 
   resources :schools do
     resources :students do
@@ -38,7 +42,8 @@ WebApp::Application.routes.draw do
     resources :teachers
     resources :upload_csvs do
       collection do
-        post :upload_csv
+        post :student_upload_csv
+        post :teacher_upload_csv
       end
     end
   end
@@ -53,8 +58,6 @@ WebApp::Application.routes.draw do
     collection do
       get :edit_password
       put :update_password
-      get :invite
-      post :invitation
     end
   end
 
@@ -137,7 +140,8 @@ WebApp::Application.routes.draw do
   root :to => 'home#index'
   resources :home do
     collection do
-      get :login
+      get :student_login
+      get :school_login
     end
   end
 end

@@ -17,7 +17,8 @@
         <div class="control-group">
           <label class="control-label" for="inputPassword">User Name</label>
           <div class="controls">
-            <%= f.text_field :username, :class => 'input-xlarge', :placeholder => "Username" %>
+            <%= f.text_field :username, :class => 'input-xlarge', :placeholder => "Username",:onBlur => "get_username(this)" %>
+            <br /><em id="username_error" style="color: #CC3333; text-transform: none;font-family: Calibri-Bold;font-size:12px;"></em>
             <%= validation_error(@student.errors["username"]) %>
           </div>
         </div>

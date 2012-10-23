@@ -1,66 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>School Admin Login</title>
-  </head>
-  <body class="account register" style="background:#232323;">
-    <div align="center" id="page" style="width: 635px;height: 347px;">
-      <div id="session_content" style="padding: 4px;">
-        <div style="background-color: #EEEEEE;width: 523px;height: 213px;margin-top:12px;">
-          <div><br /><br />
-            <%= form_for(@school, :url => school_path(@school), :html => { :method => :put }) do |f| %>
-              <%= f.hidden_field :reset_password_token %>
-              <table style="margin-top:12px;">
-                <tr>
-                  <td><%= f.label :password, "New password:" %></td>
-                  <td><%= f.password_field :password %></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><%= validation_error(@school.errors["password"])%></td>
-                </tr>
-                <tr>
-                  <td><%= f.label :password_confirmation, "Confirm new password:" %></td>
-                  <td><%= f.password_field :password_confirmation %></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><%= validation_error(@school.errors["password_confirmation"])%></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><button type="submit" class="btn">Change</button></td>
-                </tr>
-              </table>
-            <% end %>
+<div class="main">
+  <div class="container"><br/>
+    <br/>
+    <div class="span5" style="position: relative;left: 310px;">
+      <strong>Create an account if you are new here:</strong>
+      <br/>
+      <br/>
+      <%= form_for(@school, :url => school_path(@school), :html => { :method => :put }) do |f| %>
+        <%= f.hidden_field :reset_password_token %>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Create a password</label>
+          <div class="controls">
+            <%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
+            <%= validation_error(@school.errors["password"]) %>
           </div>
         </div>
-      </div>
-      <div style="clear: both;">&nbsp;</div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Confirm password</label>
+          <div class="controls">
+            <%= f.password_field :password_confirmation, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %>
+            <%= validation_error(@school.errors["password_confirmation"]) %>
+          </div>
+        </div>
+        <div class="control-group">
+          <button type="submit" class="btn">Create account</button>
+        </div>
+      <% end %><br /><br /><br /><br />
     </div>
-    <div style="max-width: 200px;" id="tiptip_holder"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div></body>
-</html>
-<style>
-  input[type=text], input[type=password], input[type=email], textarea {
-    background-image: url("/assets/txt bar.png");
-    color: rgb(65, 65, 65);
-    font-size: 14px;
-    height: 23px;
-    width: 257px;
-    border: none;
-  }
-
-  label {
-    color: #414141;
-    float: left;
-    font-family: Arial,sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-    margin: 0px 30px 0;
-  }
-
-  #page {
-    margin: 116px auto;
-  }
-
-</style>
+  </div>
+</div>

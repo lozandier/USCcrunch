@@ -29,15 +29,28 @@ class StudentsController < ApplicationController
     end
   end
 
+  def username
+    @username = User.find_by_username(params[:username])
+    if !@username.present?
+      render :update do |page|
+        page<<"$('#username_error').html('');"
+      end
+    else
+      render :update do |page|
+        page<<"$('#username_error').text('User Name already exists choose another one..');"
+      end
+    end
+  end
+
   def update
     @student = User.find(params[:id])
     if @student.update_attributes(params[:user])
       @student.update_attribute(:reset_password_token,nil)
       @student.update_attribute(:confirmation_token,nil)
-      redirect_to login_home_index_path
+      redirect_to student_login_home_index_path
     else
-      flash.now[:notice] = "Loggened in failed."
-      render :action => 'edit',:layout => false
+      flash.now[:error] = "Loggened in failed."
+      render :action => 'edit'
     end
   end
 

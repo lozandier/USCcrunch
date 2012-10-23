@@ -6,7 +6,7 @@
     <br/>
     <div id="error" style="display :none;color :red; font-size: 14px;position: relative;z-index: 1001;">Invalid Email/Password</div>
     <div id="error1" style="display :none;color :red;font-size: 14px;position: relative;z-index: 1001;">You need to sign in or sign up before continuing. </div>
-    <%= form_for(resource, :as => resource_name, :url => school_admin_session_path, :html => {:class =>"form-horizontal" },:remote => true) do |f| %>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class =>"form-horizontal" },:remote => true) do |f| %>
       <div class="control-group">
         <label class="control-label" for="inputEmail">Email or Username</label>
         <div class="controls">
@@ -29,7 +29,7 @@
           <br/>
         </div>
       </div>
-    <% end %><br /><br />
+    <% end %><br /><br /><br /><br /><br /><br />
   </div>
 </div><!--/span5-->
 
