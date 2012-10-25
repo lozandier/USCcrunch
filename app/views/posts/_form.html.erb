@@ -1,8 +1,8 @@
-<div id="UserComment">
+<div id="UserComment" style="float: left;">
   <%= form_for @post, :url => user_posts_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
     <table>
       <tr>
-        <td><%= f.text_area :body, :cols => 30, :rows => 1, :placeholder => "Compose Post Here.." %>
+        <td><%= f.text_field :body, :placeholder => "Compose Post Here.." %>
           <%= validation_error(@post.errors['body'])%></td>
       </tr>
       <tr>

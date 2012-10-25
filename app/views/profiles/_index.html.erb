@@ -1,10 +1,10 @@
 <div class="box_r1_hp">
   <h2 class="posts_title">
-    Posts <%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
+    Posts 
     <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
   </h2><hr />
   <% if @posts.present? %>
-    <% for post in @posts %>
+    <% for post in @posts.compact %>
       <div class="posts_box" id="post_<%= post.id %>">
         <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
         <div class="post" style="border-bottom: 1px solid grey;height: auto;">
@@ -34,6 +34,7 @@
             <%elsif post.favorite.status == false%>
               <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
             <% end %>
+    <%#= link_to_function "Conversation", "conversation(#{current_user.id}, #{post.id})" %>
             <div id="bid-info_<%= post.id %>"></div>
           </div>
         </div>

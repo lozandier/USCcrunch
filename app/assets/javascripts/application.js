@@ -48,6 +48,17 @@ function profile_summary(user){
     });
 }
 
+function conversation(user){
+    $.ajax({
+        url: '/profiles/'+user+'/conversation',
+        success: function(data){
+            $("#popup_body").html(data);
+            $("#overlay").show();
+            $("#popup_box").show();
+        }
+    });
+}
+
 function new_compose(){
     $.ajax({
         url: '/profiles/new_compose',

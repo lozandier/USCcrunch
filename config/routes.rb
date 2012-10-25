@@ -50,6 +50,7 @@ WebApp::Application.routes.draw do
 
   resources :profiles do
     member do
+      get :conversation
       get :profile_summary
       get :more_profile_information
       get :followers

@@ -1,0 +1,29 @@
+<div id="simple-overlay-content">
+  <div style="margin: -45px 8px;float :right;">
+    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
+  </div>
+  <div style="float: left;">
+    <%= image_tag(current_user.avatar.url(:original) , :style=>"width:25px;height: 25px;") %>
+  </div>
+  <table style="font-size: 15px;left: -60px;position: relative;top: -8px;width: 360px;">
+    <tr>
+      <td><%= current_user.tweets.first.body %><br />
+        <%= current_user.tweets.first.created_at %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= link_to "More Details", profile_path(current_user), :style => 'font-size: 12px;text-decoration:none;' %></td>
+    </tr>
+  </table>
+  <hr />
+  Conversion with <%= @user.username %>
+  <% for message in @posts %>
+    <% if message.user_id == current_user.id or message.receiver_id == current_user.id %>
+      <p style="font-size: small" ><%= image_tag(message.user.avatar.url(:original), :style=>"background: url('/images/avatar bg.png');width:25px;height: 25px;')") %></p>
+      <div style="float: right; margin: -130px 90px; width :410px;height: 112px;">
+      <%end%>
+      <br/><em style="color: #474545;font-size: 12px;">&nbsp;&nbsp;<%= message.body %></em>
+      <p style="font-size: 6px;"><%= message.created_at.strftime("%d/%b/%Y") %>&nbsp;&nbsp;<%= message.created_at.strftime("%I:%M%p") %></p>
+    </div>
+  <%end%><br/>
+</div>

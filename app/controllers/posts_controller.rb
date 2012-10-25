@@ -49,7 +49,7 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:user_id])
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
-    @repost.receiver_id = @post.receiver_id
+    @repost.receiver_id = @post.user_id
     @repost.tweet_id = @post.id
     @repost.reply = true
     if @repost.save

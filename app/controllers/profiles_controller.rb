@@ -14,6 +14,13 @@ class ProfilesController < ApplicationController
     @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
+  def conversation
+    @user = User.find(params[:id])
+    @post = @user.tweets.new(params[:tweet])
+    @posts = Tweet.paginate :conditions => ["(tweets.user_id = #{current_user.id} and tweets.receiver_id = #{params[:id]}) or (tweets.receiver_id = #{current_user.id} and tweets.user_id = #{params[:id]})"], :page => params[:page], :per_page => 5
+    render :layout => false
+  end
+
   def edit
     @user = User.find(params[:id])
   end

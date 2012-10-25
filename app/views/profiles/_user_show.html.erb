@@ -24,6 +24,7 @@
         <% end %>
       <% else %>
         <%= link_to 'Edit your Profile',edit_profile_path(current_user), :class => 'btn' %>
+        <%#= link_to_function "Conversation", "conversation(#{current_user.id})", :class => 'btn' %>
       <% end %>
       <br/>
       <div class="tweets_num"><%= @user.tweets.where("reply IS NULL").count %>&nbsp POSTS</div>
