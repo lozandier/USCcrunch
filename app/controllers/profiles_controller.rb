@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.where("user_id = '#{@user.id}'").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def edit
@@ -65,6 +65,37 @@ class ProfilesController < ApplicationController
   end
 
   def compose_message
+    if params[:tweet][:body].blank?
+      render :update do |page|
+        page.alert("Can't be blank.")
+      end
+    else
+      @tweet = Tweet.new(params[:tweet])
+      @tweet.user_id = current_user.id
+      body = params[:tweet][:body].split(' ')[0]
+      @user = User.find_by_username(body)
+      @tweet.receiver_id = @user.present? ? @user.id : nil
+      if @tweet.save
+        render :update do |page|
+          page.alert('Success')
+          page.reload
+        end
+      else
+        if remotipart_submitted?
+          render :update do |page|
+            page.alert('Uploading file is not correct format.')
+          end
+        end
+      end
+    end
+  end
+
+  def new_compose
+    @post = current_user.tweets.new(params[:tweet])
+    render :layout => false
+  end
+
+  def new_compose_message
     if params[:tweet][:body].blank?
       render :update do |page|
         page.alert("Can't be blank.")

@@ -4,19 +4,17 @@
     <h3 class="profile_name"><%= current_user.username %></h3>
     <%= link_to "View my profile page", profile_path(current_user), :class => "view_my_profile_page" %>
     <div class="posts_count">
-      <%= current_user.tweets.count %><br />POSTS
+      <%= current_user.tweets.where("reply IS NULL").count %><br />POSTS
     </div>
     <div class="replies_count">
-      <%= current_user.tweets.count %><br />REPLIES
+      <%= current_user.tweets.where("reply IS NOT NULL").count %><br />REPLIES
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"Compose new Post..." %>
-      <div class="input-container" id="img_preview">
-        <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show')%></div>
-      <div class="fakeupload">
+      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
+      <div class="input-container" id="img_preview" style="margin-left: 9px;margin-top: -6px;">
         <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>
-      <%= f.submit 'Submit'%>
+      <%= f.submit 'Post', :style => "margin-left: 10px;"%>
     <% end %>
   </div>
 

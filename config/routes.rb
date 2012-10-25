@@ -59,16 +59,23 @@ WebApp::Application.routes.draw do
       get :edit_password
       put :update_password
       post :compose_message
+      get :new_compose
+      post :new_compose_message
     end
   end
 
   resources :users do
     resources :posts do
       collection do
-        post :repost
         post :favourite
         put :update_favourite
         put :update_mark_favourite
+      end
+
+      member do
+        post :repost
+        get :reply
+        post :reply_post
       end
     end
     resources :follows do

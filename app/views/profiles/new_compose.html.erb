@@ -1,0 +1,30 @@
+<div id="simple-overlay-title">Add Post</div>
+<div id="simple-overlay-content">
+  <div style="margin: -45px 8px;float :right;">
+    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
+  </div>
+  <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
+    <%= f.text_area :body, :rows => 2, :cols => 15,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
+    <div class="input-container" id="img_preview1">
+      <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show1', :style => 'display: none;')%>
+      <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
+    </div>
+    <%= f.submit 'Submit'%>
+  <% end %>
+</div>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img_show1').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+      $("#img_preview1").show();
+      $("#img_show1").show();
+    }
+    return true;
+  }
+</script>

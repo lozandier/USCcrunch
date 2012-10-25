@@ -40,6 +40,32 @@ class PostsController < ApplicationController
     end
   end
 
+  def reply
+    @post = Tweet.find(params[:id])
+    render :layout => false
+  end
+
+  def reply_post
+    @post = Tweet.find(params[:user_id])
+    @repost = Tweet.new(params[:tweet])
+    @repost.user_id = current_user.id
+    @repost.receiver_id = @post.receiver_id
+    @repost.tweet_id = @post.id
+    @repost.reply = true
+    if @repost.save
+      render :update do |page|
+        flash[:notice] = "Successfully Replied."
+        page.reload
+      end
+    else
+      if remotipart_submitted?
+        respond_to do |format|
+          format.js
+        end
+      end
+    end
+  end
+
   def show
 
   end

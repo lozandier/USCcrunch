@@ -1,0 +1,41 @@
+<div id="UserComment_<%= @post.id %>">
+  <%= form_for @post, :url => reply_post_user_post_path(@post),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
+    <table>
+      <tr>
+        <td>
+          <%= f.text_area :body, :cols => 30, :rows => 1,:value => '', :placeholder => "Compose Post Here.." %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= validation_error(@post.errors['body'])%>
+        </td>
+      </tr>
+      <tr id="img_preview1_<%= @post.id %>" style="margin-left: 9px;margin-top: -6px;">
+        <td>
+          <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1_#{@post.id}", :style => 'display: none;')%>
+          <%= f.file_field :document, :id => "realupload1_#{@post.id}", :class => "realupload", :onChange => 'readURL(this)'%>
+        </td>
+      </tr>
+      <tr>
+        <td valign="bottom"><%= f.submit "Post", :class => 'btn'%></td>
+      </tr>
+    </table>
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#img_show1_<%= @post.id %>').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+          $("#img_preview1_<%= @post.id %>").show();
+          $("#img_show1_<%= @post.id %>").show();
+        }
+        return true;
+      }
+    </script>
+  <% end %>
+</div>

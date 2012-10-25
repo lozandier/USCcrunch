@@ -45,12 +45,10 @@
             <ul class="nav pull-right">
               <div class="btn-group">
                 <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-                  <img src="/assets/settings_default.png" heigt="15px" width="15px"/>
+                  <%= image_tag("/assets/settings_default.png", :heigt => "15px", :width => "15px") %>
                   <span class="caret"></span>
                 </a>
-                <a class="btn btn-primary href="#">
-                   <img src="/assets/new_post_icon.png" heigt="15px" width="15px"/>
-                </a>
+                <%= link_to_function image_tag("/assets/new_post_icon.png", :heigt => "15px", :width => "15px", :title => "Add New Post"), "new_compose()", :remote => true, :class => "btn btn-primary" %>
                 <ul class="dropdown-menu">
                   <!-- dropdown menu links -->
                   <li><%= link_to "My Profile", profile_path(current_user)%></li>
@@ -90,6 +88,11 @@
     <div style='float: right; margin-top: -40px;margin-right:-40px'>
     </div>
     <div id='popup_body' style='float:right'></div>
+  </div>
+  <div align='center' id='popup_box1'>
+    <div style='float: right; margin-top: -40px;margin-right:-40px'>
+    </div>
+    <div id='popup_body1' style='float:right'></div>
   </div>
 </body>
 </html>

@@ -48,11 +48,27 @@ function profile_summary(user){
     });
 }
 
+function new_compose(){
+    $.ajax({
+        url: '/profiles/new_compose',
+        success: function(data){
+            $("#popup_body1").html(data);
+            $("#overlay").show();
+            $("#popup_box1").show();
+        }
+    });
+}
+
 function hide_popup(){
 
     if(jQuery('#popup_box')){
         jQuery('#popup_body').html("");
         jQuery('#popup_box').hide();
+    }
+
+    if(jQuery('#popup_box1')){
+        jQuery('#popup_body1').html("");
+        jQuery('#popup_box1').hide();
     }
 
     if(jQuery('#overlay')){
@@ -66,11 +82,11 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#img_show').attr('src', e.target.result);
-            $('#realupload').hide();
         }
 
         reader.readAsDataURL(input.files[0]);
         $("#img_preview").show();
+        $("#img_show").show();
     }
     return true;
 }

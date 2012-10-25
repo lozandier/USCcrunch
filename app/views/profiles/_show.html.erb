@@ -41,7 +41,7 @@
               <div class="action_row">
                 <a href="#">Expand</a>
                 &nbsp&nbsp
-                <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "" %>
+                <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true %>
                 &nbsp&nbsp
                 <% if post.user_id == current_user.id %>
                   <span id="delete_<%= post.id %>">
@@ -58,6 +58,7 @@
                 <%elsif post.favorite.status == false%>
                   <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
                 <% end %>
+                <div id="bid-info_<%= post.id %>"></div>
               </div>
             </div>
           </div>

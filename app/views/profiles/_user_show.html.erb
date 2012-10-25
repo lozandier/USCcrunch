@@ -26,10 +26,8 @@
         <%= link_to 'Edit your Profile',edit_profile_path(current_user), :class => 'btn' %>
       <% end %>
       <br/>
-      <div class="tweets_num"><%= @user.tweets.count %>&nbsp<%= link_to "Posts", profile_path(@user)%></div>
-      <div class="following_num"><%= @user.sent_follows.where("status = #{true}").count %>&nbsp<%= link_to "Following", following_profile_path(@user)%></div>
-      <div class="followers_num"><%= @user.received_follows.where("status = #{true}").count %>&nbsp<%= link_to "Followers", followers_profile_path(@user)%></div>
-
+      <div class="tweets_num"><%= @user.tweets.where("reply IS NULL").count %>&nbsp POSTS</div>
+      <div class="following_num"><%= @user.tweets.where("reply IS NOT NULL").count %>&nbsp REPLIES </div>
     </div>
   </div>
 
