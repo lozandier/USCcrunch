@@ -175,7 +175,7 @@
     margin: -220px 0 0 -250px;
     padding: 15px;
     position: absolute;
-    top: 36%;
+    top: 45%;
     width: auto;
     z-index: 1001;
     background-repeat: repeat;
@@ -296,7 +296,7 @@ a{
 .pagination{
     float: right;
     position: relative;
-    top: 3px;
+    top: -20px;
     font-size: 15px;
 }
 

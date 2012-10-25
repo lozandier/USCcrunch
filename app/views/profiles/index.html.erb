@@ -12,11 +12,25 @@
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
       <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
       <div class="input-container" id="img_preview" style="margin-left: 9px;margin-top: -6px;">
+        <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show", :style => 'display: none;')%>
+        <div id="file" class="btn">Choose</div>
         <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>
       <%= f.submit 'Post', :style => "margin-left: 10px;"%>
     <% end %>
   </div>
+  <script>
+    var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
+    var fileInput = $(':file').wrap(wrapper);
+
+    fileInput.change(function(){
+      $this = $(this);
+    })
+
+    $('#file').click(function(){
+      fileInput.click();
+    }).show();
+  </script>
 
   <div class="box_l2_hp">
     This box has not been decided what to be used for.

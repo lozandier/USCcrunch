@@ -43,7 +43,7 @@
                 &nbsp&nbsp
                 <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true %>
                 &nbsp&nbsp
-                <% if post.user_id == current_user.id %>
+                <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
                   <span id="delete_<%= post.id %>">
                     <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
                   </span>

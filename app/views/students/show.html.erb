@@ -8,9 +8,8 @@
       <a class="website" href=""><%= @user.website %></a>
     </div>
     <div class="profile_box_right">
-      <div class="tweets_num"><%= @user.tweets.count %>&nbsp<%= link_to "Posts", school_student_path(@school,@user) %></div>
-      <div class="following_num"><%= @user.sent_follows.where("status = #{true}").count %>&nbsp<%= link_to "Following", following_school_student_path(@school,@user)%></div>
-      <div class="followers_num"><%= @user.received_follows.where("status = #{true}").count %>&nbsp<%= link_to "Followers", followers_school_student_path(@school,@user)%></div>
+      <div class="tweets_num"><%= @user.tweets.where("reply IS NULL").count %>&nbsp POSTS</div>
+      <div class="following_num"><%= @user.tweets.where("reply IS NOT NULL").count %>&nbsp REPLIES</div>
     </div>
   </div>
 </div>
