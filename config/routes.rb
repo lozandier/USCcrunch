@@ -53,6 +53,7 @@ WebApp::Application.routes.draw do
       get :conversation
       get :profile_summary
       get :more_profile_information
+      post :conversation_message
       get :followers
       get :following
     end

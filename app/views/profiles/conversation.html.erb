@@ -1,29 +1,59 @@
-<div id="simple-overlay-content">
-  <div style="margin: -45px 8px;float :right;">
+<div class="simple-overlay-content">
+  <div style="float: right;margin-left: 0;margin-top: -5px;">
     <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
   </div>
-  <div style="float: left;">
-    <%= image_tag(current_user.avatar.url(:original) , :style=>"width:25px;height: 25px;") %>
+  <div style="float:left;clear:both;min-height: 300px;width: 430px;background: white;position: relative;left: 80px;">
+    <%= image_tag @user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %>
+    <% if @user.tweets.present?  %>
+      <% Tweet.where("user_id = #{@user.id}").limit(1).each do |post| %>
+        <table style="font-size: 15px;left: 0;position: relative;top: 7px;width: 360px;">
+          <tr>
+            <td><%= @user.username %></td>
+          </tr>
+          <tr>
+            <td><%= post.body %></td>
+          </tr>
+          <tr>
+            <td><%= post.created_at.strftime("%d-%m-%Y") %></td>
+          </tr>
+          <tr>
+            <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
+          </tr>
+        </table>
+      <% end %>
+    <% end %>
   </div>
-  <table style="font-size: 15px;left: -60px;position: relative;top: -8px;width: 360px;">
-    <tr>
-      <td><%= current_user.tweets.first.body %><br />
-        <%= current_user.tweets.first.created_at %>
-      </td>
-    </tr>
-    <tr>
-      <td><%= link_to "More Details", profile_path(current_user), :style => 'font-size: 12px;text-decoration:none;' %></td>
-    </tr>
-  </table>
-  <hr />
-  Conversion with <%= @user.username %>
-  <% for message in @posts %>
-    <% if message.user_id == current_user.id or message.receiver_id == current_user.id %>
-      <p style="font-size: small" ><%= image_tag(message.user.avatar.url(:original), :style=>"background: url('/images/avatar bg.png');width:25px;height: 25px;')") %></p>
-      <div style="float: right; margin: -130px 90px; width :410px;height: 112px;">
-      <%end%>
-      <br/><em style="color: #474545;font-size: 12px;">&nbsp;&nbsp;<%= message.body %></em>
-      <p style="font-size: 6px;"><%= message.created_at.strftime("%d/%b/%Y") %>&nbsp;&nbsp;<%= message.created_at.strftime("%I:%M%p") %></p>
-    </div>
-  <%end%><br/>
 </div>
+<div id="simple-overlay-content" style="float: right;position: relative;">
+  <div style="float: left;left: -25px;position: relative;">
+    <%= form_for @post, :url =>conversation_message_profile_path(@user),:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
+      <%= image_tag(current_user.avatar.url(:original), :width => '40px', :height => '40px', :style => 'margin-right: -10px;margin-top: -10px;') %>
+      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:70%;",:placeholder=>"Add to Conversation" %>
+      <div class="input-container" id="img_preview1" style="margin-left: -58px;margin-top: -6px;">
+        <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1", :style => 'display: none;')%>
+        <%= f.file_field :document,:style=>"width:35%;", :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      </div>
+      <%= f.submit 'Post', :style => "float: left;margin-left: 65px;"%>
+    <% end %>
+  </div>
+</div>
+<div id="simple-overlay-content" class="conversation" style="float: right;position: relative;overflow: auto;height: auto;">
+  <%= render :partial => 'conversation' %>
+</div>
+<script>
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#img_show1').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+      $("#img_preview1").show();
+      $("#img_show1").show();
+    }
+    return true;
+  }
+</script>

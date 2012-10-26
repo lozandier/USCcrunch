@@ -52,6 +52,7 @@
                 <ul class="dropdown-menu">
                   <!-- dropdown menu links -->
                   <li><%= link_to "My Profile", profile_path(current_user)%></li>
+                  <li><%= link_to "My Posts", user_posts_path(current_user)%></li>
                   <li><%= link_to "Edit Profile", edit_profile_path(current_user) %></li>
                   <li><%= link_to "SignOut", destroy_user_session_path, :method => 'delete' %></li>
                 </ul>

@@ -1,8 +1,14 @@
 class PostsController < ApplicationController
+  layout :get_layout
   def new
     @user = User.find(params[:user_id])
     @post = @user.tweets.new
     render :layout => false
+  end
+
+  def index
+    @user = current_user
+    @posts = @user.tweets.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def create

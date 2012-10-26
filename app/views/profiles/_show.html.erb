@@ -48,7 +48,7 @@
                     <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
                   </span>
                 <% else %>
-                  <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_posts_path(post), :method => 'POST', :remote => true %>
+                  <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_post_path(current_user.id,post), :method => 'POST', :remote => true %>
                 <% end %>
                 &nbsp&nbsp
                 <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
