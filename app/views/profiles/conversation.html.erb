@@ -1,6 +1,6 @@
 <div class="simple-overlay-content">
   <div style="float: right;margin-left: 0;margin-top: -5px;">
-    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
+    <%=image_tag("close.jpeg", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '34px', :height => '34px', :onclick => "hide_popup();")%>
   </div>
   <div style="float:left;clear:both;min-height: 300px;width: 430px;background: white;position: relative;left: 80px;">
     <%= image_tag @user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %>
@@ -14,11 +14,13 @@
             <td><%= post.body %></td>
           </tr>
           <tr>
-            <td><%= post.created_at.strftime("%d-%m-%Y") %></td>
+            <td><%= post.created_at.strftime("%b %d %Y") %></td>
           </tr>
-          <tr>
-            <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
-          </tr>
+          <% if post.document.present? %>
+            <tr>
+              <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
+            </tr>
+          <% end %>
         </table>
       <% end %>
     <% end %>

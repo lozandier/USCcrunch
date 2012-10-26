@@ -1,4 +1,5 @@
 <br />
+<%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
 <span id="success1" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: -30px;">Successfully posted.</span>
 <div style="float: left;">
   <% for post in @posts %>
@@ -8,8 +9,18 @@
         <td><%= post.user.username %></td>
       </tr>
       <tr>
-        <td><%= post.body %></td>
+        <td><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></td>
       </tr>
+      <% if post.document.present? %>
+        <tr>
+          <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
+        </tr>
+      <% end %>
     </table><hr />
   <% end %>
 </div>
+<style>
+  hr{
+    margin-top: -33px;
+  }
+</style>
