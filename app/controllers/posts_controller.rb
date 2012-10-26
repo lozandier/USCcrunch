@@ -31,7 +31,7 @@ class PostsController < ApplicationController
   end
 
   def repost
-    @post = Tweet.find(params[:user_id])
+    @post = Tweet.find(params[:id])
     @repost = Tweet.new(:user_id => @post.user_id, :receiver_id => @post.receiver_id, :body => @post.body)
     if @repost.save
       render :update do |page|
