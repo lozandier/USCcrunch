@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-#  extend FriendlyId
-#  friendly_id :username, use: :slugged
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
