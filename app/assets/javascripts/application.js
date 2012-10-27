@@ -93,6 +93,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#PreviewImage').attr('src', e.target.result);
+            $("#user_photo").hide();
         };
         reader.readAsDataURL(input.files[0]);
     }

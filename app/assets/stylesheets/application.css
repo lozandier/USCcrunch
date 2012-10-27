@@ -24,6 +24,14 @@
     background-color: #FFFF80;
 }
 
+#user_photo, #PreviewImage{
+    height: 70px;
+    left: -15px;
+    position: relative;
+    top: 10px;
+    width: 68px;
+}
+
 .pagination a.currentpage{
     background-color: #2e6ab1;
     color: #FFF !important;

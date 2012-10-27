@@ -1,7 +1,7 @@
 <div class="span4">
 
   <div class="box_l1_ep">
-    <%= image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+    <%= image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
     <h3 class="profile_name"><%= @user.username %></h3>
     <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
   </div>
@@ -27,9 +27,13 @@
         <table width="100%" cellpadding="20%">
           <tr>
             <td><%= f.label :avatar, "Photo" %></td>
-            <td id="img_preview">
-              <%= image_tag(@user.avatar.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show')%>
-              <%= f.file_field :avatar, :onChange => 'readURL(this)' %></td>
+            <td>
+              <%= image_tag(@user.avatar.url(:original), :width => '70px', :height => '70px;', :id => 'user_photo') %>
+              <img id="PreviewImage" src="" alt=""  />
+              <div class="input-container" id="img_preview" style="position: relative;right: -70px;top: -35px;">
+                <%= f.file_field :avatar, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+              </div>
+            </td>
             <td><%= validation_error(@user.errors["avatar"]) %></td>
           </tr>
 
