@@ -16,7 +16,7 @@
           <div class="post_text"><%= post.body %></div>
           <div class="action_row" style="float: right;">
             <span id="delete_<%= post.id %>" >
-              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
+              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
             </span>
           </div>
         </div>

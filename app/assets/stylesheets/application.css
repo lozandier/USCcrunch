@@ -337,3 +337,21 @@ a{
     padding-top: 3px;
     white-space: nowrap;
 }
+
+
+#img_show, #img_show1{
+    display: none;
+}
+#img_preview, #img_preview1 {
+    width: 93px;
+    height: 28px;
+    background: url('/assets/file_browse_normal.png') 0 0 no-repeat;
+    border:none;
+    overflow:hidden;
+}
+#realupload, #realupload1{
+    margin-left:-145px;
+    opacity:0.0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}

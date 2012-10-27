@@ -6,10 +6,10 @@
   <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
     <%= f.text_area :body, :rows => 2, :cols => 15,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
     <div class="input-container" id="img_preview1">
-      <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show1', :style => 'display: none;')%>
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
-    <%= f.submit 'Submit'%>
+    <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show1')%>
+    <%= f.submit 'Post', :class => 'btn'%>
   <% end %>
 </div>
 <script>

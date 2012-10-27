@@ -13,17 +13,33 @@
       </tr>
       <tr id="img_preview1_<%= @post.id %>" style="margin-left: 9px;margin-top: -6px;">
         <td>
-          <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1_#{@post.id}", :style => 'display: none;')%>
-          <%= f.file_field :document, :id => "realupload1_#{@post.id}", :class => "realupload", :onChange => 'readURL(this)'%>
+          <%= f.file_field :document, :id => "realupload1_#{@post.id}", :class => "realupload", :onChange => "readURL_#{@post.id}(this)"%>
         </td>
       </tr>
       <tr>
-        <td valign="bottom"><%= f.submit "Post", :class => 'btn'%></td>
+        <td>
+          <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1_#{@post.id}", :style => 'display: none;')%>
+          <%= f.submit "Post", :class => 'btn'%></td>
       </tr>
     </table>
-    <script>
 
-      function readURL(input) {
+    <style>
+      #img_preview1_<%= @post.id %> {
+        width: 93px;
+        height: 28px;
+        background: url('/assets/file_browse_normal.png') 0 0 no-repeat;
+        border:none;
+        overflow:hidden;
+      }
+      #realupload1_<%= @post.id %>{
+        margin-left:-145px;
+        opacity:0.0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+      }
+    </style>
+    <script>
+      function readURL_<%= @post.id %>(input) {
         if (input.files && input.files[0]) {
           var reader = new FileReader();
 
