@@ -37,7 +37,7 @@
           <img class="paper_plane" src="/assets/paper_plane_icon.png" height="50px" width="50px"/>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="<%= params[:controller] == 'profiles' && params[:action] == 'index'  ? "active" : "" %>"><%= link_to image_tag("/assets/home_icon_default.png", :height => "15px", :width => "15px")+'Home', profiles_path(current_user)  %></li>
+              <li class="<%= params[:controller] == 'profiles' && params[:action] == 'index'  ? "active" : "" %>"><%= link_to image_tag("/assets/home_icon_default.png", :height => "15px", :width => "15px")+'Home', profiles_path  %></li>
               <li class="<%=  params[:controller] == "profiles" && params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password' ? "active" : ""%>"><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "15px", :width => "15px")+"Me", profile_path(current_user) %></li>
               <li><%= link_to "Class", "" %></li>
             </ul>

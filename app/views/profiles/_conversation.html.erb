@@ -1,26 +1,61 @@
-<br />
-<%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
-<span id="success1" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: -30px;">Successfully posted.</span>
-<div style="float: left;">
-  <% for post in @posts %>
-    <%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %>
-    <table style="font-size: 15px;left: 65px;position: relative;top: -40px;width: 360px;">
-      <tr>
-        <td><%= post.user.username %></td>
-      </tr>
-      <tr>
-        <td><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></td>
-      </tr>
-      <% if post.document.present? %>
-        <tr>
-          <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
-        </tr>
-      <% end %>
-    </table><hr />
-  <% end %>
+<div id="simple-overlay-content" style="float: right;position: relative;">
+  <div style="float: left;left: -25px;position: relative;">
+    <%= form_for @post, :url =>conversation_message_profile_path(@user),:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
+      <%= image_tag(current_user.avatar.url(:original), :width => '40px', :height => '40px', :style => 'margin-right: -10px;margin-top: -10px;') %>
+      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:70%;",:placeholder=>"Add to Conversation" %>
+      <%= validation_error(@post.errors["body"]) %>
+      <div class="input-container" id="img_preview1" style="margin-left: -58px;margin-top: -6px;">
+        <%= f.file_field :document,:style=>"width:35%;", :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      </div>
+      <img id="PreviewImage1" src="" alt="" style="width:25px; height:25px;"  />
+      <%= f.submit 'Post', :class => 'btn'%>
+    <% end %>
+  </div>
 </div>
-<style>
-  hr{
-    margin-top: -33px;
+<div id="simple-overlay-content" style="float: right;position: relative;overflow: auto;height: auto;">
+  <br />
+  <%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
+  <span id="success1" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: -30px;">Successfully posted.</span>
+  <div style="float: left;">
+    <% for post in @posts %>
+      <%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %>
+      <table style="font-size: 15px;left: 65px;position: relative;top: -40px;width: 360px;">
+        <tr>
+          <td><%= post.user.username %></td>
+        </tr>
+        <tr>
+          <td><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></td>
+        </tr>
+        <% if post.document.present? %>
+          <tr>
+            <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
+          </tr>
+        <% end %>
+      </table><hr />
+    <% end %>
+  </div>
+  <style>
+    hr{
+      margin-top: -33px;
+    }
+
+    .form_error{
+      color: red;
+      left: 169px;
+      position: relative;
+      top: -33px;
+    }
+  </style>
+</div>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {//Check if input has files.
+      var reader = new FileReader();//Initialize FileReader.
+
+      reader.onload = function (e) {
+        $('#PreviewImage1').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
   }
-</style>
+</script>

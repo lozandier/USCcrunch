@@ -26,36 +26,7 @@
     <% end %>
   </div>
 </div>
-<div id="simple-overlay-content" style="float: right;position: relative;">
-  <div style="float: left;left: -25px;position: relative;">
-    <%= form_for @post, :url =>conversation_message_profile_path(@user),:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= image_tag(current_user.avatar.url(:original), :width => '40px', :height => '40px', :style => 'margin-right: -10px;margin-top: -10px;') %>
-      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:70%;",:placeholder=>"Add to Conversation" %>
-      <div class="input-container" id="img_preview1" style="margin-left: -58px;margin-top: -6px;">
-        <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1", :style => 'display: none;')%>
-        <%= f.file_field :document,:style=>"width:35%;", :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
-      </div>
-      <%= f.submit 'Post', :style => "float: left;margin-left: 65px;"%>
-    <% end %>
-  </div>
-</div>
-<div id="simple-overlay-content" class="conversation" style="float: right;position: relative;overflow: auto;height: auto;">
+<div id="conversation">
   <%= render :partial => 'conversation' %>
 </div>
-<script>
 
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        $('#img_show1').attr('src', e.target.result);
-      }
-
-      reader.readAsDataURL(input.files[0]);
-      $("#img_preview1").show();
-      $("#img_show1").show();
-    }
-    return true;
-  }
-</script>

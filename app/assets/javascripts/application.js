@@ -88,18 +88,14 @@ function hide_popup(){
 }
 
 function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+    if (input.files && input.files[0]) {//Check if input has files.
+        var reader = new FileReader();//Initialize FileReader.
 
         reader.onload = function (e) {
-            $('#img_show').attr('src', e.target.result);
-        }
-
+            $('#PreviewImage').attr('src', e.target.result);
+        };
         reader.readAsDataURL(input.files[0]);
-        $("#img_preview").show();
-        $("#img_show").show();
     }
-    return true;
 }
 
 $(function() {

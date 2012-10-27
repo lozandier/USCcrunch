@@ -1,9 +1,9 @@
-<div id="UserComment_<%= @post.id %>">
+<div id="UserComment_<%= @post.id %>" style="background-color: #F1F1F7;padding: 5px;">
   <%= form_for @post, :url => reply_post_user_post_path(@post),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
     <table>
       <tr>
         <td>
-          <%= f.text_area :body, :cols => 30, :rows => 1,:value => '', :placeholder => "Compose Post Here.." %>
+          <%= f.text_area :body, :cols => 30, :rows => 1,:value => '', :placeholder => "Reply.." %>
         </td>
       </tr>
       <tr>
@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <td>
-          <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => "img_show1_#{@post.id}", :style => 'display: none;')%>
+          <img id="PreviewImage_<%= @post.id %>" src="" alt="" style="width:25px; height:25px;"  />
           <%= f.submit "Post", :class => 'btn'%></td>
       </tr>
     </table>
@@ -40,18 +40,14 @@
     </style>
     <script>
       function readURL_<%= @post.id %>(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
+        if (input.files && input.files[0]) {//Check if input has files.
+          var reader = new FileReader();//Initialize FileReader.
 
           reader.onload = function (e) {
-            $('#img_show1_<%= @post.id %>').attr('src', e.target.result);
-          }
-
+            $('#PreviewImage_<%= @post.id %>').attr('src', e.target.result);
+          };
           reader.readAsDataURL(input.files[0]);
-          $("#img_preview1_<%= @post.id %>").show();
-          $("#img_show1_<%= @post.id %>").show();
         }
-        return true;
       }
     </script>
   <% end %>

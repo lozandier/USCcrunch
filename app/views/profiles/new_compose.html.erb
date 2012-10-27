@@ -8,24 +8,19 @@
     <div class="input-container" id="img_preview1">
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
-    <%= image_tag(@post.document.url(:thumb),:width => '30px', :height => '30px', :id => 'img_show1')%>
+    <img id="PreviewImage1" src="" alt="" style="width:25px; height:25px;"  />
     <%= f.submit 'Post', :class => 'btn'%>
   <% end %>
 </div>
 <script>
-
   function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
+    if (input.files && input.files[0]) {//Check if input has files.
+      var reader = new FileReader();//Initialize FileReader.
 
       reader.onload = function (e) {
-        $('#img_show1').attr('src', e.target.result);
-      }
-
+        $('#PreviewImage1').attr('src', e.target.result);
+      };
       reader.readAsDataURL(input.files[0]);
-      $("#img_preview1").show();
-      $("#img_show1").show();
     }
-    return true;
   }
 </script>

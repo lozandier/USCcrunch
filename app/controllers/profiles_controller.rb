@@ -98,7 +98,8 @@ class ProfilesController < ApplicationController
   end
 
   def conversation_message
-    @posts = Tweet.paginate :conditions => ["(tweets.user_id = #{current_user.id} and tweets.receiver_id = #{params[:id]}) or (tweets.receiver_id = #{current_user.id} and tweets.user_id = #{params[:id]})"],:order => "created_at Desc", :page => params[:page], :per_page => 5
+    @slug = User.find_by_username(params[:id])
+    @posts = Tweet.paginate :conditions => ["(tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@slug.id}) or (tweets.receiver_id = #{current_user.id} and tweets.user_id = #{@slug.id})"],:order => "created_at Desc", :page => params[:page], :per_page => 5
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
     @post.user_id = current_user.id
