@@ -1,6 +1,6 @@
 class SchoolAdmin < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :school_name, use: :slugged
+  friendly_id :school_name, use: [:slugged, :history]
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
