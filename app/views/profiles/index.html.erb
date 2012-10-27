@@ -14,7 +14,7 @@
       <div class="input-container" id="img_preview" style="margin-left: 9px;margin-top: -6px;">
         <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>
-      <img id="PreviewImage" src="" alt="" style="width:25px; height:25px;"  />
+      <img id="PreviewImage" src="" alt="" style="width:25px; height:25px;left: 9px;position: relative;top: -1px;"  />
       <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
     <% end %>
   </div>
