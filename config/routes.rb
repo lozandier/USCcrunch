@@ -58,6 +58,7 @@ WebApp::Application.routes.draw do
       get :following
     end
     collection do
+      get :search
       get :edit_password
       put :update_password
       post :compose_message

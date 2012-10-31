@@ -5,8 +5,14 @@
         <td><%= f.text_field :body, :placeholder => "Compose Post Here.." %>
           <%= validation_error(@post.errors['body'])%></td>
       </tr>
+      <tr id="img_preview">
+        <td><%= f.file_field :document, :id => 'realupload', :onChange => "readURL(this)"%></td>
+      </tr>
       <tr>
-        <td valign="bottom"><%= f.submit "Post", :class => 'btn'%></td>
+        <td>
+          <img id="PreviewImage" src="" alt="" style="width:25px; height:25px;left: 0;position: relative;top: 0;"  />
+          <%= f.submit "Post", :class => 'btn'%>
+        </td>
       </tr>
     </table>
   <% end %>

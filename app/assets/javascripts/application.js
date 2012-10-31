@@ -21,6 +21,7 @@ $(document).ready(function(){
     });
 });
 
+
 function get_username(ht){
     $.ajax({
         url:"/students/username",

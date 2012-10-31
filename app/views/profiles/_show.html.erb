@@ -3,7 +3,7 @@
   <div class="span4">
     <% if @user.id != current_user.id %>
       <div class="box_l1_up">
-        <div class="post_to_box">
+        <div class="post_to_box" style="margin-left: 10px;margin-top: 10px;min-height: 145px;">
           <h5>Post to <%= @user.username %></h5>
           <%= render :partial => 'posts/form'%>
         </div>
