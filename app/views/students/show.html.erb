@@ -45,8 +45,6 @@
               <div class="action_row">
                 <a href="#">Expand</a>
                 &nbsp&nbsp
-                <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "" %>
-                &nbsp&nbsp
                 <span id="delete_<%= post.id %>">
                   <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
                 </span>
