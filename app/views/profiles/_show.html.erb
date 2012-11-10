@@ -41,7 +41,9 @@
               <div class="action_row">
                 <a href="#">Expand</a>
                 &nbsp&nbsp
-                <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true %>
+                <% if post.user_id != current_user.id %>
+                  <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true %>
+                <% end %>
                 &nbsp&nbsp
                 <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
                   <span id="delete_<%= post.id %>">

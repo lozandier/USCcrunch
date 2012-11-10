@@ -15,10 +15,15 @@ class ProfilesController < ApplicationController
   end
 
   def search
-    @user = User.find(params[:query])
-    @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
-    render :action => 'show'
+    @user = User.find_by_username(params[:query])
+    if @user.present?
+      @post = @user.tweets.new(params[:tweet])
+      @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+      render :action => 'show'
+    else
+      flash[:error] = "Search not Found."
+      redirect_to profiles_path
+    end
   end
 
   def conversation

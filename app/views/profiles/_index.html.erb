@@ -18,7 +18,9 @@
           <div class="action_row">
             <a href="#">Expand</a>
             &nbsp&nbsp
-            <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true, :id => "reply_#{post.id}" %>
+            <% if post.user_id != current_user.id %>
+              <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true, :id => "reply_#{post.id}" %>
+            <% end %>
             &nbsp&nbsp
             <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
               <span id="delete_<%= post.id %>">
@@ -35,9 +37,9 @@
             <%elsif post.favorite.status == false%>
               <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
             <% end %>
-            <%= link_to_function "Conversation", "conversation('#{post.user.id}', #{post.id})", :style => 'float: right;left: 350px;position: relative;', :class => 'btn' %>
             <div id="bid-info_<%= post.id %>"></div>
           </div>
+          <%= link_to_function "Conversation", "conversation('#{post.user.id}', #{post.id})", :style => 'float: right;right: 5px;position: relative;', :class => 'btn' %>
         </div>
       </div>
     <% end %>

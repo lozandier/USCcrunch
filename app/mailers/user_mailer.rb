@@ -22,4 +22,10 @@ class UserMailer < ActionMailer::Base
     @teacher = teacher
     mail(:to => teacher.email, :from => school.email, :subject => "HI")
   end
+
+  def reply_post(user,post)
+    @user = user
+    @post = post
+    mail(:to => user.email, :from => post.user.email, :subject => "Reply to your post")
+  end
 end

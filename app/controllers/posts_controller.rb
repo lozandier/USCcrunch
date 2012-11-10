@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     if @repost.save
       render :update do |page|
         flash[:notice] = "Successfully Replied."
+        UserMailer.reply_post(@post.user,@repost).deliver
         page.reload
       end
     else
