@@ -31,6 +31,12 @@ WebApp::Application.routes.draw do
     end
   end
 
+  resources :teachers do
+    collection do
+      put :username
+    end
+  end
+
   resources :schools do
     resources :students do
       member do

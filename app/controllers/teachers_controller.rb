@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  layout :get_school_layout
+  layout :get_school_layout, :except => ['edit', 'update']
 
   def new
     @school = SchoolAdmin.find(params[:school_id])
@@ -40,6 +40,19 @@ class TeachersController < ApplicationController
     else
       flash.now[:notice] = "Loggened in failed."
       render :action => 'edit',:layout => false
+    end
+  end
+
+  def username
+    @username = User.find_by_username(params[:username])
+    if !@username.present?
+      render :update do |page|
+        page<<"$('#username_error').html('');"
+      end
+    else
+      render :update do |page|
+        page<<"$('#username_error').text('User Name already exists choose another one..');"
+      end
     end
   end
 end
