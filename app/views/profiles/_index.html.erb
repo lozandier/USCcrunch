@@ -1,49 +1,66 @@
-<div class="box_r1_hp">
-  <h2 class="posts_title">
-    Posts
-    <%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
-    <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
-  </h2><hr />
-  <% if @posts.present? %>
-    <% for post in @posts.compact %>
-      <div class="posts_box" id="post_<%= post.id %>">
-        <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
-        <div class="post" style="border-bottom: 1px solid grey;height: auto;">
-          <h5 class="post_name"><%= post.user.username %></h5>
-          <div class="post_at">&nbsp<%= post.user.email %></div>
-          <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
-          <div class="post_text">
-            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
-          </div>
-          <div class="action_row">
-            <a href="#">Expand</a>
-            &nbsp&nbsp
-            <% if post.user_id != current_user.id %>
-              <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true, :id => "reply_#{post.id}" %>
-            <% end %>
-            &nbsp&nbsp
-            <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
-              <span id="delete_<%= post.id %>">
-                <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
-              </span>
-            <% else %>
-              <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_post_path(current_user,post), :method => 'POST', :remote => true %>
-            <% end %>
-            &nbsp&nbsp
-            <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
-              <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
-            <% elsif post.favorite.status == true %>
-              <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
-            <%elsif post.favorite.status == false%>
-              <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
-            <% end %>
-            <div id="bid-info_<%= post.id %>"></div>
-          </div>
-          <%= link_to_function "Conversation", "conversation('#{post.user.id}', #{post.id})", :style => 'float: right;right: 5px;position: relative;', :class => 'btn' %>
+<% if @posts.present? %>
+  <% for post in @posts.compact %>
+    <div class="posts_box" id="post_<%= post.id %>">
+      <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
+      <div class="post" style="border-bottom: 1px solid grey;height: auto;">
+        <h5 class="post_name"><%= post.user.username %></h5>
+        <div class="post_at">&nbsp<%= post.user.email %></div>
+        <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
+        <div class="post_text">
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
         </div>
+        <div class="action_row">
+          <%= link_to_function "Expand", "", :id => "expand_#{post.id}" %>
+          <%= link_to_function "UnExpand", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
+          &nbsp&nbsp
+          <% if post.user_id != current_user.id %>
+            <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true, :id => "reply_#{post.id}" %>
+          <% end %>
+          &nbsp&nbsp
+          <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
+            <span id="delete_<%= post.id %>">
+              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
+            </span>
+          <% else %>
+            <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_post_path(current_user,post), :method => 'POST', :remote => true %>
+          <% end %>
+          &nbsp&nbsp
+          <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
+            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
+          <% elsif post.favorite.status == true %>
+            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+          <%elsif post.favorite.status == false%>
+            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
+          <% end %>
+          <div id="bid-info_<%= post.id %>"></div>
+          <div id="expa_<%= post.id %>"  style="display:none;">
+            <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br />
+            <b><%= post.user.tweets.where("reply IS NULL").count %></b>&nbsp POSTS&nbsp&nbsp
+            <b><%= post.user.tweets.where("reply IS NOT NULL").count %></b>&nbsp REPLIES
+          </div>
+          <script>
+            $("#expand_<%= post.id %>").click(function(){
+              $("#unexpand_<%= post.id %>").show();
+              $("#expa_<%= post.id %>").show();
+              $("#expand_<%= post.id %>").hide();
+            });
+
+            $("#unexpand_<%= post.id %>").click(function(){
+              $("#expand_<%= post.id %>").show();
+              $("#expa_<%= post.id %>").hide();
+              $("#unexpand_<%= post.id %>").hide();
+            });
+          </script>
+        </div>
+        <%= link_to_function "Conversation", "conversation('#{post.user.id}', #{post.id})", :style => 'float: right;right: 5px;position: relative;', :class => 'btn' %>
       </div>
-    <% end %>
-  <% else %>
-    <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
+    </div>
   <% end %>
-</div>
+<% else %>
+  <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
+<% end %>
+<% if @posts.total_pages > @posts.current_page %>
+  <div id="more_posts_link">
+    <input type="hidden" value="<%= @posts.current_page+1 %>" id="posts_page" />
+  </div>
+<% end %>

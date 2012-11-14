@@ -57,7 +57,11 @@ class StudentsController < ApplicationController
   def show
     @school = SchoolAdmin.find(params[:school_id])
     @user = User.find(params[:id])
-    @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:page], :per_page => 2
+    respond_to do |format|
+      format.html {render :partial => "show", :layout => false if request.xhr?}
+      format.js {render :partial => "show", :layout => false if request.xhr?}
+    end
   end
 
   def posts

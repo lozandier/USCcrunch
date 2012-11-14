@@ -113,3 +113,35 @@ jQuery(document).ajaxStart(function(settings){
 jQuery(document).ajaxStop(function(){
     jQuery('#ajax_loader_big_div').hide();
 });
+
+function more_posts(page){
+    jQuery('#more_posts_link').remove();
+    jQuery.ajax({
+        url: "/profiles?page="+page,
+        success: function(data) {
+            jQuery('#posts').append(data);
+        }
+    });
+}
+
+function posts(user_id, page){
+    jQuery('#more_posts_link').remove();
+    jQuery.ajax({
+        url: "/profiles/"+user_id+"?page="+page,
+        success: function(data) {
+            jQuery('#posts').append(data);
+        }
+    });
+}
+
+function school_posts(user_id,student_id, page){
+    jQuery('#more_posts_link').remove();
+    jQuery.ajax({
+        url: "/schools/"+user_id+"/students/"+student_id+"?page="+page,
+        success: function(data) {
+            jQuery('#posts').append(data);
+            $('#more').hide();
+            $('#no-more').hide();
+        }
+    });
+}
