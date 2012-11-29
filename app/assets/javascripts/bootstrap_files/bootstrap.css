@@ -6344,12 +6344,13 @@ body.blue_background {
 /* conversation.html specific */
 .conversation_right_box {
     position: fixed;
-    top: 0px;
+    top: 42px;
     left: 77%;
     height: 100%;
     width: 300px;
     border-left: 1px solid white;
     background-color: #f9f9f9;
+    overflow: auto;
 }
 
 .conversation_middle_box {

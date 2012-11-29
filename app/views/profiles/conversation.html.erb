@@ -14,13 +14,8 @@
             <td><%= post.body %></td>
           </tr>
           <tr>
-            <td><%= post.created_at.strftime("%b %d %Y") %></td>
+            <td><%= post.created_at.strftime("%b %d at %l:%M %p") %> via EduPost </td>
           </tr>
-          <% if post.document.present? %>
-            <tr>
-              <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
-            </tr>
-          <% end %>
         </table>
       <% end %>
     <% end %>

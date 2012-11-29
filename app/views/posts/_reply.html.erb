@@ -7,48 +7,15 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td style="color: red;">
           <%= validation_error(@post.errors['body'])%>
-        </td>
-      </tr>
-      <tr id="img_preview1_<%= @post.id %>" style="margin-left: 9px;margin-top: -6px;">
-        <td>
-          <%= f.file_field :document, :id => "realupload1_#{@post.id}", :class => "realupload", :onChange => "readURL_#{@post.id}(this)"%>
         </td>
       </tr>
       <tr>
         <td>
-          <img id="PreviewImage_<%= @post.id %>" src="" alt="" style="width:25px; height:25px;"  />
-          <%= f.submit "Post", :class => 'btn'%></td>
+          <%= f.submit "Post", :class => 'btn'%>
+        </td>
       </tr>
     </table>
-
-    <style>
-      #img_preview1_<%= @post.id %> {
-        width: 93px;
-        height: 28px;
-        background: url('/assets/file_browse_normal.png') 0 0 no-repeat;
-        border:none;
-        overflow:hidden;
-      }
-      #realupload1_<%= @post.id %>{
-        margin-left:-145px;
-        opacity:0.0;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-      }
-    </style>
-    <script>
-      function readURL_<%= @post.id %>(input) {
-        if (input.files && input.files[0]) {//Check if input has files.
-          var reader = new FileReader();//Initialize FileReader.
-
-          reader.onload = function (e) {
-            $('#PreviewImage_<%= @post.id %>').attr('src', e.target.result);
-          };
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-    </script>
   <% end %>
 </div>

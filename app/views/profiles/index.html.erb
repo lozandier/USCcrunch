@@ -11,22 +11,19 @@
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
       <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"@#{current_user.username}" %>
-      <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-        <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
-      </div>
-      <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 32px;margin-top: -5px;width: 25px;"  />
       <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
     <% end %>
   </div>
-
-  <div class="box_l2_hp points_box">
-    <h5 class="points_title">Points</h5>
-    <div class="progress progress-striped active">
-      <div class="bar" style="width: 80%;">80&nbsp</div>
+  <% if current_user.role == 'student' %>
+    <div class="box_l2_hp points_box">
+      <h5 class="points_title">Points</h5>
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 80%;">80&nbsp</div>
+      </div>
+      <div class="badges_title">Badges &#183; Stats</div>
     </div>
-    <div class="badges_title">Badges &#183; Stats</div>
+  <% end %>
 
-  </div>
 
   <div class="box_l3_hp">
     <div class="link_box">

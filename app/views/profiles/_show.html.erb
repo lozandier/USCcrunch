@@ -14,13 +14,7 @@
             <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true %>
           <% end %>
           &nbsp&nbsp
-          <% if post.user_id == current_user.id and current_user.role == 'teacher' %>
-            <span id="delete_<%= post.id %>">
-              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
-            </span>
-          <% else %>
-            <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_post_path(current_user.id,post), :method => 'POST', :remote => true %>
-          <% end %>
+          <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost', repost_user_post_path(current_user.id,post), :method => 'POST', :remote => true %>
           &nbsp&nbsp
           <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
             <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>

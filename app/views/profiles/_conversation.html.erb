@@ -4,10 +4,6 @@
       <%= image_tag(current_user.avatar.url(:original), :width => '40px', :height => '40px', :style => 'margin-right: -10px;margin-top: -10px;') %>
       <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:70%;",:placeholder=>"Add to Conversation" %>
       <%= validation_error(@post.errors["body"]) %>
-      <div class="input-container" id="img_preview1" style="margin-left: -58px;margin-top: -6px;">
-        <%= f.file_field :document,:style=>"width:35%;", :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
-      </div>
-      <img id="PreviewImage1" src="" alt="" style="width:25px; height:25px;"  />
       <%= f.submit 'Post', :class => 'btn'%>
     <% end %>
   </div>
@@ -26,11 +22,9 @@
         <tr>
           <td><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></td>
         </tr>
-        <% if post.document.present? %>
-          <tr>
-            <td><%= image_tag(post.document.url(:original), :width => '50px') %></td>
-          </tr>
-        <% end %>
+        <tr>
+          <td><%= post.created_at.strftime("%b %d at %l:%M %p") %></td>
+        </tr>
       </table><hr />
     <% end %>
   </div>
@@ -47,15 +41,3 @@
     }
   </style>
 </div>
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {//Check if input has files.
-      var reader = new FileReader();//Initialize FileReader.
-
-      reader.onload = function (e) {
-        $('#PreviewImage1').attr('src', e.target.result);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-</script>

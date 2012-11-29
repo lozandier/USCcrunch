@@ -6,10 +6,6 @@
           <%= validation_error(@post.errors['body'])%></td>
       </tr>
       <tr><td>
-          <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-            <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => "readURL(this)"%>
-          </div>
-          <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 35px;margin-top: -5px;width: 25px;"  />
           <%= f.submit "Post", :class => 'btn'%></td>
       </tr>
     </table>

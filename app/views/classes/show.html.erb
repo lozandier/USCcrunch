@@ -7,18 +7,23 @@
     </div>
 
     <div class="profile_box_right with_options">
+      <% if current_user.role == 'teacher' %>
+        <%= link_to '<button type="button" class="btn">Edit Class</button>'.html_safe, "" %>
+        <br/>
+        <div class="roster_num">Roster</div>
+      <% else %>
+        <div class="btn-group other_profile_options_button">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <%= image_tag("/assets/dude.png", :width => '15px;', :height => '20px;') %>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Post to @<%= @user.username %></a></li>
+          </ul>
+        </div>
 
-      <div class="btn-group other_profile_options_button">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          <%= image_tag("/assets/dude.png", :width => '15px;', :height => '20px;') %>
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Post to @<%= @user.username %></a></li>
-        </ul>
-      </div>
-
-      <div class="roster_num">Classmates</div>
+        <div class="roster_num">Classmates</div>
+      <% end %>
     </div>
     <%= image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") %>
     <h2 class="profile_name"><%= @user.username %></h2>

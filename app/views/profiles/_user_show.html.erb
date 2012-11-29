@@ -11,15 +11,15 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Post to @GregJohnson</a></li>
-            <li><a href="#">Report @GregJohnson</a></li>
+            <li><a href="#">Post to @<%= @user.username %></a></li>
+            <li><a href="#">Report @<%= @user.username %></a></li>
           </ul>
         </div>
       <% end %>
       <div class="tweets_num"><span class="black_bold"><%= @user.tweets.where("reply IS NULL").count %></span>&nbspPOSTS</div>
       <hr class="gray_divider" width="80px"/>
       <div class="following_num"><span class="black_bold"><%= @user.tweets.where("reply IS NOT NULL").count %></span>&nbspREPLIES</div>
-      <% if @user.id == current_user.id %>
+      <% if @user.id == current_user.id and current_user.role == 'student'%>
         <hr class="gray_divider" width="80px"/>
         <div class="following_num">&nbspBADGES</div>
       <% end %>
