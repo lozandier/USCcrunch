@@ -32,11 +32,11 @@
               <%= image_tag(@user.avatar.url(:original), :width => '100px', :height => '100px;', :id => 'user_photo') %>
               <img id="PreviewImage" src="" alt=""  />
               <div class="input-container btn">Change photo<span class="caret"></span>
-                <%= f.file_field :avatar, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)', :style => 'margin-left: -290px;'%>
+                <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'margin-left: -119px;margin-top: -5px;width: 116px;'%>
               </div>
               <br/>
               <div class="change_photo_box_text" style="position:relative;left: 75px;">
-              This photo is your identity on Eduposts and appears with your posts.Need help? <a href=#">Learn More</a>
+                This photo is your identity on Eduposts and appears with your posts.Need help? <a href=#">Learn More</a>
               </div>
             </td>
             <td><%= validation_error(@user.errors["avatar"]) %></td>

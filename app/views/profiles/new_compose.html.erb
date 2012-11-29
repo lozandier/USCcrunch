@@ -5,7 +5,7 @@
   </div>
   <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
     <%= f.text_area :body, :rows => 4, :cols => 15,:class=>"popup_post_box_input" %>
-    <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><img src="/assets/paperclip.png" height="20px" width="15px">
+    <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
     <img id="PreviewImage1" src="" alt="" style="float: left;height: 25px;margin-left: 20px;margin-top: 5px;width: 25px;"  />

@@ -1,1 +1,1 @@
-$('#UserComment').html('<%= escape_javascript render :partial => 'reply' %>');
+$('#UserComment_<%= @post.id %>').html('<%= escape_javascript render :partial => 'reply' %>');
