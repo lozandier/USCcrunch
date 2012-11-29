@@ -116,10 +116,12 @@ jQuery(document).ajaxStop(function(){
 
 function more_posts(page){
     jQuery('#more_posts_link').remove();
+    $("#ajax").show();
     jQuery.ajax({
         url: "/profiles?page="+page,
         success: function(data) {
             jQuery('#posts').append(data);
+            $("#ajax").hide();
         }
     });
 }
@@ -129,6 +131,7 @@ function posts(user_id, page){
     jQuery.ajax({
         url: "/profiles/"+user_id+"?page="+page,
         success: function(data) {
+            $("#ajax").show();
             jQuery('#posts').append(data);
         }
     });
@@ -144,4 +147,17 @@ function school_posts(user_id,student_id, page){
             $('#no-more').hide();
         }
     });
+}
+
+
+//change background image
+
+var backImage = ["/assets/Amazing_Flowers_Wallpapers_55.jpg","/assets/scene3.jpg","/assets/rain1.jpg","/assets/moss.jpg","/assets/nature2.jpg"];
+var count = 0;
+function changeBGImage(whichImage) {
+    count++;
+    $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
+    if(count == 4){
+        count = 0;
+    }
 }

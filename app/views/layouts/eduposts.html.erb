@@ -37,9 +37,27 @@
           <img class="paper_plane" src="/assets/paper_plane_icon.png" height="50px" width="50px"/>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="<%= params[:controller] == 'profiles' && params[:action] == 'index'  ? "active" : "" %>"><%= link_to image_tag("/assets/home_icon_default.png", :height => "15px", :width => "15px")+'Home', profiles_path  %></li>
-              <li class="<%=  params[:controller] == "profiles" && params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password' ? "active" : ""%>"><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "15px", :width => "15px")+"Me", profile_path(current_user) %></li>
-              <li><%= link_to "Class", "" %></li>
+              <% if params[:controller] == 'profiles' && params[:action] == 'index'  %>
+                <li class="active"><%= link_to image_tag("/assets/home_icon_blue.png", :height => "30px", :width => "20px")+'Home', profiles_path  %></li>
+              <% else %>
+                <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', profiles_path  %></li>
+              <% end %>
+              <% if params[:controller] == 'notifications' && params[:action] == 'index' || params[:action] == 'posts' %>
+                <li class="active"><%= link_to image_tag("/assets@_blue.png", :height => "30px", :width => "20px")+'Connect', notifications_path %></li>
+              <% else %>
+                <li><%= link_to image_tag("/assets/@_grey.png", :height => "30px", :width => "20px")+'Connect', notifications_path  %></li>
+              <% end %>
+              <% if params[:controller] == "profiles" && params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password' %>
+                <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px")+"Me", profile_path(current_user) %></li>
+              <% else %>
+                <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "30px", :width => "20px")+"Me", profile_path(current_user) %></li>
+              <% end %>
+              <% if params[:controller] == 'classes' && params[:action] == 'show'%>
+                <li class="active"><%= link_to image_tag("/assets/class_blue.png", :height => "20px", :width => "20px")+"Class", class_path(current_user) %></li>
+              <% else %>
+                <li><%= link_to image_tag("/assets/class_grey.png", :height => "20px", :width => "20px")+"Class", class_path(current_user) %></li>
+              <% end %>
+
             </ul>
 
             <ul class="nav pull-right">
@@ -76,13 +94,6 @@
     </div>
 
   <footer>
-    <div class="container">
-      <div class="row">
-        <div class="span12">
-          <p>Designed by @heyallanmoreno</p>
-        </div>
-      </div>
-    </div>
   </footer>
   <div id='overlay' style='filter:alpha(opacity=50);'></div>
   <div align='center' id='popup_box'>

@@ -11,4 +11,8 @@ class HomeController < ApplicationController
   def school_login
 
   end
+
+  def about
+    render :layout => false
+  end
 end

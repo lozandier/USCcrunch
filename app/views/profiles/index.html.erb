@@ -4,41 +4,46 @@
     <h3 class="profile_name"><%= current_user.username %></h3>
     <%= link_to "View my profile page", profile_path(current_user), :class => "view_my_profile_page" %>
     <div class="posts_count">
-      <%= current_user.tweets.where("reply IS NULL").count %><br />POSTS
+      <%= current_user.tweets.where("reply IS NULL").count %>&nbsp;Posts
     </div>
     <div class="replies_count">
-      <%= current_user.tweets.where("reply IS NOT NULL").count %><br />REPLIES
+      <%= current_user.tweets.where("reply IS NOT NULL").count %>&nbsp;Replies
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
-      <div class="input-container" id="img_preview" style="margin-left: 9px;margin-top: -6px;">
-        <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"@#{current_user.username}" %>
+      <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><img src="/assets/paperclip.png" height="20px" width="15px">
+        <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>
-      <img id="PreviewImage" src="" alt="" style="width:25px; height:25px;left: 9px;position: relative;top: -1px;"  />
+      <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 32px;margin-top: -5px;width: 25px;"  />
       <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
     <% end %>
   </div>
 
-  <div class="box_l2_hp">
-    This box has not been decided what to be used for.
+  <div class="box_l2_hp points_box">
+    <h5 class="points_title">Points</h5>
+    <div class="progress progress-striped active">
+      <div class="bar" style="width: 80%;">80&nbsp</div>
+    </div>
+    <div class="badges_title">Badges &#183; Stats</div>
+
   </div>
 
   <div class="box_l3_hp">
     <div class="link_box">
-      &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
+   	About &#183; Help &#183; Terms &#183; Privacy &#183; Blog
+      <br/>
+      &#169; 2012 Eduposts
     </div>
   </div>
 </div>
 
 <div class="span8" id="posts">
-  <div class="box_r1_hp">
-    <h2 class="posts_title">
-      Posts
-      <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
-    </h2>
-    <%= render :partial => 'index' %>
-    <input type="hidden" value="inbox" id="post_type" />
-  </div>
+  <h2 class="posts_title">
+    Posts
+    <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+  </h2>
+  <%= render :partial => 'index' %>
+  <input type="hidden" value="inbox" id="post_type" />
 </div>
 <script>
   jQuery(function() {

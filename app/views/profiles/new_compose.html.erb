@@ -1,16 +1,19 @@
-<div id="simple-overlay-title">Add Post</div>
-<div id="simple-overlay-content">
+<div class="popup_post_box">
+  <div class="whats_happening">What's happening?</div>
   <div style="margin: -45px 8px;float :right;">
-    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
+    <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : 21px -5px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
   </div>
   <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-    <%= f.text_area :body, :rows => 2, :cols => 15,:class=>"compose_new_post",:style=>"width:74%;",:placeholder=>"@#{current_user.username}" %>
-    <div class="input-container" id="img_preview1">
+    <%= f.text_area :body, :rows => 4, :cols => 15,:class=>"popup_post_box_input" %>
+    <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><img src="/assets/paperclip.png" height="20px" width="15px">
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
-    <img id="PreviewImage1" src="" alt="" style="width:25px; height:25px;"  />
-    <%= f.submit 'Post', :class => 'btn'%>
+    <img id="PreviewImage1" src="" alt="" style="float: left;height: 25px;margin-left: 20px;margin-top: 5px;width: 25px;"  />
+    <%= f.submit 'Post', :class => 'btn send_button'%>
+    <div class="post_box_word_counter">200</div>
+
   <% end %>
+
 </div>
 <script>
   function readURL(input) {

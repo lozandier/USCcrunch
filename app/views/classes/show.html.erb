@@ -1,0 +1,74 @@
+<div class="span12">
+
+  <div class="box_c1_mp extended">
+
+    <div class="cover_photo">
+      <div class="cover_photo_button" style="float: right;margin-right: 10px;margin-top: 125px;"><a href="javascript:changeBGImage(0)">switch theme</a></div>
+    </div>
+
+    <div class="profile_box_right with_options">
+
+      <div class="btn-group other_profile_options_button">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <%= image_tag("/assets/dude.png", :width => '15px;', :height => '20px;') %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Post to @<%= @user.username %></a></li>
+        </ul>
+      </div>
+
+      <div class="roster_num">Classmates</div>
+    </div>
+    <%= image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") %>
+    <h2 class="profile_name"><%= @user.username %></h2>
+    <h4 class="at_name">@<%= @user.username %></h4>
+    <br/>
+    <p class="bio"><%= @user.bio %></p>
+  </div>
+
+</div>
+
+
+<div class="row-fluid">
+
+  <div class="span4">
+
+    <div class="box_l1_hp side_nav_box">
+      <%= link_to "<button class='side_nav_button announcements' type=button'>Announcements<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, "" %>
+      <%= link_to "<button class='side_nav_button assignments' type=button'>Assignments<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, "" %>
+    </div>
+
+    <div class="box_l2_hp">
+      <div class="instructor_header">Instructor</div>
+      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
+      <div class="instructor_name"><a href="#">Prof Bob</a></div>
+      <p class="instructor_at_name">&nbsp@ProfBob</p>
+    </div>
+
+    <div class="box_l2_hp">
+      <div class="assistant_header">Assistant</div>
+      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
+      <div class="assistant_name"><a href="#">T/A Todd</a></div>
+      <p class="assistant_at_name">&nbsp@TATodd</p>
+    </div>
+
+    <div class="box_l3_hp">
+      <div class="link_box">
+    					About &#183; Help &#183; Terms &#183; Privacy &#183; Blog
+        <br/>
+        &#169; 2012 Eduposts
+      </div>
+    </div>
+
+  </div>
+
+  <div class="span8" id="posts">
+    <h2 class="posts_title">Posts
+      <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+    </h2>
+    <%= render :partial => '/profiles/show' %>
+    <input type="hidden" value="show" id="post_type" />
+    <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
+  </div>
+</div>

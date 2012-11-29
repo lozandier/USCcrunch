@@ -37,6 +37,13 @@ WebApp::Application.routes.draw do
     end
   end
 
+  resources :classes
+  resources :notifications do
+    collection do
+      get :posts
+    end
+  end
+
   resources :schools do
     resources :students do
       member do
@@ -159,6 +166,7 @@ WebApp::Application.routes.draw do
     collection do
       get :student_login
       get :school_login
+      get :about
     end
   end
 end

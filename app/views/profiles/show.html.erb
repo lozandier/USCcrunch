@@ -4,36 +4,41 @@
 
     <div class="span4">
       <% if @user.id != current_user.id %>
-        <div class="box_l1_up">
+        <div class="box_l1_hp side_nav_box">
           <div class="post_to_box" style="margin-left: 10px;margin-top: 10px;min-height: 145px;">
             <h5>Post to <%= @user.username %></h5>
             <%= render :partial => 'posts/form'%>
           </div>
         </div>
       <% end %>
+      <% if @user.id == current_user.id %>
+        <div class="box_l1_hp">
+          <%= link_to "<button class='side_nav_button profile' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, posts_notifications_path %>
+          <%= link_to "<button class='side_nav_button password' type=button'>Replies<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, notifications_path %>
+        </div>
+      <% end %>
 
-      <div class="box_l2_hp">
+      <!--<div class="box_l2_hp">
     			This box has not been decided what to be used for.
-      </div>
+      </div>-->
 
       <div class="box_l3_hp">
         <div class="link_box">
-          &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
+    					About &#183; Help &#183; Terms &#183; Privacy &#183; Blog
+          <br/>
+          &#169; 2012 Eduposts
         </div>
       </div>
 
     </div>
 
     <div class="span8" id="posts">
-      <div class="box_r1_hp">
-        <h2 class="posts_title">Posts
-          <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
-        </h2>
-        <hr />
-        <%= render :partial => '/profiles/show' %>
-        <input type="hidden" value="show" id="post_type" />
-        <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
-      </div>
+      <h2 class="posts_title">Posts
+        <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+      </h2>
+      <%= render :partial => '/profiles/show' %>
+      <input type="hidden" value="show" id="post_type" />
+      <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
     </div>
   </div>
 </div>
