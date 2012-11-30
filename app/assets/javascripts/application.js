@@ -116,12 +116,15 @@ jQuery(document).ajaxStop(function(){
 
 function more_posts(page){
     jQuery('#more_posts_link').remove();
-    $("#ajax").show();
     jQuery.ajax({
+        beforeSend: function() {
+            $('#ajax_loader_big_div').hide();
+            jQuery('#posts').append($("#ajax").show());
+        },
         url: "/profiles?page="+page,
         success: function(data) {
             jQuery('#posts').append(data);
-            $("#ajax").hide();
+            jQuery($("#ajax"),this).remove();
         }
     });
 }
@@ -129,10 +132,48 @@ function more_posts(page){
 function posts(user_id, page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
+        beforeSend: function() {
+            $('#ajax_loader_big_div').hide();
+            jQuery('#posts').append($("#ajax").show());
+        },
         url: "/profiles/"+user_id+"?page="+page,
         success: function(data) {
             $("#ajax").show();
             jQuery('#posts').append(data);
+            jQuery($("#ajax"),this).remove();
+        }
+    });
+}
+
+
+function notification_posts(page){
+    jQuery('#more_posts_link').remove();
+    jQuery.ajax({
+        beforeSend: function() {
+            $('#ajax_loader_big_div').hide();
+            jQuery('#posts').append($("#ajax").show());
+        },
+        url: "/notifications/posts?page="+page,
+        success: function(data) {
+            $("#ajax").show();
+            jQuery('#posts').append(data);
+            jQuery($("#ajax"),this).remove();
+        }
+    });
+}
+
+function notification_replies(page){
+    jQuery('#more_posts_link').remove();
+    jQuery.ajax({
+        beforeSend: function() {
+            $('#ajax_loader_big_div').hide();
+            jQuery('#posts').append($("#ajax").show());
+        },
+        url: "/notifications?page="+page,
+        success: function(data) {
+            $("#ajax").show();
+            jQuery('#posts').append(data);
+            jQuery($("#ajax"),this).remove();
         }
     });
 }
@@ -140,11 +181,14 @@ function posts(user_id, page){
 function school_posts(user_id,student_id, page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
+        beforeSend: function() {
+            $('#ajax_loader_big_div').hide();
+            jQuery('#posts').append($("#ajax").show());
+        },
         url: "/schools/"+user_id+"/students/"+student_id+"?page="+page,
         success: function(data) {
             jQuery('#posts').append(data);
-            $('#more').hide();
-            $('#no-more').hide();
+            jQuery($("#ajax"),this).remove();
         }
     });
 }
@@ -161,3 +205,5 @@ function changeBGImage(whichImage) {
         count = 0;
     }
 }
+
+

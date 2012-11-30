@@ -32,7 +32,7 @@
       <div class="cover_photo">
         <div class="cover_photo_button"><a href="javascript:changeBGImage(0)">switch theme</a></div>
       </div>
-      <%= image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") %>
+      <%= link_to image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo"), @user.avatar.url %>
       <h2 class="profile_name"><%= @user.username %></h2>
       <h4 class="at_name">@<%= @user.username %></h4>
       <br/>

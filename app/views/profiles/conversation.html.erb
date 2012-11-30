@@ -2,7 +2,7 @@
   <div style="float: right;margin-left: 0;margin-top: -5px;">
     <%=image_tag("close.jpeg", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '34px', :height => '34px', :onclick => "hide_popup();")%>
   </div>
-  <div style="float:left;clear:both;min-height: 300px;width: 430px;background: white;position: relative;left: 80px;">
+  <div style="float:left;clear:both;min-height: 120px;width: 430px;background: white;position: relative;left: 80px;">
     <%= image_tag @user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %>
     <% if @user.tweets.present?  %>
       <% Tweet.where("user_id = #{@user.id}").limit(1).each do |post| %>

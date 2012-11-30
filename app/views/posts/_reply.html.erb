@@ -7,8 +7,8 @@
         </td>
       </tr>
       <tr>
-        <td style="color: red;">
-          <%= validation_error(@post.errors['body'])%>
+        <td id="error_<%= @post.id %>" style="color: red;float: left;left: 3px;position: relative;top: -10px;display: none;">
+          Reply con't be blank.
         </td>
       </tr>
       <tr>

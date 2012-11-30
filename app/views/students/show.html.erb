@@ -3,13 +3,7 @@
     <div style="float: left;"><%= image_tag(@user.avatar.url(:original) , :width => '140px;', :height => '140px;', :class => "profile_pic img-rounded") %></div>
     <div style="float: left;left:12px;">
       <h2 class="profile_name"><%= @user.username %></h2>
-      <h4 class="at_name"><%= @user.email %></h4>
-      <div class="location"><%= @user.state%></div>
-      <a class="website" href=""><%= @user.website %></a>
-    </div>
-    <div class="profile_box_right">
-      <div class="tweets_num"><%= @user.tweets.where("reply IS NULL").count %>&nbsp POSTS</div>
-      <div class="following_num"><%= @user.tweets.where("reply IS NOT NULL").count %>&nbsp REPLIES</div>
+      <h4 class="at_name">@<%= @user.username %></h4>
     </div>
   </div>
 </div>
@@ -27,27 +21,23 @@
   </div>
 
   <div class="span8"  id="posts">
-    <div class="box_r1_hp">
-      <h2 class="posts_title">Posts
-        <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
-      </h2>
-      <%= render :partial => 'show' %>
-      <input type="hidden" value="show" id="post_type" />
-      <input type="hidden" value="<%= @school.id %>" id="school_id" />
-      <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
-    </div>
+    <h2 class="posts_title">Posts
+      <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+    </h2>
+    <%= render :partial => 'show' %>
+    <input type="hidden" value="show" id="post_type" />
+    <input type="hidden" value="<%= @school.id %>" id="school_id" />
+    <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
   </div>
 </div>
 <script>
   jQuery(function() {
-    $('#more').hide();
     jQuery(window).scroll(
     function() {
       if (($(window).scrollTop() == $(document).height() - $(window).height()) && jQuery('#posts_page').val() > 0)
       {
         if (jQuery("#post_type").val() == 'show') {
           school_posts(jQuery('#current_user_id').val(),jQuery('#school_id').val(), jQuery('#posts_page').val())
-          $('#more').show();
         }
       }
     });

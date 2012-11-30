@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   def conversation
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.paginate :conditions => ["((tweets.user_id = #{params[:id]} or tweets.receiver_id = #{params[:id]}))"],:order => "created_at Desc", :page => params[:index_page], :per_page => 5
+    @posts = Tweet.paginate :conditions => ["((tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@user.id}))"],:order => "created_at Desc", :page => params[:index_page], :per_page => 5
     render :layout => false
   end
 
@@ -118,9 +118,8 @@ class ProfilesController < ApplicationController
   end
 
   def conversation_message
-    @slug = User.find_by_username(params[:id])
-    @posts = Tweet.paginate :conditions => ["(tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@slug.id}) or (tweets.receiver_id = #{current_user.id} and tweets.user_id = #{@slug.id})"],:order => "created_at Desc", :page => params[:page], :per_page => 5
     @user = User.find(params[:id])
+    @posts = Tweet.paginate :conditions => ["((tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@user.id}))"],:order => "created_at Desc", :page => params[:page], :per_page => 5
     @post = @user.tweets.new(params[:tweet])
     @post.user_id = current_user.id
     @post.receiver_id = @user.id
@@ -129,10 +128,8 @@ class ProfilesController < ApplicationController
         format.js
       end
     else
-      if remotipart_submitted?
-        respond_to do |format|
-          format.js
-        end
+      render :update do |page|
+        page.alert("Conversation con't be blank.")
       end
     end
   end

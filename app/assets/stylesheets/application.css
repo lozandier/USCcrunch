@@ -327,6 +327,15 @@ a{
     z-index:4;
 }
 
+#ajax-loader{
+    float: right;
+    height: 16px;
+    left: 265px;
+    position: relative;
+    width: 16px;
+    z-index: 1000000;
+}
+
 .dddropdown-menu{
     display: none;
     width: 100px;

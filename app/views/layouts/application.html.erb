@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>My Greatest Web App</title>
-    <%= stylesheet_link_tag "bootstrap", "jquery.notifyBar","bootstrap-responsive","font-awesome.css", "base","jquery.simplyscroll","styleswitch" %>
+    <%= stylesheet_link_tag "application","bootstrap", "jquery.notifyBar","bootstrap-responsive","font-awesome.css", "base","jquery.simplyscroll","styleswitch" %>
     <%= javascript_include_tag "application", "jquery.notifyBar","jquery.simplyscroll","jquery.remotipart","bootstrap.min","script","jquery.iframe-transport","styleswitch" %>
     <%= csrf_meta_tags %>
     <% ['notice', 'error', 'warning'].each do |f|%>
@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div id='ajax_loader_big_div' style='z-index:1000000;display: none;'>
+    <div id='ajax_loader_big_div'>
       <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
     </div>
     <div class="main">

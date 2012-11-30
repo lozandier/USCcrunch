@@ -4,7 +4,7 @@
       <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
       <div class="post" style="border-bottom: 1px solid grey;height: auto;">
         <h5 class="post_name"><%= post.user.username %></h5>
-        <div class="post_at">&nbsp<%= post.user.email %></div>
+        <div class="post_at">&nbsp@<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text"><%= post.body %></div>
         <div class="action_row">
@@ -15,13 +15,6 @@
             <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
           </span>
           &nbsp&nbsp
-          <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
-            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',"",:remote => true,:method => 'post' %>
-          <% elsif post.favorite.status == true %>
-            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',"",:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
-          <%elsif post.favorite.status == false%>
-            <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',"",:remote => true,:method => 'put' %>
-          <% end %>
           <div id="expa_<%= post.id %>"  style="display:none;">
             <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br />
             <b><%= post.user.tweets.where("reply IS NULL").count %></b>&nbsp POSTS&nbsp&nbsp
@@ -43,7 +36,6 @@
         </div>
       </div>
     </div>
-    <div id='more' >Loading More Content</div>
   <% end %>
 <% else %>
   <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
@@ -54,16 +46,6 @@
   </div>
 <% else %>
 <% end %>
-<style>
-  #more{
-    background: none repeat scroll 0 0 #EEEEEE;
-    border: 1px solid #CFCFCF;
-    color: #000000;
-    display: none;
-    font-weight: bold;
-    left: 1100px;
-    padding: 5px;
-    position: fixed;
-    top: 100px;
-  }
-</style>
+<div id='ajax' style='z-index:1000000;display: none;'>
+  <img alt=""  src="/assets/ajax-loader.gif" id = "ajax-loader" />
+</div>
