@@ -3,16 +3,22 @@
     <div id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
       <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;">
-        <h5 class="post_name"><%= post.user.username %></h5>
-        <div class="post_at">&nbsp@<%= post.user.username %></div>
+        <h5 class="post_name"><%= post.user.username.split("@").last %></h5>
+        <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],'')+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
         </div>
         <div class="action_row">
           <%= link_to_function image_tag("/assets/discussion.png", :height => "10px", :width => "10px")+'View Conversation', "conversation('#{post.user.id}', #{post.id})" %>
           &nbsp&nbsp
           <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post), :remote => true, :id => "reply_#{post.id}" %>
+          &nbsp&nbsp
+          <% if post.user_id == current_user.id  %>
+            <span id="delete_<%= post.id %>">
+              <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
+            </span>
+          <% end %>
           &nbsp&nbsp
           <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
             <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>

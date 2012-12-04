@@ -1,7 +1,7 @@
 <div class="span4">
   <div class="box_l1_hp">
     <%= image_tag(current_user.avatar.url(:original),:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
-    <h3 class="profile_name"><%= current_user.username %></h3>
+    <h3 class="profile_name"><%= current_user.username.split("@").last %></h3>
     <%= link_to "View my profile page", profile_path(current_user), :class => "view_my_profile_page" %>
     <div class="posts_count">
       <%= current_user.tweets.where("reply IS NULL").count %>&nbsp;Posts
@@ -10,7 +10,7 @@
       <%= current_user.tweets.where("reply IS NOT NULL").count %>&nbsp;Replies
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"@#{current_user.username}" %>
+      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"#{current_user.username}" %>
       <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
     <% end %>
   </div>

@@ -77,6 +77,7 @@ WebApp::Application.routes.draw do
       post :compose_message
       get :new_compose
       post :new_compose_message
+      put :switch_theme
     end
   end
 

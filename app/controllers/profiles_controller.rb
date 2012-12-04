@@ -104,7 +104,6 @@ class ProfilesController < ApplicationController
       @tweet.receiver_id = @user.present? ? @user.id : nil
       if @tweet.save
         render :update do |page|
-          page.alert('Success')
           page.reload
         end
       else
@@ -124,8 +123,8 @@ class ProfilesController < ApplicationController
     @post.user_id = current_user.id
     @post.receiver_id = @user.id
     if @post.save
-      respond_to do |format|
-        format.js
+      render :update do |page|
+        page.redirect_to profiles_path
       end
     else
       render :update do |page|
@@ -152,7 +151,6 @@ class ProfilesController < ApplicationController
       @tweet.receiver_id = @user.present? ? @user.id : nil
       if @tweet.save
         render :update do |page|
-          page.alert('Success')
           page.reload
         end
       else
@@ -162,6 +160,13 @@ class ProfilesController < ApplicationController
           end
         end
       end
+    end
+  end
+
+  def switch_theme
+    @user = User.find(params[:id])
+    @user.update_attribute(:theme, params[:url])
+    render :update do |page|
     end
   end
 end

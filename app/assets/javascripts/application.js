@@ -198,12 +198,21 @@ function school_posts(user_id,student_id, page){
 
 var backImage = ["/assets/Amazing_Flowers_Wallpapers_55.jpg","/assets/scene3.jpg","/assets/rain1.jpg","/assets/moss.jpg","/assets/nature2.jpg"];
 var count = 0;
-function changeBGImage(whichImage) {
+function changeBGImage(whichImage,id) {
     count++;
     $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
     if(count == 4){
         count = 0;
     }
+    $.ajax({
+        url:"/profiles/switch_theme",
+        type:'PUT',
+        data:{
+            url:backImage[(count-1)],
+            id:id
+        },
+        success:function(data){
+        }
+    });
 }
-
 

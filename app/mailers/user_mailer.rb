@@ -26,6 +26,6 @@ class UserMailer < ActionMailer::Base
   def reply_post(user,post)
     @user = user
     @post = post
-    mail(:to => user.email, :from => post.user.email, :subject => "Reply to your post")
+    mail(:to => user.email, :from => post.user.email,:reply_to => post.user.email, :subject => "Reply to your post")
   end
 end

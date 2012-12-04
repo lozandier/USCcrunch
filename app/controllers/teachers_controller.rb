@@ -35,11 +35,12 @@ class TeachersController < ApplicationController
     @teacher = User.find(params[:id])
     if @teacher.update_attributes(params[:user])
       @teacher.update_attribute(:reset_password_token,nil)
-      flash[:notice] = "Loggened in successful."
-      redirect_to root_path
+      @teacher.update_attribute(:confirmation_token,nil)
+      @teacher.update_attribute(:username,'@'+@teacher.username)
+      redirect_to student_login_home_index_path
     else
-      flash.now[:notice] = "Loggened in failed."
-      render :action => 'edit',:layout => false
+      flash.now[:error] = "Loggened in failed."
+      render :action => 'edit'
     end
   end
 

@@ -47,6 +47,7 @@ class StudentsController < ApplicationController
     if @student.update_attributes(params[:user])
       @student.update_attribute(:reset_password_token,nil)
       @student.update_attribute(:confirmation_token,nil)
+      @student.update_attribute(:username,'@'+@student.username)
       redirect_to student_login_home_index_path
     else
       flash.now[:error] = "Loggened in failed."
@@ -87,7 +88,7 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    @student = Student.find(params[:id])
+    @student = User.find(params[:id])
     if @student.destroy
       render :update do |page|
         flash[:notice] = "Successfully deleted this Student."

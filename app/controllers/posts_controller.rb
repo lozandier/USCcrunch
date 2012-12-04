@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     @post.receiver_id = @user.id
     if @post.save
       render :update do |page|
-        flash[:notice] = "Successfully twitted this user."
+        flash[:notice] = "Successfully posted this user."
         page.redirect_to profiles_path
       end
     else

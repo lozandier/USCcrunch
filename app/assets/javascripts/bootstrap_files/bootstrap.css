@@ -6345,7 +6345,7 @@ body.blue_background {
 .conversation_right_box {
     position: fixed;
     top: 42px;
-    left: 77%;
+    left: 76%;
     height: 100%;
     width: 300px;
     border-left: 1px solid white;
@@ -6426,15 +6426,12 @@ body.blue_background {
 
 .conversation_poster_name {
     float: left;
-    margin-bottom: 3px;
     font-weight: 900;
     font-size: 12px;
-    line-height: 10px;
 }
 
 .conversation_poster_content {
     float: left;
-    width: 220px;
     font-size: 10px;
     line-height: 10px;
 }

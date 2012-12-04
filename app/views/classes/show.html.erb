@@ -2,9 +2,10 @@
 
   <div class="box_c1_mp extended">
 
-    <div class="cover_photo">
-      <div class="cover_photo_button" style="float: right;margin-right: 10px;margin-top: 125px;"><a href="javascript:changeBGImage(0)">switch theme</a></div>
+    <div class="cover_photo" style= "background-image : url(<%= @user.theme.present? ? @user.theme : '/assets/cover_photo.jpg'%>)">
+      <div class="cover_photo_button" style="float: right;margin-right: 10px;margin-top: 125px;"><a href="javascript:changeBGImage(0,<%= @user.id %>)">switch theme</a></div>
     </div>
+
 
     <div class="profile_box_right with_options">
       <% if current_user.role == 'teacher' %>
@@ -18,7 +19,7 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Post to @<%= @user.username %></a></li>
+            <li><a href="#">Post to <%= @user.username %></a></li>
           </ul>
         </div>
 
@@ -26,8 +27,8 @@
       <% end %>
     </div>
     <%= image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") %>
-    <h2 class="profile_name"><%= @user.username %></h2>
-    <h4 class="at_name">@<%= @user.username %></h4>
+    <h2 class="profile_name"><%= @user.username.split("@").last %></h2>
+    <h4 class="at_name"><%= @user.username %></h4>
     <br/>
     <p class="bio"><%= @user.bio %></p>
   </div>
