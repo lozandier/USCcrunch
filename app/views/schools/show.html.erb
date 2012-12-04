@@ -23,7 +23,11 @@
           <% else %>
             <td><%= school.email %></td>
           <% end %>
-          <td><%= school.username.split("@").last %></td>
+          <% if school.username.present? %>
+            <td><%= school.username.split("@").last %></td>
+          <% else %>
+            <td></td>
+          <% end %>
           <td>
             <% if school.reset_password_token == nil %>
               Joined
