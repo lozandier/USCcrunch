@@ -201,9 +201,6 @@ var count = 0;
 function changeBGImage(whichImage,id) {
     count++;
     $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
-    if(count == 4){
-        count = 0;
-    }
     $.ajax({
         url:"/profiles/switch_theme",
         type:'PUT',
@@ -214,5 +211,9 @@ function changeBGImage(whichImage,id) {
         success:function(data){
         }
     });
+    if(count == 5){
+        count = 0;
+    }
+    
 }
 
