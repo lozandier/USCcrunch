@@ -29,8 +29,10 @@
 
 
     <div class="box_c1_mp extended">
-      <div class="cover_photo" style= "background-image : url(<%= current_user.theme.present? ? current_user.theme : '/assets/cover_photo.jpg'%>)">
-        <div class="cover_photo_button"><a href="javascript:changeBGImage(0,<%= current_user.id %>)">switch theme</a></div>
+      <div class="cover_photo" style= "background-image : url(<%= @user.theme.present? ? @user.theme : '/assets/cover_photo.jpg'%>)">
+        <% if @user.id == current_user.id %>
+          <div class="cover_photo_button"><a href="javascript:changeBGImage(0,<%= current_user.id %>)">switch theme</a></div>
+        <% end %>
       </div>
       <%= link_to image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo"), @user.avatar.url %>
       <h2 class="profile_name"><%= @user.username.split("@").last %></h2>
