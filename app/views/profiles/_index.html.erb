@@ -3,7 +3,7 @@
     <div id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
       <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;">
-        <h5 class="post_name"><%= post.user.username.split("@").last %></h5>
+        <h5 class="post_name"><%= link_to post.user.username.split("@").last, profile_path(post.user), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text">

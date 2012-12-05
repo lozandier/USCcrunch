@@ -1,1 +1,5 @@
-jQuery("#bid-info_<%= @post.id %>").html("<%= escape_javascript(render :partial => 'reply') %>");
+<% if params[:reply_as].blank? %>
+  jQuery("#bid-info_<%= @post.id %>").html("<%= escape_javascript(render :partial => 'reply') %>");
+<% else %>
+  jQuery("#bid-infoo_<%= @post.id %>").html("<%= escape_javascript(render :partial => 'reply') %>");
+<% end %>

@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   def conversation
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.paginate :conditions => ["((tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@user.id}))"],:order => "created_at Desc", :page => params[:index_page], :per_page => 5
+    @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
     render :layout => false
   end
 
@@ -118,7 +118,7 @@ class ProfilesController < ApplicationController
 
   def conversation_message
     @user = User.find(params[:id])
-    @posts = Tweet.paginate :conditions => ["((tweets.user_id = #{current_user.id} and tweets.receiver_id = #{@user.id}))"],:order => "created_at Desc", :page => params[:page], :per_page => 5
+    @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
     @post = @user.tweets.new(params[:tweet])
     @post.user_id = current_user.id
     @post.receiver_id = @user.id
