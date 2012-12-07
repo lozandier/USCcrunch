@@ -2,7 +2,7 @@
 
   <div class="box_l1_ep">
     <%= image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
-    <h3 class="profile_name"><%= @user.username %></h3>
+    <h3 class="profile_name"><%= @user.username.split('@').last %></h3>
     <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
   </div>
 

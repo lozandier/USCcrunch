@@ -28,10 +28,14 @@
   </div>
   <%= image_tag(current_user.avatar.url(:original), :width => '80px', :height => '80px', :class => 'conversation_post_pic') %>
   <h4 class="conversation_post_name"><%= current_user.username.split("@").last %></h4>
-  <div class="started_this_conversation"> Started this conversation</div>
-  <div class="conversation_post_content">Post content goes here</div>
-  <div class="conversation_post_date">Nov. 1 at 8:00 AM via EduPost
-  </div>
+  <div class="started_this_conversation">Started this conversation</div>
+  <% if @user.tweets.present?  %>
+    <% Tweet.where("user_id = #{@user.id}").order('created_at Asc').limit(1).each do |post| %>
+      <div class="conversation_post_content"><%= post.body %></div>
+      <div class="conversation_post_date">Nov. 1 at 8:00 AM via EduPost
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 
