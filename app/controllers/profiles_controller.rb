@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   def conversation
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply IS NULL").order("created_at Asc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where("reply IS NOT NULL or reply IS NULL").order("created_at Asc")
     render :layout => false
   end
 
