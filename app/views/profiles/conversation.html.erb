@@ -1,9 +1,8 @@
 <div class="conversation_right_box">
   <div class="conversation_post_input_box">
-    <img class="conversation_post_pic_small" src="images/profile_placeholder.png" height="30px" width="30px"/>
     <%= form_for @post, :url =>conversation_message_profile_path(@user),:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= image_tag(current_user.avatar.url(:original), :width => '40px', :height => '40px', :style => 'float: left;margin-top: -6px;') %>
-      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:58%;",:placeholder=>"Add to Conversation" %>
+      <%= image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') %>
+      <%= f.text_field :body,:class=>"compose_new_post",:style=>"width:55%;",:placeholder=>"Add to Conversation" %>
       <%= f.submit 'Post', :style => "left: -10px;position: relative;top: -4px;" %>
     <% end %>
   </div>

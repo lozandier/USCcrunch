@@ -10,7 +10,7 @@
       <%= current_user.tweets.where("reply IS NOT NULL").count %>&nbsp;Replies
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"#{current_user.username}" %>
+      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"Compose new Post..." %>
       <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
     <% end %>
   </div>
