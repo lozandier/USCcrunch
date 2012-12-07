@@ -2,7 +2,7 @@
   <div class="box_c1_mp">
     <div style="float: left;"><%= image_tag(@user.avatar.url(:original) , :width => '140px;', :height => '140px;', :class => "profile_pic img-rounded") %></div>
     <div style="float: left;left:12px;">
-      <h2 class="profile_name"><%= @user.username.split('@').last %></h2>
+      <h2 class="profile_name"><%= @user.username %></h2>
       <h4 class="at_name"><%= @user.username %></h4>
     </div>
   </div>
@@ -24,7 +24,7 @@
     <h2 class="posts_title">Posts
       <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
     </h2>
-    <%= render :partial => 'show' %>
+    <%= render :partial => '/students/show' %>
     <input type="hidden" value="show" id="post_type" />
     <input type="hidden" value="<%= @school.id %>" id="school_id" />
     <input type="hidden" value="<%= @user.id %>" id="current_user_id" />

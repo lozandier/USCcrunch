@@ -3,7 +3,7 @@
   <div class="box_c1_mp">
     <div style="float: left;"><%= image_tag(@user.avatar.url(:original) , :width => '140px;', :height => '140px;', :class => "profile_pic img-rounded") %></div>
     <div style="float: left;left:12px;">
-      <h2 class="profile_name"><%= @user.username %></h2>
+      <h2 class="profile_name"><%= @user.username.split('@').last %></h2>
       <h4 class="at_name"><%= @user.email %></h4>
       <div class="location"><%= @user.state%></div>
       <a class="website" href=""><%= @user.website %></a>
@@ -40,7 +40,7 @@
           <div class="posts_box">
             <div style="float:left;clear:both;"><%= image_tag follow.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
             <div class="post" style="border-bottom: 1px solid grey;height: auto;">
-              <h5 class="post_name"><%= follow.user.username %></h5>
+              <h5 class="post_name"><%= follow.user.username.split('@').last %></h5>
               <div class="post_at">&nbsp<%= follow.user.email %></div>
             </div>
           </div>

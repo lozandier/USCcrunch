@@ -3,8 +3,8 @@
     <div class="posts_box" id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
       <div class="post" style="border-bottom: 1px solid grey;height: auto;">
-        <h5 class="post_name"><%= post.user.username %></h5>
-        <div class="post_at">&nbsp@<%= post.user.username %></div>
+        <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
+        <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text"><%= post.body %></div>
         <div class="action_row">

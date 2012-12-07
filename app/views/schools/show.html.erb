@@ -19,7 +19,13 @@
           <td><%= school.first_name %></td>
           <td><%= school.last_name %></td>
           <% if school.reset_password_token == nil %>
-            <td><%= link_to school.email, school_student_path(@school, school) %></td>
+            <td>
+              <% if school.role == 'student' %>
+                <%= link_to school.email, school_student_path(@school, school) %>
+              <% else %>
+                <%= link_to school.email, school_teacher_path(@school, school) %>
+              <% end %>
+            </td>
           <% else %>
             <td><%= school.email %></td>
           <% end %>
@@ -40,7 +46,11 @@
             <% if school.reset_password_token == nil %>
               <%= link_to "View Posts", posts_school_student_path(@school, school)%> |
             <% end %>
-            <%= link_to "Delete", student_path(school), :remote => true, :method => :delete, :confirm => "Are You Sure.." %>
+            <% if school.role == 'student' %>
+              <%= link_to "Delete", student_path(school), :remote => true, :method => :delete, :confirm => "Are You Sure.." %>
+            <% else %>
+              <%= link_to "Delete", teacher_path(school), :remote => true, :method => :delete, :confirm => "Are You Sure.." %>
+            <% end %>
           </td>
         </tr>
       <% end %>

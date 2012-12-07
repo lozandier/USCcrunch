@@ -31,6 +31,16 @@ class TeachersController < ApplicationController
     end
   end
 
+  def show
+    @school = SchoolAdmin.find(params[:school_id])
+    @user = User.find(params[:id])
+    @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    respond_to do |format|
+      format.html {render :partial => "show", :layout => false if request.xhr?}
+      format.js {render :partial => "show", :layout => false if request.xhr?}
+    end
+  end
+
   def update
     @teacher = User.find(params[:id])
     if @teacher.update_attributes(params[:user])
@@ -53,6 +63,16 @@ class TeachersController < ApplicationController
     else
       render :update do |page|
         page<<"$('#username_error').text('User Name already exists choose another one..');"
+      end
+    end
+  end
+
+  def destroy
+    @teacher = User.find(params[:id])
+    if @teacher.destroy
+      render :update do |page|
+        flash[:notice] = "Successfully deleted this Teacher."
+        page.reload
       end
     end
   end
