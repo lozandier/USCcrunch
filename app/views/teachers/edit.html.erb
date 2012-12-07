@@ -5,7 +5,7 @@
       <strong>Create an account if you are new here:</strong>
       <br/>
       <br/>
-      <%= form_for(@teacher, :url => student_path(@teacher), :html => { :method => :put }) do |f| %>
+      <%= form_for(@teacher, :url => teacher_path(@teacher), :html => { :method => :put }) do |f| %>
         <%= f.hidden_field :reset_password_token %>
         <div class="control-group">
           <label class="control-label" for="inputEmail">Email or Username</label>
