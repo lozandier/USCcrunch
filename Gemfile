@@ -14,6 +14,7 @@ gem 'remotipart', '~> 1.0'
 gem 'will_paginate', '>= 3.0.pre'
 gem 'quiet_assets'
 gem 'thin'
+gem 'aws-sdk'
 
 
 group :production do

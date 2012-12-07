@@ -2,7 +2,7 @@
   <%= form_for @post, :url => user_posts_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
     <table>
       <tr>
-        <td><%= f.text_field :body, :placeholder => "#{@user.username}" %>
+        <td><%= f.text_field :body, :value => "#{@user.username+' ' }"  %>
           <%= validation_error(@post.errors['body'])%></td>
       </tr>
       <tr><td>

@@ -3,7 +3,7 @@
     <table>
       <tr>
         <td>
-          <%= f.text_area :body, :cols => 30, :rows => 1,:value => '', :placeholder => "Reply.." %>
+          <%= f.text_area :body, :cols => 30, :rows => 1, :value => "#{@post.user.username+' ' }" %>
         </td>
       </tr>
       <tr>
