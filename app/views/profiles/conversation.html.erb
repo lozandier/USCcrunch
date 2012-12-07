@@ -47,7 +47,7 @@
   <div class="started_this_conversation">Started this conversation</div>
   <% if @user.tweets.present?  %>
     <% Tweet.where("user_id = #{current_user.id}").order('created_at Asc').limit(1).each do |post| %>
-      <div class="conversation_post_content"><%= post.body %></div>
+      <div class="conversation_post_content"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></div>
       <div class="conversation_post_date"><%= post.created_at.strftime("%b %d at %H:%M %p") %> via EduPost
       </div>
     <% end %>
