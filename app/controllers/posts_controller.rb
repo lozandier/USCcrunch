@@ -48,11 +48,12 @@ class PostsController < ApplicationController
 
   def reply
     @post = Tweet.find(params[:id])
-    render :layout => false
+    @user = User.find(params[:user_id])
+    @posts = Tweet.where("tweet_id = #{@post.id} AND #{@post.reply = true }").order("created_at Asc")
   end
 
   def reply_post
-    @post = Tweet.find(params[:user_id])
+    @post = Tweet.find(params[:id])
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
     @repost.receiver_id = @post.user_id

@@ -53,23 +53,27 @@
              margin-top:20px;">
           <h2 class="posts_title">Posts</h2>
           <div class="posts_box">
-            <% for post in @posts %>
-              <%= image_tag(post.user.avatar.url(:original), :height => '50px;',:width => '50px;', :class => 'profile_pic img-rounded') %>
-              <div class="post">
-                <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
-                <div class="post_at">&nbsp<%= post.user.username %></div>
-                <div class="post_time"><%= time_ago_in_words(post.created_at)  %></div>
-                <div class="post_text"><%= post.body %></div>
-                <div class="action_row">
-                  <img src="/assets/discussion.png" height="10px" width="10px">&nbsp<a href="#">View Conversation</a>
-                  &nbsp&nbsp
-                  <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
-                  &nbsp&nbsp
-                  <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Repost</a>
-                  &nbsp&nbsp
-                  <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+            <% if @posts.present? %>
+              <% for post in @posts %>
+                <%= image_tag(post.user.avatar.url(:original), :height => '50px;',:width => '50px;', :class => 'profile_pic img-rounded') %>
+                <div class="post">
+                  <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
+                  <div class="post_at">&nbsp<%= post.user.username %></div>
+                  <div class="post_time"><%= time_ago_in_words(post.created_at)  %></div>
+                  <div class="post_text"><%= post.body %></div>
+                  <div class="action_row">
+                    <img src="/assets/discussion.png" height="10px" width="10px">&nbsp<a href="#">View Conversation</a>
+                    &nbsp&nbsp
+                    <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
+                    &nbsp&nbsp
+                    <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Repost</a>
+                    &nbsp&nbsp
+                    <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+                  </div>
                 </div>
-              </div>
+              <% end %>
+            <% else %>
+              <span style="color: red;font-size: 15px;left: 310px;position: relative;top: -15px;">No Posts.</span>
             <% end %>
           </div>
         </div>

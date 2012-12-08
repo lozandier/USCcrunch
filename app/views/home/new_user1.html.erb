@@ -74,31 +74,36 @@
           </script>
         </div>
 
-        <div class="span8" id="posts" style="background-color:#F9F9F9;
-             box-shadow:#FFFFFF 0 0 1px 1px inset, rgba(0, 0, 0, 0.296875) 0 1px 5px;
-             height:auto;
-             margin-bottom:20px;
-             margin-top:20px;">
-          <h2 class="posts_title">Posts</h2>
-          <div class="posts_box">
+        <div class="span8" id="posts">
+          <h2 class="posts_title">Posts
+            <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
+          </h2>
+          <% if @posts.present? %>
             <% for post in @posts %>
-              <%= image_tag(post.user.avatar.url(:original), :height => '50px;',:width => '50px;', :class => 'profile_pic img-rounded') %>
-              <div class="post">
-                <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
-                <div class="post_at">&nbsp<%= post.user.username %></div>
-                <div class="post_time"><%= time_ago_in_words(post.created_at)  %></div>
-                <div class="post_text"><%= post.body %></div>
-                <div class="action_row">
-                  <img src="/assets/discussion.png" height="10px" width="10px">&nbsp<a href="#">View Conversation</a>
-                  &nbsp&nbsp
-                  <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
-                  &nbsp&nbsp
-                  <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+              <div class="posts_box" id="post_<%= post.id %>">
+                <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
+                <div class="post" style="border-bottom: 1px solid grey;height: auto;">
+                  <h5 class="post_name"><%= link_to post.user.username.split("@").last,profile_path(post.user), :style => 'color:black;font-weight:bold;' %></h5>
+                  <div class="post_at">&nbsp<%= post.user.username %></div>
+                  <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
+                  <div class="post_text"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></div>
+                  <div class="action_row">
+                    <% if post.reply == true %>
+                      <%= link_to image_tag("/assets/discussion.png", :height => "10px", :width => "10px")+'View Conversation', " " %>
+                    <% end %>
+                    &nbsp&nbsp
+                    <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post) %>
+                    &nbsp&nbsp
+                      <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite'," " %>
+                  </div>
                 </div>
               </div>
             <% end %>
-          </div>
+          <% else %>
+            <span style="color: red;font-size: 15px;left: 300px;position: relative;top: -9px;">No Posts.</span>
+          <% end %>
         </div>
+
       </div>
     </div>
   </body>
@@ -110,5 +115,15 @@
     opacity:0.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  }
+
+  #posts{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: auto;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid white;
+    box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
   }
 </style>

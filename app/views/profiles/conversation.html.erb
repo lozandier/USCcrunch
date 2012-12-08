@@ -16,7 +16,8 @@
           <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
         </div>
         <div class="conversation_action_row">
-          <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(post.user,post,:reply_as => 'conversation_reply'), :remote => true, :id => "reply_#{post.id}" %> &#183; <a href="#">Like</a> &#183; <a href="#">Flag</a> &#183; <a href="#">More</a>
+          <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183;
+          <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', " " %> &#183; <a href="#">Like</a> &#183; <a href="#">Flag</a> &#183; <a href="#">More</a>
         </div>
         <div id="bid-infoo_<%= post.id %>"></div>
         <% i = post.id  %>

@@ -11,7 +11,11 @@
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
       <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"Compose new Post..." %>
-      <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn'%>
+      <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+        <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      </div>
+      <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 32px;margin-top: -6px;width: 25px;"  />
+      <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn', :style => 'position:relative;left:170px;'%>
     <% end %>
   </div>
   <% if current_user.role == 'student' %>
