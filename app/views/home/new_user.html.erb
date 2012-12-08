@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title>Eduposts</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link href="/assets/bootstrap_files/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/assets/bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+
+  <body class="blue_background">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <img class="paper_plane" src="/assets/paper_plane_icon.png" height="50px" width="50px"/>
+          <div class="nav-collapse collapse">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row-fluid">
+
+        <div class="span4">
+          <div class="box_l1_hp no_white_border">
+            <div class="welcome_message_box margin_fix">
+              <h4>Welcome, <%= current_user.first_name %>!</h4>
+    					Get started in less than 60 seconds.
+            </div>
+            <div class="welcome_message_box_bottom">
+              <%= link_to "<button type='button' class='btn'>Next</button>".html_safe, new_user1_home_path(current_user) %>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="span8" id="posts" style="background-color:#F9F9F9;
+             box-shadow:#FFFFFF 0 0 1px 1px inset, rgba(0, 0, 0, 0.296875) 0 1px 5px;
+             height:auto;
+             margin-bottom:20px;
+             margin-top:20px;">
+          <h2 class="posts_title">Posts</h2>
+          <div class="posts_box">
+            <% for post in @posts %>
+              <%= image_tag(post.user.avatar.url(:original), :height => '50px;',:width => '50px;', :class => 'profile_pic img-rounded') %>
+              <div class="post">
+                <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
+                <div class="post_at">&nbsp<%= post.user.username %></div>
+                <div class="post_time"><%= time_ago_in_words(post.created_at)  %></div>
+                <div class="post_text"><%= post.body %></div>
+                <div class="action_row">
+                  <img src="/assets/discussion.png" height="10px" width="10px">&nbsp<a href="#">View Conversation</a>
+                  &nbsp&nbsp
+                  <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
+                  &nbsp&nbsp
+                  <img src="/assets/repost_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Repost</a>
+                  &nbsp&nbsp
+                  <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /.row_fluid" -->
+  </body>
+</html>

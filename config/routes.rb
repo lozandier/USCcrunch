@@ -164,8 +164,12 @@ WebApp::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
   root :to => 'home#index'
   resources :home do
+    member do
+      get :new_user
+      get :new_user1
+      put :update_new_user1
+    end
     collection do
-      get :student_login
       get :school_login
       get :about
     end

@@ -30,16 +30,17 @@
     <%= render :partial => 'index' %>
     <input type="hidden" value="show" id="post_type" />
   </div>
-  <script>
-    jQuery(function() {
-      jQuery(window).scroll(
-      function() {
-        if (($(window).scrollTop() == $(document).height() - $(window).height()) && jQuery('#posts_page').val() > 0)
-        {
-          if (jQuery("#post_type").val() == 'show') {
-            notification_replies(jQuery('#posts_page').val())
-          }
+</div>
+<script>
+  jQuery(function() {
+    jQuery(window).scroll(
+    function() {
+      if (($(window).scrollTop() == $(document).height() - $(window).height()) && jQuery('#posts_page').val() > 0)
+      {
+        if (jQuery("#post_type").val() == 'show') {
+          notification_replies(jQuery('#posts_page').val())
         }
-      });
+      }
     });
-  </script>
+  });
+</script>

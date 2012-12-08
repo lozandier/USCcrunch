@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <title>Eduposts</title>
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link href="/assets/bootstrap_files/bootstrap.css" rel="stylesheet">
+    <%= javascript_include_tag "application", "jquery.notifyBar","jquery.simplyscroll","jquery.remotipart","/assets/bootstrap_files/bootstrap-transition.js","/assets/bootstrap_files/bootstrap-alert.js","/assets/bootstrap_files/bootstrap-modal.js","/assets/bootstrap_files/bootstrap-dropdown.js","/assets/bootstrap_files/bootstrap-scrollspy.js","/assets/bootstrap_files/bootstrap-tab.js","/assets/bootstrap_files/bootstrap-tooltip.js","/assets/bootstrap_files/bootstrap-popover.js","/assets/bootstrap_files/bootstrap-button.js","/assets/bootstrap_files/bootstrap-collapse.js","/assets/bootstrap_files/bootstrap-carousel.js","/assets/bootstrap_files/bootstrap-typeahead.js" %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="/assets/bootstrap_files/bootstrap-responsive.css" rel="stylesheet">
+  </head>
+
+  <body class="blue_background">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <!--<a class="brand" href="index.html"><img src="images/logo.png" height="85px" width="115px"/></a>-->
+          <img class="paper_plane" src="/assets/paper_plane_icon.png" height="50px" width="50px"/>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row-fluid">
+
+        <div class="span4">
+
+          <div class="add_character_box">
+            <h3 class="add_character_title">Add character</h3>
+            <div class="add_character_text">Upload a photo and describe yourself.</div>
+            <div class="add_character_darkening"></div>
+          </div>
+
+          <div class="add_character_profile_box">
+            <%= form_for @user, :url => update_new_user1_home_path(@user) do |f| %>
+              <%= image_tag(@user.avatar.url(:original), :width => '100px', :height => '100px;', :id => 'user_photo',:class => 'profile_pic img-rounded') %>
+              <img id="PreviewImage" src="" alt="" style="width: 100px;height: 100px;display: none;" class="profile_pic img-rounded"  />
+              <div class="btn add_character_upload_image">Upload image
+                <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'margin-left: -119px;margin-top: -5px;width: 116px;'%>
+              </div>
+              <div class="image_size_text">Maximum size of 700K, JPG, GIF,<br/>PNG.</div>
+              <h4 class="bio_title">Bio</h4>
+              <div class="bio_text_count"><strong>0 / 160</strong></div>
+              <%= f.text_area :bio, :rows => 3, :class => "bio_text_area" %>
+              <div class="skip_button">
+                <%= f.submit "Skip &#187;".html_safe %>
+              </div>
+            <% end %>
+          </div>
+          <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {//Check if input has files.
+                var reader = new FileReader();//Initialize FileReader.
+
+                reader.onload = function (e) {
+                  $('#PreviewImage').attr('src', e.target.result);
+                  $("#user_photo").hide();
+                  $("#PreviewImage").show();
+                };
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+          </script>
+        </div>
+
+        <div class="span8" id="posts" style="background-color:#F9F9F9;
+             box-shadow:#FFFFFF 0 0 1px 1px inset, rgba(0, 0, 0, 0.296875) 0 1px 5px;
+             height:auto;
+             margin-bottom:20px;
+             margin-top:20px;">
+          <h2 class="posts_title">Posts</h2>
+          <div class="posts_box">
+            <% for post in @posts %>
+              <%= image_tag(post.user.avatar.url(:original), :height => '50px;',:width => '50px;', :class => 'profile_pic img-rounded') %>
+              <div class="post">
+                <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
+                <div class="post_at">&nbsp<%= post.user.username %></div>
+                <div class="post_time"><%= time_ago_in_words(post.created_at)  %></div>
+                <div class="post_text"><%= post.body %></div>
+                <div class="action_row">
+                  <img src="/assets/discussion.png" height="10px" width="10px">&nbsp<a href="#">View Conversation</a>
+                  &nbsp&nbsp
+                  <img src="/assets/reply_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Reply</a>
+                  &nbsp&nbsp
+                  <img src="/assets/favorite_icon.png" height="10px" width="10px"/>&nbsp<a href="#">Favorite</a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<style>
+  #realupload11{
+    opacity: 0;
+    width: 29px;
+    opacity:0.0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  }
+</style>

@@ -30,7 +30,8 @@ class StudentsController < ApplicationController
   end
 
   def username
-    @username = User.find_by_username(params[:username])
+    @user = '@'+ params[:username]
+    @username = User.find_by_username(@user)
     if !@username.present?
       render :update do |page|
         page<<"$('#username_error').html('');"
@@ -48,7 +49,8 @@ class StudentsController < ApplicationController
       @student.update_attribute(:reset_password_token,nil)
       @student.update_attribute(:confirmation_token,nil)
       @student.update_attribute(:username,'@'+@student.username)
-      redirect_to student_login_home_index_path
+      sign_in(@student, @student)
+      redirect_to new_user_home_path(current_user)
     else
       flash.now[:error] = "Loggened in failed."
       render :action => 'edit'

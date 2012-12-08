@@ -47,7 +47,8 @@ class TeachersController < ApplicationController
       @teacher.update_attribute(:reset_password_token,nil)
       @teacher.update_attribute(:confirmation_token,nil)
       @teacher.update_attribute(:username,'@'+@teacher.username)
-      redirect_to student_login_home_index_path
+      sign_in(@teacher, @teacher)
+      redirect_to new_user_home_path(current_user)
     else
       flash.now[:error] = "Loggened in failed."
       render :action => 'edit'
