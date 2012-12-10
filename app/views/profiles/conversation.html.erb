@@ -29,7 +29,7 @@
     <% end %>
     <% for post in @posts %>
       <% if post.id != i %>
-        <%= post_picture(post) %>
+        <%= conversation_picture(post) %>
         <div class="conversation_poster_name"><%= post.user.fullname %></div><br />
         <div class="conversation_poster_content">
           <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
