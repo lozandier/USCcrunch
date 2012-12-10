@@ -1,8 +1,12 @@
 <div class="span4">
 
   <div class="box_l1_ep">
-    <%= image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
-    <h3 class="profile_name"><%= @user.username.split('@').last %></h3>
+    <% if @user.role == 'student' %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
+    <% else %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
+    <% end %>
+    <h3 class="profile_name"><%= @user.fullname %></h3>
     <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
   </div>
 
@@ -29,7 +33,11 @@
           <tr>
             <td><%= f.label :avatar, "Photo" %></td>
             <td>
-              <%= image_tag(@user.avatar.url(:original), :width => '100px', :height => '100px;', :id => 'user_photo') %>
+              <% if @user.role == 'student' %>
+                <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '100px', :width => '100px' , :id => 'user_photo') : image_tag("/assets/profile_pic_student.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
+              <% else %>
+                <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '100px', :width => '100px', :id => 'user_photo') : image_tag("/assets/profile_pic_instructor.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
+              <% end %>
               <img id="PreviewImage" src="" alt=""  />
               <div class="input-container btn">Change photo<span class="caret"></span>
                 <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'margin-left: -119px;margin-top: -5px;width: 116px;'%>
@@ -44,7 +52,8 @@
 
           <tr>
             <td><%= f.label :username, "Username" %></td>
-            <td><%= f.text_field :username %></td>
+            <td><%= f.text_field :username, :value => @user.username.split('@').last,:onBlur => "get_username(this)" %></td>
+            <td id="username_error" style="color: #CC3333; text-transform: none;font-family: Calibri-Bold;font-size:12px;width:200px;"></td>
             <td><%= validation_error(@user.errors["username"]) %></td>
           </tr>
           <tr>
@@ -80,10 +89,9 @@
 </div>
 <style>
   .form_error{
-    color: red;
-    left: -110px;
+    left: -36px;
     position: relative;
-    top: -5px;
-    width: 200px;
+    top: -6px;
+    width: 317px;
   }
 </style>

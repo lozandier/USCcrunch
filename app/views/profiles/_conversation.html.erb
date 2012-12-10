@@ -10,7 +10,7 @@
 
   <div class="conversation_post_box">
     <% for post in @posts %>
-      <%= image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') %>
+      <%= conversation_picture(post) %>
       <div class="conversation_poster_name"><%= post.user.username %></div>
       <div class="conversation_poster_content"><a href="#"><%= post.user.username %></a> hey whatup, so how long have you been using edupost?</div>
       <div class="conversation_action_row">
@@ -21,8 +21,11 @@
 </div>
 
 <div class="conversation_middle_box">
-
-  <img class="conversation_post_pic" src="images/profile_placeholder.png" height=80px width=80px>
+  <% if current_user.role == 'student' %>
+    <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '80px', :height => '80px', :class => 'conversation_post_pic') : image_tag("/assets/profile_pic_student.png", :width => '80px', :height => '80px', :class => 'conversation_post_pic')%>
+  <% else %>
+    <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '80px', :height => '80px', :class => 'conversation_post_pic') : image_tag("/assets/profile_pic_instructor.png", :width => '80px', :height => '80px', :class => 'conversation_post_pic')%>
+  <% end %>
   <h4 class="conversation_post_name">JohnDoe</h4>
   <div class="started_this_conversation"> Started this conversation</div>
   <div class="conversation_post_content">Post content goes here</div>

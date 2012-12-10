@@ -4,13 +4,6 @@ class HomeController < ApplicationController
     
   end
 
-  def new_user
-    @user = User.find(params[:id])
-    sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.user_id = b.user_id )) order by a.created_at desc"
-    @posts = Tweet.paginate_by_sql [sql_query], :per_page => 10, :page => params[:page]
-    render :layout => false
-  end
-
   def new_user1
     @user = User.find(params[:id])
     sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.user_id = b.user_id )) order by a.created_at desc"
@@ -18,7 +11,14 @@ class HomeController < ApplicationController
     render :layout => false
   end
 
-  def update_new_user1
+  def new_user2
+    @user = User.find(params[:id])
+    sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.user_id = b.user_id )) order by a.created_at desc"
+    @posts = Tweet.paginate_by_sql [sql_query], :per_page => 10, :page => params[:page]
+    render :layout => false
+  end
+
+  def update_new_user2
     @user = User.find(params[:id])
     sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.user_id = b.user_id )) order by a.created_at desc"
     @posts = Tweet.paginate_by_sql [sql_query], :per_page => 10, :page => params[:page]
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       redirect_to profiles_path
     else
       flash[:error] = "Failed to Update your Profile details."
-      render :action => 'new_user1', :layout => false
+      render :action => 'new_user2', :layout => false
     end
 
   end

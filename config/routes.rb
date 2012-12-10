@@ -31,11 +31,7 @@ WebApp::Application.routes.draw do
     end
   end
 
-  resources :teachers do
-    collection do
-      put :username
-    end
-  end
+  resources :teachers 
 
   resources :classes
   resources :notifications do
@@ -165,9 +161,9 @@ WebApp::Application.routes.draw do
   root :to => 'home#index'
   resources :home do
     member do
-      get :new_user
       get :new_user1
-      put :update_new_user1
+      get :new_user2
+      put :update_new_user2
     end
     collection do
       get :school_login

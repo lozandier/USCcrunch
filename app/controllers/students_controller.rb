@@ -31,6 +31,7 @@ class StudentsController < ApplicationController
 
   def username
     @user = '@'+ params[:username]
+    @user_name = current_user.username if current_user
     @username = User.find_by_username(@user)
     if !@username.present?
       render :update do |page|
@@ -38,7 +39,11 @@ class StudentsController < ApplicationController
       end
     else
       render :update do |page|
-        page<<"$('#username_error').text('User Name already exists choose another one..');"
+        if current_user and @user == @user_name
+          page<<"$('#username_error').text('Thats you..');"
+        else
+          page<<"$('#username_error').text('User Name already exists choose another one..');"
+        end
       end
     end
   end
@@ -50,7 +55,7 @@ class StudentsController < ApplicationController
       @student.update_attribute(:confirmation_token,nil)
       @student.update_attribute(:username,'@'+@student.username)
       sign_in(@student, @student)
-      redirect_to new_user_home_path(current_user)
+      redirect_to new_user1_home_path(current_user)
     else
       flash.now[:error] = "Loggened in failed."
       render :action => 'edit'

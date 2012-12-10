@@ -6367,9 +6367,9 @@ body.blue_background {
 
 .conversation_post_pic {
     float: left;
-    margin-top: 10px;
+    margin-left: -6px;
     margin-right: 10px;
-    margin-left: 10px;
+    margin-top: -3px;
 }
 
 .conversation_post_name {
