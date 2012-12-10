@@ -71,10 +71,11 @@ class ProfilesController < ApplicationController
     if current_user.errors.empty? and current_user.update_with_password(params[:user])
       sign_in(:user, current_user, :bypass => true)
       flash[:notice] = 'Your password changed successfully.'
+      redirect_to edit_password_profiles_path
     else
       flash[:error] = 'Password changing failed.'
+      render :action => "edit_password"
     end
-    render :action => "edit_password"
   end
 
   def followers
