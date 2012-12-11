@@ -17,7 +17,7 @@
         <%= conversation_picture(post) %>
         <div class="conversation_poster_name"><%= post.user.fullname %></div><br />
         <div class="conversation_poster_content">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %>
         </div>
         <div class="conversation_action_row">
           <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183;
@@ -32,7 +32,7 @@
         <%= conversation_picture(post) %>
         <div class="conversation_poster_name"><%= post.user.fullname %></div><br />
         <div class="conversation_poster_content">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %>
         </div>
         <div class="conversation_action_row">
           <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= post.created_at.strftime("%b %d at %H:%M %p") %> &#183; <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(post.user,post,:reply_as => 'conversation_reply'), :remote => true, :id => "reply_#{post.id}" %> &#183; <a href="#">Like</a> &#183; <a href="#">Flag</a> &#183; <a href="#">More</a>
@@ -56,7 +56,7 @@
   <div class="started_this_conversation">Started this conversation</div>
   <% if @user.tweets.present?  %>
     <% Tweet.where("user_id = #{current_user.id}").order('created_at Asc').limit(1).each do |post| %>
-      <div class="conversation_post_content"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %></div>
+      <div class="conversation_post_content"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %></div>
       <div class="conversation_post_date"><%= post.created_at.strftime("%b %d at %H:%M %p") %> via EduPost
       </div>
     <% end %>
