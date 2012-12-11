@@ -9,7 +9,7 @@
         <div class="post_text">
           <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %><br />
           <% if post.body > post.body.slice(0..300) %>
-            <%= link_to_function "More", "", :id => "expand_#{post.id}" %>
+            <%= link_to_function "Read More", "", :id => "expand_#{post.id}" %>
             <%= link_to_function "Hide", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
             &nbsp&nbsp
           <% end %>
