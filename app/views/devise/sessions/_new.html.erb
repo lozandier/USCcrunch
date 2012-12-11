@@ -22,9 +22,9 @@
       <div class="control-group">
         <div class="controls">
           <label class="checkbox">
-            <input type="checkbox" /> Remember me
+            <%= f.check_box :remember_me, :value => 1, :checked => 'checked', :name => "user[remember_me]" %>Remember me
           </label>
-          <button type="submit" class="btn">Log In</button>
+          <%= f.submit "Log In", :class => "btn" %>
           <%= link_to "Recover password or username &raquo;".html_safe, new_user_password_path %>
           <br/>
         </div>

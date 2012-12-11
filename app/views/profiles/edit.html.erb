@@ -53,8 +53,8 @@
           <tr>
             <td><%= f.label :username, "Username" %></td>
             <td><%= f.text_field :username, :value => @user.username.split('@').last,:onBlur => "get_username(this)" %></td>
-            <td id="username_error" style="color: #CC3333; text-transform: none;font-family: Calibri-Bold;font-size:12px;width:200px;"></td>
-            <td><%= validation_error(@user.errors["username"]) %></td>
+            <td id="username_error" style="text-transform: none;font-family: Calibri-Bold;font-size:12px;width:300px;position: relative;top: 10px;float: left;">
+              <%= validation_error(@user.errors["username"]) %></td>
           </tr>
           <tr>
             <td><%= f.label :email, "Email" %></td>

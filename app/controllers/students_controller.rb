@@ -40,9 +40,9 @@ class StudentsController < ApplicationController
     else
       render :update do |page|
         if current_user and @user == @user_name
-          page<<"$('#username_error').text('Thats you..');"
+          page<<"$('#username_error').text('Thats you..').css('color','green');"
         else
-          page<<"$('#username_error').text('User Name already exists choose another one..');"
+          page<<"$('#username_error').text('User Name already exists choose another one..').css('color','red');;"
         end
       end
     end
