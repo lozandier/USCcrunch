@@ -718,7 +718,7 @@ ol ul {
 }
 
 li {
-    line-height: 20px;
+    line-height: 18px;
 }
 
 ul.unstyled,
@@ -4388,7 +4388,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a {
     float: none;
-    padding: 9px 15px 10px;
+    padding: 10px 15px 10px;
     color: #777777;
     text-decoration: none;
     text-shadow: 0 1px 0 #ffffff;
@@ -6420,7 +6420,7 @@ body.blue_background {
     float: left;
     margin-left: 10px;
     margin-right: 10px;
-}	
+}
 
 .conversation_post_input_small {
     float: left;
@@ -6600,7 +6600,7 @@ body.meshed_background {
 
 .footer {
     clear: both;
-    padding: 10px 0px 10px 340px;
+    padding: 10px 0px 10px 165px;
     width: auto;
     vertical-align: center;
 }
@@ -6795,42 +6795,4 @@ button.btn.btn-info.save_button {
 /* readings.html specific */
 .for_readings {
     margin-left: 105px;
-}
-
-body {
-    color: #8E959C;
-    font-family: 'Open Sans', sans-serif;
-}
-
-h2, h3, h4, h5, h6 {
-    color: #2F353E;
-    font-weight: 300;
-    text-transform: uppercase;
-}
-
-h2 {
-    text-align: center;
-    margin: 40px 0 45px 0;
-    background: url('/assets/line.gif') center repeat-x;
-}
-
-h2 span {
-    background: #FFF;
-    padding: 0 20px;
-}
-
-.centered {
-    text-align: center;
-}
-
-.framed {
-    margin-bottom: 10px;
-    border: 10px solid #FFF;
-    -moz-box-shadow: 0 0 7px #CCC;
-    -webkit-box-shadow: 0 0 7px #CCC;
-    box-shadow: 0 0 7px #CCC;
-}
-
-.feature-blocks {
-    margin-bottom: 50px;
 }

@@ -243,3 +243,34 @@ $(document).ready(function(){
     });
 });
 
+function student_login(user){
+    $.ajax({
+        type:'GET',
+        url:"/users/sign_in",
+        data:{
+            role: user
+        },
+        success:function(data){
+
+        }
+    });
+}
+
+$(document).ajaxError(function(e, XHR, options){
+    val1 = $('#user_email').val();
+    val2 = $('#user_password').val();
+    val3 = $('#user_role').val();
+    if(val3 == 'student'){
+        role = "#error"
+    }else{
+        role = "#error2"
+    }
+    if (XHR.status == 401){
+        if(val1 != '' || val2 != ''){
+            $(role).show();
+        }else{
+            $(role).hide();
+        }
+    }
+});
+
