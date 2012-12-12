@@ -12,10 +12,17 @@ class SchoolAdmin < ActiveRecord::Base
   validates :school_name,:first_name,:last_name, :presence => true
   validates_uniqueness_of :school_name
   has_many :users, :dependent => :destroy
-  validate :email_should_not_exist_in_student
+  validate :email_should_not_exist_in_student,:email_should_not_exist_in_admin
 
   def email_should_not_exist_in_student
     student = User.find_by_email(self.email)
+    return true unless student.present?
+    self.errors.add(:email, "is already taken")
+    return false
+  end
+
+  def email_should_not_exist_in_admin
+    student = Admin.find_by_email(self.email)
     return true unless student.present?
     self.errors.add(:email, "is already taken")
     return false

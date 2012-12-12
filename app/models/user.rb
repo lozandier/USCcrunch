@@ -11,13 +11,20 @@ class User < ActiveRecord::Base
   has_many :sent_follows, :class_name => "Follow", :foreign_key => :user_id, :dependent => :destroy
   has_many :received_follows, :class_name => 'Follow', :foreign_key => :receiver_id,:dependent => :destroy
   has_many :favorites, :dependent => :destroy
-  validate :email_should_not_exist_in_school_admin
+  validate :email_should_not_exist_in_school_admin,:email_should_not_exist_in_admin
   validates_acceptance_of :terms_of_service, :message => "In order to use the service, You must first agree to the terms and conditions", :on => :update
 
   def email_should_not_exist_in_school_admin
     student = SchoolAdmin.find_by_email(self.email)
     return true unless student.present?
     self.errors.add(:email, "is already taken.")
+    return false
+  end
+
+  def email_should_not_exist_in_admin
+    student = Admin.find_by_email(self.email)
+    return true unless student.present?
+    self.errors.add(:email, "is already taken")
     return false
   end
 
