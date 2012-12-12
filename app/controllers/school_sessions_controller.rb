@@ -1,12 +1,16 @@
 class SchoolSessionsController < Devise::SessionsController
+  layout :layout?
+
   def new
   end
 
   def create
+    puts "VVVVVVVVVVVV"
     resource = warden.authenticate!(:scope => resource_name)
-    render :update do |page|
-      page.redirect_to school_path(current_school_admin)
-    end
+    puts resource.errors.inspect
+    puts "VVVVVVVVVVVBBBBBB"
+    flash[:notice] = "Successfully Login.."
+    redirect_to school_path(current_school_admin)
   end
 
   def destroy

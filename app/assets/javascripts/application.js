@@ -217,3 +217,29 @@ function changeBGImage(whichImage,id) {
     
 }
 
+
+$(document).ready(function(){
+    var mouse_in_side = false;
+
+    $("#area").click(function(){
+        $("#area").css('min-height','100px');
+        $(".attachment").show();
+        $("#post").show();
+        mouse_in_side = true;
+    })
+
+    $('.box_l1_hp').hover(function(){
+        mouse_in_side=true;
+    }, function(){
+        mouse_in_side=false;
+    });
+
+    $(document).click(function(){
+        if(mouse_in_side == false){
+            $("#area").css('min-height','10px');
+            $(".attachment").hide();
+            $("#post").hide();
+        }
+    });
+});
+

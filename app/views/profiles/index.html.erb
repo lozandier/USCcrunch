@@ -14,12 +14,12 @@
       <%= current_user.tweets.where("reply IS NOT NULL").count %>&nbsp;Replies
     </div>
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_field :body,:class=>"compose_new_post",:value => '',:style=>"width:90%;",:placeholder=>"Compose new Post..." %>
-      <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+      <%= f.text_area :body,:class=>"compose_new_post",:value => '',:rows => 1,:style => 'margin:70px 12px;',:placeholder=>"Compose new Post...",:id => 'area' %>
+      <div class="input-container btn attachment" style="height: 22px;margin-top: -65px;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
         <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>
-      <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 32px;margin-top: -6px;width: 25px;"  />
-      <%= f.submit 'Post', :style => "margin-left: 10px;",:class =>'btn', :style => 'position:relative;left:170px;'%>
+      <img id="PreviewImage" src="" alt="" style="float: left;height: 25px;margin-left: 83px;margin-top: -70px;width: 25px;"  />
+      <%= f.submit 'Post', :id => "post",:class =>'btn', :style => 'left: 300px;margin-top: -120px;position: relative;display:none;'%>
     <% end %>
   </div>
   <% if current_user.role == 'student' %>

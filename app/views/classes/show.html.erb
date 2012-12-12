@@ -49,17 +49,21 @@
 
     <div class="box_l2_hp">
       <div class="instructor_header">Instructor</div>
-      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
-      <div class="instructor_name"><a href="#">Prof Bob</a></div>
-      <p class="instructor_at_name">&nbsp@ProfBob</p>
+      <% if @user.role == 'student' %>
+        <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")%>
+      <% else %>
+        <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")%>
+      <% end %>
+      <div class="instructor_name"><a href="#"><%= @user.username.split('@').last %></a></div>
+      <p class="instructor_at_name">&nbsp<%= @user.username %></p>
     </div>
 
-    <div class="box_l2_hp">
+    <!---<div class="box_l2_hp">
       <div class="assistant_header">Assistant</div>
       <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
       <div class="assistant_name"><a href="#">T/A Todd</a></div>
       <p class="assistant_at_name">&nbsp@TATodd</p>
-    </div>
+    </div>-->
 
     <div class="box_l3_hp">
       <div class="link_box">

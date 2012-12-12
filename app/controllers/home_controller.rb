@@ -36,6 +36,5 @@ class HomeController < ApplicationController
   end
 
   def about
-    render :layout => false
   end
 end

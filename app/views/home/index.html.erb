@@ -1,28 +1,69 @@
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="span8 offset2">
-        <div id="myCarousel" class="carousel slide">
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <div class="active item"><%= image_tag("/assets/imac.png", :alt => "app")%></div>
-            <div class="item"><%= image_tag("/assets/ipad.png", :alt => "app")%></div>
-          </div>
-          <!-- Carousel nav -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-        </div>
-        <h1>Not your regular web application</h1>
-        <p>The next big thing is arround the corner and you'll be part of it.</p>
-      </div>
-    </div>
-</header>
+<div class="launch_background">
+  <div class="container_for_boxes">
 
-<div class="strip">
-  <div class="container">
-    <div class="row">
-      <p>Empowered by more than 40.000 customers around the world. Developers, Y U no signup? <%= link_to "SIGNUP NOW!", new_user_session_path, :class => 'btn btn-primary' %></p>
+    <div class="instructor_box">
+      <img src="/assets/instructor.png" height="300px" width="300px"/>
+      <%= link_to_function image_tag('/assets/instructor_login_button.png'), 'student_login("teacher")', :class => 'instructor_login_button',:style => "position:relative;top:20px;" %>
+    </div>
+
+    <div class="student_box">
+      <img src="/assets/student.png" height="300px" width="300px"/>
+      <%= link_to_function image_tag('/assets/student_login_button.png'), 'student_login("student")', :class => 'student_login_button',:style => "position:relative;top:20px;" %>
     </div>
   </div>
 </div>
+<div class="container" style="position: relative;left: 170px;">
+  <div class="main">
+    <div class="row feature-blocks">
+      <div class="span3">
+        <h3>SAVE TIME</h3>
+        <p class="grey_text">EduPost saves educators time by connecting students to everything they want to know. Now students can get their questions answered by classmates, not just instructors.</p>
+        <br/>
+      </div>
+      <div class="span3">
+        <h3>TRACK PARTICIPATION</h3>
+        <p class="grey_text">With EduPost, educators can track classroom participation, measure student engagement.</p>
+        <br/>
+      </div>
+      <div class="span3">
+        <h3>COLLABORATE</h3>
+        <p class="grey_text">Educators can easily post assignments, provide one-on-one help, host discussions, and archive important questions or conversations.</p>
+        <br/>
+      </div>
+    </div>
+
+    <div class="row feature-blocks">
+      <div class="span3">
+        <%= image_tag("/assets/marshall.png", :width => '220px',:height => '60px') %>
+      </div>
+      <div class="span3">
+        <%= image_tag("/assets/annenberg.png", :width => '220px',:height => '60px') %>
+      </div>
+    </div>
+  </div>
 </div>
+<div class="footer">
+    	Eduposts &#169; 2012 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+  <%= link_to "About", "", :class => 'grey_text' %>&nbsp&#183;&nbsp
+  <%= link_to "Help", "", :class => 'grey_text' %>&nbsp&#183;&nbsp
+  <%= link_to "Terms", "", :class => 'grey_text' %>&nbsp&#183;&nbsp
+  <%= link_to "Privacy", "", :class => 'grey_text' %>&nbsp&#183;&nbsp
+  <%= link_to "Blog", "", :class => 'grey_text' %>&nbsp&#183;&nbsp
+  <%= link_to image_tag("/assets/twitter_icon.png",:height => "30px", :width => "30px"), "https://twitter.com/iedupost", :target => "blank" %>&nbsp&#183;&nbsp
+  <%= link_to image_tag("/assets/facebook_icon.png",:height => "30px", :width => "30px"), "http://www.facebook.com/edupos", :target => "blank" %>&nbsp&#183;&nbsp
+  <%= link_to image_tag("/assets/email_icon.png",:height => "30px", :width => "30px"), "mailto:andrew@eduposts.com" %>&nbsp&#183;&nbsp
+</div>
+<script>
+  function student_login(user){
+    $.ajax({
+      type:'GET',
+      url:"/users/sign_in",
+      data:{
+        role: user
+      },
+      success:function(data){
+
+      }
+    });
+  }
+</script>

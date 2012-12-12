@@ -2150,7 +2150,7 @@ table [class*=span],
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url("/assets/img/glyphicons-halflings.png");
+    background-image: url("../img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 }
@@ -2170,7 +2170,7 @@ table [class*=span],
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .dropdown-menu > .active > a > [class*=" icon-"] {
-    background-image: url("/assets/img/glyphicons-halflings-white.png");
+    background-image: url("../img/glyphicons-halflings-white.png");
 }
 
 .icon-glass {
@@ -4388,7 +4388,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a {
     float: none;
-    padding: 10px 15px 10px;
+    padding: 9px 15px 10px;
     color: #777777;
     text-decoration: none;
     text-shadow: 0 1px 0 #ffffff;
@@ -4572,7 +4572,7 @@ input[type="submit"].btn.btn-mini {
     background-image: -o-linear-gradient(top, #222222, #111111);
     background-image: linear-gradient(to bottom, #222222, #111111);
     */
-    background-image:url('../images/navbar.png');
+    background-image:url('/assets/navbar.png');
     background-repeat: repeat-x;
     border-color: #252525;
     filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
@@ -6546,17 +6546,23 @@ body.blue_background {
     position: absolute;
     z-index: 1;
     margin-top: 3px;
-    left: 48%;
-    right: 52%;
+    margin-left: -40px;
+    left: 50%;
+    right: 50%:
 }
 
 .launch_background {
-    z-index: -1;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70%;
+    margin-top: -20px;
+    width: auto;
+    height: 410px;
+    background-image: url("/assets/launch_background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: cover;
+    border-bottom: 11px solid rgb(221, 221, 221);
 }
 
 body.white_background {
@@ -6564,11 +6570,20 @@ body.white_background {
     background-color: white;
 }
 
+body.meshed_background {
+    background-image: url("/assets/meshed_background.png");
+}
+
+.container_for_boxes {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
 .instructor_box {
+    margin-top: 20px;
     float: left;
-    margin-left: 24%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    display: block;
     width: 340px;
     border-radius: 5px;
     /*background-color: rgba(0, 0, 0, 0.3);*/
@@ -6585,36 +6600,25 @@ body.white_background {
 
 .footer {
     clear: both;
-    padding-top: 10px;
-    height: 50px;
+    padding: 10px 0px 10px 340px;
     width: auto;
-    border-top: 1px solid gray;
-    text-align: center;
-
+    vertical-align: center;
 }
-
-/*.instructor_box h1 {
-font-weight: 400;
-color: white;
-opacity: 1;
-}*/
 
 .student_box {
     float: left;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-left: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 20px;
     width: 340px;
     border-radius: 5px;
     /*background-color: rgba(0, 0, 0, 0.3);*/
     text-align: center;
 }
 
-/*.student_box h1 {
-font-weight: 400;
-color: white;
-opacity: 1;
-}*/
+.grey_text {
+    color: black;
+}
 
 /* about.html specific */
 .box_l1_a {
@@ -6658,7 +6662,7 @@ opacity: 1;
 p.search_result_people_at_name {
     float: left;
     margin-top: 27px;
-    margin-left: -48px;
+    margin-left: -51px;
     font-size: 12px;
     color: gray;
 }
@@ -6734,3 +6738,99 @@ label.checkbox {
     margin-left: 10px;
 }
 
+/* terms_of_service.html specific */
+.box_r1_hp.for_terms_of_service {
+    height: auto;
+}
+
+.terms_of_service_content {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* add_student.html */
+.faqs_box {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70%;
+    resize: none;
+}
+
+.faq_letter {
+    clear: left;
+    float: left;
+    margin-top: 10px;
+    margin-left: 82px;
+    font-weight: bold;
+}
+
+.btn.delete_x {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+button.btn.btn-info.save_button {
+    float: right;
+    margin-top: 120px;
+    margin-right: 10px;
+}
+
+.faq_box {
+    margin-bottom: 200px;
+}
+
+.single_line {
+    height: 20px;
+}
+
+.add_faq_button {
+    margin-top: 16px;
+    margin-right: 10px;
+    float: right;
+}
+
+/* readings.html specific */
+.for_readings {
+    margin-left: 105px;
+}
+
+body {
+    color: #8E959C;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #2F353E;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+h2 {
+    text-align: center;
+    margin: 40px 0 45px 0;
+    background: url('/assets/line.gif') center repeat-x;
+}
+
+h2 span {
+    background: #FFF;
+    padding: 0 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.framed {
+    margin-bottom: 10px;
+    border: 10px solid #FFF;
+    -moz-box-shadow: 0 0 7px #CCC;
+    -webkit-box-shadow: 0 0 7px #CCC;
+    box-shadow: 0 0 7px #CCC;
+}
+
+.feature-blocks {
+    margin-bottom: 50px;
+}
