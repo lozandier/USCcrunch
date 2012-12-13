@@ -3,28 +3,14 @@
   <div style="margin: -45px 8px;float :right;">
     <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : 21px -5px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
   </div>
-  <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-    <%= f.hidden_field :post_box,:value => 'post' %>
-    <%= f.text_area :body, :rows => 4, :cols => 15,:class=>"popup_post_box_input" %>
+  <%= form_for @post, :url =>create_post_profile_path(@user),:html => {:method => "POST"},:remote => true do |f| %>
+    <%= f.text_area :body, :rows => 4, :cols => 15, :value => "#{@user.username+' ' }",:class=>"popup_post_box_input" %>
+    <%= validation_error(@post.errors['body']) %>
     <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
     <img id="PreviewImage1" src="" alt="" style="float: left;height: 25px;margin-left: 20px;margin-top: 5px;width: 25px;"  />
     <%= f.submit 'Post', :class => 'btn send_button'%>
-    <% if current_user.role == 'teacher' %>
-      <div class="btn-group post_options_button">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-          post
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><%= link_to_function "post", 'change_val(this)' %></li>
-          <li><%= link_to_function "announcement",'change_val(this)' %></li>
-          <li><%= link_to_function "assignment", 'change_val(this)' %></li>
-        </ul>
-      </div>
-    <% end %>
-
   <% end %>
 
 </div>
@@ -38,10 +24,5 @@
       };
       reader.readAsDataURL(input.files[0]);
     }
-  }
-
-  function change_val(val){
-    $(".post_options_button > a").html($(val).text()+''+'<span class="caret"></span>')
-    $("#tweet_post_box").val($(".post_options_button > a").text())
   }
 </script>

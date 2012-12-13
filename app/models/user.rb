@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation,:terms_of_service, :remember_me,:username,:avatar,:school_admin_id,:role,:bio,:state,:major,:website,:first_name,:last_name,:reset_password_token
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
+  has_many :reports, :dependent => :destroy, :order => "created_at DESC"
   has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "100x100>"}
   validates :first_name,:last_name,:presence => true
   validates_format_of :username,:uniqueness => true, :with => /^[\w\-@]*$/ , :message => "Only use letters, numbers with no spaces"

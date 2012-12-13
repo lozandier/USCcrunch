@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
-    @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where('post_box IS NULL').order("created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}')").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and post_box IS NULL").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "show", :layout => false if request.xhr?}
       format.js {render :partial => "show", :layout => false if request.xhr?}
@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   def conversation
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @posts = Tweet.where("reply IS NOT NULL or reply IS NULL").order("created_at Asc")
+    @posts = Tweet.where("(reply IS NOT NULL or reply IS NULL) and post_box IS NULL").order("created_at Asc")
     render :layout => false
   end
 
@@ -169,6 +169,53 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     @user.update_attribute(:theme, params[:url])
     render :update do |page|
+    end
+  end
+
+
+  def post
+    @user = User.find(params[:id])
+    @post = Tweet.new(params[:tweet])
+    render :layout => false
+  end
+
+  def create_post
+    @user = User.find(params[:id])
+    @post = Tweet.new(params[:tweet])
+    @post.user_id = current_user.id
+    @post.receiver_id = @user.id
+    if @post.save
+      render :update do |page|
+        flash[:notice] = "Successfully Posted."
+        page.reload
+      end
+    else
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
+
+  def report
+    @user = User.find(params[:id])
+    @report = Report.new(params[:report])
+    render :layout => false
+  end
+
+  def report_post
+    @user = User.find(params[:id])
+    @report = Report.new(params[:report])
+    @report.user_id = current_user.id
+    @report.receiver_id = @user.id
+    if @report.save
+      render :update do |page|
+        flash[:notice] = "Successfully Reported."
+        page.reload
+      end
+    else
+      respond_to do |format|
+        format.js
+      end
     end
   end
 end

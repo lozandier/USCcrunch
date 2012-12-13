@@ -60,6 +60,28 @@ function conversation(user){
     });
 }
 
+function report(user){
+    $.ajax({
+        url :"/profiles/"+user+"/report",
+        success :function(data){
+            $("#popup_body").html(data);
+            $("#popup_box").show();
+            $("#overlay").show();
+        }
+    });
+}
+
+function post(user){
+    $.ajax({
+        url :"/profiles/"+user+"/post",
+        success :function(data){
+            $("#popup_body").html(data);
+            $("#popup_box").show();
+            $("#overlay").show();
+        }
+    });
+}
+
 function new_compose(){
     $.ajax({
         url: '/profiles/new_compose',
@@ -223,7 +245,7 @@ $(document).ready(function(){
 
     $("#area").click(function(){
         $("#area").css('min-height','100px');
-        $(".attachment").show();
+        $("#image_upload").show();
         $("#post").show();
         mouse_in_side = true;
     })
@@ -237,7 +259,7 @@ $(document).ready(function(){
     $(document).click(function(){
         if(mouse_in_side == false){
             $("#area").css('min-height','10px');
-            $(".attachment").hide();
+            $("#image_upload").hide();
             $("#post").hide();
         }
     });

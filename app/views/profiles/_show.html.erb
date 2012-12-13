@@ -2,25 +2,26 @@
   <% for post in @posts %>
     <div class="posts_box" id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= post_picture(post) %></div>
-      <div class="post" style="border-bottom: 1px solid grey;height: auto;">
+      <div class="post" style="border-bottom: 1px solid #E8E8E8;">
         <h5 class="post_name"><%= link_to post.user.fullname,profile_path(post.user), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %><br />
           <% if post.body > post.body.slice(0..300) %>
-            <%= link_to_function "Read More", "", :id => "expand_#{post.id}" %>
-            <%= link_to_function "Hide", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
-            &nbsp&nbsp
+            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %>...<br />
+          <% else %>
+            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %><br />
           <% end %>
           <% if post.document.present? %>
             <%= link_to image_tag(post.document.url(:original),:width => '50px;', :height => '50px;'), post.document.url %>
           <% end %>
         </div>
         <div class="action_row">
-          <div id="expa_<%= post.id %>"  style="display:none;">
-            <%= post.body %>
-          </div>
+          <% if post.body > post.body.slice(0..300) %>
+            <%= link_to_function "expand", "", :id => "expand_#{post.id}" %>
+            <%= link_to_function "Hide", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
+            &nbsp&nbsp
+          <% end %>
           <% if post.reply == true %>
             <%= link_to_function image_tag("/assets/discussion.png", :height => "10px", :width => "10px")+'View Conversation', "conversation('#{post.user.id}', #{post.id})" %>
           <% end %>
@@ -40,6 +41,9 @@
           <%elsif post.favorite.status == false%>
             <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
           <% end %>
+          <div id="expa_<%= post.id %>"  style="display:none;">
+            <%= post.body %>
+          </div>
           <div id="bid-info_<%= post.id %>"></div>
           <script>
             $("#expand_<%= post.id %>").click(function(){
@@ -66,6 +70,10 @@
     <input type="hidden" value="<%= @posts.current_page+1 %>" id="posts_page" />
   </div>
 <% end %>
-<div id='ajax' style='z-index:1000000;display: none;'>
-  <img alt=""  src="/assets/ajax-loader.gif" id = "ajax-loader" />
+<div id='ajax' style='z-index:1000000;width:500px;height:120px;display: none;'>
+  <div style="float:left;clear:both;">
+    <div class="post" style="height: 72px;">
+      <img alt=""  src="/assets/loader.gif" id = "ajax-loader" /><br />
+    </div>
+  </div>
 </div>

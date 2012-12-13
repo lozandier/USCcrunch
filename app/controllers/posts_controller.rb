@@ -74,6 +74,7 @@ class PostsController < ApplicationController
     end
   end
 
+
   def show
 
   end

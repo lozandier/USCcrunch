@@ -10,8 +10,8 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def posts
-    @posts = Tweet.where("reply IS NULL").paginate :page => params[:page], :per_page => 10
+  def announcements
+    @posts = Tweet.where("post_box = 'announcement'").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "posts", :layout => false if request.xhr?}
       format.js {render :partial => "posts", :layout => false if request.xhr?}

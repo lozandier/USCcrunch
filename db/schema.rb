@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204085048) do
+ActiveRecord::Schema.define(:version => 20121213060906) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(:version => 20121204085048) do
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
+  create_table "reports", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "receiver_id"
+    t.text     "body"
+    t.string   "status"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "school_admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -94,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20121204085048) do
     t.datetime "updated_at",            :null => false
     t.boolean  "reply"
     t.integer  "tweet_id"
+    t.string   "post_box"
   end
 
   create_table "users", :force => true do |t|

@@ -62,6 +62,10 @@
     <input type="hidden" value="<%= @posts.current_page+1 %>" id="posts_page" />
   </div>
 <% end %>
-<div id='ajax' style='z-index:1000000;display: none;'>
-  <img alt=""  src="/assets/ajax-loader.gif"  id = "ajax-loader" />
+<div id='ajax' style='z-index:1000000;width:500px;height:120px;display: none;'>
+  <div style="float:left;clear:both;">
+    <div class="post" style="height: 72px;">
+      <img alt=""  src="/assets/loader.gif" id = "ajax-loader" /><br />
+    </div>
+  </div>
 </div>

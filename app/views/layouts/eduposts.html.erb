@@ -62,13 +62,12 @@
 
             <ul class="nav pull-right">
               <div class="btn-group">
-                <a class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" href="#">
-                  <%= image_tag("/assets/settings_default.png", :heigt => "15px", :width => "15px") %>
-                  <span class="caret"></span>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <%= image_tag("/assets/settings_default.png", :heigt => "30px", :width => "20px") %>
+                  <span class="caret options"></span>
                 </a>
                 <%= link_to_function image_tag("/assets/new_post_icon.png", :heigt => "15px", :width => "15px", :title => "Add New Post"), "new_compose()", :remote => true, :class => "btn btn-primary" %>
                 <ul class="dropdown-menu">
-                  <!-- dropdown menu links -->
                   <li><%= link_to "My Profile", profile_path(current_user)%></li>
                   <li><%= link_to "My Posts", user_posts_path(current_user)%></li>
                   <li><%= link_to "Edit Profile", edit_profile_path(current_user) %></li>
@@ -85,7 +84,7 @@
     </div>
 
     <div id='ajax_loader_big_div' style='z-index:1000000;display: none;'>
-      <img alt=""  src="/assets/284.gif" style="width:80px;height:80px;z-index:1000000;"/>
+      <img alt=""  src="/assets/loader.gif" style="width:32px;height:32px;z-index:1000000;"/>
     </div>
     <div class="container">
       <div class="row-fluid">

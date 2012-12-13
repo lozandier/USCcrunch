@@ -36,7 +36,7 @@ WebApp::Application.routes.draw do
   resources :classes
   resources :notifications do
     collection do
-      get :posts
+      get :announcements
     end
   end
 
@@ -65,6 +65,10 @@ WebApp::Application.routes.draw do
       post :conversation_message
       get :followers
       get :following
+      get :report
+      post :report_post
+      get :post
+      post :create_post
     end
     collection do
       get :search
