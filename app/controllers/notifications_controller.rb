@@ -17,4 +17,12 @@ class NotificationsController < ApplicationController
       format.js {render :partial => "posts", :layout => false if request.xhr?}
     end
   end
+
+  def assignments
+    @posts = Tweet.where("post_box = 'assignment'").paginate :page => params[:page], :per_page => 10
+    respond_to do |format|
+      format.html {render :partial => "posts", :layout => false if request.xhr?}
+      format.js {render :partial => "posts", :layout => false if request.xhr?}
+    end
+  end
 end

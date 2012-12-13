@@ -34,7 +34,7 @@
     background-color: #FFFF80;
 }
 
-#user_photo, #PreviewImage{
+#user_photo, #PreviewImage, #PreviewImage1{
     height: 70px;
     left: -15px;
     position: relative;

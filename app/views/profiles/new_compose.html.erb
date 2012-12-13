@@ -9,7 +9,7 @@
     <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
       <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
     </div>
-    <img id="PreviewImage1" src="" alt="" style="float: left;height: 25px;margin-left: 20px;margin-top: 5px;width: 25px;"  />
+    <img id="PreviewImage1" src="" alt="" style="float: left;height: 16px;margin-left: 35px;margin-top: -2px;width: 20px;"  />
     <%= f.submit 'Post', :class => 'btn send_button'%>
     <% if current_user.role == 'teacher' %>
       <div class="btn-group post_options_button">
@@ -34,7 +34,7 @@
       var reader = new FileReader();//Initialize FileReader.
 
       reader.onload = function (e) {
-        $('#PreviewImage1').attr('src', e.target.result);
+        $('#PreviewImage1').attr('src', '/assets/check_loaded.png');
       };
       reader.readAsDataURL(input.files[0]);
     }

@@ -38,7 +38,7 @@
               <% else %>
                 <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '100px', :width => '100px', :id => 'user_photo') : image_tag("/assets/profile_pic_instructor.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
               <% end %>
-              <img id="PreviewImage" src="" alt=""  />
+              <img id="PreviewImage1" src="" alt=""  />
               <div class="input-container btn">Change photo<span class="caret"></span>
                 <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'margin-left: -119px;margin-top: -5px;width: 116px;'%>
               </div>
@@ -95,3 +95,17 @@
     width: 317px;
   }
 </style>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {//Check if input has files.
+      var reader = new FileReader();//Initialize FileReader.
+
+      reader.onload = function (e) {
+        $('#PreviewImage1').attr('src', e.target.result);
+        $('#PreviewImage1').show();
+        $("#user_photo").hide();
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

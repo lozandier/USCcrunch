@@ -13,7 +13,7 @@
       <% end %>
       <% if @user.id == current_user.id %>
         <div class="box_l1_hp">
-          <%= link_to "<button class='side_nav_button profile' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, posts_notifications_path %>
+          <%= link_to "<button class='side_nav_button profile' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, user_posts_path(current_user) %>
           <%= link_to "<button class='side_nav_button password' type=button'>Replies<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, notifications_path %>
         </div>
       <% end %>

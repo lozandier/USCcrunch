@@ -115,7 +115,8 @@ function readURL(input) {
         var reader = new FileReader();//Initialize FileReader.
 
         reader.onload = function (e) {
-            $('#PreviewImage').attr('src', e.target.result);
+            $('#PreviewImage').attr('src', '/assets/check_loaded.png');
+            $('#PreviewImage').show();
             $("#user_photo").hide();
         };
         reader.readAsDataURL(input.files[0]);
@@ -261,6 +262,7 @@ $(document).ready(function(){
             $("#area").css('min-height','10px');
             $("#image_upload").hide();
             $("#post").hide();
+            $('#PreviewImage').hide();
         }
     });
 });

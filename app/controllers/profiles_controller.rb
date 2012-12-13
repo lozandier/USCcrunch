@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
-    @posts = Tweet.where('post_box IS NULL').order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where("post_box IS NULL or post_box = 'post'").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
