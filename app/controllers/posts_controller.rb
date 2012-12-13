@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @user = current_user
-    @posts = @user.tweets.order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @posts = @user.tweets.where('post_box IS NULL').order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def create
