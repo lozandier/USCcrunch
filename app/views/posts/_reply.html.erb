@@ -20,7 +20,7 @@
       <% else %>
         <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
       <% end %>
-      <%= f.text_field :body, :value => "#{post.receiver.username+' ' }" ,:class=>"conversation_post_input_small",:placeholder=>"Add to Conversation" %>
+      <%= f.text_field :body, :value => "#{post.user.username+' ' }" ,:class=>"conversation_post_input_small",:placeholder=>"Add to Conversation" %>
     <% end %>
   </div>
 </div>
