@@ -28,4 +28,10 @@ class UserMailer < ActionMailer::Base
     @post = post
     mail(:to => user.email, :from => post.user.email,:reply_to => post.user.email, :subject => post.body)
   end
+
+  def send_report(user,admin_email)
+    @user = user
+    @admin_email = admin_email
+    mail(:to => @admin_email, :subject => "Report")
+  end
 end

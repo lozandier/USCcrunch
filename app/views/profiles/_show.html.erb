@@ -17,6 +17,9 @@
           <% end %>
         </div>
         <div class="action_row">
+          <div id="expa_<%= post.id %>"  style="display:none;">
+            <%= post.body %>
+          </div>
           <% if post.body > post.body.slice(0..300) %>
             <%= link_to_function "expand", "", :id => "expand_#{post.id}" %>
             <%= link_to_function "Hide", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
@@ -41,9 +44,6 @@
           <%elsif post.favorite.status == false%>
             <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
           <% end %>
-          <div id="expa_<%= post.id %>"  style="display:none;">
-            <%= post.body %>
-          </div>
           <div id="bid-info_<%= post.id %>"></div>
           <script>
             $("#expand_<%= post.id %>").click(function(){
