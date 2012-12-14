@@ -13,7 +13,7 @@
       </div>
       <div class="action_row">
         <div id="expa_<%= post.id %>"  style="display:none;">
-          <%= post.body %>
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
         </div>
         <% if post.body > post.body.slice(0..300) %>
           <%= link_to_function "expand", "", :id => "expand_#{post.id}" %>
@@ -31,11 +31,6 @@
           <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
         <% end %>
         <div id="bid-info_<%= post.id %>"></div>
-        <div id="expa_<%= post.id %>"  style="display:none;">
-          <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br />
-          <b><%= post.user.tweets.where("reply IS NULL").count %></b>&nbsp POSTS&nbsp&nbsp
-          <b><%= post.user.tweets.where("reply IS NOT NULL").count %></b>&nbsp REPLIES
-        </div>
         <script>
           $("#expand_<%= post.id %>").click(function(){
             $("#unexpand_<%= post.id %>").show();
