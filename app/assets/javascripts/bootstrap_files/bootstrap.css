@@ -6345,8 +6345,9 @@ body.blue_background {
 .conversation_right_box {
     background-color: #F9F9F9;
     box-shadow: 0 0 1px 1px #FFFFFF inset, 1px 0 5px rgba(0, 0, 0, 0.3);
-    height: 100%;
-    position: fixed;
+    min-height: 97%;
+    height: auto;
+    position: absolute;
     right: 0;
     top: 15px;
     width: 425px;

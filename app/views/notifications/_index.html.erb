@@ -7,35 +7,26 @@
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %><br />
+          <% if post.body > post.body.slice(0..300) %>
+            <span id="pos_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
+          <% else %>
+              <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
+            <% end %>
+          <div id="expa_<%= post.id %>"  style="display:none;">
+            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+          </div>
           <% if post.document.present? %>
             <%= link_to image_tag(post.document.url(:original),:width => '50px;', :height => '50px;'), post.document.url %>
           <% end %>
         </div>
         <div class="action_row">
-          <div id="expa_<%= post.id %>"  style="display:none;">
-            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
-          </div>
           <% if post.body > post.body.slice(0..300) %>
-            <%= link_to_function "expand", "", :id => "expand_#{post.id}" %>
-            <%= link_to_function "Hide", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
+            <%= link_to_function "expand", "expand(#{post.id})", :id => "expand_#{post.id}" %>
+            <%= link_to_function "Hide", "unexpand(#{post.id})", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
             &nbsp&nbsp
           <% end %>
           <%= link_to_function image_tag("/assets/discussion.png", :height => "10px", :width => "10px")+'View Conversation', "conversation('#{post.user.id}', #{post.id})" %>
         </div>
-        <script>
-          $("#expand_<%= post.id %>").click(function(){
-            $("#unexpand_<%= post.id %>").show();
-            $("#expa_<%= post.id %>").show();
-            $("#expand_<%= post.id %>").hide();
-          });
-
-          $("#unexpand_<%= post.id %>").click(function(){
-            $("#expand_<%= post.id %>").show();
-            $("#expa_<%= post.id %>").hide();
-            $("#unexpand_<%= post.id %>").hide();
-          });
-        </script>
       </div>
     </div>
   <% end %>

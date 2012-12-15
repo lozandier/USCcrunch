@@ -35,9 +35,8 @@ WebApp::Application.routes.draw do
 
   resources :classes
   resources :notifications do
-    collection do
+    member do
       get :announcements
-      get :assignments
     end
   end
 

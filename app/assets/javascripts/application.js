@@ -298,3 +298,17 @@ $(document).ajaxError(function(e, XHR, options){
     }
 });
 
+
+function expand(post_id){
+    $("#expa_"+post_id).show();
+    $("#pos_"+post_id).hide();
+    $("#expand_"+post_id).hide();
+    $("#unexpand_"+post_id).show();
+}
+
+function unexpand(post_id){
+    $("#expa_"+post_id).hide();
+    $("#pos_"+post_id).show();
+    $("#expand_"+post_id).show();
+    $("#unexpand_"+post_id).hide();
+}

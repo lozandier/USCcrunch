@@ -23,11 +23,11 @@
 
   <div class="span8" id="posts">
     <h2 class="posts_title">
-      Posts
+      Announcements
       <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
     </h2>
     <% if @posts.present? %>
-      <%= render :partial => 'posts' %>
+      <%= render :partial => 'profiles/show' %>
     <% else %>
       <span style="color: red;font-size: 15px;left: 310px;position: relative;top: -15px;">No Announcements.</span>
     <% end %>

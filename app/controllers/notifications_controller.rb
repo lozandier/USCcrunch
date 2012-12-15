@@ -11,18 +11,12 @@ class NotificationsController < ApplicationController
   end
 
   def announcements
-    @posts = Tweet.where("post_box = 'announcement'").paginate :page => params[:page], :per_page => 10
+    @user = User.find(params[:id])
+    @header = params[:post_text].present? ? "#{params[:post_text]}" : " "
+    @posts = Tweet.where("user_id = #{@user.id} and post_box = '#{@header}'").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
-      format.html {render :partial => "posts", :layout => false if request.xhr?}
-      format.js {render :partial => "posts", :layout => false if request.xhr?}
+      format.js
     end
   end
 
-  def assignments
-    @posts = Tweet.where("post_box = 'assignment'").paginate :page => params[:page], :per_page => 10
-    respond_to do |format|
-      format.html {render :partial => "posts", :layout => false if request.xhr?}
-      format.js {render :partial => "posts", :layout => false if request.xhr?}
-    end
-  end
 end

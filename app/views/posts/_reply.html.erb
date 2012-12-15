@@ -5,10 +5,26 @@
       <div class="conversation_poster_name"><%= post.user.fullname %></div>
       <div class="conversation_poster_at_name"><%= post.user.username %></div>
       <div class="conversation_poster_content">
-        <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %>
+        <% if post.body > post.body.slice(0..300) %>
+          <span id="pos_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
+        <% else %>
+            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
+          <% end %>
+        <div id="expa_<%= post.id %>"  style="display:none;">
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+        </div>
       </div>
       <div class="conversation_action_row">
-        <%= time_ago_in_words(post.created_at) %> &#183; <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(post.user,post) %> &#183; <a href="#">Like</a> &#183; <a href="#">Flag</a> &#183; <a href="#">More</a>
+        <%= time_ago_in_words(post.created_at) %> &#183;
+        <% if post.body > post.body.slice(0..300) %>
+          <%= link_to_function "expand", "expand(#{post.id})", :id => "expand_#{post.id}" %>
+          <%= link_to_function "Hide", "unexpand(#{post.id})", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
+          &nbsp&nbsp
+        <% end %>
+        <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(post.user,post) %> &#183;
+        <a href="#">Like</a> &#183;
+        <a href="#">Flag</a> &#183;
+        <a href="#">More</a>
       </div>
       <br /><% end %>
   </div>
@@ -35,7 +51,21 @@
   <div class="started_this_conversation">Started this conversation</div>
   <% if @user.tweets.present?  %>
     <% Tweet.where("user_id = #{current_user.id}").order('created_at Asc').limit(1).each do |post| %>
-      <div class="conversation_post_content"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0],profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body.slice(0..300) %></div>
+      <div class="conversation_post_content">
+        <% if post.body > post.body.slice(0..300) %>
+          <span id="pos_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
+        <% else %>
+            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
+          <% end %>
+        <div id="expa_<%= post.id %>"  style="display:none;">
+          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+        </div>
+        <% if post.body > post.body.slice(0..300) %>
+          <%= link_to_function "expand", "expand(#{post.id})", :id => "expand_#{post.id}" %>
+          <%= link_to_function "Hide", "unexpand(#{post.id})", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
+          &nbsp&nbsp
+        <% end %>
+      </div>
       <div class="conversation_post_date"><%= time_ago_in_words(post.created_at) %>
       </div>
     <% end %>
