@@ -77,20 +77,5 @@
 
   <div class="span8" id="posts">
     <%= render :partial => '/profiles/show' %>
-    <input type="hidden" value="show" id="post_type" />
-    <input type="hidden" value="<%= @user.id %>" id="current_user_id" />
   </div>
 </div>
-<script>
-  jQuery(function() {
-    jQuery(window).scroll(
-    function() {
-      if (($(window).scrollTop() == $(document).height() - $(window).height()) && jQuery('#posts_page').val() > 0)
-      {
-        if (jQuery("#post_type").val() == 'show') {
-          posts(jQuery('#current_user_id').val(), jQuery('#posts_page').val())
-        }
-      }
-    });
-  });
-</script>
