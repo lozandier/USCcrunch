@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = @user.tweets.new(params[:tweet])
-    @header = params[:post].present? ? "#{params[:post]}" : " "
+    @header = params[:post].present? ? "#{params[:post].capitalize}" : " "
     if @header == 'reply'
       @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true}").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     else
