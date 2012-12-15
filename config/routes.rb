@@ -172,6 +172,8 @@ WebApp::Application.routes.draw do
     collection do
       get :school_login
       get :about
+      get :terms_of_service
+      get :privacy_policy
     end
   end
 end
