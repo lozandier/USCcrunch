@@ -33,7 +33,15 @@ WebApp::Application.routes.draw do
 
   resources :teachers 
 
-  resources :classes
+  resources :classes do
+    member do
+      get :roster
+      get :invite_students
+      get :faqs
+      get :importent_links
+      get :readings
+    end
+  end
   resources :notifications do
     member do
       get :announcements

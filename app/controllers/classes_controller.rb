@@ -16,4 +16,28 @@ class ClassesController < ApplicationController
       format.js {render :partial => "show", :layout => false if request.xhr?}
     end
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def roster
+    @user = User.find(params[:id])
+  end
+
+  def invite_students
+    @user = User.find(params[:id])
+  end
+
+  def faqs
+    @user = User.find(params[:id])
+  end
+
+  def readings
+    @user = User.find(params[:id])
+  end
+
+  def importent_links
+    @user = User.find(params[:id])
+  end
 end

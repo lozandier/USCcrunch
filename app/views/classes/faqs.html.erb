@@ -1,0 +1,74 @@
+<div class="span4">
+
+  <div class="box_l1_ep">
+    <% if @user.role == 'student' %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
+    <% else %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '40px', :width => '40px' , :class => "profile_pic img-rounded") %>
+    <% end %>
+    <h3 class="profile_name"><%= @user.fullname %></h3>
+    <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
+  </div>
+
+
+  <div class="box_l1_hp">
+    <%= link_to "<button class='side_nav_button profile' type=button'>Class<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, edit_class_path(@user) %>
+    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Roster<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, roster_class_path(@user) %>
+    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Invite Students<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, invite_students_class_path(@user) %>
+    <%= link_to "<button class='side_nav_button posts for_notifications  active_button' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, faqs_class_path %>
+    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Readings<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, readings_class_path(@user) %>
+    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, importent_links_class_path %>
+  </div>
+
+  <div class="box_l3_hp">
+    <div class="link_box">
+      &#169; &nbsp 2012 &nbsp EduPosts &nbsp More links go here
+    </div>
+  </div>
+</div>
+
+<div class="span8">
+
+  <div class="box_r1_hp">
+    <h2 class="posts_title with_bottom_border">FAQ's</h2>
+    <div class="profile_note"></div>
+
+    <div class="faq_box">
+      <div class="faq_letter">Q:</div><textarea class="faqs_box single_line" rows="1"></textarea><button type="button" class="btn paperclip"></button>
+      <div class="faq_letter">A:</div><textarea class="faqs_box" rows="3"></textarea>
+      <div class="delete_link"><a href="#">delete</a></div>
+      <br/>
+    </div>
+
+    <div class="faq_box">
+      <div class="faq_letter">Q:</div><textarea class="faqs_box single_line" rows="1"></textarea><button type="button" class="btn paperclip"></button>
+      <div class="faq_letter">A:</div><textarea class="faqs_box" rows="3"></textarea>
+      <div class="delete_link"><a href="#">delete</a></div>
+      <br/>
+      <button type="button" class="btn btn-info save_button">Save</button>
+      <button type="button" class="btn add_faq_button">Add FAQ</button>
+    </div>
+  </div>
+</div>
+<style>
+  .form_error{
+    left: -36px;
+    position: relative;
+    top: -6px;
+    width: 317px;
+  }
+</style>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {//Check if input has files.
+      var reader = new FileReader();//Initialize FileReader.
+
+      reader.onload = function (e) {
+        $('#PreviewImage1').attr('src', e.target.result);
+        $('#PreviewImage1').show();
+        $("#user_photo").hide();
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

@@ -6732,3 +6732,118 @@ label.checkbox {
     margin-left: 10px;
 }
 
+.box_r1_hp {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 900px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid white;
+    box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.faqs_box {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70%;
+    resize: none;
+}
+
+.faq_letter {
+    clear: left;
+    float: left;
+    margin-top: 10px;
+    margin-left: 82px;
+    font-weight: bold;
+}
+
+.btn.paperclip {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 30px;
+    width: 35px;
+    background: url('/assets/paperclip.png');
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.btn.paperclip.for_edit_classes {
+    float: none;
+    margin-top: -10px;
+}
+
+button.btn.btn-info.save_button {
+    clear: right;
+    float: right;
+    margin-top: 50px;
+    margin-right: 112px;
+}
+
+.faq_box {
+    margin-bottom: 150px;
+}
+
+.delete_link a {
+    clear: both;
+    float: right;
+    margin-top: -10px;
+    margin-right: 112px;
+    color: gray;
+    font-size: 12px;
+}
+
+.single_line {
+    height: 20px;
+}
+
+.add_faq_button {
+    margin-top: 50px;
+    margin-right: 10px;
+    float: right;
+}
+
+/* readings.html specific */
+.for_readings {
+    margin-left: 105px;
+}
+
+/* invite_students.html specific */
+.invite_students_box {
+    margin-top: 20px;
+    height: 377px;
+    width: 445.5px;
+    margin: auto;
+}
+
+.bulk_invites_note {
+    margin-top: -12px;
+    color: gray;
+    font-size: 12px;
+}
+
+.bulk_invites {
+    float: right;
+    resize: none;
+    width: 306px;
+}
+
+.for_assistants {
+    margin-top: -20px;
+}
+
+.students_emails_title {
+    float: left;
+    margin-right: 20px;
+}
+
+.submit_button {
+    clear: right;
+    float: right;
+    margin-top: 10px;
+}
+
+.student_email_single_input {
+    float: right;
+    width: 306px;
+}

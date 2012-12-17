@@ -12,7 +12,7 @@ class NotificationsController < ApplicationController
 
   def announcements
     @user = User.find(params[:id])
-    @header = params[:post_text].present? ? "#{params[:post_text].capitalize}" : " "
+    @header = params[:post_text].present? ? "#{params[:post_text]}" : " "
     @posts = Tweet.where("user_id = #{@user.id} and post_box = '#{@header}'").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.js

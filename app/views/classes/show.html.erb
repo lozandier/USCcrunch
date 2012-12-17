@@ -11,7 +11,7 @@
 
     <div class="profile_box_right with_options">
       <% if current_user.role == 'teacher' %>
-        <%= link_to '<button type="button" class="btn">Edit Class</button>'.html_safe, "" %>
+        <%= link_to 'Edit Class', edit_class_path(@user), :class => 'btn' %>
         <br/>
         <div class="roster_num">Roster</div>
       <% else %>
