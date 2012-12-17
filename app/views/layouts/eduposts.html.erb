@@ -42,22 +42,21 @@
               <% else %>
                 <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', profiles_path  %></li>
               <% end %>
-              <% if params[:controller] == 'notifications' && params[:action] == 'index' || params[:action] == 'posts' %>
+              <% if params[:controller] == 'notifications' && (params[:action] == 'index' || params[:action] == 'posts') %>
                 <li class="active"><%= link_to image_tag("/assets@_blue.png", :height => "30px", :width => "20px")+'Connect', notifications_path %></li>
               <% else %>
                 <li><%= link_to image_tag("/assets/@_grey.png", :height => "30px", :width => "20px")+'Connect', notifications_path  %></li>
               <% end %>
-              <% if params[:controller] == "profiles" && params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password' %>
+              <% if params[:controller] == "profiles" && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password') %>
                 <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px")+"Me", profile_path(current_user) %></li>
               <% else %>
                 <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "30px", :width => "20px")+"Me", profile_path(current_user) %></li>
               <% end %>
-              <% if params[:controller] == 'classes' && params[:action] == 'show'%>
+              <% if params[:controller] == 'classes' && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'roster' || params[:action] == 'invite_students' || params[:action] == 'faqs' || params[:action] == 'importent_links' || params[:action] == 'readings')%>
                 <li class="active"><%= link_to image_tag("/assets/class_blue.png", :height => "20px", :width => "20px")+"Class", class_path(current_user) %></li>
               <% else %>
                 <li><%= link_to image_tag("/assets/class_grey.png", :height => "20px", :width => "20px")+"Class", class_path(current_user) %></li>
               <% end %>
-
             </ul>
 
             <ul class="nav pull-right">
@@ -105,7 +104,7 @@
     </div>
     <div id='popup_body1' style='float:right'></div>
   </div>
-  <%#= render :partial => 'layouts/google_analytics' %>
+<%#= render :partial => 'layouts/google_analytics' %>
 </body>
 </html>
 <script>
