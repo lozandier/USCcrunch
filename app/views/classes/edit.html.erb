@@ -32,7 +32,7 @@
     <h2 class="posts_title">Class</h2>
     <div class="profile_note">This information appears on your public profile, search results, and beyond.</div>
     <div class="edit_profile_right_column">
-      <%= form_for(@user, :url => profile_path(@user)) do |f| %>
+      <%= form_for(@user, :url => class_path(@user)) do |f| %>
         <table width="100%" cellpadding="20%">
           <tr>
             <td><%= f.label :avatar, "Photo" %></td>
