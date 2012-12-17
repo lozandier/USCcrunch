@@ -183,8 +183,8 @@
     margin: -220px 0 0 -250px;
     padding: 15px;
     position: absolute;
-    top: 50%;
-    width: auto;
+    top: 42%;
+    width: 90%;
     z-index: 1001;
     background-repeat: repeat;
 }
@@ -313,7 +313,7 @@ a{
     height:auto;
     left:50%;
     position:fixed;
-    top:35%;
+    top:30%;
     z-index:4;
 }
 

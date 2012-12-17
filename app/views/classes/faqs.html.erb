@@ -33,21 +33,10 @@
     <h2 class="posts_title with_bottom_border">FAQ's</h2>
     <div class="profile_note"></div>
 
-    <div class="faq_box">
-      <div class="faq_letter">Q:</div><textarea class="faqs_box single_line" rows="1"></textarea><button type="button" class="btn paperclip"></button>
-      <div class="faq_letter">A:</div><textarea class="faqs_box" rows="3"></textarea>
-      <div class="delete_link"><a href="#">delete</a></div>
-      <br/>
-    </div>
+    <%= render :partial => 'faq' %>
 
-    <div class="faq_box">
-      <div class="faq_letter">Q:</div><textarea class="faqs_box single_line" rows="1"></textarea><button type="button" class="btn paperclip"></button>
-      <div class="faq_letter">A:</div><textarea class="faqs_box" rows="3"></textarea>
-      <div class="delete_link"><a href="#">delete</a></div>
-      <br/>
-      <button type="button" class="btn btn-info save_button">Save</button>
-      <button type="button" class="btn add_faq_button">Add FAQ</button>
-    </div>
+    <button type="button" class="btn btn-info save_button">Save</button>
+    <%= link_to "Add FAQ", "#add", :id => "add-another", :class => "btn add_faq_button" %>
   </div>
 </div>
 <style>

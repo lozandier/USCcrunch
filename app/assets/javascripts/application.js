@@ -21,6 +21,20 @@ $(document).ready(function(){
     });
 });
 
+//add fields
+function remove_fields(link) {
+    $(link).previous("input[type=hidden]").value = "1";
+    $(link).up(".fields").hide();
+}
+
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g")
+    $(link).up().insert({
+        before: content.replace(regexp, new_id)
+    });
+}
+
 
 function get_username(ht){
     $.ajax({
@@ -311,4 +325,18 @@ function unexpand(post_id){
     $("#pos_"+post_id).show();
     $("#expand_"+post_id).show();
     $("#unexpand_"+post_id).hide();
+}
+
+function expand1(post_id){
+    $("#expa1_"+post_id).show();
+    $("#pos1_"+post_id).hide();
+    $("#expand1_"+post_id).hide();
+    $("#unexpand1_"+post_id).show();
+}
+
+function unexpand1(post_id){
+    $("#expa1_"+post_id).hide();
+    $("#pos1_"+post_id).show();
+    $("#expand1_"+post_id).show();
+    $("#unexpand1_"+post_id).hide();
 }

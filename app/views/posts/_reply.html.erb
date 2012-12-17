@@ -1,7 +1,7 @@
 <div class="conversation_right_box">
-  <div class="conversation_post_box">
-    <% for post in @posts %>
-      <br /><%= conversation_picture(post) %>
+  <% for post in @posts %>
+    <div class="conversation_post_box">
+      <%= conversation_picture(post) %>
       <div class="conversation_poster_name"><%= post.user.fullname %></div>
       <div class="conversation_poster_at_name"><%= post.user.username %></div>
       <div class="conversation_poster_content">
@@ -26,8 +26,9 @@
         <a href="#">Flag</a> &#183;
         <a href="#">More</a>
       </div>
-      <br /><% end %>
-  </div>
+    </div>
+  <% end %>
+
 
   <div class="conversation_post_input_box">
     <%= form_for @post, :url => reply_post_user_post_path(@post),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
