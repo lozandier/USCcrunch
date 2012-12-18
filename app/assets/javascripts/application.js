@@ -271,6 +271,12 @@ $(document).ready(function(){
         mouse_in_side=false;
     });
 
+    $('.conversation_post_input_box').hover(function(){
+        mouse_in_side=true;
+    }, function(){
+        mouse_in_side=false;
+    });
+
     $(document).click(function(){
         if(mouse_in_side == false){
             $("#area").css('min-height','10px');

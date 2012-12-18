@@ -24,9 +24,8 @@ class ClassesController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      @user.update_attribute(:username,'@'+@user.username)
       flash[:notice] = "Successfully Updated your Class details."
-      redirect_to edit_class_path(@user)
+      redirect_to class_path(@user)
     else
       flash[:error] = "Failed to Update your Class details."
       render :action => 'edit'

@@ -29,10 +29,9 @@
       <% end %>
     </div>
     <%= profile_picture %>
-    <h2 class="profile_name"><%= @user.fullname %></h2>
-    <h4 class="at_name"><%= @user.username %></h4>
+    <h2 class="profile_name"><%= @user.class_name.present? ? @user.class_name : "Class" %></h2>
     <br/>
-    <p class="bio"><%= @user.bio %></p>
+    <p class="bio"><%= @user.class_description.present? ? @user.class_description : " " %></p>
   </div>
 
 </div>

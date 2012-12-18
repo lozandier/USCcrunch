@@ -33,7 +33,7 @@
             <%= link_to_function image_tag("/assets/discussion.png", :height => "10px", :width => "10px")+'View Conversation', "conversation('#{post.user.id}', #{post.id})" %>
           <% end %>
           &nbsp&nbsp
-          <%= link_to image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', reply_user_post_path(current_user,post) %>
+          <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "conversation('#{post.user.id}', #{post.id})" %>
           &nbsp&nbsp
           <% if post.user_id == current_user.id  %>
             <span id="delete_<%= post.id %>">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217063901) do
+ActiveRecord::Schema.define(:version => 20121218123233) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -152,6 +152,9 @@ ActiveRecord::Schema.define(:version => 20121217063901) do
     t.string   "role"
     t.integer  "school_admin_id"
     t.string   "theme"
+    t.string   "class_name"
+    t.text     "syllabus"
+    t.text     "class_description"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
