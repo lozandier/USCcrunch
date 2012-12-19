@@ -63,8 +63,10 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:id])
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
-    @repost.receiver_id = @post.user_id
     @repost.tweet_id = @post.id
+    body = params[:tweet][:body].split(' ')[0]
+    @user = User.find_by_username(body)
+    @repost.receiver_id = @user.present? ? @user.id : @post.user_id
     if @repost.save
       @post.update_attribute(:reply, true)
       render :update do |page|
