@@ -320,8 +320,9 @@ a{
 #ajax-loader{
     float: right;
     height: 32px;
-    left: 265px;
+    left: 340px;
     position: relative;
+    top: 20px;
     width: 32px;
     z-index: 1000000;
 }

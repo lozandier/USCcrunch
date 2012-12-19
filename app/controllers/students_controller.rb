@@ -53,7 +53,6 @@ class StudentsController < ApplicationController
     if @student.update_attributes(params[:user])
       @student.update_attribute(:reset_password_token,nil)
       @student.update_attribute(:confirmation_token,nil)
-      @student.update_attribute(:username,'@'+@student.username)
       sign_in(@student, @student)
       redirect_to new_user1_home_path(current_user)
     else

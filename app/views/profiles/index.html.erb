@@ -12,10 +12,10 @@
     </div>
     <div class="replies_count">
       <%= current_user.tweets.where("reply IS NOT NULL").count %>&nbsp;Replies
-    </div><br />
+    </div>
 
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
-      <%= f.text_area :body,:class=>"compose_new_post",:value => '',:rows => 1,:style => 'margin-left: 12px;margin-top: 62px;resize:none;',:placeholder=>"Compose new Post...",:id => 'area' %>
+      <br /><%= f.text_area :body,:class=>"compose_new_post",:value => '',:rows => 1,:style => 'margin-left: 12px;margin-top: 62px;resize:none;',:placeholder=>"Compose new Post...",:id => 'area' %>
       <div class="input-container btn attachment" id="image_upload" style="height: 22px;left: 4px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
         <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
       </div>

@@ -53,7 +53,6 @@ class ProfilesController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      @user.update_attribute(:username,'@'+@user.username)
       flash[:notice] = "Successfully Updated your Profile details."
       redirect_to profile_path(@user)
     else

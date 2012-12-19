@@ -46,7 +46,6 @@ class TeachersController < ApplicationController
     if @teacher.update_attributes(params[:user])
       @teacher.update_attribute(:reset_password_token,nil)
       @teacher.update_attribute(:confirmation_token,nil)
-      @teacher.update_attribute(:username,'@'+@teacher.username)
       sign_in(@teacher, @teacher)
       redirect_to new_user1_home_path(current_user)
     else
