@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
   has_many :reports, :dependent => :destroy, :order => "created_at DESC"
   attr_accessor :school
+  #has_attached_file :avatar,:styles => {:original => "900x900>", :default => "280x190>" }
   has_attached_file :avatar,
     :whiny => false,
     :storage => :s3,

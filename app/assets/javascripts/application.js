@@ -74,6 +74,17 @@ function conversation(user){
     });
 }
 
+function reply(user_id,post_id){
+    $.ajax({
+        url: '/users/'+user_id+'/posts/'+post_id+'/reply',
+        success: function(data){
+            $("#popup_body").html(data);
+            $("#overlay").show();
+            $("#popup_box").show();
+        }
+    });
+}
+
 function report(user){
     $.ajax({
         url :"/profiles/"+user+"/report",

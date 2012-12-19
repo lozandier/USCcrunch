@@ -49,7 +49,14 @@ class PostsController < ApplicationController
   def reply
     @post = Tweet.find(params[:id])
     @user = User.find(params[:user_id])
-    @posts = Tweet.where("tweet_id = #{@post.id} AND #{@post.reply = true }").order("created_at Asc")
+    render :layout => false
+  end
+
+  def conversation
+    @user = User.find(params[:user_id])
+    @post = Tweet.find(params[:id])
+    @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    render :layout => false
   end
 
   def reply_post
@@ -58,8 +65,8 @@ class PostsController < ApplicationController
     @repost.user_id = current_user.id
     @repost.receiver_id = @post.user_id
     @repost.tweet_id = @post.id
-    @repost.reply = true
     if @repost.save
+      @post.update_attribute(:reply, true)
       render :update do |page|
         flash[:notice] = "Successfully Replied."
         UserMailer.reply_post(@post.user,@repost).deliver
