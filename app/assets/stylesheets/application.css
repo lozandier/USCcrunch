@@ -319,10 +319,10 @@ a{
 
 #ajax-loader{
     float: right;
-    height: 16px;
+    height: 32px;
     left: 265px;
     position: relative;
-    width: 16px;
+    width: 32px;
     z-index: 1000000;
 }
 
