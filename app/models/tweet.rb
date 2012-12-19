@@ -3,6 +3,7 @@ class Tweet < ActiveRecord::Base
   belongs_to :receiver, :class_name => 'User'
   attr_accessible :user_id,:receiver_id, :body,:document,:reply,:tweet_id,:post_box
   validates :body, :presence => true
+  has_attached_file :document, :styles => {:medium => "300x300>", :thumb => "100x100>"} if Rails.env == 'development'
   has_attached_file :document,
     :whiny => false,
     :storage => :s3,
@@ -12,7 +13,7 @@ class Tweet < ActiveRecord::Base
     :styles => {
     :original => "900x900>",
     :default => "280x190>",
-    :other => "96x96>" }
+    :other => "96x96>" } if Rails.env == 'production'
   before_post_process :resize_images
   has_one :favorite, :dependent => :destroy
 
