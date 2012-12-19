@@ -6,17 +6,16 @@ class User < ActiveRecord::Base
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
   has_many :reports, :dependent => :destroy, :order => "created_at DESC"
   attr_accessor :school
-  has_attached_file :avatar, :styles => {:medium => "300x300>", :thumb => "100x100>"}
-#  has_attached_file :avatar,
-#    :whiny => false,
-#    :storage => :s3,
-#    :s3_credentials => "#{Rails.root}/config/s3.yml",
-#    :path => "uploaded_files/profile/:id/:style/:basename.:extension",
-#    :bucket => "edupost",
-#    :styles => {
-#    :original => "900x900>",
-#    :default => "280x190>",
-#    :other => "96x96>" }
+  has_attached_file :avatar,
+    :whiny => false,
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path => "uploaded_files/profile/:id/:style/:basename.:extension",
+    :bucket => "edupost",
+    :styles => {
+    :original => "900x900>",
+    :default => "280x190>",
+    :other => "96x96>" }
   validates :first_name,:last_name,:presence => true
   validates :username,:uniqueness => true,:presence => true,:format => {:with => /^[\w\-@]*$/ , :message => "Only use letters, numbers with no spaces"}
   belongs_to :school_admin
