@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
     if @header == 'Reply'
       @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true}").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     else
-      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and post_box IS NULL").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and (post_box IS NULL or post_box = 'post')").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     end
     respond_to do |format|
       format.html {render :partial => "show", :layout => false if request.xhr?}

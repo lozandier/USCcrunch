@@ -49,7 +49,7 @@
       <img alt=""  src="/assets/bigger_spinner.gif" style="width:32px;height:32px;z-index:1000000;"/>
     </div>
     <%= yield %>
-    <%= render :partial => 'layouts/google_analytics' %>
+    <%= render :partial => 'layouts/google_analytics' if Rails.env == 'production' %>
   </body>
 </html>
 

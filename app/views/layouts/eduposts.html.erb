@@ -104,7 +104,7 @@
     </div>
     <div id='popup_body1' style='float:right'></div>
   </div>
-<%#= render :partial => 'layouts/google_analytics' %>
+<%= render :partial => 'layouts/google_analytics' if Rails.env == 'production' %>
 </body>
 </html>
 <script>
