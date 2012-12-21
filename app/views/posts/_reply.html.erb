@@ -105,7 +105,7 @@
       $("#tweet_body").val(user + " ");
     }
   </script>
-
+  <div id="notice" style="display:none;color: green;font-size: 12px;">Successfully Replied..</div>
   <div class="conversation_post_input_box" style="height: auto;padding-bottom: 0px;">
     <%= form_for @post, :url => reply_post_user_post_path(@post),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
       <% if current_user.role == 'student' %>
