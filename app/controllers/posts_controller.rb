@@ -66,7 +66,7 @@ class PostsController < ApplicationController
       @post.update_attribute(:reply, true)
       render :update do |page|
         flash[:notice] = "Successfully Replied."
-        #UserMailer.reply_post(@post.user,@repost).deliver
+        UserMailer.reply_post(@post.user,@repost).deliver
         page.reload
       end
     else
