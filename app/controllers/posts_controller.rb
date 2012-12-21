@@ -66,7 +66,7 @@ class PostsController < ApplicationController
       @post.update_attribute(:reply, true)
       render :update do |page|
         flash[:notice] = "Successfully Replied."
-        UserMailer.reply_post(@post.user,@repost).deliver
+        #UserMailer.reply_post(@post.user,@repost).deliver
         page.reload
       end
     else
@@ -113,7 +113,12 @@ class PostsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @post = @user.tweets.find(params[:id])
+    @delete_post = @post.tweet_id
     if @post.destroy
+      @delete = Tweet.find_by_tweet_id(@delete_post)
+      if !@delete.present?
+        Tweet.find(@delete_post).update_attribute(:reply, false) if @delete_post != nil
+      end
       respond_to do |format|
         format.js{@post}
       end
