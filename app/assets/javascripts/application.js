@@ -52,17 +52,6 @@ function get_username(ht){
     });
 }
 
-function profile_summary(user){
-    $.ajax({
-        url: '/profiles/'+user+'/profile_summary',
-        success: function(data){
-            $("#popup_body").html(data);
-            $("#overlay").show();
-            $("#popup_box").show();
-        }
-    });
-}
-
 function conversation(user){
     $.ajax({
         url: '/profiles/'+user+'/conversation',
@@ -89,8 +78,8 @@ function report(user){
     $.ajax({
         url :"/profiles/"+user+"/report",
         success :function(data){
-            $("#popup_body").html(data);
-            $("#popup_box").show();
+            $("#popup_body1").html(data);
+            $("#popup_box1").show();
             $("#overlay").show();
         }
     });
@@ -100,8 +89,8 @@ function post(user){
     $.ajax({
         url :"/profiles/"+user+"/post",
         success :function(data){
-            $("#popup_body").html(data);
-            $("#popup_box").show();
+            $("#popup_body1").html(data);
+            $("#popup_box1").show();
             $("#overlay").show();
         }
     });
