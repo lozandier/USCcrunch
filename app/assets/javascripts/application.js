@@ -56,6 +56,7 @@ function conversation(user){
     $.ajax({
         url: '/profiles/'+user+'/conversation',
         success: function(data){
+            $("body").css({'overflow': "hidden", 'margin-right': "14px"})
             $("#popup_body").html(data);
             $("#overlay").show();
             $("#popup_box").show();
@@ -67,6 +68,7 @@ function reply(user_id,post_id){
     $.ajax({
         url: '/users/'+user_id+'/posts/'+post_id+'/reply',
         success: function(data){
+            $("body").css({'overflow': "hidden", 'margin-right': "14px"})
             $("#popup_body").html(data);
             $("#overlay").show();
             $("#popup_box").show();
@@ -112,6 +114,7 @@ function hide_popup(){
     if(jQuery('#popup_box')){
         jQuery('#popup_body').html("");
         jQuery('#popup_box').hide();
+        $("body").css({'overflow': "visible", 'margin-right': "0px"})
     }
 
     if(jQuery('#popup_box1')){
