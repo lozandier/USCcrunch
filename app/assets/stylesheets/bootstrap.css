@@ -6407,7 +6407,7 @@ body.blue_background {
     color: gray;
 }
 
-.conversation_post_input_box {
+.conversation_post_input_box,.conversation_post_input_box1,.conversation_post_input_box2  {
     padding-top: 10px;
     padding-bottom: 20px;
     height: 20px;
