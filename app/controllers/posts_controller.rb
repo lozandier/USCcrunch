@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   def reply
     @post = Tweet.find(params[:id])
     @user = User.find(params[:user_id])
-    @posts = Tweet.where("post_box IS NULL").order("created_at Asc")
+    @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
     render :layout => false
   end
 

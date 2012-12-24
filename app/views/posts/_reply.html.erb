@@ -128,7 +128,7 @@
         <% else %>
           <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
         <% end %>
-        <%= f.text_area :body,:value => "#{@post.user.username+ " "}",:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%;padding:0px;' %>
+        <%= f.text_area :body,:value => "#{@post.user.username+ " "}",:class=>"compose_new_post reply_tweet_body",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%;padding:0px;' %>
         <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
           <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
         </div>
