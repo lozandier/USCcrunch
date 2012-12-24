@@ -129,13 +129,13 @@ class ProfilesController < ApplicationController
     @user = current_user
     @post = Tweet.find(params[:id])
     @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
-    @repost = Tweet.new(params[:tweet])
-    @repost.user_id = current_user.id
-    @repost.tweet_id = params[:id]
+    @post = Tweet.new(params[:tweet])
+    @post.user_id = current_user.id
+    @post.tweet_id = params[:id]
     body = params[:tweet][:body].split(' ')[0]
     @user = User.find_by_username(body)
-    @repost.receiver_id = @user.present? ? @user.id : @post.user_id
-    if @repost.save
+    @post.receiver_id = @user.present? ? @user.id : nil
+    if @post.save
       render :update do |page|
         page.redirect_to profiles_path
       end
