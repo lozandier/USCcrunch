@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
-    @posts = Tweet.where("(post_box IS NULL or post_box = 'post') and receiver_id IS NULL ").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where("(tweet_id IS NULL and receiver_id IS NULL)").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
@@ -41,11 +41,7 @@ class ProfilesController < ApplicationController
 
   def conversation
     @post = Tweet.find(params[:id])
-    if @post.tweet_id == nil
-      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
-    else
-      @posts = Tweet.where("tweet_id = '#{@post.id}' or tweet_id = '#{@post.tweet_id}'").order("created_at Asc")
-    end
+    @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
     render :layout => false
   end
 
@@ -139,7 +135,6 @@ class ProfilesController < ApplicationController
     body = params[:tweet][:body].split(' ')[0]
     @user = User.find_by_username(body)
     @post.receiver_id = @user.present? ? @user.id : nil
-    @post.reply = true
     if @post.save
       render :update do |page|
         page.redirect_to profiles_path

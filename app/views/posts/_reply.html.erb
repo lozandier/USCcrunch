@@ -80,44 +80,42 @@
             </div>
           </li>
           <% for post in @posts %>
-            <% if post.id != @post.id %>
-              <li id="message_11147352" class="message clearfix default">
-                <div class="avatar with-user-card">
-                  <%= conversation_picture(post) %>
-                </div>
-                <div class="message-content">
-                  <a class="username with-user-card"><%= @post.user.username %></a>
-                  <div id="message_body_11147352" class="message-body ">
-                    <% if post.body > post.body.slice(0..300) %>
-                      <span id="pos1_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
-                    <% else %>
-                        <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
-                      <% end %>
-                    <div id="expa1_<%= post.id %>"  style="display:none;">
-                      <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
-                    </div>
+            <li id="message_11147352" class="message clearfix default">
+              <div class="avatar with-user-card">
+                <%= conversation_picture(post) %>
+              </div>
+              <div class="message-content">
+                <a class="username with-user-card"><%= @post.user.username %></a>
+                <div id="message_body_11147352" class="message-body ">
+                  <% if post.body > post.body.slice(0..300) %>
+                    <span id="pos1_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
+                  <% else %>
+                      <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
+                    <% end %>
+                  <div id="expa1_<%= post.id %>"  style="display:none;">
+                    <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
                   </div>
-                  <ul class="messageTools tools-default">
-                    <li class="reply-dot">
-                      <%= time_ago_in_words(post.created_at) %> &#183;
-                      <% if post.body > post.body.slice(0..300) %>
-                        <%= link_to_function "expand", "expand1(#{post.id})", :id => "expand1_#{post.id}" %>
-                        <%= link_to_function "Hide", "unexpand1(#{post.id})", :id => "unexpand1_#{post.id}", :style => 'display:none;' %>
-                        &nbsp&nbsp
-                      <% end %>
-                      <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{post.user.username}')" %> &#183;
-                      <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
-                        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
-                      <% elsif post.favorite.status == true %>
-                        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
-                      <%elsif post.favorite.status == false%>
-                        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
-                      <% end %>
-                    </li>
-                  </ul>
                 </div>
-              </li>
-            <% end %>
+                <ul class="messageTools tools-default">
+                  <li class="reply-dot">
+                    <%= time_ago_in_words(post.created_at) %> &#183;
+                    <% if post.body > post.body.slice(0..300) %>
+                      <%= link_to_function "expand", "expand1(#{post.id})", :id => "expand1_#{post.id}" %>
+                      <%= link_to_function "Hide", "unexpand1(#{post.id})", :id => "unexpand1_#{post.id}", :style => 'display:none;' %>
+                      &nbsp&nbsp
+                    <% end %>
+                    <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{post.user.username}')" %> &#183;
+                    <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
+                      <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
+                    <% elsif post.favorite.status == true %>
+                      <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+                    <%elsif post.favorite.status == false%>
+                      <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
+                    <% end %>
+                  </li>
+                </ul>
+              </div>
+            </li>
           <% end %>
         </ol>
       </div>
@@ -130,41 +128,30 @@
         <% else %>
           <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
         <% end %>
-        <%= f.text_area :body,:value => "#{@post.user.username+ " "}",:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%;padding:0px;' %>
+        <%=  f.text_area :body,:value => "#{@post.user.username+ " "}",:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%;padding:0px;' %>
         <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
           <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
         </div>
         <img id="PreviewImage1" style="height: 16px;left: 50px;position: relative;top: 4px;width: 20px;display: none;"  />
-        <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 100px;position: relative;'%>
+        <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 110px;position: relative;'%>
       <% end %>
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    var mouse_in_side = false;
 
-    $("#tweet_body").click(function(){
-      $("#tweet_body").css('min-height','100px');
+<script type="text/javascript">
+  jQuery(function($){
+  });
+  $(function()
+  {
+    $("#tweet_body").focus(function()
+    {
+      $(this).animate({"height": "100px"}, "fast" );
+      $("#button_bar").show();
       $("#image_upload1").show();
       $("#post1").css('display', 'block');
       $('#PreviewImage1').show();
-      mouse_in_side = true;
-    })
-
-    $('.conversation_post_input_box').hover(function(){
-      mouse_in_side=true;
-    }, function(){
-      mouse_in_side=false;
-    });
-
-    $(document).click(function(){
-      if(mouse_in_side == false){
-        $("#tweet_body").css('min-height','10px');
-        $("#image_upload1").hide();
-        $("#post1").hide();
-        $('#PreviewImage1').hide();
-      }
+      return false;
     });
   });
 
