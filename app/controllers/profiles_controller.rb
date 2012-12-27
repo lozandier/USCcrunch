@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
-    @posts = Tweet.where("(tweet_id IS NULL and receiver_id IS NULL)").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.all(:order => "created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
@@ -41,7 +41,11 @@ class ProfilesController < ApplicationController
 
   def conversation
     @post = Tweet.find(params[:id])
-    @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    if @post.tweet_id == nil
+      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    else
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Desc")
+    end
     render :layout => false
   end
 
@@ -129,13 +133,17 @@ class ProfilesController < ApplicationController
     @user = current_user
     @post = Tweet.find(params[:id])
     @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
-    @post = Tweet.new(params[:tweet])
-    @post.user_id = current_user.id
-    @post.tweet_id = params[:id]
+    @repost = Tweet.new(params[:tweet])
+    @repost.user_id = current_user.id
+    if @post.tweet_id == nil
+      @repost.tweet_id = @post.id
+    else
+      @repost.tweet_id = @post.tweet_id
+    end
     body = params[:tweet][:body].split(' ')[0]
     @user = User.find_by_username(body)
-    @post.receiver_id = @user.present? ? @user.id : nil
-    if @post.save
+    @repost.receiver_id = @user.present? ? @user.id : nil
+    if @repost.save
       render :update do |page|
         page.redirect_to profiles_path
       end
