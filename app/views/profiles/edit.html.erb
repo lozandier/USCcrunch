@@ -33,17 +33,23 @@
           <tr>
             <td><%= f.label :avatar, "Photo" %></td>
             <td>
-              <%if @user.role == 'student'%>
-                <%=@user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '100px;', :height => '100px;', :id => "PreviewImage1") : image_tag("/assets/profile_pic_student.png",:width => '100px;',:height => '100px;', :id => "PreviewImage1")%>
-              <%else%>
-                <%=@user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '100px;', :height => '100px;', :id => "PreviewImage1") : image_tag("/assets/profile_pic_instructor.png",:width => '100px;',:height => '100px;', :id => "PreviewImage1")%>
-              <%end%>
-              <div class="input-container btn">Change photo<span class="caret"></span>
-                <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'margin-left: -119px;margin-top: -5px;width: 116px;'%>
-              </div>
-              <br/>
-              <div class="change_photo_box_text" style="position:relative;left: 75px;">
-                This photo is your identity on Eduposts and appears with your posts.Need help? <a href=#">Learn More</a>
+              <div style="width:100%;">
+                <div style="width: 20%;float: left;">
+                  <%if @user.role == 'student'%>
+                    <%=@user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '100px;', :height => '100px;', :id => "PreviewImage1") : image_tag("/assets/profile_pic_student.png",:width => '100px;',:height => '100px;', :id => "PreviewImage1")%>
+                  <%else%>
+                    <%=@user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '100px;', :height => '100px;', :id => "PreviewImage1") : image_tag("/assets/profile_pic_instructor.png",:width => '100px;',:height => '100px;', :id => "PreviewImage1")%>
+                  <%end%>
+                </div>
+                <div style="width:70%;float: left;">
+                  <div class="input-container btn" style=" line-height: 26px;padding-bottom: 5px;    padding-left: 10px;    padding-right: 10px;    padding-top: 5px;">Change photo<span class="caret"></span>
+                  </div>
+                  <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'left: -104px;  position: relative;  width: 0;'%>
+                  <br/>
+                  <div class="change_photo_box_text" style="width: 295px;">
+                    This photo is your identity on Eduposts and appears with your posts.Need help? <br/><a href=#">Learn More</a>
+                  </div>
+                </div>
               </div>
             </td>
             <td><%= validation_error(@user.errors["avatar"]) %></td>

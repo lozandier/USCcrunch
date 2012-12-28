@@ -6,7 +6,7 @@
       <% if @user.id != current_user.id %>
         <div class="box_l1_hp side_nav_box">
           <div class="post_to_box" style="margin-left: 10px;margin-top: 10px;min-height: 145px;">
-            <h5>Post to <%= @user.username %></h5>
+            <h5>Post to <%#= @user.username %></h5>
             <%= render :partial => 'posts/form'%>
           </div>
         </div>

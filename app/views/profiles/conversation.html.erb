@@ -1,7 +1,7 @@
 <div id="conversation_back">
-  <div id="conversation_modal" style="bottom: auto; overflow: visible;">
-    <div style="float: right;margin-right: -18px;margin-top: -18px;">
-      <%=image_tag("close.jpeg", :style => "cursor: pointer;margin : -2px -9px -2px 0px;", :border =>0,:width => '34px', :height => '34px', :onclick => "hide_popup();")%>
+   <div id="conversation_modal" style="bottom: auto; overflow: visible;">
+    <div style="float: right;margin-right: -18px;margin-top: -23px;">
+      <%=image_tag("x.png", :style => "cursor: pointer;", :border =>0,:width => '12px', :height => '13px', :onclick => "hide_popup();")%>
     </div>
     <div class="gradient-section single-page">
       <div id="message_11147329" class="message single-message suggested twitter" data-ape="messages_11147329">
@@ -16,11 +16,11 @@
           </div>
         </div>
       </div>
-
       <div class="message-content clearfix">
-        <div class="convo-user"> Started this conversation </div>
-        <%= @post.user.fullname %>
-        <div id="message_body_11147329" class="message-body">
+        <h4 class="conversation_post_name" style="line-height:0px;"><%= @post.user.fullname %></h4>
+        <div class="started_this_conversation"> Started this conversation </div>
+
+        <div id="message_body_11147329" class="conversation_post_content">
           <% if @post.body > @post.body.slice(0..300) %>
             <span id="pos1_<%= @post.id%>"><%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.slice(0..300).length)) : @post.body.slice(0..300) %><%= link_to_function "...", "expand(#{@post.id})" %><br /></span>
           <% else %>
@@ -29,7 +29,9 @@
           <div id="expa1_<%= @post.id %>"  style="display:none;">
             <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %>
           </div>
+          <div class="conversation_post_date"><%= time_ago_in_words(@post.created_at) %></div>
         </div>
+
         <% if @post.body > @post.body.slice(0..300) %>
           <%= link_to_function "expand", "expand1(#{@post.id})", :id => "expand1_#{@post.id}" %>
           <%= link_to_function "Hide", "unexpand1(#{@post.id})", :id => "unexpand1_#{@post.id}", :style => 'display:none;' %>
@@ -121,19 +123,25 @@
       </div>
     </div>
 
-    <div class="conversation_post_input_box" style="height: auto;padding-bottom: 0px;">
+    <div class="conversation_post_input_box" style="height: inherit;padding-bottom: 0px;">
       <%= form_for @post, :url => conversation_message_profile_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
         <% if current_user.role == 'student' %>
           <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_student.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
         <% else %>
           <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
         <% end %>
-        <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%; padding: 0px;',:placeholder=>"Add to Conversation",:value => ' ' %>
-        <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-          <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+        <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 85%; padding: 0px; background-color:#f5f5f5;',:placeholder=>"Add to Conversation",:value => ' ' %>
+        <div style="width:100%">
+          <div style="width:49%; float: left;">
+            <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+              <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+            </div>
+            <img id="PreviewImage1" style="height: 16px;top: 4px;width: 20px;display: none;" />
+          </div>
+          <div style="width:13%;float: left;">
+            <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 146px;position: relative;'%>
+          </div>
         </div>
-        <img id="PreviewImage1" style="height: 16px;left: -122px;position: relative;top: 4px;width: 20px;"  />
-        <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 110px;position: relative;'%>
       <% end %>
     </div>
   </div>
