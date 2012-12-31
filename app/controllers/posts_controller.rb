@@ -52,15 +52,18 @@ class PostsController < ApplicationController
     if @post.tweet_id == nil
       @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Desc")
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
     end
-    
     render :layout => false
   end
 
   def reply_post
     @post = Tweet.find(params[:id])
-    @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    if @post.tweet_id == nil
+      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    else
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+    end
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
     if @post.tweet_id == nil

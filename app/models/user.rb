@@ -2,10 +2,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email,:school,:class_name,:class_description,:syllabus, :password, :password_confirmation,:terms_of_service, :remember_me,:username,:avatar,:school_admin_id,:role,:bio,:state,:major,:website,:first_name,:last_name,:reset_password_token
+  attr_accessible :email,:class_photo,:school,:class_name,:class_description,:syllabus, :password, :password_confirmation,:terms_of_service, :remember_me,:username,:avatar,:school_admin_id,:role,:bio,:state,:major,:website,:first_name,:last_name,:reset_password_token
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
   has_many :reports, :dependent => :destroy, :order => "created_at DESC"
   attr_accessor :school
+  
   has_attached_file :avatar,
     :whiny => false,
     :storage => :s3,
@@ -17,6 +18,18 @@ class User < ActiveRecord::Base
     :default => "280x190>",
     :other => "96x96>" } if Rails.env == 'production'
   has_attached_file :avatar,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
+
+  has_attached_file :class_photo,
+    :whiny => false,
+    :storage => :s3,
+    :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path => "uploaded_files/profile/:id/:style/:basename.:extension",
+    :bucket => "edupost",
+    :styles => {
+    :original => "900x900>",
+    :default => "280x190>",
+    :other => "96x96>" } if Rails.env == 'production'
+  has_attached_file :class_photo,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
   validates :first_name,:last_name,:presence => true
   validates :username,:uniqueness => true,:presence => true,:format => {:with => /^[\w\-@]*$/ , :message => "Only use letters, numbers with no spaces"}
   belongs_to :school_admin

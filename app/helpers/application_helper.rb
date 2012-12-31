@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def class_profile_picture
+    if @user.role == 'student'
+      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_student.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+    else
+      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_instructor.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+    end
+  end
+
 
   def post_picture(post)
     if post.user.role == 'student'

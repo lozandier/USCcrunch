@@ -56,7 +56,10 @@ function conversation(user){
     $.ajax({
         url: '/profiles/'+user+'/conversation',
         success: function(data){
-            $("body").css({'overflow': "hidden", 'margin-right': "14px"})
+            $("body").css({
+                'overflow': "hidden",
+                'margin-right': "14px"
+            })
             $("#popup_body").html(data);
             $("#overlay").show();
             $("#popup_box").show();
@@ -68,7 +71,10 @@ function reply(user_id,post_id){
     $.ajax({
         url: '/users/'+user_id+'/posts/'+post_id+'/reply',
         success: function(data){
-            $("body").css({'overflow': "hidden", 'margin-right': "14px"})
+            $("body").css({
+                'overflow': "hidden",
+                'margin-right': "14px"
+            })
             $("#popup_body").html(data);
             $("#overlay").show();
             $("#popup_box").show();
@@ -114,7 +120,10 @@ function hide_popup(){
     if(jQuery('#popup_box')){
         jQuery('#popup_body').html("");
         jQuery('#popup_box').hide();
-        $("body").css({'overflow': "visible", 'margin-right': "0px"})
+        $("body").css({
+            'overflow': "visible",
+            'margin-right': "0px"
+        })
     }
 
     if(jQuery('#popup_box1')){
@@ -258,6 +267,28 @@ function changeBGImage(whichImage,id) {
 }
 
 
+var backImage = ["/assets/Amazing_Flowers_Wallpapers_55.jpg","/assets/scene3.jpg","/assets/rain1.jpg","/assets/moss.jpg","/assets/nature2.jpg"];
+var count = 0;
+function changeclassBGImage(whichImage,id) {
+    count++;
+    $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
+    $.ajax({
+        url:"/classes/switch_theme",
+        type:'PUT',
+        data:{
+            url:backImage[(count-1)],
+            id:id
+        },
+        success:function(data){
+        }
+    });
+    if(count == 5){
+        count = 0;
+    }
+
+}
+
+
 $(document).ready(function(){
     var mouse_in_side = false;
 
@@ -348,4 +379,18 @@ function unexpand1(post_id){
     $("#pos1_"+post_id).show();
     $("#expand1_"+post_id).show();
     $("#unexpand1_"+post_id).hide();
+}
+
+function expand2(post_id){
+    $("#expa2_"+post_id).show();
+    $("#pos2_"+post_id).hide();
+    $("#expand2_"+post_id).hide();
+    $("#unexpand2_"+post_id).show();
+}
+
+function unexpand2(post_id){
+    $("#expa2_"+post_id).hide();
+    $("#pos2_"+post_id).show();
+    $("#expand2_"+post_id).show();
+    $("#unexpand2_"+post_id).hide();
 }

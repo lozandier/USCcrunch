@@ -1,124 +1,114 @@
-<div class="conversation_right_box" style="top: 41px;min-height: 685px;">
-  <div class="conversation_post_box">
-    <%= conversation_picture(@post) %>
-    <div class="conversation_poster_name"><%= @post.user.fullname %></div>
-    <div class="conversation_poster_at_name" style="font-size: 12px;float: left;">&nbsp;<%= @post.user.username %></div>
-    <div class="conversation_poster_content" style="text-align: left;">
-      <% if @post.body > @post.body.slice(0..300) %>
-        <span id="pos1_<%= @post.id%>"><%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.slice(0..300).length)) : @post.body.slice(0..300) %><%= link_to_function "...", "expand(#{@post.id})" %><br /></span>
-      <% else %>
-          <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %><br />
+<div id="conversation_sidebar_wrapper">
+  <div id="conversation_sidebar">
+    <div class="conversation-contain">
+      <ol id="updates" class="stream-list small-style stream-poller">
+        <li id="message_11147352" class="message clearfix default">
+          <div class="avatar with-user-card">
+            <%= conversation_picture(@post) %>
+          </div>
+          <div class="message-content">
+            <a class="username with-user-card"><%= @post.user.username %></a>
+            <div id="message_body_11147352" class="message-body ">
+              <% if @post.body > @post.body.slice(0..300) %>
+                <span id="pos1_<%= @post.id%>"><%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.slice(0..300).length)) : @post.body.slice(0..300) %><%= link_to_function "...", "expand1(#{@post.id})" %><br /></span>
+              <% else %>
+                  <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %><br />
+                <% end %>
+              <div id="expa1_<%= @post.id %>"  style="display:none;">
+                <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %>
+              </div>
+            </div>
+            <ul class="messageTools tools-default"  style="margin-left: 0px;">
+              <li class="reply-dot">
+                <%= time_ago_in_words(@post.created_at) %> &#183;
+                <% if @post.body > @post.body.slice(0..300) %>
+                  <%= link_to_function "expand", "expand1(#{@post.id})", :id => "expand1_#{@post.id}" %>
+                  <%= link_to_function "Hide", "unexpand1(#{@post.id})", :id => "unexpand1_#{@post.id}", :style => 'display:none;' %>
+                  &nbsp&nbsp
+                <% end %>
+                <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{@post.user.username}')" %> &#183;
+                <% if !@post.favorite.present? || !current_user.favorite_for(@post).present? %>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(@post.id),:remote => true,:method => 'post' %>
+                <% elsif @post.favorite.status == true %>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(@post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+                <%elsif @post.favorite.status == false%>
+                  <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(@post.id),:remote => true,:method => 'put' %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <% for post in @posts %>
+          <li id="message_11147352" class="message clearfix default">
+            <div class="avatar with-user-card">
+              <%= conversation_picture(post) %>
+            </div>
+            <div class="message-content">
+              <a class="username with-user-card"><%= @post.user.username %></a>
+              <div id="message_body_11147352" class="message-body ">
+                <% if post.body > post.body.slice(0..300) %>
+                  <span id="pos1_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand1(#{post.id})" %><br /></span>
+                <% else %>
+                    <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
+                  <% end %>
+                <div id="expa1_<%= post.id %>"  style="display:none;">
+                  <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
+                </div>
+              </div>
+              <ul class="messageTools tools-default" style="margin-left: 0px;">
+                <li class="reply-dot">
+                  <%= time_ago_in_words(post.created_at) %> &#183;
+                  <% if post.body > post.body.slice(0..300) %>
+                    <%= link_to_function "expand", "expand1(#{post.id})", :id => "expand1_#{post.id}" %>
+                    <%= link_to_function "Hide", "unexpand1(#{post.id})", :id => "unexpand1_#{post.id}", :style => 'display:none;' %>
+                    &nbsp&nbsp
+                  <% end %>
+                  <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{post.user.username}')" %> &#183;
+                  <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
+                    <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
+                  <% elsif post.favorite.status == true %>
+                    <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
+                  <%elsif post.favorite.status == false%>
+                    <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </li>
         <% end %>
-      <div id="expa1_<%= @post.id %>"  style="display:none;">
-        <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %>
-      </div>
-    </div>
-    <div class="conversation_action_row">
-      <%= time_ago_in_words(@post.created_at) %> &#183;
-      <% if @post.body > @post.body.slice(0..300) %>
-        <%= link_to_function "expand", "expand1(#{@post.id})", :id => "expand1_#{@post.id}" %>
-        <%= link_to_function "Hide", "unexpand1(#{@post.id})", :id => "unexpand1_#{@post.id}", :style => 'display:none;' %>
-        &nbsp&nbsp
-      <% end %>
-      <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{@post.user.username}')" %> &#183;
-      <% if !@post.favorite.present? || !current_user.favorite_for(@post).present? %>
-        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(@post.id),:remote => true,:method => 'post' %>
-      <% elsif @post.favorite.status == true %>
-        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(@post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
-      <%elsif @post.favorite.status == false%>
-        <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(@post.id),:remote => true,:method => 'put' %>
-      <% end %>
+      </ol>
     </div>
   </div>
-  <% for post in @posts %>
-    <div class="conversation_post_box">
-      <%= conversation_picture(post) %>
-      <div class="conversation_poster_name"><%= post.user.fullname %></div>
-      <div class="conversation_poster_at_name" style="font-size: 12px;float: left;">&nbsp;<%= post.user.username %></div>
-      <div class="conversation_poster_content" style="text-align: left;">
-        <% if post.body > post.body.slice(0..300) %>
-          <span id="pos1_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
-        <% else %>
-            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
-          <% end %>
-        <div id="expa1_<%= post.id %>"  style="display:none;">
-          <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
-        </div>
-      </div>
-      <div class="conversation_action_row">
-        <%= time_ago_in_words(post.created_at) %> &#183;
-        <% if post.body > post.body.slice(0..300) %>
-          <%= link_to_function "expand", "expand1(#{post.id})", :id => "expand1_#{post.id}" %>
-          <%= link_to_function "Hide", "unexpand1(#{post.id})", :id => "unexpand1_#{post.id}", :style => 'display:none;' %>
-          &nbsp&nbsp
-        <% end %>
-        <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply_user_post_path('#{post.user.username}')" %> &#183;
-        <% if !post.favorite.present? || !current_user.favorite_for(post).present? %>
-          <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',favourite_user_posts_path(post.id),:remote => true,:method => 'post' %>
-        <% elsif post.favorite.status == true %>
-          <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorited',update_favourite_user_posts_path(post.id),:remote => true,:method => 'put', :style => 'color: #FF9B00;' %>
-        <%elsif post.favorite.status == false%>
-          <%= link_to image_tag("/assets/favorite_icon.png", :width => '10px', :height => '10px')+'Favorite',update_mark_favourite_user_posts_path(post.id),:remote => true,:method => 'put' %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-  <div class="conversation_post_input_box" style="height: auto;padding-bottom: 0px;">
+
+  <div class="conversation_post_input_box" style="height: auto;padding-bottom: 25px;">
     <%= form_for @post, :url => conversation_message_profile_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
       <% if current_user.role == 'student' %>
         <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_student.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
       <% else %>
         <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
       <% end %>
-      <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%;',:placeholder=>"Add to Conversation",:value => ' ' %>
-      <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-        <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 85%; padding: 0px; background-color:#f5f5f5;',:placeholder=>"Add to Conversation",:value => ' ' %>
+      <div style="width:100%">
+        <div style="width:49%; float: left;">
+          <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+            <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+          </div>
+          <img id="PreviewImage1" style="height: 16px;top: 4px;width: 20px;display: none;" />
+        </div>
+        <div style="width:13%;float: left;">
+          <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 146px;position: relative;'%>
+        </div>
       </div>
-      <img id="PreviewImage1" style="float: left;height: 16px;margin-left: 68px;margin-top: -4px;width: 20px;display: none;"  />
-      <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 266px;position: relative;'%>
     <% end %>
   </div>
 </div>
- <script type="text/javascript">
-    $(document).ready(function(){
-      var mouse_in_side = false;
-
-      $("#tweet_body").mouseenter(function(){
-        $("#tweet_body").css('min-height','100px');
-        $("#image_upload1").show();
-        $("#post1").css('display', 'block');
-        $('#PreviewImage1').show();
-        mouse_in_side = true;
-      })
-
-      $('.conversation_post_input_box').mouseenter(function(){
-        mouse_in_side=true;
-      }, function(){
-        mouse_in_side=false;
-      });
-
-      $(document).click(function(){
-        if(mouse_in_side == false){
-          $("#tweet_body").css('min-height','10px');
-          $("#image_upload1").hide();
-          $("#post1").hide();
-          $('#PreviewImage1').hide();
-        }
-      });
-    });
-
-    function readURL(input) {
-      if (input.files && input.files[0]) {//Check if input has files.
-        var reader = new FileReader();//Initialize FileReader.
-
-        reader.onload = function (e) {
-          $('#PreviewImage1').attr('src', '/assets/check_loaded.png');
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    function reply_user_post_path(user){
-      $("#tweet_body").val(user + " ");
-    }
-  </script>
+<style>
+  #PreviewImage1{
+    height: 70px;
+    left: -15px;
+    position: relative;
+    top: 10px;
+    width: 68px;
+    display: none;
+  }
+</style>

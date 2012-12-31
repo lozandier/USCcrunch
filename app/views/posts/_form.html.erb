@@ -3,6 +3,6 @@
   <div class="input-container btn attachment" id="image_upload" style="height: 22px;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
     <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
   </div>
-  <img id="PreviewImage" style="float: left;height: 16px;margin-left: 27px;margin-top: -6px;width: 20px;"  />
-  <%= f.submit 'Post', :id => "post",:class =>'btn', :style => 'left: 165px;position: relative;display:none;'%>
+  <img id="PreviewImage" style="float: left;height: 16px;margin-left: 27px;margin-top: -6px;width: 20px;display: none;"  />
+  <%= f.submit 'Post', :id => "post",:class =>'btn', :style => 'left: 200px;position: relative;display:none;'%>
 <% end %>

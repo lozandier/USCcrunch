@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
     if @post.tweet_id == nil
       @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Desc")
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
     end
     render :layout => false
   end
@@ -132,7 +132,11 @@ class ProfilesController < ApplicationController
   def conversation_message
     @user = current_user
     @post = Tweet.find(params[:id])
-    @posts = Tweet.order("created_at Desc").paginate :page => params[:page], :per_page => 10
+    if @post.tweet_id == nil
+      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+    else
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+    end
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
     if @post.tweet_id == nil
@@ -144,8 +148,8 @@ class ProfilesController < ApplicationController
     @user = User.find_by_username(body)
     @repost.receiver_id = @user.present? ? @user.id : nil
     if @repost.save
-      render :update do |page|
-        page.redirect_to profiles_path
+      respond_to do |format|
+        format.js
       end
     else
       render :update do |page|

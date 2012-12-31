@@ -43,9 +43,9 @@
                 <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', profiles_path  %></li>
               <% end %>
               <% if params[:controller] == 'notifications' && (params[:action] == 'index' || params[:action] == 'posts') %>
-                <li class="active"><%= link_to image_tag("/assets@_blue.png", :height => "30px", :width => "20px")+'Connect', notifications_path %></li>
+                <li class="active"><%= link_to image_tag("/assets@_blue.png", :height => "30px", :width => "20px")+'Inbox', notifications_path %></li>
               <% else %>
-                <li><%= link_to image_tag("/assets/@_grey.png", :height => "30px", :width => "20px")+'Connect', notifications_path  %></li>
+                <li><%= link_to image_tag("/assets/@_grey.png", :height => "30px", :width => "20px")+'Inbox', notifications_path  %></li>
               <% end %>
               <% if params[:controller] == "profiles" && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password') %>
                 <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px")+"Me", profile_path(current_user) %></li>

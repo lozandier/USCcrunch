@@ -2,9 +2,9 @@
 
   <div class="box_l1_ep">
     <% if @user.role == 'student' %>
-      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+      <%= @user.class_photo.present? ? image_tag(@user.class_photo.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
     <% else %>
-      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+      <%= @user.class_photo.present? ? image_tag(@user.class_photo.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
     <% end %>
     <h3 class="profile_name"><%= @user.class_name.present? ? @user.class_name : "Class" %></h3>
     <%= link_to "View my class page", class_path(@user), :class => "view_my_profile_page" %>
@@ -40,16 +40,16 @@
               <div style="width:100%;">
                 <div style="width: 20%;float: left;">
                   <% if @user.role == 'student' %>
-                    <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '100px', :width => '100px' , :id => 'user_photo') : image_tag("/assets/profile_pic_student.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
+                    <%= @user.class_photo.present? ? image_tag(@user.class_photo.url(:original),:height => '100px', :width => '100px' , :id => 'user_photo') : image_tag("/assets/profile_pic_student.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
                   <% else %>
-                    <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '100px', :width => '100px', :id => 'user_photo') : image_tag("/assets/profile_pic_instructor.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
+                    <%= @user.class_photo.present? ? image_tag(@user.class_photo.url(:original),:height => '100px', :width => '100px', :id => 'user_photo') : image_tag("/assets/profile_pic_instructor.png",:height => '100px', :width => '100px', :id => 'user_photo') %>
                   <% end %>
                   <img id="PreviewImage1" src="" alt="" style="display: none;"/>
                 </div>
                 <div style="width:70%;float: left;">
                   <div class="input-container btn" style=" line-height: 26px;padding-bottom: 5px;    padding-left: 10px;    padding-right: 10px;    padding-top: 5px;">Change photo<span class="caret"></span>
                   </div>
-                  <%= f.file_field :avatar, :id => "realupload11", :onChange => 'readURL(this)', :style => 'left: -104px;    position: relative;    width: 0;'%>
+                  <%= f.file_field :class_photo, :id => "realupload11", :onChange => 'readURL(this)', :style => 'left: -104px;    position: relative;    width: 0;'%>
                   <br/>
                   <div class="change_photo_box_text">
                     This photo is your identity on Eduposts and appears with your posts.Need help? <a href=#">Learn More</a>

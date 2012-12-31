@@ -41,6 +41,9 @@ WebApp::Application.routes.draw do
       get :importent_links
       get :readings
     end
+    collection do
+      put :switch_theme
+    end
   end
   resources :notifications do
     member do

@@ -6,6 +6,13 @@ class ClassesController < ApplicationController
     
   end
 
+  def switch_theme
+    @user = User.find(params[:id])
+    @user.update_attribute(:class_theme, params[:url])
+    render :update do |page|
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     @header = "Posts"
