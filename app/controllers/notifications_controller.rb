@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   layout :get_layout
 
   def index
-    @posts = Tweet.where("receiver_id = #{current_user.id} and post_box IS NULL and user_id != #{current_user.id}").order('created_at desc').paginate :page => params[:page], :per_page => 8
+    @posts = Tweet.where("body like '@%' and receiver_id = #{current_user.id} and user_id != #{current_user.id} and post_box IS NULL").order('created_at desc').paginate :page => params[:page], :per_page => 8
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
