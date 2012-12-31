@@ -157,7 +157,6 @@
       $("#button_bar").show();
       $("#image_upload1").show();
       $("#post1").css('display', 'block');
-      $('#PreviewImage1').show();
       return false;
     });
   });
@@ -168,6 +167,7 @@
 
       reader.onload = function (e) {
         $('#PreviewImage1').attr('src', '/assets/check_loaded.png');
+        $('#PreviewImage1').show();
       };
       reader.readAsDataURL(input.files[0]);
     }
