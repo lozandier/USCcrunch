@@ -3,8 +3,7 @@ class NotificationsController < ApplicationController
   layout :get_layout
 
   def index
-    sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.receiver_id = b.receiver_id and b.body like '@%%' and a.receiver_id != #{current_user.id})) order by a.created_at desc"
-    @posts = Tweet.paginate_by_sql [sql_query], :per_page => 20, :page => params[:page]
+    @posts = Tweet.where("body like '@%' and receiver_id = #{current_user.id} and user_id != #{current_user.id} and post_box IS NULL").order('created_at desc').paginate :page => params[:page], :per_page => 8
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
