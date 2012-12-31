@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     :other => "96x96>" } if Rails.env == 'production'
   has_attached_file :class_photo,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
   validates :first_name,:last_name,:presence => true
-  validates :username,:uniqueness => true,:presence => true,:format => {:with => /^[\w\-@]*$/ , :message => "Only use letters, numbers with no spaces"}
+  validates :username,:uniqueness => true,:presence => true,:format => {:with => /^[\w\-@]*$/ , :message => "Only use letters, numbers with no spaces"}, :on => :update
   belongs_to :school_admin
   has_many :sent_follows, :class_name => "Follow", :foreign_key => :user_id, :dependent => :destroy
   has_many :received_follows, :class_name => 'Follow', :foreign_key => :receiver_id,:dependent => :destroy
