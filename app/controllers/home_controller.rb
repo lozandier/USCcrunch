@@ -46,4 +46,20 @@ class HomeController < ApplicationController
     
   end
 
+  def contact
+    @contact = Contact.new
+  end
+
+  def post_contact
+    @contact = Contact.new(params[:contact])
+    if @contact.save
+      flash[:notice] = "Successfully send the contact information"
+      UserMailer.contact(@contact).deliver
+      redirect_to contact_home_index_path
+    else
+      flash[:error] = "Fail to send the contact information"
+      render :action => 'contact'
+    end
+  end
+
 end

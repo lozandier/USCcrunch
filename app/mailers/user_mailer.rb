@@ -34,4 +34,9 @@ class UserMailer < ActionMailer::Base
     @admin_email = admin_email
     mail(:to => @admin_email, :subject => "Report")
   end
+
+  def contact(contact)
+    @contact = contact
+    mail(:to => "ashok@dine-media.com", :body => contact.email)
+  end
 end

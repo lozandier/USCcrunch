@@ -8,13 +8,7 @@
       <%= link_to "<button class='side_nav_button assignments' type=button'>Assignments<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, announcements_notification_path(current_user,:post_text => "assignment"), :remote => true %>
     </div>
 
-    <div class="box_l3_hp">
-      <div class="link_box">
-    	About &#183; Help &#183; Terms &#183; Privacy &#183; Blog
-        <br/>
-        &#169; 2012 Eduposts
-      </div>
-    </div>
+    <%= render :partial => 'profiles/links' %>
 
   </div>
 

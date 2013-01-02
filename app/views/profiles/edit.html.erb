@@ -114,6 +114,7 @@
     }
   }
   $(document).submit(function(){
-    $("#user_username").val('@'+$("#user_username").val());
+    var u_name = $("#user_username").val().toLowerCase()
+    $("#user_username").val('@'+u_name);
   });
 </script>
