@@ -21,14 +21,25 @@
         <div class="started_this_conversation"> Started this conversation </div>
 
         <div id="message_body_11147329" class="conversation_post_content">
-          <% if @post.body > @post.body.slice(0..300) %>
-            <span id="pos2_<%= @post.id%>"><%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.slice(0..300).length)) : @post.body.slice(0..300) %><%= link_to_function "...", "expand2(#{@post.id})" %><br /></span>
+          <% if @post.receiver.present? %>
+            <% if @post.body > @post.body.slice(0..300) %>
+              <span id="pos2_<%= @post.id%>"><%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.slice(0..300).length)) : @post.body.slice(0..300) %><%= link_to_function "...", "expand2(#{@post.id})" %><br /></span>
+            <% else %>
+                <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %><br />
+              <% end %>
+            <div id="expa2_<%= @post.id %>"  style="display:none;">
+              <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %>
+            </div>
           <% else %>
-              <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %><br />
-            <% end %>
-          <div id="expa2_<%= @post.id %>"  style="display:none;">
-            <%= User.find_by_username(@post.body.split(" ")[0]).present? ? ((link_to @post.body.split(" ")[0], profile_path(@post.receiver))+' '+@post.body.slice(@post.body.split(" ")[0].length..@post.body.length)) : @post.body %>
-          </div>
+            <% if @post.body > @post.body.slice(0..300) %>
+              <span id="pos2_<%= @post.id%>"><%= @post.body.slice(0..300) %><%= link_to_function "...", "expand2(#{@post.id})" %><br /></span>
+            <% else %>
+                <%= @post.body %><br />
+              <% end %>
+            <div id="expa2_<%= @post.id %>"  style="display:none;">
+              <%= @post.body %>
+            </div>
+          <% end %>
           <div class="conversation_post_date"><%= time_ago_in_words(@post.created_at) %></div>
           &nbsp&nbsp<% if @post.body > @post.body.slice(0..300) %>
             <%= link_to_function "expand", "expand2(#{@post.id})", :id => "expand2_#{@post.id}" %>
