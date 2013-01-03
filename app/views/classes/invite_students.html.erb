@@ -50,25 +50,3 @@
 
   </div>
 </div>
-<style>
-  .form_error{
-    left: -36px;
-    position: relative;
-    top: -6px;
-    width: 317px;
-  }
-</style>
-<script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {//Check if input has files.
-      var reader = new FileReader();//Initialize FileReader.
-
-      reader.onload = function (e) {
-        $('#PreviewImage1').attr('src', e.target.result);
-        $('#PreviewImage1').show();
-        $("#user_photo").hide();
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-</script>

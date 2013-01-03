@@ -37,6 +37,6 @@ class UserMailer < ActionMailer::Base
 
   def contact(contact)
     @contact = contact
-    mail(:to => "ashok@dine-media.com", :body => contact.email)
+    mail(:to => "support@eduposts.com", :body => contact.email)
   end
 end

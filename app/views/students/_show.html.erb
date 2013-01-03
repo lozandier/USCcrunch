@@ -1,16 +1,13 @@
 <% if @posts.present? %>
   <% for post in @posts %>
     <div class="posts_box" id="post_<%= post.id %>">
-      <div style="float:left;clear:both;"><%= image_tag post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded" %></div>
+      <div style="float:left;clear:both;"><%= post_picture(post) %></div>
       <div class="post" style="border-bottom: 1px solid grey;height: auto;">
         <h5 class="post_name"><%= post.user.username.split('@').last %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text"><%= post.body %></div>
         <div class="action_row">
-          <%= link_to_function "Expand", "", :id => "expand_#{post.id}" %>
-          <%= link_to_function "UnExpand", "", :id => "unexpand_#{post.id}", :style => 'display:none;' %>
-          &nbsp&nbsp
           <span id="delete_<%= post.id %>">
             <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(@user.id,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>
           </span>
@@ -20,32 +17,10 @@
             <b><%= post.user.tweets.where("reply IS NULL").count %></b>&nbsp POSTS&nbsp&nbsp
             <b><%= post.user.tweets.where("reply IS NOT NULL").count %></b>&nbsp REPLIES
           </div>
-          <script>
-            $("#expand_<%= post.id %>").click(function(){
-              $("#unexpand_<%= post.id %>").show();
-              $("#expa_<%= post.id %>").show();
-              $("#expand_<%= post.id %>").hide();
-            });
-
-            $("#unexpand_<%= post.id %>").click(function(){
-              $("#expand_<%= post.id %>").show();
-              $("#expa_<%= post.id %>").hide();
-              $("#unexpand_<%= post.id %>").hide();
-            });
-          </script>
         </div>
       </div>
     </div>
   <% end %>
 <% else %>
-  <span style="color: red;font-size: 15px;left: 376px;position: relative;top: 17px;">No Posts.</span>
+  <span style="color: red;font-size: 15px;left: 300px;position: relative;top: -9px;">No Posts.</span>
 <% end %>
-<% if @posts.total_pages > @posts.current_page %>
-  <div id="more_posts_link">
-    <input type="hidden" value="<%= @posts.current_page+1 %>" id="posts_page" />
-  </div>
-<% else %>
-<% end %>
-<div id='ajax' style='z-index:1000000;display: none;'>
-  <img alt=""  src="/assets/bigger_spinner.gif" id = "ajax-loader" />
-</div>
