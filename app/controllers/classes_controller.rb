@@ -32,14 +32,14 @@ class ClassesController < ApplicationController
   def graph
     @user = User.find(params[:id])
     bar_v = []
-    title = Title.new("No Of Posts")
+    title = Title.new("No Of Students")
     bar = BarGlass.new
     year = Time.now.year
     i = Time.now.strftime("%m").to_i
     y_range = []
     (1..31).each do |j|
       xx = "#{year}-#{i}-#{j}".to_time
-      y= Tweet.where("user_id = #{@user.id} and tweets.created_at LIKE '%#{xx.to_date.strftime('%Y-%m-%d')}%'").count
+      y= User.where("role = 'student' and reset_password_token IS NULL and users.created_at LIKE '%#{xx.to_date.strftime('%Y-%m-%d')}%'").count
       bar_values = BarValue.new(y);
       y_range << y
       bar_v << bar_values
