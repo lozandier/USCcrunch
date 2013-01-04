@@ -25,7 +25,7 @@ class ClassesController < ApplicationController
 
   def graphs
     @user = User.find(params[:id])
-    @graph = open_flash_chart_object(750,400,"/classes/#{@user.id}/graph")
+    #@graph = open_flash_chart_object(750,400,"/classes/#{@user.id}/graph")
     @graphs = open_flash_chart_object(750,300,"/classes/#{@user.id}/graph_code")
   end
 
