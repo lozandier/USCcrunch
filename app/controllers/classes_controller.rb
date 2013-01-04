@@ -39,7 +39,7 @@ class ClassesController < ApplicationController
     y_range = []
     (1..31).each do |j|
       xx = "#{year}-#{i}-#{j}".to_time
-      y= User.where("role = 'student' and reset_password_token IS NULL and users.created_at LIKE '%#{xx.to_date.strftime('%Y-%m-%d')}%'").count
+      y= User.where("role = 'student' and reset_password_token IS NULL and users.created_at LIKE '#{xx.to_datetime.strftime('%Y-%m-%d')}%'").count
       bar_values = BarValue.new(y);
       y_range << y
       bar_v << bar_values
