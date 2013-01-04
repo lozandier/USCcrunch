@@ -15,9 +15,9 @@
     <%= link_to "<button class='side_nav_button profile' type=button'>Class<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, edit_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications active_button' type=button'>Roster<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, roster_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Invite Students<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, invite_students_class_path(@user) %>
-    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, faqs_class_path %>
+    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, faqs_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Readings<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, readings_class_path(@user) %>
-    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, importent_links_class_path %>
+    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, importent_links_class_path(@user) %>
   </div>
 
   <div class="box_l3_hp">
@@ -30,16 +30,23 @@
 <div class="span8">
   <div class="box_r1_hp">
     <h2 class="posts_title">Roster</h2>
-    <div class="people_box first_box">
-      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
-      <div class="search_result_people_name"><a href="#">John Doe</a></div>
-      <p class="search_result_people_at_name">@JohnDoe</p>
-    </div>
-    <div class="people_box">
-      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
-    </div>
-    <div class="people_box">
-      <img class="profile_pic img-rounded" src="/assets/profile_placeholder.png" height="50px" width="50px"/>
-    </div>
+    <div class="first_box"></div>
+    <% for student in @users %>
+      <div class="people_box" id ="student_<%= student.id %>">
+        <%= student.avatar.present? ? image_tag(student.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
+        <div class="search_result_people_name"><%= link_to student.fullname, profile_path(student)%></div>
+        <p class="search_result_people_at_name"><%= student.username %>
+          <%= link_to "Analytics", graphs_class_path(student), :style => 'display:none;', :id => "ana_#{student.id}"  %></p>
+      </div>
+      <script>
+        $("#student_<%= student.id %>").hover(function(){
+          $("#ana_<%= student.id %>").show();
+        })
+
+        $("#student_<%= student.id %>").mouseleave(function(){
+          $("#ana_<%= student.id %>").hide();
+        })
+      </script>
+    <% end %>
   </div>
 </div>

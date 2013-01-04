@@ -15,9 +15,9 @@
     <%= link_to "<button class='side_nav_button profile' type=button'>Class<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, edit_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Roster<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, roster_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Invite Students<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, invite_students_class_path(@user) %>
-    <%= link_to "<button class='side_nav_button posts for_notifications  active_button' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, faqs_class_path %>
+    <%= link_to "<button class='side_nav_button posts for_notifications  active_button' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, faqs_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Readings<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, readings_class_path(@user) %>
-    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, importent_links_class_path %>
+    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, importent_links_class_path(@user) %>
   </div>
 
   <div class="box_l3_hp">

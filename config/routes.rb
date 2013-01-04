@@ -40,6 +40,9 @@ WebApp::Application.routes.draw do
       get :faqs
       get :importent_links
       get :readings
+      get :graphs
+      get :graph
+      get :graph_code
     end
     collection do
       put :switch_theme
