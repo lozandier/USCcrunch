@@ -38,7 +38,8 @@ class ClassesController < ApplicationController
     i = Time.now.strftime("%m").to_i
     y_range = []
     (1..31).each do |j|
-      y= Tweet.where("user_id = #{@user.id}").count
+      xx = "#{year}-#{i}-#{j}".to_time
+      y= Tweet.where("user_id = #{@user.id} and tweets.created_at LIKE '%#{xx.to_date.strftime('%Y-%m-%d')}%'").count
       bar_values = BarValue.new(y);
       y_range << y
       bar_v << bar_values
