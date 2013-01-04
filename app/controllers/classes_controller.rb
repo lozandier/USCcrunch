@@ -106,7 +106,7 @@ class ClassesController < ApplicationController
 
   def roster
     @user = User.find(params[:id])
-    @users = User.where("role = 'student'")
+    @users = User.where("role = 'student' and confirmation_token IS NULL")
   end
 
   def invite_students
