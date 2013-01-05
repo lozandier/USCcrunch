@@ -1,0 +1,36 @@
+<head>
+  <script type="text/javascript" src="/assets/scripts/jquery.cloneposition.js"></script>
+  <script type="text/javascript" src="/assets/scripts/theme.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/radmin-plugins.css" />
+</head>
+<div class="span4">
+  <div class="squiggly-border"></div>
+  <div class="graph" id="flot-gradient-line_<%= @user.id %>"></div>
+</div>
+
+<script type="text/javascript" src="/assets/scripts/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="/assets/scripts/charts.js"></script>
+<script type="text/javascript">
+  jQuery(function($){
+    var today = new Date();
+    var time = today.getFullYear();
+    var time1 = time-1;
+    var time2 = time1-1;
+    var time3 = time2-1;
+    var time4 = time3-1;
+    var time5 = time4-1;
+    var likes = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year}%'").count %>
+    var likes1 = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year1}%'").count %>
+    var likes2 = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year2}%'").count %>
+    var likes3 = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year3}%'").count %>
+    var likes4 = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year4}%'").count %>
+    var likes5 = <%= Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at LIKE '%#{@year5}%'").count %>
+    var clikes = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year}%'").count %>
+    var clikes1 = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year1}%'").count %>
+    var clikes2 = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year2}%'").count %>
+    var clikes3 = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year3}%'").count %>
+    var clikes4 = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year4}%'").count %>
+    var clikes5 = <%= Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at LIKE '%#{@year5}%'").count %>
+    flot_line('flot-gradient-line_<%= @user.id %>', flot_options_line,[[time5, likes5],[time4, likes4],[time3, likes3],[time2, likes2],[time1, likes1],[time, likes]],[[time5, clikes5],[time4, clikes4],[time3, clikes3],[time2, clikes2],[time1, clikes1],[time, clikes]]);
+  });
+</script>

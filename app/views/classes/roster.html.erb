@@ -36,15 +36,14 @@
         <%= student.avatar.present? ? image_tag(student.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
         <div class="search_result_people_name"><%= link_to student.fullname, profile_path(student)%></div>
         <p class="search_result_people_at_name"><%= student.username %>
-          <%= link_to "Analytics", graphs_class_path(student), :style => 'display:none;', :id => "ana_#{student.id}"  %></p>
+          <%= link_to "Analytics", graphs_class_path(student), :style => 'display:none;float: right;position: relative;right: -542px;top: -22px;',:class => 'btn', :id => "ana_#{student.id}", :remote => true  %></p>
+        <span id="chart_<%= student.id %>" style="float: left;left: 9px;position: relative;width: 850px;top: 20px;">
+        </span>
       </div>
+
       <script>
         $("#student_<%= student.id %>").hover(function(){
           $("#ana_<%= student.id %>").show();
-        })
-
-        $("#student_<%= student.id %>").mouseleave(function(){
-          $("#ana_<%= student.id %>").hide();
         })
       </script>
     <% end %>
