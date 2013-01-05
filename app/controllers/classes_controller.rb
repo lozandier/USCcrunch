@@ -26,11 +26,14 @@ class ClassesController < ApplicationController
   def graphs
     @user = User.find(params[:id])
     @year = Time.now.strftime("%Y").to_i
+    @next_year = @year+1
     @year1 = @year-1
     @year2 = @year1-1
     @year3 = @year2-1
     @year4 = @year3-1
     @year5 = @year4-1
+    @year6 = @year5-1
+    @year7 = @year6-1
     respond_to do |format|
       format.js
     end
