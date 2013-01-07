@@ -34,6 +34,25 @@ class ClassesController < ApplicationController
     @year5 = @year4-1
     @year6 = @year5-1
     @year7 = @year6-1
+    @today = Date.today;
+    @time = @today.strftime("%Y").to_i;
+    @time1 = @time-1;
+    @time2 = @time1-1;
+    @time3 = @time2-1;
+    @time4 = @time3-1;
+    @time5 = @time4-1;
+    @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year1}-12-31' AND '#{@next_year}-01-01'").count
+    @likes1 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year2}-12-31' AND '#{@year}-01-01'").count
+    @likes2 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year3}-12-31' AND '#{@year1}-01-01'").count
+    @likes3 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year4}-12-31' AND '#{@year2}-01-01'").count
+    @likes4 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year5}-12-31' AND '#{@year3}-01-01'").count
+    @likes5 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year6}-12-31' AND '#{@year4}-01-01'").count
+    @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year1}-12-31' AND '#{@next_year}-01-01'").count
+    @clikes1 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year2}-12-31' AND '#{@year}-01-01'").count
+    @clikes2 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year3}-12-31' AND '#{@year1}-01-01'").count
+    @clikes3 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year4}-12-31' AND '#{@year2}-01-01'").count
+    @clikes4 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year5}-12-31' AND '#{@year3}-01-01'").count
+    @clikes5 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year6}-12-31' AND '#{@year4}-01-01'").count
     respond_to do |format|
       format.js
     end

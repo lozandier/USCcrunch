@@ -6846,3 +6846,79 @@ button.btn.btn-info.save_button {
     float: right;
     width: 306px;
 }
+
+/* edit_roster.html specific */
+.stats_box {
+    float: right;
+    overflow: hidden;
+    margin: 10px 10px 0px 0px;
+    width: 250px;
+}
+
+.stats_box_time_row {
+    margin-bottom: 10px;
+    width: inherit;
+    text-align: center;
+}
+
+.stats_box_time_row a {
+    margin-left: 5px;
+    text-decoraiton: none;
+    font-weight: bold;
+    color: black;
+}
+
+.stats_box_row {
+    margin-bottom: 10px;
+    width: inherit;
+    border-bottom: 1px solid gray;
+}
+
+.stats_num {
+    float: right;
+}
+/* IE specific classes */
+.fifty_by_fifty {
+    height: 50px;
+    width: 50px;
+}
+
+.ten_by_ten {
+    height: 10px;
+    width: 10px;
+}
+
+.thirty_by_thirty {
+    height: 30px;
+    width: 30px;
+}
+
+.eighty_by_eighty {
+    height: 80px;
+    width: 80px;
+}
+
+.thirty_by_twenty {
+    height: 30px;
+    width: 20px;
+}
+
+.twenty_by_thirty {
+    height: 20px;
+    width: 30px;
+}
+
+.one_eighty {
+    height: 180px;
+    width: 180px;
+}
+
+.one_hundred {
+    height: 100px;
+    width: 100px;
+}
+
+.three_hundred {
+    height: 300px;
+    width: 300px;
+}
