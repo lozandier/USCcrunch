@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102050338) do
+ActiveRecord::Schema.define(:version => 20130108065005) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -41,6 +41,17 @@ ActiveRecord::Schema.define(:version => 20130102050338) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "faqs", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "question"
+    t.text     "answer"
+    t.string   "question_file_name"
+    t.string   "question_content_type"
+    t.integer  "question_file_size"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
   create_table "favorites", :force => true do |t|
     t.integer  "tweet_id"
     t.integer  "user_id"
@@ -67,6 +78,28 @@ ActiveRecord::Schema.define(:version => 20130102050338) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "importent_links", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "links"
+    t.string   "link_file_name"
+    t.string   "link_content_type"
+    t.integer  "link_file_size"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "readings", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "reading"
+    t.string   "read_document_file_name"
+    t.string   "read_document_content_type"
+    t.integer  "read_document_file_size"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "reports", :force => true do |t|
     t.integer  "user_id"

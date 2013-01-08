@@ -14,10 +14,10 @@
   <div class="box_l1_hp">
     <%= link_to "<button class='side_nav_button profile' type=button'>Class<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, edit_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Roster<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, roster_class_path(@user) %>
-    <%= link_to "<button class='side_nav_button posts for_notifications  active_button' type=button'>Invite Students<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, invite_students_class_path(@user) %>
+    <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Invite Students<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, invite_students_class_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>FAQ's<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, class_faqs_path(@user) %>
     <%= link_to "<button class='side_nav_button posts for_notifications' type=button'>Readings<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, class_readings_path(@user) %>
-    <%= link_to "<button class='side_nav_button password' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, class_importent_links_path(@user) %>
+    <%= link_to "<button class='side_nav_button password  active_button' type=button'>Important Links<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, class_importent_links_path(@user) %>
   </div>
 
   <div class="box_l3_hp">
@@ -27,26 +27,20 @@
   </div>
 </div>
 
-<div class="span8">
-  <div class="box_r1_ep">
-    <h2 class="posts_title">Invite Students</h2>
-    <div class="profile_note"></div>
-
-    <div class="invite_students_box">
-      <h4>Bulk Invites</h4>
-      <div class="bulk_invites_note">Enter each student's name in a separate line</div>
-      <br/>
-      <div class="students_emails_title">Student's Emails</div>
-      <textarea class="bulk_invites" rows="7"
-                placeholder="student@school.edu            student@school.edu             student@school.edu"></textarea>
-      <br/>
-      <button type="button" class="btn btn-info submit_button">Submit</button>
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      <div class="students_emails_title">Student's Email</div>
-      <input class="edit_profile_input student_email_single_input" type="text" placeholder="student@school.edu"/>
-      <br/>
-      <button type="button" class="btn btn-info submit_button">Submit</button>
+<div class="span8" id="posts" style="min-height: 700px;">
+  <h2 class="posts_title with_bottom_border">Important Links</h2>
+  <div class="profile_note">Enter each link on a separate line</div>
+  <%= form_for @user,:url => upload_doc_class_importent_links_path(@user), :method => 'POST' do |f| %>
+    <div class="faq_box">
+      <input type="text" size="30" placeholder="Title" name="user[importent_links_attributes][334455ff445533][title]" id="user_readings_attributes_334455445533_title" class="faqs_box single_line for_readings" />
+      <button type="button" class="btn paperclip"></button>
+      <textarea rows="3" placeholder="Links" name="user[importent_links_attributes][334455ff445533][links]" id="user_readings_attributes_0_reading" cols="40" class="faqs_box for_readings"></textarea>
+      <br />
     </div>
+    <%= f.fields_for :importent_links do |document| %>
 
-  </div>
+    <% end %>
+    <div  style="float:right;position: relative;left: -180px;"><%= link_to_add_fields "<button type='button' class='btn add_faq_button'>Add Links</button>".html_safe, f, :importent_links  %></div>
+    <button type="submit" class="btn btn-info save_button" style="position: relative;top: -80px;">Save</button>
+  <% end %>
 </div>

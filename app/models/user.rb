@@ -2,10 +2,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email,:class_photo,:school,:class_name,:class_description,:syllabus, :password, :password_confirmation,:terms_of_service, :remember_me,:username,:avatar,:school_admin_id,:role,:bio,:state,:major,:website,:first_name,:last_name,:reset_password_token
+  attr_accessible :email,:class_photo,:readings_attributes,:importent_links_attributes,:faqs_attributes,:school,:class_name,:class_description,:syllabus, :password, :password_confirmation,:terms_of_service, :remember_me,:username,:avatar,:school_admin_id,:role,:bio,:state,:major,:website,:first_name,:last_name,:reset_password_token
   has_many :tweets, :dependent => :destroy, :order => "created_at DESC"
   has_many :reports, :dependent => :destroy, :order => "created_at DESC"
+  has_many :readings, :dependent => :destroy
+  has_many :faqs, :dependent => :destroy
+  has_many :importent_links, :dependent => :destroy
   attr_accessor :school
+  accepts_nested_attributes_for :readings,  :allow_destroy  => true,:reject_if => :all_blank
+  accepts_nested_attributes_for :faqs,  :allow_destroy  => true,:reject_if => :all_blank
+  accepts_nested_attributes_for :importent_links,  :allow_destroy  => true,:reject_if => :all_blank
   
   has_attached_file :avatar,
     :whiny => false,

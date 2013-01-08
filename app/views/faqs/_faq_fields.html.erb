@@ -1,0 +1,9 @@
+<div class="faq_box">
+  <div class="faq_letter">Q:</div>
+  <%= f.text_field :question, :placeholder => "Title", :class => "faqs_box single_line" %>
+  <button type="button" class="btn paperclip"></button>
+  <div class="faq_letter">A:</div>
+  <%= f.text_area :answer, :rows => 3, :placeholder => "Reading", :class => "faqs_box" %>
+  <div class="delete_link"><%= link_to_remove_fields "delete", f %></div>
+  <br/>
+</div>

@@ -37,13 +37,25 @@ WebApp::Application.routes.draw do
     member do
       get :roster
       get :invite_students
-      get :faqs
-      get :importent_links
-      get :readings
       get :graphs
     end
     collection do
       put :switch_theme
+    end
+    resources :faqs do
+      collection do
+        post :upload_doc
+      end
+    end
+    resources :readings do
+      collection do
+        post :upload_doc
+      end
+    end
+    resources :importent_links do
+      collection do
+        post :upload_doc
+      end
     end
   end
   resources :notifications do
