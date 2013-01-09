@@ -1,5 +1,5 @@
 class Faq < ActiveRecord::Base
- attr_accessible :question, :answer, :user_id,:question_document
+  attr_accessible :question, :answer, :user_id,:question_document
   validates :question, :answer,:presence => true
   belongs_to :user
   has_attached_file :question_document,

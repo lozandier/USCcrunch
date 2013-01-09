@@ -361,7 +361,7 @@ a{
 #realupload, #realupload1{
     margin-left: -9px;
     margin-top: -38px;
-    opacity: 0;
+    overflow: hidden;
     width: 29px;
     opacity:0.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -369,6 +369,21 @@ a{
 }
 
 #realupload11{
+    opacity:0.0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+
+#file_browse_wrapper {
+    width: 22px;
+    height: 22px;
+    margin-top: 9px;
+    overflow:hidden;
+}
+
+#file_browse{
+    margin-left:-145px;
+    margin-top: -32px;
     opacity:0.0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
