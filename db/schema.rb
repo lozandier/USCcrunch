@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108065005) do
+ActiveRecord::Schema.define(:version => 20130109065510) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -45,11 +45,11 @@ ActiveRecord::Schema.define(:version => 20130108065005) do
     t.integer  "user_id"
     t.text     "question"
     t.text     "answer"
-    t.string   "question_file_name"
-    t.string   "question_content_type"
-    t.integer  "question_file_size"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "question_document_file_name"
+    t.string   "question_document_content_type"
+    t.integer  "question_document_file_size"
   end
 
   create_table "favorites", :force => true do |t|
@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(:version => 20130108065005) do
     t.integer  "user_id"
     t.text     "title"
     t.text     "links"
-    t.string   "link_file_name"
-    t.string   "link_content_type"
-    t.integer  "link_file_size"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "link_document_file_name"
+    t.string   "link_document_content_type"
+    t.integer  "link_document_file_size"
   end
 
   create_table "readings", :force => true do |t|

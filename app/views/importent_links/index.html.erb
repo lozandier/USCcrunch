@@ -33,7 +33,9 @@
   <%= form_for @user,:url => upload_doc_class_importent_links_path(@user), :method => 'POST' do |f| %>
     <div class="faq_box">
       <input type="text" size="30" placeholder="Title" name="user[importent_links_attributes][334455ff445533][title]" id="user_readings_attributes_334455445533_title" class="faqs_box single_line for_readings" />
-      <button type="button" class="btn paperclip"></button>
+      <div class="btn paperclip" id="file_browse_wrapper"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+        <input id="file_browse" type="file" name="user[importent_links_attributes][334455ff445533][link]" />
+      </div>
       <textarea rows="3" placeholder="Links" name="user[importent_links_attributes][334455ff445533][links]" id="user_readings_attributes_0_reading" cols="40" class="faqs_box for_readings"></textarea>
       <br />
     </div>

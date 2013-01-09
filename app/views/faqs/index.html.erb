@@ -34,7 +34,9 @@
     <div class="faq_box">
       <div class="faq_letter">Q:</div>
       <input type="text" size="30" name="user[faqs_attributes][334455ff445533][question]" id="user_readings_attributes_334455445533_title" class="faqs_box single_line" />
-      <button type="button" class="btn paperclip"></button>
+      <div class="btn paperclip" id="file_browse_wrapper"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+        <input id="file_browse" type="file" name="user[faqs_attributes][334455ff445533][question_document]" />
+      </div>
       <div class="faq_letter">A:</div>
       <textarea rows="3" name="user[faqs_attributes][334455ff445533][answer]" id="user_readings_attributes_0_reading" cols="40" class="faqs_box"></textarea>
       <br />

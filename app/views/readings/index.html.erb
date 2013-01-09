@@ -33,12 +33,14 @@
   <%= form_for @user,:url => upload_doc_class_readings_path(@user), :method => 'POST' do |f| %>
     <div class="faq_box">
       <input type="text" size="30" placeholder="Title" name="user[readings_attributes][334455ff445533][title]" id="user_readings_attributes_334455445533_title" class="faqs_box single_line for_readings">
-      <button type="button" class="btn paperclip"></button>
+      <div class="btn paperclip" id="file_browse_wrapper"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+        <input id="file_browse" type="file" name="user[readings_attributes][334455ff445533][read_document]" />
+      </div>
       <textarea rows="3" placeholder="Reading" name="user[readings_attributes][334455ff445533][reading]" id="user_readings_attributes_0_reading" cols="40" class="faqs_box for_readings"></textarea>
       <br>
     </div>
     <%= f.fields_for :readings do |document| %>
-      
+
     <% end %>
     <div  style="float:right;position: relative;left: -180px;"><%= link_to_add_fields "<button type='button' class='btn add_faq_button'>Add Reading</button>".html_safe, f, :readings  %></div>
     <button type="submit" class="btn btn-info save_button" style="position: relative;top: -80px;">Save</button>
