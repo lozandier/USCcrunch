@@ -13,7 +13,7 @@ class FaqsController < ApplicationController
     reject = @user.faqs.inject(true){|truthiness, n| !!(truthiness && n.marked_for_destruction?) }
     if !reject and @user.save
       flash[:notice] = "Successfully given document names"
-      redirect_to class_faqs_path(@user)
+      redirect_to class_path(@user)
     else
       1.times{@user.faqs.build}
       flash[:error] = "Document Names given failed"

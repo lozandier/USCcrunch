@@ -13,7 +13,7 @@ class ReadingsController < ApplicationController
     reject = @user.readings.inject(true){|truthiness, n| !!(truthiness && n.marked_for_destruction?) }
     if !reject and @user.save
       flash[:notice] = "Successfully given document names"
-      redirect_to class_readings_path(@user)
+      redirect_to class_path(@user)
     else
       1.times{@user.readings.build}
       flash[:error] = "Document Names given failed"
