@@ -6850,8 +6850,12 @@ button.btn.btn-info.save_button {
 /* edit_roster.html specific */
 .stats_box {
     float: right;
-    overflow: hidden;
-    margin: 10px 10px 0px 0px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: -442px;
+    margin-top: -305px;
+    overflow-x: hidden;
+    overflow-y: hidden;
     width: 250px;
 }
 

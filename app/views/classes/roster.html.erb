@@ -32,38 +32,12 @@
   <div class="first_box"></div>
   <% for student in @users %>
     <div id ="student_<%= student.id %>">
-      <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;width: 100%;">
+      <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;width: 100%;min-height: 80px;">
         <%= student.avatar.present? ? image_tag(student.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
         <div class="search_result_people_name"><%= link_to student.fullname, profile_path(student)%></div>
         <p class="search_result_people_at_name"><%= student.username %></p>
-        <div class="stats_box">
-          <div class="stats_box_time_row">
-            <%= link_to "1d", graphs_class_path(student, :point => '1d'), :remote => true  %>
-            <%= link_to "5d", graphs_class_path(student, :point => '5d'), :remote => true  %>
-            <%= link_to "1m", graphs_class_path(student, :point => '1m'), :remote => true  %>
-            <%= link_to "2m", graphs_class_path(student, :point => '2m'), :remote => true  %>
-            <%= link_to "3m", graphs_class_path(student, :point => '3m'), :remote => true  %>
-            <%= link_to "All", graphs_class_path(student, :point => 'all'), :remote => true  %>
-            <%= image_tag("/assets/tt.png") %>
-          </div>
-          <div class="stats_box_row">
-            Posts <span class="stats_num"><%= student.tweets.where('reply IS NULL and post_box IS NULL').count %></span>
-          </div>
-          <div class="stats_box_row">
-            Replies <span class="stats_num"><%= student.tweets.where('reply IS NOT NULL and post_box IS NULL').count %></span>
-          </div>
-          <div class="stats_box_row">
-            Time Online <span class="stats_num">125h</span>
-          </div>
-          <div class="stats_box_row">
-            Favorites <span class="stats_num">15</span>
-          </div>
-          <div class="stats_box_row">
-            Favorited <span class="stats_num">15</span>
-          </div>
-        </div>
         <%= link_to "Analytics", graphs_class_path(student), :style => 'display:none;float: right;position: relative;',:class => 'btn', :id => "ana_#{student.id}", :remote => true  %>
-        <span id="chart_<%= student.id %>" style="float: left;left: 9px;position: relative;width: 850px;top: -110px;">
+        <span id="chart_<%= student.id %>" style="float: left;left: 9px;position: relative;width: 850px;top: 4px;">
         </span>
       </div>
     </div>

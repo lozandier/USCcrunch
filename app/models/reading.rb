@@ -13,4 +13,17 @@ class Reading < ActiveRecord::Base
     :default => "280x190>",
     :other => "96x96>" } if Rails.env == 'production'
   has_attached_file :read_document,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
+
+  before_post_process :resize_images
+
+  # Helper method to determine whether or not an attachment is an image.
+  def image?
+    read_document_content_type =~ %r{^(image|(x-)?application)/(bmp|gif|jpeg|jpg|pjpeg|png|x-png)$}
+  end
+
+  private
+
+  def resize_images
+    return false unless image?
+  end
 end
