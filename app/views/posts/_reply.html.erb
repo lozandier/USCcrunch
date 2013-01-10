@@ -167,8 +167,8 @@
         <%=  f.text_area :body,:value => "#{@post.user.username+ " "}",:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 85%;padding:0px;background-color:#f5f5f5;' %>
         <div style="width:100%">
           <div style="width:49%; float: left;">
-            <div class="input-container btn attachment" id="image_upload1" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-              <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+            <div class="input-container btn attachment" id="file_browse_wrapper" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;margin-top: 0px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+              <%= f.file_field :document, :id => "file_browse", :onChange => 'readURL(this)' %>
             </div>
             <img id="PreviewImage1" style="height: 16px;top: 4px;width: 20px;display: none;" />
           </div>
@@ -190,7 +190,7 @@
     {
       $(this).animate({"height": "100px"}, "fast" );
       $("#button_bar").show();
-      $("#image_upload1").show();
+      $("#file_browse_wrapper").show();
       $("#post1").css('display', 'block');
       return false;
     });

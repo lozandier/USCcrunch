@@ -374,11 +374,20 @@ a{
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
 }
 
-#file_browse_wrapper {
+#file_browse_wrapper1{
+    display: none;
+    margin-left: 14px;
+    margin-top: 0px;
+}
+
+#file_browse_wrapper,#file_browse_wrapper1 {
     width: 22px;
     height: 22px;
-    margin-top: 9px;
     overflow:hidden;
+}
+
+#file_browse_wrapper{
+    margin-top: 9px;
 }
 
 #file_browse{

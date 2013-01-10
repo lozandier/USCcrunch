@@ -16,11 +16,11 @@
 
     <%= form_for @post, :url =>compose_message_profiles_path,:html => {:multipart => true,:method => "POST"},:remote => true do |f| %>
       <br /><%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'margin-left: 12px;margin-top: 62px;resize:none;',:placeholder=>"Compose new Post...",:id => 'area' %>
-      <div class="input-container btn attachment" id="image_upload" style="height: 22px;left: 4px;position: relative;width: 20px;display: none;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-        <%= f.file_field :document, :id => "realupload", :class => "realupload", :onChange => 'readURL(this)'%>
+      <div class="input-container btn attachment" id="file_browse_wrapper1"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+        <%= f.file_field :document, :id => "file_browse", :onChange => 'readURL(this)' %>
       </div>
       <img id="PreviewImage" style="height: 16px;left: 18px;position: relative;top: 2px;width: 20px;display: none;"  />
-      <%= f.submit 'Post', :id => "post",:class =>'btn', :style => 'display: none;left: 240px;position: relative;'%>
+      <%= f.submit 'Post', :id => "post",:class =>'btn', :style => 'display: none;left: 235px;position: relative;'%>
     <% end %>
   </div>
   <% if current_user.role == 'student' %>

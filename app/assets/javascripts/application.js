@@ -291,7 +291,7 @@ $(document).ready(function(){
 
     $("#area").click(function(){
         $("#area").css('min-height','100px');
-        $("#image_upload").show();
+        $("#file_browse_wrapper1").show();
         $("#post").show();
         mouse_in_side = true;
     })
@@ -311,7 +311,7 @@ $(document).ready(function(){
     $(document).click(function(){
         if(mouse_in_side == false){
             $("#area").css('min-height','10px');
-            $("#image_upload").hide();
+            $("#file_browse_wrapper1").hide();
             $("#post").hide();
             $('#PreviewImage').hide();
         }
