@@ -31,7 +31,7 @@
     <%= class_profile_picture %>
     <h2 class="profile_name"><%= @user.class_name.present? ? @user.class_name : "Class" %></h2>
     <br/>
-    <p class="bio"><%= @user.class_description.present? ? @user.class_description : " " %></p>
+    <p class="bio" style="width: 800px;"><%= @user.class_description.present? ? @user.class_description : " " %></p>
     <div class="class_content_row" style="margin-left: 200px;">
       <%= link_to "Syllabus", "", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "FAQ's", "faq(#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
