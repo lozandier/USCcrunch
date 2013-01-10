@@ -64,6 +64,39 @@ function conversation(user){
     });
 }
 
+function faq(user){
+    $.ajax({
+        url: '/classes/'+user+'/faqs/faqs',
+        success: function(data){
+            $("#popup_body1").html(data);
+            $("#overlay").show();
+            $("#popup_box1").show();
+        }
+    });
+}
+
+function reading(user){
+    $.ajax({
+        url: '/classes/'+user+'/readings/readings',
+        success: function(data){
+            $("#popup_body1").html(data);
+            $("#overlay").show();
+            $("#popup_box1").show();
+        }
+    });
+}
+
+function link(user){
+    $.ajax({
+        url: '/classes/'+user+'/importent_links/links',
+        success: function(data){
+            $("#popup_body1").html(data);
+            $("#overlay").show();
+            $("#popup_box1").show();
+        }
+    });
+}
+
 function reply(user_id,post_id){
     $.ajax({
         url: '/users/'+user_id+'/posts/'+post_id+'/reply',

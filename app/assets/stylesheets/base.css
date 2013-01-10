@@ -23,17 +23,6 @@ h2, h3, h4, h5, h6 {
 	text-transform: uppercase;
 }
 
-h2 {
-	text-align: center;
-    margin: 40px 0 45px 0;
-	background: url('../assets/line.gif') center repeat-x;
-}
-
-h2 span {
-	background: #FFF;
-	padding: 0 20px;
-}
-
 .centered {
 	text-align: center;
 }

@@ -44,6 +44,7 @@
             <%= link_to "2m", graphs_class_path(student, :point => '2m'), :remote => true  %>
             <%= link_to "3m", graphs_class_path(student, :point => '3m'), :remote => true  %>
             <%= link_to "All", graphs_class_path(student, :point => 'all'), :remote => true  %>
+            <%= image_tag("/assets/tt.png") %>
           </div>
           <div class="stats_box_row">
             Posts <span class="stats_num"><%= student.tweets.where('reply IS NULL and post_box IS NULL').count %></span>

@@ -20,4 +20,10 @@ class ReadingsController < ApplicationController
       render :action => "index"
     end
   end
+
+  def readings
+    @user = User.find(params[:class_id])
+    @readings = Reading.where("user_id = #{@user.id}")
+    render :layout => false
+  end
 end

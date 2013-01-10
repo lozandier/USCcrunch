@@ -6,8 +6,8 @@
   <%= form_for @post, :url =>create_post_profile_path(@user),:html => {:method => "POST"},:remote => true do |f| %>
     <%= f.text_area :body, :rows => 4, :cols => 15, :value => "#{@user.username+' ' }",:class=>"popup_post_box_input" %>
     <%= validation_error(@post.errors['body']) %>
-    <div class="input-container btn attachment" style="height: 22px;left: 10px;position: relative;width: 20px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
-      <%= f.file_field :document, :id => "realupload1", :class => "realupload", :onChange => 'readURL(this)'%>
+    <div class="input-container btn attachment" id="file_browse_wrapper1" style="display:block;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+      <%= f.file_field :document, :id => "file_browse", :onChange => 'readURL(this)' %>
     </div>
     <img id="PreviewImage1" src="" alt="" style="float: left;height: 16px;margin-left: 35px;margin-top: -2px;width: 20px;display: none;"  />
     <%= f.submit 'Post', :class => 'btn send_button'%>

@@ -6485,10 +6485,10 @@ body.blue_background {
 /* post_box.html specific */
 
 .popup_post_box {
-    position: fixed;
-    top: 30%;
+    position: absolute;
+    top: -30%;
     left: 32.5%;
-    height: 200px;
+    height: auto;
     width: 500px;
     border-radius: 5px;
     background-color: white;

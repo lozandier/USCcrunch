@@ -20,4 +20,10 @@ class FaqsController < ApplicationController
       render :action => "index"
     end
   end
+
+  def faqs
+    @user = User.find(params[:class_id])
+    @faqs = Faq.where("user_id = #{@user.id}")
+    render :layout => false
+  end
 end

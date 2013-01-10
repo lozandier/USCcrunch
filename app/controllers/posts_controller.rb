@@ -76,10 +76,9 @@ class PostsController < ApplicationController
     @repost.receiver_id = @user.present? ? @user.id : @post.user_id
     if @repost.save
       @post.update_attribute(:reply, true)
-      render :update do |page|
-        flash[:notice] = "Successfully Replied."
-        UserMailer.reply_post(@post.user,@repost).deliver
-        page.reload
+      UserMailer.reply_post(@post.user,@repost).deliver
+      respond_to do |format|
+        format.js
       end
     else
       if remotipart_submitted?

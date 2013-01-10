@@ -45,16 +45,19 @@ WebApp::Application.routes.draw do
     resources :faqs do
       collection do
         post :upload_doc
+        get :faqs
       end
     end
     resources :readings do
       collection do
         post :upload_doc
+        get :readings
       end
     end
     resources :importent_links do
       collection do
         post :upload_doc
+        get :links
       end
     end
   end

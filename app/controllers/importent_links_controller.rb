@@ -20,4 +20,10 @@ class ImportentLinksController < ApplicationController
       render :action => "index"
     end
   end
+
+  def links
+    @user = User.find(params[:class_id])
+    @links = ImportentLink.where("user_id = #{@user.id}")
+    render :layout => false
+  end
 end
