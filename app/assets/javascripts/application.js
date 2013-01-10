@@ -325,6 +325,7 @@ $(document).ready(function(){
     $("#area").click(function(){
         $("#area").css('min-height','100px');
         $("#file_browse_wrapper1").show();
+        $('#PreviewImage').hide();
         $("#post").show();
         mouse_in_side = true;
     })
