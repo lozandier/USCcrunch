@@ -12,29 +12,29 @@
       <%= image_tag("/assets/tt.png") %>
     </div>
     <div class="stats_box_row">
-      Posts <span class="stats_num"><%= @user.tweets.where('reply IS NULL and post_box IS NULL').count %></span>
+      Posts <span class="stats_num"><%= @posts %></span>
     </div>
     <div class="stats_box_row">
-      Replies <span class="stats_num"><%= @user.tweets.where('reply IS NOT NULL and post_box IS NULL').count %></span>
+      Replies <span class="stats_num"><%= @replies %></span>
     </div>
     <div class="stats_box_row">
-      Time Online <span class="stats_num">125h</span>
+      Time Online <span class="stats_num"><%= @user.sign_in_count %>h</span>
     </div>
     <div class="stats_box_row">
-      Favorites <span class="stats_num">15</span>
+      Favorites <span class="stats_num"><%= @favorites %></span>
     </div>
     <div class="stats_box_row">
-      Favorited <span class="stats_num">15</span>
+      Favorited <span class="stats_num"><%= @user_favorites %></span>
     </div>
   </div>
 </div>
 <script type="text/javascript">
   jQuery(function($){
-    flot_line('flot-gradient-line_<%= @user.id %>', flot_options_line,[[<%= @time5 %>, <%= @likes5 %>],[<%= @time4 %>, <%= @likes4 %>],[<%= @time3 %>, <%= @likes3 %>],[<%= @time2 %>, <%= @likes2 %>],[<%= @time1 %>, <%= @likes1 %>],[<%= @time %>, <%= @likes %>]],[[<%= @time5 %>, <%= @clikes5 %>],[<%= @time4 %>, <%= @clikes4 %>],[<%= @time3 %>, <%= @clikes3 %>],[<%= @time2 %>, <%= @clikes2 %>],[<%= @time1 %>, <%= @clikes1 %>],[<%= @time %>, <%= @clikes %>]]);
+    flot_line('flot-gradient-line_<%= @user.id %>', flot_options_line,<%= @likesqw %>,<%= @likesqw1 %>);
   });
 </script>
 <style>
   .tickLabel{
     right: 0px;
-}
+  }
 </style>

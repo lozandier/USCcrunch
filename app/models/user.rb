@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :reports, :dependent => :destroy, :order => "created_at DESC"
   has_many :readings, :dependent => :destroy
   has_many :faqs, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
   has_many :importent_links, :dependent => :destroy
   attr_accessor :school
   accepts_nested_attributes_for :readings,  :allow_destroy  => true,:reject_if => :all_blank

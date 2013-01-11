@@ -26,62 +26,124 @@ class ClassesController < ApplicationController
   def graphs
     @user = User.find(params[:id])
     if params[:point] == '1d'
-      @today = Date.today-1;
-      @time = @today.strftime("%d").to_i;
-      @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today+1}'").count
-      @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today+1}'").count
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").count
+      @likesqw = []
+      @likesqw1 = []
+      @today = Time.now;
+      (1..24).each do |time|
+        n = 0
+        p = 0
+        Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").each do |user|
+          if user.created_at.strftime("%H").to_i == time
+            n = n+1
+          end
+        end
+        Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}'").each do |user|
+          if user.created_at.strftime("%H").to_i == time
+            p = p+1
+          end
+        end
+        @likesqw << [time,n]
+        @likesqw1 << [time,p]
+      end
     elsif params[:point] == '5d'
-      @today = Date.today;
-      @time = @today.strftime("%d").to_i;
-      @time1 = @time-1;
-      @time2 = @time1-1;
-      @time3 = @time2-1;
-      @time4 = @time3-1;
-      @time5 = @time4-1;
-      @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today+1}'").count
-      @likes1 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-2}' AND '#{Date.today}'").count
-      @likes2 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-3}' AND '#{Date.today-1}'").count
-      @likes3 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-4}' AND '#{Date.today-2}'").count
-      @likes4 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today-3}'").count
-      @likes5 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-6}' AND '#{Date.today-4}'").count
-      @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today+1}'").count
-      @clikes1 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-2}' AND '#{Date.today}'").count
-      @clikes2 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-3}' AND '#{Date.today-1}'").count
-      @clikes3 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-4}' AND '#{Date.today-2}'").count
-      @clikes4 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today-3}'").count
-      @clikes5 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-6}' AND '#{Date.today-4}'").count
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today}'").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today}'").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-5}' AND '#{Date.today}'").count
+      @likesqw = []
+      @likesqw1 = []
+      @time = Time.now.strftime("%d").to_i
+      k = 0
+      c = 5
+      (1..5).each do |time|
+        @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-c}' AND '#{Date.today-c+1}'").count
+        @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-c}' AND '#{Date.today-c+1}'").count
+        k = k+1
+        @date = (Date.today-c).strftime("%d").to_i
+        @likesqw << [@date,@likes]
+        @likesqw1 << [@date,@clikes]
+        c = c-1
+      end
+    elsif params[:point] == '1m'
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}'").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}'").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}'").count
+      @likesqw = []
+      @likesqw1 = []
+      @time = Time.now.strftime("%d").to_i
+      k = 0
+      c = 31
+      (1..31).each do |time|
+        @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{Date.today-c}' AND '#{Date.today-c+1}'").count
+        @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{Date.today-c}' AND '#{Date.today-c+1}'").count
+        k = k+1
+        @date = (Date.today-c).strftime("%d").to_i
+        @likesqw << [@date,@likes]
+        @likesqw1 << [@date,@clikes]
+        c = c-1
+      end
+    elsif params[:point] == '2m'
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}'").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}'").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}'").count
+      @likesqw = []
+      @likesqw1 = []
+      count = 0
+      (1..2).each do |time|
+        month = Date.today.ago(count.month).beginning_of_month
+        lamonth = Date.today.ago(count.month).end_of_month
+        m = Date.today.ago(count.month).beginning_of_month.strftime("%m").to_i
+        @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{month}' AND '#{lamonth }'").count
+        @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{month}' AND '#{lamonth}'").count
+        @likesqw << [m,@likes]
+        @likesqw1 << [m,@clikes]
+        count = count+1
+      end
+    elsif params[:point] == '3m'
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}'").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}'").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}'").count
+      @likesqw = []
+      @likesqw1 = []
+      count = 0
+      (1..3).each do |time|
+        month = Date.today.ago(count.month).beginning_of_month
+        lamonth = Date.today.ago(count.month).end_of_month
+        m = Date.today.ago(count.month).beginning_of_month.strftime("%m").to_i
+        @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{month}' AND '#{lamonth }'").count
+        @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{month}' AND '#{lamonth}'").count
+        @likesqw << [m,@likes]
+        @likesqw1 << [m,@clikes]
+        count = count+1
+      end
     else
-      @year = Time.now.strftime("%Y").to_i
-      @next_year = @year+1
-      @year1 = @year-1
-      @year2 = @year1-1
-      @year3 = @year2-1
-      @year4 = @year3-1
-      @year5 = @year4-1
-      @year6 = @year5-1
-      @year7 = @year6-1
-      @today = Date.today;
-      @time = @today.strftime("%Y").to_i;
-      @time1 = @time-1;
-      @time2 = @time1-1;
-      @time3 = @time2-1;
-      @time4 = @time3-1;
-      @time5 = @time4-1;
-      @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year1}-12-31' AND '#{@next_year}-01-01'").count
-      @likes1 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year2}-12-31' AND '#{@year}-01-01'").count
-      @likes2 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year3}-12-31' AND '#{@year1}-01-01'").count
-      @likes3 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year4}-12-31' AND '#{@year2}-01-01'").count
-      @likes4 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year5}-12-31' AND '#{@year3}-01-01'").count
-      @likes5 = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@year6}-12-31' AND '#{@year4}-01-01'").count
-      @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year1}-12-31' AND '#{@next_year}-01-01'").count
-      @clikes1 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year2}-12-31' AND '#{@year}-01-01'").count
-      @clikes2 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year3}-12-31' AND '#{@year1}-01-01'").count
-      @clikes3 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year4}-12-31' AND '#{@year2}-01-01'").count
-      @clikes4 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year5}-12-31' AND '#{@year3}-01-01'").count
-      @clikes5 = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@year6}-12-31' AND '#{@year4}-01-01'").count
-    end
-    respond_to do |format|
-      format.js
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL ").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL ").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}'").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}'").count
+      @likesqw = []
+      @likesqw1 = []
+      c = 4
+      (1..5).each do |time|
+        puts  @date = (Date.today).strftime("%Y").to_i-c
+        @time = Date.new(@date, 1).beginning_of_month
+        @time1 = Date.new(@date, 12).end_of_month
+        @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@time}' AND '#{@time1}'").count
+        @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@time}' AND '#{@time1}'").count
+        @likesqw << [@date,@likes]
+        @likesqw1 << [@date,@clikes]
+        c = c-1
+      end
+      respond_to do |format|
+        format.js
+      end
     end
   end
 
