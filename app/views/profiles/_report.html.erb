@@ -1,5 +1,5 @@
 <div class="popup_post_box">
-  <div class="whats_happening">Report to <%= @user.username.split('@').last %></div>
+  <div class="whats_happening">Report <%= @user.username.split('@').last %></div>
   <div style="margin: -45px 8px;float :right;">
     <%=image_tag("simple-overlay-close.gif", :style => "cursor: pointer;margin : 21px -5px -2px 0px;", :border =>0,:width => '20px', :height => '20px', :onclick => "hide_popup();")%>
   </div>

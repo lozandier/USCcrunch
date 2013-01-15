@@ -12,7 +12,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to_function "Post to #{@user.username}", "post(#{@user.id})"%></li>
-            <li><%= link_to_function "Report to #{@user.username}", "report(#{@user.id})"%></li>
+            <li><%= link_to_function "Report #{@user.username}", "report(#{@user.id})"%></li>
           </ul>
         </div>
       <% end %>
