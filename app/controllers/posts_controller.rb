@@ -98,7 +98,6 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:user_id])
     @favourite = Favorite.new(:user_id => current_user.id,:tweet_id=>@post.id,:status => true).save
     render :update do |page|
-      page.alert('Marked as Favourites')
       page.reload
     end
   end
@@ -107,7 +106,6 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:user_id])
     @favourite = @post.favorite.update_attribute(:status, false)
     render :update do |page|
-      page.alert('Unmarked as Favourites')
       page.reload
     end
   end
@@ -116,7 +114,6 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:user_id])
     @favourite = @post.favorite.update_attribute(:status, true)
     render :update do |page|
-      page.alert('marked as Favourites')
       page.reload
     end
   end

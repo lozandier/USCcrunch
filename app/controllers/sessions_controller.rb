@@ -12,7 +12,6 @@ class SessionsController < Devise::SessionsController
       @user = User.find_by_email_and_role(params[:user][:email],params[:user][:role])
       if @user.present?
         resource = warden.authenticate!(:scope => resource_name)
-        flash[:notice] = 'Signed in Successfully'
         page.redirect_to after_sign_in_path_for(current_user)
       else
         @role = params[:user][:role] == 'student' ? '#error' : '#error2'
