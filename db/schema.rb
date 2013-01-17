@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109065510) do
+ActiveRecord::Schema.define(:version => 20130117063509) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -56,8 +56,9 @@ ActiveRecord::Schema.define(:version => 20130109065510) do
     t.integer  "tweet_id"
     t.integer  "user_id"
     t.boolean  "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "receiver_id"
   end
 
   create_table "follows", :force => true do |t|
@@ -149,12 +150,12 @@ ActiveRecord::Schema.define(:version => 20130109065510) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                    :default => "", :null => false
-    t.string   "encrypted_password",       :default => "", :null => false
+    t.string   "email",                      :default => "", :null => false
+    t.string   "encrypted_password",         :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            :default => 0
+    t.integer  "sign_in_count",              :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -171,12 +172,12 @@ ActiveRecord::Schema.define(:version => 20130109065510) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",          :default => 0
+    t.integer  "failed_attempts",            :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "authentication_token"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "state"
     t.text     "bio"
     t.string   "major"
@@ -193,6 +194,9 @@ ActiveRecord::Schema.define(:version => 20130109065510) do
     t.string   "class_photo_content_type"
     t.integer  "class_photo_file_size"
     t.string   "class_theme"
+    t.string   "syllabus_link_file_name"
+    t.string   "syllabus_link_content_type"
+    t.integer  "syllabus_link_file_size"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

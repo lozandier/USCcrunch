@@ -179,6 +179,19 @@ function readURL(input) {
     }
 }
 
+function readURL1(input) {
+    if (input.files && input.files[0]) {//Check if input has files.
+        var reader = new FileReader();//Initialize FileReader.
+
+        reader.onload = function (e) {
+            $('#PreviewImage2').attr('src', '/assets/check_loaded.png');
+            $('#PreviewImage2').show();
+            $("#user_photo").hide();
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 $(function() {
     $(".pagination a").live("click", function() {
         $.getScript(this.href);
