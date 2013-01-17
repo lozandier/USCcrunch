@@ -186,7 +186,6 @@ function readURL1(input) {
         reader.onload = function (e) {
             $('#PreviewImage2').attr('src', '/assets/check_loaded.png');
             $('#PreviewImage2').show();
-            $("#user_photo").hide();
         };
         reader.readAsDataURL(input.files[0]);
     }
