@@ -3,6 +3,6 @@ class Admin::DashboardsController < ApplicationController
   layout :layout?
 
   def index
-    @schools = SchoolAdmin.all
+    @schools = SchoolAdmin.where("admin_id = #{current_admin.id}").all
   end
 end

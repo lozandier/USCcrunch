@@ -8,6 +8,7 @@ class Admin::SchoolsController < ApplicationController
 
   def create
     @school = SchoolAdmin.new(params[:school_admin])
+    @school.admin_id = current_admin.id
     @school.password = 'kapil123'
     @school.password_confirmation = 'kapil123'
     if @school.save

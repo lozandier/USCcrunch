@@ -8,7 +8,7 @@ class SchoolAdmin < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,:first_name,:last_name,:school_name,:reset_password_token
+  attr_accessible :email, :password, :password_confirmation,:admin_id, :remember_me,:first_name,:last_name,:school_name,:reset_password_token
   validates :school_name,:first_name,:last_name, :presence => true
   validates_uniqueness_of :school_name
   has_many :users, :dependent => :destroy
