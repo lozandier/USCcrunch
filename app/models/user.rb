@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     :styles => {
     :original => "900x900>",
     :default => "280x190>",
-    :other => "96x96>" } if Rails.env == 'production'
+    :other => "96x96>" } if (Rails.env == 'production' or Rails.env == 'staging')
   has_attached_file :avatar,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
 
 

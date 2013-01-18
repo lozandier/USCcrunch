@@ -1,15 +1,19 @@
-<div class="span5">
-  <h3>Forgot your password?</h3>
+<div class="container">
 
-  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-    <%= devise_error_messages! %>
+  <div class="row">
+    <div class="span10 sign_up_column">
+      <div class="sign_up_content">
+        <h2>Forgot your password?</h2>
+        <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="controls">
+            <%= f.email_field :email, :class => 'span5', :placeholder => "Email" %>
+          </div>
+          <%= f.submit "Recover", :class => "btn btn-warning span5" %>
+        </div> <!--/sign_up_content -->
+      </div>
+    <% end %>
 
-    <p><%= f.label :email %>
-      <%= f.email_field :email %></p>
-
-    <p><%#= f.submit "Send me reset password instructions" %>
-      <button type="submit" class="button medium black">Submit</button>
-    </p>
-  <% end %><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
 
 </div>
