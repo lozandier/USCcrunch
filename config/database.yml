@@ -13,7 +13,7 @@ development:
 
 staging:
   adapter: mysql2
-  database: web_app_development
+  database: web_app_staging
   username: root
   password:
   pool: 5
