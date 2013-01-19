@@ -97,7 +97,7 @@ class StudentsController < ApplicationController
     @student = User.find(params[:id])
     if @student.destroy
       render :update do |page|
-        flash[:notice] = "Successfully deleted this Student."
+        flash[:notice] = "Successfully deleted this #{@student.role}."
         page.reload
       end
     end

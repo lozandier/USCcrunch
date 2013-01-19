@@ -1,16 +1,12 @@
 <div class="span12">
-  <div class="box_c1_mp">
-    <div style="float: left;">
-      <% if @user.role == 'student' %>
-        <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_student.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo") %>
-      <% else %>>
-        <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_instructor.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")%>
-      <% end %>
+  <div class="box_c1_mp extended">
+    <div class="cover_photo" style= "background-image : url(<%= @user.theme.present? ? @user.theme : '/assets/cover_photo.jpg'%>)">
     </div>
-    <div style="float: left;left:12px;">
-      <h2 class="profile_name"><%= @user.username.split('@').last %></h2>
-      <h4 class="at_name"><%= @user.username %></h4>
-    </div>
+    <%= profile_picture %>
+    <h2 class="profile_name"><%= @user.fullname %></h2>
+    <h4 class="at_name"><%= @user.username %></h4>
+    <br/>
+    <p class="bio"><%= @user.bio %></p>
   </div>
 </div>
 
@@ -30,7 +26,7 @@
     <h2 class="posts_title">Posts
       <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
     </h2>
-    <%= render :partial => 'show' %>
+    <%= render :partial => '/students/show' %>
     <input type="hidden" value="show" id="post_type" />
     <input type="hidden" value="<%= @school.id %>" id="school_id" />
     <input type="hidden" value="<%= @user.id %>" id="current_user_id" />

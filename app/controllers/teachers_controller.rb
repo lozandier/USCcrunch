@@ -58,7 +58,7 @@ class TeachersController < ApplicationController
     @teacher = User.find(params[:id])
     if @teacher.destroy
       render :update do |page|
-        flash[:notice] = "Successfully deleted this Teacher."
+        flash[:notice] = "Successfully deleted this #{@teacher.role}."
         page.reload
       end
     end
