@@ -7,16 +7,16 @@
       <% else %>
         <%= current_user.avatar.present? ? image_tag(current_user.avatar.url(:original), :width => '30px', :height => '30px', :class => 'conversation_post_pic_small') : image_tag("/assets/profile_pic_instructor.png", :width => '30px', :height => '30px', :class => 'conversation_post_pic_small')%>
       <% end %>
-      <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 85%; padding: 0px; background-color:#f5f5f5;',:placeholder=>"Add to Conversation",:value => ' ' %>
+      <%= f.text_area :body,:class=>"compose_new_post",:rows => 1,:style => 'resize:none;margin-right: 20px;width: 80%; padding: 0px; background-color:#f5f5f5;',:placeholder=>"Add to Conversation",:value => ' ' %>
       <div style="width:100%">
         <div style="width:49%; float: left;">
-          <div class="input-container btn attachment" id="file_browse_wrapper" style="height: 22px;left: 40px;position: relative;width: 20px;display: none;margin-top: 0px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
+          <div class="input-container btn attachment" id="file_browse_wrapper" style="height: 22px;left: 45px;position: relative;width: 20px;display: none;margin-top: 0px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
             <%= f.file_field :document, :id => "file_browse", :onChange => 'readURL(this)' %>
           </div>
           <img id="PreviewImage1" style="height: 16px;top: 4px;width: 20px;display: none;" />
         </div>
         <div style="width:13%;float: left;">
-          <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 146px;position: relative;'%>
+          <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 135px;position: relative;'%>
         </div>
       </div>
     <% end %>
