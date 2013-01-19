@@ -6,7 +6,6 @@
         <h5 class="post_name"><%= link_to post.user.fullname, profile_path(post.user), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
-        <%= Rails.env %>
         <div class="post_text">
           <%= render :partial => '/profiles/post_text',:locals => {:post => post} %>
         </div>

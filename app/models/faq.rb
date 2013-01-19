@@ -11,7 +11,7 @@ class Faq < ActiveRecord::Base
     :styles => {
     :original => "900x900>",
     :default => "280x190>",
-    :other => "96x96>" } if (Rails.env == 'production' or Rails.env == 'staging')
+    :other => "96x96>" } if (Rails.env == 'production')
   has_attached_file :question_document,:styles => {:original => "900x900>", :default => "280x190>" } if Rails.env == 'development'
 
   before_post_process :resize_images
