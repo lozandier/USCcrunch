@@ -68,12 +68,6 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def profile_summary
-    @user = User.find(params[:id])
-    @posts = @user.tweets.paginate :page => params[:index_page], :per_page => 3
-    render :layout => false
-  end
-
   def edit_password
 
   end
@@ -88,20 +82,6 @@ class ProfilesController < ApplicationController
       flash[:error] = 'Password changing failed.'
       render :action => "edit_password"
     end
-  end
-
-  def followers
-    @user = User.find(params[:id])
-    @post = @user.tweets.new(params[:tweet])
-    @users = User.where("confirmation_token IS NULL and id != '#{@user.id}'")
-    @followers = @user.received_follows.where("status = #{true}")
-  end
-
-  def following
-    @users = User.where("confirmation_token IS NULL and id != '#{current_user.id}'")
-    @user = User.find(params[:id])
-    @post = @user.tweets.new(params[:tweet])
-    @followers = Follow.where("status = #{true} and user_id = #{@user.id}")
   end
 
   def compose_message

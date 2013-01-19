@@ -16,22 +16,12 @@
           <img id="PreviewImage1" style="height: 16px;top: 4px;width: 20px;display: none;" />
         </div>
         <div style="width:13%;float: left;">
-          <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 135px;position: relative;'%>
+          <%= f.submit 'Post', :id => 'post1',:class =>'btn', :style => 'display: none;left: 132px;position: relative;'%>
         </div>
       </div>
     <% end %>
   </div>
 </div>
-<style>
-  #PreviewImage1{
-    height: 70px;
-    left: -15px;
-    position: relative;
-    top: 10px;
-    width: 68px;
-    display: none;
-  }
-</style>
 <script>
   jQuery(function($){
   });
@@ -52,30 +42,4 @@
   function reply_user_post_path(user){
     $("#tweet_body").val(user + " ");
   }
-
-
-  $(document).ready(function(){
-    var mouse_in_side = false;
-
-    $('#box_l1_hp').hover(function(){
-      mouse_in_side=true;
-    }, function(){
-      mouse_in_side=false;
-    });
-
-    $('.conversation_post_input_box').hover(function(){
-      mouse_in_side=true;
-    }, function(){
-      mouse_in_side=false;
-    });
-
-    $(document).click(function(){
-      if(mouse_in_side == false){
-        $("#tweet_body").css('height','auto');
-        $("#file_browse_wrapper").hide();
-        $("#post1").hide();
-        $("#button_bar").show();
-      }
-    });
-  });
 </script>

@@ -90,8 +90,6 @@ WebApp::Application.routes.draw do
       get :profile_summary
       get :more_profile_information
       post :conversation_message
-      get :followers
-      get :following
       get :report
       post :report_post
       get :post
