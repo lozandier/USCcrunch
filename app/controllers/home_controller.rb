@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user
-      redirect_to profiles_path
+      redirect_to profiles_path(:school_name => current_user.school_admin.school)
     end
   end
 

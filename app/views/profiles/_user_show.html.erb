@@ -3,7 +3,7 @@
   <div class="span12">
     <div class="profile_box_right">
       <% if @user.id == current_user.id %>
-        <%= link_to 'Edit Profile',edit_profile_path(current_user), :class => 'btn' %>
+        <%= link_to 'Edit Profile',edit_profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id), :class => 'btn' %>
       <% else %>
         <div class="btn-group other_profile_options_button">
           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

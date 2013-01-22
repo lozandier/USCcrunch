@@ -33,4 +33,8 @@ class SchoolAdmin < ActiveRecord::Base
     self.reset_password_sent_at = Time.now
     save
   end
+
+  def school
+    self.school_name.split(".").join("").downcase
+  end
 end

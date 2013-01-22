@@ -49,9 +49,9 @@ function get_username(ht){
     });
 }
 
-function conversation(user){
+function conversation(school,user){
     $.ajax({
-        url: '/profiles/'+user+'/conversation',
+        url: '/'+school+'/profiles/'+user+'/conversation',
         success: function(data){
             $("body").css({
                 'overflow': "hidden",
@@ -134,9 +134,9 @@ function post(user){
     });
 }
 
-function new_compose(){
+function new_compose(school){
     $.ajax({
-        url: '/profiles/new_compose',
+        url: '/'+school+'/profiles/new_compose',
         success: function(data){
             $("#popup_body1").html(data);
             $("#overlay").show();
@@ -205,14 +205,14 @@ jQuery(document).ajaxStop(function(){
     jQuery('#ajax_loader_big_div').hide();
 });
 
-function more_posts(page){
+function more_posts(school,page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
         beforeSend: function() {
             $('#ajax_loader_big_div').hide();
             jQuery('#posts').append($("#ajax").show());
         },
-        url: "/profiles?page="+page,
+        url: "/"+school+"/profiles?page="+page,
         success: function(data) {
             jQuery('#posts').append(data);
             jQuery($("#ajax"),this).remove();

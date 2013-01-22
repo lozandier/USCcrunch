@@ -151,7 +151,7 @@ class ClassesController < ApplicationController
     @user = User.find(params[:id])
     if @user.id != current_user.id
       flash[:error] = 'Access Denied.'
-      redirect_to class_path(current_user)
+      redirect_to class_path(:school_name => current_user.school_admin.school,:id =>current_user.id)
     end
   end
 
@@ -159,7 +159,7 @@ class ClassesController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = "Successfully Updated your Class details."
-      redirect_to class_path(@user)
+      redirect_to class_path(:school_name => current_user.school_admin.school,:id =>@user.id)
     else
       flash[:error] = "Failed to Update your Class details."
       render :action => 'edit'

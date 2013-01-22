@@ -13,8 +13,8 @@
       <% end %>
       <% if @user.id == current_user.id %>
         <div class="box_l1_hp">
-          <%= link_to "<button class='side_nav_button profile active_button' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, profile_path(current_user, :post => 'post'), :remote => true %>
-          <%= link_to "<button class='side_nav_button password' type=button'>Replies<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, profile_path(current_user, :post => 'reply'), :remote => true %>
+          <%= link_to "<button class='side_nav_button profile active_button' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id, :post => 'post'), :remote => true %>
+          <%= link_to "<button class='side_nav_button password' type=button'>Replies<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id, :post => 'reply'), :remote => true %>
         </div>
       <% end %>
 

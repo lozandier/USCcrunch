@@ -33,7 +33,7 @@ WebApp::Application.routes.draw do
 
   resources :teachers 
 
-  resources :classes do
+  resources :classes,:path => "/:school_name/classes/" do
     member do
       get :roster
       get :invite_students
@@ -61,7 +61,7 @@ WebApp::Application.routes.draw do
       end
     end
   end
-  resources :notifications do
+  resources :notifications,:path => "/:school_name/notifications/" do
     member do
       get :announcements
     end
@@ -84,7 +84,7 @@ WebApp::Application.routes.draw do
     end
   end
 
-  resources :profiles do
+  resources :profiles,:path => "/:school_name/profiles/" do
     member do
       get :conversation
       get :profile_summary
