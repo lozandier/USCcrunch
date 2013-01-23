@@ -58,7 +58,7 @@
               <div class="bio_text_count"><strong>0 / 160</strong></div>
               <%= f.text_area :bio, :rows => 3, :class => "bio_text_area" %>
               <div class="skip_button">
-                <%= link_to "Skip &#187;".html_safe, profiles_path %>
+                <%= link_to "Skip &#187;".html_safe, profiles_path(:school_name => current_user.school_admin.school) %>
               </div>
               <div style="float: right;left: -10px;position: relative;">
                 <%= f.submit "Save".html_safe %>

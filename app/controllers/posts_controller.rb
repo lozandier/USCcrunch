@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @user = current_user
-    @posts = @user.tweets.where('post_box IS NULL').order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @posts = Tweet.where("user_id = '#{@user.id}' and post_box IS NULL and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def create
@@ -50,9 +50,9 @@ class PostsController < ApplicationController
     @post = Tweet.find(params[:id])
     @user = User.find(params[:user_id])
     if @post.tweet_id == nil
-      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{params[:id]}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or tweets.id = '#{@post.tweet_id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     end
     render :layout => false
   end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
     if @post.tweet_id == nil
       @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or tweets.id = '#{@post.tweet_id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     end
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id

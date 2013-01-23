@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     sql_query = "select * from tweets a where (id in (select max(id) from tweets b where a.user_id = b.user_id )) order by a.created_at desc"
     @posts = Tweet.paginate_by_sql [sql_query], :per_page => 10, :page => params[:page]
     if @user.update_attributes(params[:user])
-      redirect_to profiles_path
+      redirect_to profiles_path(:school_name => current_user.school_admin.school)
     else
       flash[:error] = "Failed to Update your Profile details."
       render :action => 'new_user2', :layout => false

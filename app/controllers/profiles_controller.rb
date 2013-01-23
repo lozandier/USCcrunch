@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
   def index
     @users = User.where("reset_password_token IS NULL and id != '#{current_user.id}'")
     @post = current_user.tweets.new(params[:tweet])
-    @posts = Tweet.all(:order => "created_at Desc").paginate :page => params[:page], :per_page => 10
+    @posts = Tweet.where("users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.html {render :partial => "index", :layout => false if request.xhr?}
       format.js {render :partial => "index", :layout => false if request.xhr?}
@@ -17,9 +17,9 @@ class ProfilesController < ApplicationController
     @post = @user.tweets.new(params[:tweet])
     @header = params[:post].present? ? "#{params[:post].capitalize}" : " "
     if @header == 'Reply'
-      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true}").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true} and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     else
-      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and (post_box IS NULL or post_box = 'post')").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and (post_box IS NULL or post_box = 'post') and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     end
     respond_to do |format|
       format.html {render :partial => "show", :layout => false if request.xhr?}
@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
     @user = User.find_by_username(params[:query])
     if @user.present?
       @post = @user.tweets.new(params[:tweet])
-      @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+      @posts = Tweet.where("user_id = '#{@user.id}' and reply IS NULL and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
       render :action => 'show'
     else
       flash[:error] = "Search not Found."
@@ -42,9 +42,9 @@ class ProfilesController < ApplicationController
   def conversation
     @post = Tweet.find(params[:id])
     if @post.tweet_id == nil
-      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{params[:id]}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+      @posts = Tweet.where("(tweet_id = '#{@post.tweet_id}' or tweets.id = '#{@post.tweet_id}') and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     end
     render :layout => false
   end
@@ -113,9 +113,9 @@ class ProfilesController < ApplicationController
     @user = current_user
     @post = Tweet.find(params[:id])
     if @post.tweet_id == nil
-      @posts = Tweet.where("tweet_id = '#{params[:id]}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{params[:id]}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     else
-      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or id = '#{@post.tweet_id}'").order("created_at Asc")
+      @posts = Tweet.where("tweet_id = '#{@post.tweet_id}' or tweets.id = '#{@post.tweet_id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Asc")
     end
     @repost = Tweet.new(params[:tweet])
     @repost.user_id = current_user.id
