@@ -7,7 +7,7 @@
       <%= @user.class_photo.present? ? image_tag(@user.class_photo.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
     <% end %>
     <h3 class="profile_name"><%= @user.class_name.present? ? @user.class_name : "Class" %></h3>
-    <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>
+    <%= link_to "View my profile page", profile_path(:school_name => current_user.school_admin.school,:id =>@user.id), :class => "view_my_profile_page" %>
   </div>
 
 

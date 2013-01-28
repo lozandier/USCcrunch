@@ -1,5 +1,5 @@
 <%= form_for @post, :url => user_posts_path(@user),:html => {:multipart => true, :method => 'POST'},:remote => true do |f| %>
-  <%= f.text_area :body, :value => "#{@user.username+' ' }",:rows => 1,:id => 'area',:style => "width: 90%;resize:none;"  %>
+  <%= f.text_area :body, :value => "#{@user.username != nil ? @user.username+' ' : '' }",:rows => 1,:id => 'area',:style => "width: 90%;resize:none;"  %>
   <div class="input-container btn attachment" id="file_browse_wrapper1" style="margin-left: 0px;"><%= image_tag("/assets/paperclip.png", :width => '15px;', :height => '20px;')%>
     <%= f.file_field :document, :id => "file_browse", :onChange => 'readURL(this)' %>
   </div>

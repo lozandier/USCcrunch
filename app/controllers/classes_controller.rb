@@ -28,8 +28,8 @@ class ClassesController < ApplicationController
     if params[:point] == '1d'
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
       @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-1}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
       @likesqw = []
       @likesqw1 = []
       @today = Time.now;
@@ -71,8 +71,8 @@ class ClassesController < ApplicationController
     elsif params[:point] == '1m'
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
       @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today-31}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
       @likesqw = []
       @likesqw1 = []
       @time = Time.now.strftime("%d").to_i
@@ -90,8 +90,8 @@ class ClassesController < ApplicationController
     elsif params[:point] == '2m'
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
       @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(1.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
       @likesqw = []
       @likesqw1 = []
       count = 0
@@ -108,8 +108,8 @@ class ClassesController < ApplicationController
     elsif params[:point] == '3m'
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and tweets.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
       @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and tweets.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and favorites.created_at BETWEEN '#{Date.today.ago(2.month).beginning_of_month}' AND '#{Date.today}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
       @likesqw = []
       @likesqw1 = []
       count = 0
@@ -126,8 +126,8 @@ class ClassesController < ApplicationController
     else
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and users.school_admin_id = '#{current_user.school_admin_id}' ").joins("left join users on users.id = tweets.user_id").count
       @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and users.school_admin_id = '#{current_user.school_admin_id}' ").joins("left join users on users.id = tweets.user_id").count
-      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
-      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
       @likesqw = []
       @likesqw1 = []
       c = 4
