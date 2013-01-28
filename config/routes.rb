@@ -37,6 +37,7 @@ WebApp::Application.routes.draw do
     member do
       get :roster
       get :invite_students
+      post :create_invited_students
       get :graphs
     end
     collection do

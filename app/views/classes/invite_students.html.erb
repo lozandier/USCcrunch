@@ -36,16 +36,19 @@
       <h4>Bulk Invites</h4>
       <div class="bulk_invites_note">Enter each student's name in a separate line</div>
       <br/>
-      <div class="students_emails_title">Student's Emails</div>
-      <textarea class="bulk_invites" rows="7"
-                placeholder="student@school.edu            student@school.edu             student@school.edu"></textarea>
-      <br/>
-      <button type="button" class="btn btn-info submit_button">Submit</button>
+      <%= form_tag create_invited_students_class_path(:school_name => current_user.school_admin.school,:id => current_user.id)  do %>
+        <div class="students_emails_title">Student's Emails</div>
+        <%= text_area_tag :emails,'',:class=>"bulk_invites",:rows=>"7",:placeholder=>"student@school.edu            student@school.edu             student@school.edu" %>
+        <br/>
+        <%= submit_tag "Submit",:class=>"btn btn-info submit_button"%>
+      <% end %>
       <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      <div class="students_emails_title">Student's Email</div>
-      <input class="edit_profile_input student_email_single_input" type="text" placeholder="student@school.edu"/>
-      <br/>
-      <button type="button" class="btn btn-info submit_button">Submit</button>
+      <%= form_tag create_invited_students_class_path(:school_name => current_user.school_admin.school,:id => current_user.id)  do %>
+        <div class="students_emails_title">Student's Emails</div>
+        <%= text_field_tag :emails,'',:class=>"edit_profile_input student_email_single_input",:placeholder=>"student@school.edu" %>
+        <br/>
+        <%= submit_tag "Submit",:class=>"btn btn-info submit_button"%>
+      <% end %>
     </div>
 
   </div>

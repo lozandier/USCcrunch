@@ -174,4 +174,29 @@ class ClassesController < ApplicationController
   def invite_students
     @user = User.find(params[:id])
   end
+
+  def create_invited_students
+    @user = User.find(params[:id])
+    @school = SchoolAdmin.find(current_user.school_admin_id.to_i)
+    user_mail = ''
+    if params[:emails] != ''
+      params[:emails].split(",").to_a.each do |email|
+        if !User.exists?(:email => email)
+          @student = @school.users.new(:email => email)
+          @student.password = 'ashok123'
+          @student.password_confirmation = 'ashok123'
+          @student.save
+          @student.update_attribute(:role, 'student')
+          @student.generate_password_reset_code
+          UserMailer.sent_student_invitation(@school,@student).deliver
+        end
+        user_mail = email
+      end
+      !User.exists?(:email => user_mail) ? (flash[:notice] = "Sent Invitation Successfully") : (flash[:error] = "Failed to Send Invitation")
+      redirect_to invite_students_class_path(:school_name => current_user.school_admin.school,:id =>@user.id)
+    else
+      flash[:error] = "Failed to Send Invitation"
+      render :action => 'invite_students'
+    end
+  end
 end
