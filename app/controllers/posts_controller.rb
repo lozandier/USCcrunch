@@ -8,7 +8,7 @@ class PostsController < ApplicationController
 
   def index
     @user = current_user
-    @posts = Tweet.where("user_id = '#{@user.id}' and post_box IS NULL and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
+    @posts = Tweet.where("user_id = '#{@user.id}' and post_box IS NULL and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:index_page], :per_page => 10
   end
 
   def create

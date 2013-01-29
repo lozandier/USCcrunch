@@ -16,7 +16,7 @@ class ClassesController < ApplicationController
   def show
     @user = User.find(params[:id])
     @header = "Posts"
-    @posts = Tweet.where("tweet_id IS NULL and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :per_page => 20, :page => params[:page]
+    @posts = Tweet.where("tweet_id IS NULL and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :per_page => 20, :page => params[:page]
     respond_to do |format|
       format.html {render :partial => "show", :layout => false if request.xhr?}
       format.js {render :partial => "show", :layout => false if request.xhr?}
