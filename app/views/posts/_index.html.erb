@@ -9,21 +9,11 @@
     <div id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= post_picture(post) %></div>
       <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;">
-        <h5 class="post_name"><%= link_to post.user.fullname, profile_path(post.user), :style => 'color:black;font-weight:bold;' %></h5>
+        <h5 class="post_name"><%= link_to post.user.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>post.user.id), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
         <div class="post_text">
-          <% if post.body > post.body.slice(0..300) %>
-            <span id="pos_<%= post.id%>"><%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.slice(0..300).length)) : post.body.slice(0..300) %><%= link_to_function "...", "expand(#{post.id})" %><br /></span>
-          <% else %>
-              <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %><br />
-            <% end %>
-          <div id="expa_<%= post.id %>"  style="display:none;">
-            <%= User.find_by_username(post.body.split(" ")[0]).present? ? ((link_to post.body.split(" ")[0], profile_path(post.receiver))+' '+post.body.slice(post.body.split(" ")[0].length..post.body.length)) : post.body %>
-          </div>
-          <% if post.document.present? %>
-            <%= link_to image_tag(post.document.url(:original),:width => '50px;', :height => '50px;'), post.document.url %>
-          <% end %>
+          <%= render :partial => '/profiles/post_text',:locals => {:post => post} %>
         </div>
         <div class="action_row">
           <% if post.body > post.body.slice(0..300) %>
