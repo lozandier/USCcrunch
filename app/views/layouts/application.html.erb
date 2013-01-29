@@ -29,21 +29,17 @@
                 <% if params[:controller] == 'home' && params[:action] == 'index'  %>
                   <li class="active"><%= link_to image_tag("/assets/home_icon_blue.png", :height => "30px", :width => "20px")+'Home', root_path  %></li>
                 <% else %>
-                  <% if !current_user %>
-                    <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', root_path  %></li>
-                  <% else %>
-                    <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', profiles_path  %></li>
-                  <% end %>
+                  <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', root_path  %></li>
                 <% end %>
                 <% if params[:controller] == 'home' && params[:action] == 'about'  %>
-                  <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"About", "http://www.eduposts.com/" %></li>
+                  <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"About", root_path %></li>
                 <% else %>
-                  <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"About", "http://www.eduposts.com/" %></li>
+                  <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"About", root_path %></li>
                 <% end %>
                 <% if params[:controller] == 'home' && (params[:action] == 'contact' or params[:action] == 'post_contact')  %>
-                  <li class="active"><%= link_to image_tag("/assets/@_blue.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"Contact", "http://www.eduposts.com/" %></li>
+                  <li class="active"><%= link_to image_tag("/assets/@_blue.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"Contact", root_path %></li>
                 <% else %>
-                  <li><%= link_to image_tag("/assets/@_white.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"Contact", "http://www.eduposts.com/" %></li>
+                  <li><%= link_to image_tag("/assets/@_white.png", :height => "30px", :width => "20px", :class => 'nav_icon')+"Contact", root_path %></li>
                 <% end %>
               <% end %>
             </ul>
