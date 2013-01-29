@@ -34,9 +34,9 @@
     <p class="bio" style="width: 800px;"><%= @user.class_description.present? ? @user.class_description : " " %></p>
     <div class="class_content_row" style="margin-left: 200px;">
       <%= link_to "Syllabus", "", :class => "grey_text", :style => 'color: gray;' %> &#183;
-      <%= link_to_function "FAQ's", "faq(#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
-      <%= link_to_function "Readings", "reading(#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
-      <%= link_to_function "Important Links", "link(#{@user.id})", :class => "grey_text", :style => 'color: gray;' %>
+      <%= link_to_function "FAQ's", "faq('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
+      <%= link_to_function "Readings", "reading('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
+      <%= link_to_function "Important Links", "link('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %>
     </div>
 
   </div>
@@ -48,8 +48,8 @@
 
       <div class="box_l1_hp side_nav_box">
         <%= link_to "<button class='side_nav_button class active_button' type=button'>Posts<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, class_path(:school_name => current_user.school_admin.school,:id =>@user.id) %>
-        <%= link_to "<button class='side_nav_button announcements' type=button'>Announcements<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, announcements_notification_path(:school_name => current_user.school_admin.school,:id =>@user.id,:post_text => "announcement"), :remote => true %>
-        <%= link_to "<button class='side_nav_button assignments' type=button'>Assignments<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, announcements_notification_path(:school_name => current_user.school_admin.school,:id =>@user.id,:post_text => "assignment"), :remote => true %>
+        <%= link_to "<button class='side_nav_button announcements' type=button'>Announcements<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, announcements_notification_path(:school_name => current_user.school_admin.school,:id =>@user.id,:post => "announcement"), :remote => true %>
+        <%= link_to "<button class='side_nav_button assignments' type=button'>Assignments<img class='arrow' src='/assets/arrow.png' height='10px' width='10px'></button>".html_safe, announcements_notification_path(:school_name => current_user.school_admin.school,:id =>@user.id,:post => "assignment"), :remote => true %>
       </div>
 
       <div class="box_l2_hp">

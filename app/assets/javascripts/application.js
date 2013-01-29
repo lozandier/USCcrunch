@@ -64,9 +64,9 @@ function conversation(school,user){
     });
 }
 
-function faq(user){
+function faq(school,user){
     $.ajax({
-        url: '/classes/'+user+'/faqs/faqs',
+        url: '/'+school+'/classes/'+user+'/faqs/faqs',
         success: function(data){
             $("#popup_body1").html(data);
             $("#overlay").show();
@@ -75,9 +75,9 @@ function faq(user){
     });
 }
 
-function reading(user){
+function reading(school,user){
     $.ajax({
-        url: '/classes/'+user+'/readings/readings',
+        url: '/'+school+'/classes/'+user+'/readings/readings',
         success: function(data){
             $("#popup_body1").html(data);
             $("#overlay").show();
@@ -86,9 +86,9 @@ function reading(user){
     });
 }
 
-function link(user){
+function link(school,user){
     $.ajax({
-        url: '/classes/'+user+'/importent_links/links',
+        url: '/'+school+'/classes/'+user+'/importent_links/links',
         success: function(data){
             $("#popup_body1").html(data);
             $("#overlay").show();
@@ -112,9 +112,9 @@ function reply(user_id,post_id){
     });
 }
 
-function report(user){
+function report(school,user){
     $.ajax({
-        url :"/profiles/"+user+"/report",
+        url :'/'+school+"/profiles/"+user+"/report",
         success :function(data){
             $("#popup_body1").html(data);
             $("#popup_box1").show();
@@ -123,9 +123,9 @@ function report(user){
     });
 }
 
-function post(user){
+function post(school,user){
     $.ajax({
-        url :"/profiles/"+user+"/post",
+        url :'/'+school+"/profiles/"+user+"/post",
         success :function(data){
             $("#popup_body1").html(data);
             $("#popup_box1").show();

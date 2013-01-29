@@ -58,7 +58,7 @@
     </div>
   <% end %>
 <% else %>
-  <span style="color: red;font-size: 15px;left: 300px;position: relative;top: -9px;">No <%= @header %>.</span>
+  <span style="color: red;font-size: 15px;left: 300px;position: relative;top: -9px;">No <%=  params[:post].present? ? @header : "Posts" %>.</span>
 <% end %>
 <% if @posts.total_pages > @posts.current_page %>
   <div id="more_posts_link">

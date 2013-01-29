@@ -36,7 +36,7 @@
         <%= student.avatar.present? ? image_tag(student.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
         <div class="search_result_people_name"><%= link_to student.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>student.id)%></div>
         <p class="search_result_people_at_name"><%= student.username %></p>
-        <%= link_to "Analytics", graphs_class_path(student), :style => 'display:none;float: right;position: relative;',:class => 'btn', :id => "ana_#{student.id}", :remote => true  %>
+        <%= link_to "Analytics", graphs_class_path(student.school_admin.school,student), :style => 'display:none;float: right;position: relative;',:class => 'btn', :id => "ana_#{student.id}", :remote => true  %>
         <span id="chart_<%= student.id %>" style="float: left;left: 9px;position: relative;width: 850px;top: 4px;">
         </span>
       </div>
