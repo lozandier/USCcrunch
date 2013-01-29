@@ -17,9 +17,9 @@ class ProfilesController < ApplicationController
     @post = @user.tweets.new(params[:tweet])
     @header = params[:post].present? ? "#{params[:post].capitalize}" : " "
     if @header == 'Reply'
-      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true} and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and reply = #{true} and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     else
-      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and (post_box IS NULL or post_box = 'post') and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
+      @posts = Tweet.where("(user_id = '#{@user.id}' or receiver_id = '#{@user.id}') and (post_box IS NULL or post_box = 'post') and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order("created_at Desc").paginate :page => params[:page], :per_page => 10
     end
     respond_to do |format|
       format.html {render :partial => "show", :layout => false if request.xhr?}
