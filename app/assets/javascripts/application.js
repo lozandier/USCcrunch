@@ -220,14 +220,14 @@ function more_posts(school,page){
     });
 }
 
-function posts(user_id, page){
+function posts(school,user_id, page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
         beforeSend: function() {
             $('#ajax_loader_big_div').hide();
             jQuery('#posts').append($("#ajax").show());
         },
-        url: "/profiles/"+user_id+"?page="+page,
+        url: '/'+school+"/profiles/"+user_id+"?page="+page,
         success: function(data) {
             $("#ajax").show();
             jQuery('#posts').append(data);
@@ -237,14 +237,14 @@ function posts(user_id, page){
 }
 
 
-function notification_posts(page){
+function notification_posts(school,page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
         beforeSend: function() {
             $('#ajax_loader_big_div').hide();
             jQuery('#posts').append($("#ajax").show());
         },
-        url: "/notifications/posts?page="+page,
+        url: '/'+school+"/notifications/posts?page="+page,
         success: function(data) {
             $("#ajax").show();
             jQuery('#posts').append(data);
@@ -253,14 +253,14 @@ function notification_posts(page){
     });
 }
 
-function notification_replies(page){
+function notification_replies(school,page){
     jQuery('#more_posts_link').remove();
     jQuery.ajax({
         beforeSend: function() {
             $('#ajax_loader_big_div').hide();
             jQuery('#posts').append($("#ajax").show());
         },
-        url: "/notifications?page="+page,
+        url: '/'+school+"/notifications?page="+page,
         success: function(data) {
             $("#ajax").show();
             jQuery('#posts').append(data);

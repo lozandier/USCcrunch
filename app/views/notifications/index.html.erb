@@ -19,6 +19,7 @@
     </h2>
     <%= render :partial => 'index' %>
     <input type="hidden" value="show" id="post_type" />
+    <input type="hidden" value="<%= current_user.school_admin.id %>" id="school_post_type" />
   </div>
 </div>
 <script>
@@ -28,7 +29,7 @@
       if (($(window).scrollTop() == $(document).height() - $(window).height()) && jQuery('#posts_page').val() > 0)
       {
         if (jQuery("#post_type").val() == 'show') {
-          notification_replies(jQuery('#posts_page').val())
+          notification_replies(jQuery('#school_post_type').val(),jQuery('#posts_page').val())
         }
       }
     });
