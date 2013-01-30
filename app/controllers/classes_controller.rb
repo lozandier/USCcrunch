@@ -192,7 +192,7 @@ class ClassesController < ApplicationController
         end
         user_mail = email
       end
-      !User.exists?(:email => user_mail) ? (flash[:notice] = "Sent Invitation Successfully") : (flash[:error] = "Failed to Send Invitation")
+      flash[:notice] = "Sent Invitation Successfully"
       redirect_to invite_students_class_path(:school_name => current_user.school_admin.school,:id =>@user.id)
     else
       flash[:error] = "Failed to Send Invitation"
