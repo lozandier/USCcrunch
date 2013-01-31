@@ -6489,6 +6489,7 @@ body.blue_background {
     top: -30%;
     left: 32.5%;
     height: auto;
+    min-height: 200px;
     width: 500px;
     border-radius: 5px;
     background-color: white;

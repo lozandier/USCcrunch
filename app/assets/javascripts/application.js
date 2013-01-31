@@ -337,6 +337,7 @@ $(document).ready(function(){
     $("#area").click(function(){
         $("#area").css('min-height','100px');
         $("#file_browse_wrapper1").show();
+        $('.box_l1_hp').css('min-height','240px');
         $('#PreviewImage').hide();
         $("#post").show();
         mouse_in_side = true;
@@ -358,6 +359,7 @@ $(document).ready(function(){
         if(mouse_in_side == false){
             $("#area").css('min-height','10px');
             $("#file_browse_wrapper1").hide();
+            $('.box_l1_hp').css('min-height','auto');
             $("#post").hide();
             $('#PreviewImage').hide();
         }
