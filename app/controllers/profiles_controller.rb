@@ -53,7 +53,7 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     if @user.id != current_user.id
       flash[:error] = 'Access Denied.'
-      redirect_to profile_path(current_user)
+      redirect_to profile_path(:school_name => current_user.school_admin.school,:id =>@user)
     end
   end
 
@@ -61,10 +61,10 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:notice] = "Successfully Updated your Profile details."
-      redirect_to profile_path(@user)
+      redirect_to profile_path(:school_name => current_user.school_admin.school,:id =>@user)
     else
       flash[:error] = "Failed to Update your Profile details."
-      render :action => 'edit'
+      render :action => "edit"
     end
   end
 

@@ -12,11 +12,11 @@ class ReadingsController < ApplicationController
     @user.attributes = params[:user]
     reject = @user.readings.inject(true){|truthiness, n| !!(truthiness && n.marked_for_destruction?) }
     if !reject and @user.save
-      flash[:notice] = "Successfully given document names"
+      flash[:notice] = "Successfully given the Readings"
       redirect_to class_path(:school_name => current_user.school_admin.school,:id =>@user.id)
     else
       1.times{@user.readings.build}
-      flash[:error] = "Document Names given failed"
+      flash[:error] = "Failed to give the readings"
       render :action => "index"
     end
   end

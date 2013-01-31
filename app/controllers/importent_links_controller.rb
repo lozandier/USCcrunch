@@ -12,11 +12,11 @@ class ImportentLinksController < ApplicationController
     @user.attributes = params[:user]
     reject = @user.importent_links.inject(true){|truthiness, n| !!(truthiness && n.marked_for_destruction?) }
     if !reject and @user.save
-      flash[:notice] = "Successfully given document names"
+      flash[:notice] = "Successfully given Importent Links"
       redirect_to class_path(@user)
     else
       1.times{@user.importent_links.build}
-      flash[:error] = "Document Names given failed"
+      flash[:error] = "Failed to give the Links"
       render :action => "index"
     end
   end
