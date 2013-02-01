@@ -8,9 +8,9 @@
         <div class="avatar">
           <div class="msgSource"></div>
           <% if @post.user.role == 'student' %>
-            <%= @post.user.avatar.present? ? image_tag(@post.user.avatar.url(:original), :width => '75', :height => '75') : image_tag("/assets/profile_pic_student.png", :width => '75', :height => '75')%>
+            <%= @post.user.avatar.present? ? image_tag(@post.user.avatar.url(:original)) : image_tag("/assets/profile_pic_student.png")%>
           <% else %>
-            <%= @post.user.avatar.present? ? image_tag(@post.user.avatar.url(:original), :width => '75', :height => '75') : image_tag("/assets/profile_pic_instructor.png", :width => '75', :height => '75')%>
+            <%= @post.user.avatar.present? ? image_tag(@post.user.avatar.url(:original)) : image_tag("/assets/profile_pic_instructor.png")%>
           <% end %>
         </div>
       </div>

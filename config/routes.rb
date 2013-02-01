@@ -95,6 +95,7 @@ WebApp::Application.routes.draw do
       post :report_post
       get :post
       post :create_post
+      get :favorites
     end
     collection do
       get :search

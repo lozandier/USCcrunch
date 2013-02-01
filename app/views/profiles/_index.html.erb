@@ -1,8 +1,8 @@
 <% if @posts.present? %>
   <% for post in @posts.compact %>
-    <div id="post_<%= post.id %>">
+    <div class="posts_box" id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= post_picture(post) %></div>
-      <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;">
+      <div class="post">
         <h5 class="post_name"><%= link_to post.user.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>post.user.id), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
@@ -26,6 +26,10 @@
             &nbsp&nbsp
             <%= link_to_function image_tag("/assets/reply_icon.png", :width => '10px', :height => '10px')+'Reply', "reply(#{current_user.id}, #{post.id})" %>
             &nbsp&nbsp
+            <% if post.user_id == current_user.id  %>
+              <%= link_to image_tag("/assets/repost_icon.png", :width => '10px', :height => '10px')+'Repost',repost_user_post_path(current_user.id,post.id),:remote => true,:method => 'post' %>
+              &nbsp&nbsp
+            <% end %>
             <% if post.user_id == current_user.id  %>
               <span id="delete_<%= post.id %>">
                 <%= link_to image_tag("/assets/delete_post.png", :width => '10px', :height => '10px')+'Delete', user_post_path(current_user,post), :method => :delete, :remote => true,:confirm => "Are you Sure..", :class => 'button medium red'%>

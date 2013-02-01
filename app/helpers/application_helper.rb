@@ -9,34 +9,34 @@ module ApplicationHelper
 
   def profile_picture
     if @user.role == 'student'
-      @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_student.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+      @user.avatar.present? ? image_tag(@user.avatar.url(:original), :class => "profile_pic img-rounded for_cover_photo one_eighty") : image_tag("/assets/profile_pic_student.png", :class => "profile_pic img-rounded for_cover_photo one_eighty")
     else
-      @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_instructor.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+      @user.avatar.present? ? image_tag(@user.avatar.url(:original), :class => "profile_pic img-rounded for_cover_photo one_eighty") : image_tag("/assets/profile_pic_instructor.png", :class => "profile_pic img-rounded for_cover_photo one_eighty")
     end
   end
 
   def class_profile_picture
     if @user.role == 'student'
-      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_student.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original), :class => "profile_pic img-rounded for_cover_photo one_eighty") : image_tag("/assets/profile_pic_student.png", :class => "profile_pic img-rounded for_cover_photo one_eighty")
     else
-      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original) , :width => '180px;', :height => '180px;', :class => "profile_pic img-rounded for_cover_photo") : image_tag("/assets/profile_pic_instructor.png",:width => '180px;',:height => '180px;' , :class => "profile_pic img-rounded for_cover_photo")
+      @user.class_photo.present? ? image_tag(@user.class_photo.url(:original), :class => "profile_pic img-rounded for_cover_photo one_eighty") : image_tag("/assets/profile_pic_instructor.png", :class => "profile_pic img-rounded for_cover_photo one_eighty")
     end
   end
 
 
   def post_picture(post)
     if post.user.role == 'student'
-      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")
+      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_student.png", :class => "profile_pic img-rounded fifty_by_fifty")
     else
-      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :width => "50px;", :height => "50px;", :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")
+      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_instructor.png", :class => "profile_pic img-rounded fifty_by_fifty")
     end
   end
 
   def conversation_picture(post)
     if post.user.role == 'student'
-      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :width => "30px;", :height => "30px;", :class => "conversation_post_pic_small") : image_tag("/assets/profile_pic_student.png",:width => '30px;',:height => '30px;' , :class => "conversation_post_pic_small")
+      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :class => "conversation_post_pic_small thirty_by_thirty") : image_tag("/assets/profile_pic_student.png", :class => "conversation_post_pic_small thirty_by_thirty")
     else
-      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :width => "30px;", :height => "30px;", :class => "conversation_post_pic_small") : image_tag("/assets/profile_pic_instructor.png",:width => '30px;',:height => '30px;' , :class => "conversation_post_pic_small")
+      post.user.avatar.present? ? image_tag(post.user.avatar.url(:original), :class => "conversation_post_pic_small thirty_by_thirty") : image_tag("/assets/profile_pic_instructor.png", :class => "conversation_post_pic_small thirty_by_thirty")
     end
   end
 

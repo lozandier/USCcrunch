@@ -707,7 +707,7 @@ h4 small {
 ul,
 ol {
     padding: 0;
-    margin: 0 0 10px 0px;
+    margin: 0 0 10px 25px;
 }
 
 ul ul,
@@ -2150,6 +2150,7 @@ table [class*=span],
     *margin-right: .3em;
     line-height: 14px;
     vertical-align: text-top;
+    background-image: url("../img/glyphicons-halflings.png");
     background-position: 14px 14px;
     background-repeat: no-repeat;
 }
@@ -2169,7 +2170,7 @@ table [class*=span],
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .dropdown-menu > .active > a > [class*=" icon-"] {
-    background-image: url("/assets/img/glyphicons-halflings-white.png");
+    background-image: url("../img/glyphicons-halflings-white.png");
 }
 
 .icon-glass {
@@ -3023,7 +3024,7 @@ button.close {
 .btn {
     display: inline-block;
     *display: inline;
-    padding: 4px 7px;
+    padding: 4px 14px;
     margin-bottom: 0;
     *margin-left: .3em;
     font-size: 14px;
@@ -3616,8 +3617,8 @@ input[type="submit"].btn.btn-mini {
 }
 
 .btn .caret {
-    margin-left: 2px;
-    margin-top: 13px;
+    margin-top: 8px;
+    margin-left: 0;
 }
 
 .btn-mini .caret,
@@ -4154,7 +4155,7 @@ input[type="submit"].btn.btn-mini {
     min-height: 40px;
     padding-right: 20px;
     padding-left: 20px;
-    background-color: #252525;
+    background-color: #fafafa;
     background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f2f2f2));
     background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
@@ -4285,9 +4286,9 @@ input[type="submit"].btn.btn-mini {
 
 .navbar-search {
     position: relative;
+    float: left;
     margin-top: 5px;
     margin-bottom: 0;
-    margin-right: 10px;
 }
 
 .navbar-search .search-query {
@@ -4387,7 +4388,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .nav > li > a {
     float: none;
-    padding: 9px 15px 10px;
+    padding: 10px 15px 10px;
     color: #777777;
     text-decoration: none;
     text-shadow: 0 1px 0 #ffffff;
@@ -5782,8 +5783,7 @@ to {
     position: absolute;
     z-index: 1;
     margin-top: 8px;
-    left: 50%;
-    right: 50%;
+    margin-left: 450px;
 }
 
 
@@ -5794,6 +5794,10 @@ to {
 
 .options {
     margin-left: 10px;
+}
+
+input.compose_new_post {
+    width: 265px;
 }
 
 .caret.options {
@@ -5829,7 +5833,6 @@ to {
 
 .box_l3_hp {
     margin-top: 20px;
-    height: 60px;
     border-radius: 5px;
     background-color: #f9f9f9;
     border: 1px solid white;
@@ -5840,7 +5843,7 @@ to {
 .box_r1_hp {
     margin-top: 20px;
     margin-bottom: 20px;
-    height: auto;
+    height: 900px;
     border-radius: 5px;
     background-color: #f9f9f9;
     border: 1px solid white;
@@ -5893,8 +5896,7 @@ to {
 }
 
 .link_box {
-    margin-top: 10px;
-    margin-left: 10px;
+    margin: 10px auto 10px auto;
     color: darkgray;
 }
 
@@ -5902,11 +5904,18 @@ to {
     margin-left: 10px;
 }
 
+.posts_box {
+    border-bottom: 1px solid #E8E8E8;
+    overflow: hidden;
+}
+
+.posts_box.first {
+    border-top: 1px solid #E8E8E8;
+}
 
 .post {
     float: right;
-    width: 90.75%;
-    height: auto;
+    width: 695px;
 }
 
 .post_name {
@@ -5935,6 +5944,8 @@ to {
 .action_row {
     float: left;
     clear: both;
+    margin-top: 2px;
+    margin-bottom: 5px;
     font-size: 12px;
 }
 
@@ -5966,8 +5977,10 @@ to {
 .bio {
     margin-top: 30px;
     margin-left: 200px;
+    height: 60px;
     width: 400px;
     color: darkgray;
+    overflow: visible;
 }
 
 .profile_box_right {
@@ -6125,8 +6138,10 @@ to {
 }
 
 .edit_profile_input.first {
+    clear: all;
     margin-top: 45px;
 }
+
 
 /* edit_password.html specific */
 
@@ -6149,7 +6164,7 @@ to {
 .cover_photo_button {
     float: right;
     margin-top: 125px;
-    margin-right: -175px;
+    margin-right: -140px;
 }
 
 .cover_photo_button.for_classes {
@@ -6225,6 +6240,13 @@ p.assistant_at_name {
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 0px;
+}
+
+.class_content_row {
+    float: left;
+    margin-top: -8px;
+    margin-left: 10px;
+    color: darkgray;
 }
 
 /* new_user_1.html specific */
@@ -6311,8 +6333,10 @@ body.blue_background {
 
 .image_size_text {
     float: left;
-    margin-top: 50px;
-    margin-left: -115px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 170px;
+    background-color: red;
 }
 
 .bio_title {
@@ -6328,11 +6352,9 @@ body.blue_background {
 }
 
 .bio_text_area {
-    float: right;
     clear: both;
-    width: 335px;
-    margin-top: 0px;
-    margin-right: 10px;
+    width: 265px;
+    margin-left: 10px;
     resize: none;
 }
 
@@ -6343,114 +6365,128 @@ body.blue_background {
 
 /* conversation.html specific */
 .conversation_right_box {
-    background-color: #F9F9F9;
-    box-shadow: 0 0 1px 1px #FFFFFF inset, 1px 0 5px rgba(0, 0, 0, 0.3);
-    min-height: 97%;
-    height: auto;
-    position: absolute;
-    right: 0;
-    top: 41px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    height: 100%;
     width: 425px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 1px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+
 .conversation_middle_box {
-    background-color: #F9F9F9;
-    bottom: 46%;
-    box-shadow: 0 0 1px 1px #FFFFFF inset, 0 1px 5px rgba(0, 0, 0, 0.3);
-    padding: 10px;
     position: fixed;
+    bottom: 46%;
     right: 45%;
     width: 450px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .conversation_post_pic {
     float: left;
-    margin-left: -6px;
-    margin-right: 10px;
-    margin-top: -3px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .conversation_post_name {
     float: left;
-    margin-right: 10px;
 }
 
 .started_this_conversation {
-    color: gray;
     float: left;
+    color: gray;
     font-size: 10px;
-    margin-bottom: 5px;
-    margin-right: 50px;
-    margin-top: 2px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .conversation_post_content {
     float: left;
     font-size: 18px;
+    width: 77%;
     height: 100%;
-    width: 100%;
 }
 
 .conversation_post_date {
-    color: gray;
     float: left;
-    font-size: 10px;
     margin-top: 5px;
+    font-size: 10px;
+    color: gray;
 }
 
 .conversation_post_input_box {
-    background-color: #F0F2F4;
-    border-bottom-color: #E8E8E8;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    height: 20px;
-    padding-bottom: 20px;
     padding-top: 10px;
+    padding-bottom: 20px;
+    height: 20px;
+    background-color: #f0f2f4;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .conversation_post_pic_small {
     float: left;
     margin-left: 10px;
     margin-right: 10px;
-}	
+}
 
 .conversation_post_input_small {
     float: left;
+    width: 82%;
+    overflow: auto;
 }
 
+
+
 .conversation_post_box {
-    border-bottom-color: #E8E8E8;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding-bottom: 10px;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 10px;
+    overflow: hidden;
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 .conversation_poster_name {
     float: left;
     font-weight: 900;
+    font-size: 14px;
+    line-height: 10px;
+}
+
+.conversation_poster_name a{
+    color: black;
+}
+
+.conversation_poster_at_name {
+    float: left;
+    margin-left: 5px;
     font-size: 12px;
+    line-height: 10px;
+    color: gray;
+
 }
 
 .conversation_poster_content {
     float: left;
-    font-size: 13px;
-    line-height: 16px;
     margin-top: 5px;
     width: 84%;
+    font-size: 13px;
+    line-height: 16px;
 }
 
 .conversation_action_row {
-    color: gray;
     float: left;
+    margin-top: 3px;
+    margin-left: 50px;
     font-size: 10px;
     line-height: 10px;
-    margin-left: 50px;
-    margin-top: 3px;
+    color: gray;
+}
+
+.conversation_icon {
+    margin-top: -3px;
+    margin-right: 3px;
 }
 
 /* notifications.html specific */
@@ -6485,16 +6521,19 @@ body.blue_background {
 /* post_box.html specific */
 
 .popup_post_box {
-    position: absolute;
-    top: -30%;
-    left: 32.5%;
-    height: auto;
-    min-height: 200px;
+    position: fixed;
+    top: 30%;
+    left: 31%;
+    height: 200px;
     width: 500px;
     border-radius: 5px;
     background-color: white;
     box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
+}
 
+.popup_post_box.responsive_height {
+    top: 5%;
+    height: auto;
 }
 
 .whats_happening {
@@ -6515,6 +6554,21 @@ body.blue_background {
     width: 467px;
     height: 100px;
     resize: none;
+}
+
+.popup_post_box_input.faqs_input {
+    height: 138px;
+    text-align: center;
+}
+
+.faqs_list {
+    height: auto;
+    width: 482px;
+    margin: 10px auto 10px auto;
+}
+
+.faq_title {
+    margin-bottom: 20px;
 }
 
 .btn.attachment {
@@ -6543,18 +6597,23 @@ body.blue_background {
 .eduposts_logo {
     position: absolute;
     z-index: 1;
-    margin-top: 3px;
-    left: 48%;
-    right: 52%;
+    margin-top: 5px;
+    left: 46%;
+
 }
 
 .launch_background {
-    z-index: -1;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70%;
+    margin-top: -20px;
+    width: auto;
+    height: 410px;
+    background-image: url("/assets/launch_background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center top;
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: cover;
+    border-bottom: 11px solid rgb(221, 221, 221);
 }
 
 body.white_background {
@@ -6562,11 +6621,20 @@ body.white_background {
     background-color: white;
 }
 
+body.meshed_background {
+    background-image: url("/assets/meshed_background.png");
+}
+
+.container_for_boxes {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+}
+
 .instructor_box {
+    margin-top: 20px;
     float: left;
-    margin-left: 24%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    display: block;
     width: 340px;
     border-radius: 5px;
     /*background-color: rgba(0, 0, 0, 0.3);*/
@@ -6583,36 +6651,25 @@ body.white_background {
 
 .footer {
     clear: both;
-    padding-top: 10px;
-    height: 50px;
+    padding: 10px 0px 10px 40px;
     width: auto;
-    border-top: 1px solid gray;
-    text-align: center;
-
+    vertical-align: center;
 }
-
-/*.instructor_box h1 {
-font-weight: 400;
-color: white;
-opacity: 1;
-}*/
 
 .student_box {
     float: left;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-left: 10px;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 20px;
     width: 340px;
     border-radius: 5px;
     /*background-color: rgba(0, 0, 0, 0.3);*/
     text-align: center;
 }
 
-/*.student_box h1 {
-font-weight: 400;
-color: white;
-opacity: 1;
-}*/
+.grey_text {
+    color: darkgray;
+}
 
 /* about.html specific */
 .box_l1_a {
@@ -6620,6 +6677,7 @@ opacity: 1;
     background-color: #f9f9f9;
     border: 1px solid white;
     box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
+
 }
 
 .box_r1_a {
@@ -6629,6 +6687,7 @@ opacity: 1;
     box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
+
 /* search_posts.html specific */
 .side_nav_button.people {
     border-bottom-left-radius: 5px;
@@ -6637,7 +6696,7 @@ opacity: 1;
 
 /*search_people.html specific */
 .people_box {
-    height: 70px;
+    overflow: hidden;
     border-bottom: 1px solid lightgray;
 }
 
@@ -6656,21 +6715,19 @@ opacity: 1;
 p.search_result_people_at_name {
     float: left;
     margin-top: 27px;
-    margin-left: -48px;
+    margin-left: -51px;
     font-size: 12px;
     color: gray;
 }
 
 /* sign_up.html specific */
 .span10.sign_up_column {
-    position: absolute;
-    margin-left: 10%;
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: 110px;
 }
 
 .sign_up_content {
     margin-left: 150px;
+    width: 380px;
 }
 
 label.checkbox {
@@ -6687,17 +6744,41 @@ label.checkbox {
 .checker_content {
     float: left;
     margin-left: 30px;
-    margin-top: -195px;
+    margin-top: -215px;
     width: 200px;
-    line-height: 22px;
+    line-height: 21px;
+}
+
+.for_invite {
+    margin-top: -150px;
+}
+
+.for_password_recovery {
+    margin-top: -45px;
+}
+
+.additional_message_input {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    resize: none;
+}
+
+.first_name {
+    float: left;
+    width: 170px;
 
 }
 
+.last_name {
+    float: left;
+    margin-left: 11px;
+    width: 170px;
+}
 /* index_instructor.html */
 .progress.progress-striped {
     margin-left: auto;
     margin-right: auto;
-    width: 345px;
+    width: 298px;
 }
 
 .box_l2_hp.points_box {
@@ -6732,15 +6813,18 @@ label.checkbox {
     margin-left: 10px;
 }
 
-.box_r1_hp {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    min-height: 900px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    border: 1px solid white;
-    box-shadow: 0px 0px 1px 1px rgb(255, 255, 255) inset, 0px 1px 5px rgba(0, 0, 0, 0.3);
+/* terms_of_service.html specific */
+.box_r1_hp.for_terms_of_service {
+    height: auto;
 }
+
+.terms_of_service_content {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* add_student.html */
 .faqs_box {
     float: left;
     margin-top: 10px;
@@ -6753,7 +6837,7 @@ label.checkbox {
     clear: left;
     float: left;
     margin-top: 10px;
-    margin-left: 82px;
+    margin-left: 60px;
     font-weight: bold;
 }
 
@@ -6777,7 +6861,7 @@ button.btn.btn-info.save_button {
     clear: right;
     float: right;
     margin-top: 50px;
-    margin-right: 112px;
+    margin-right: 90px;
 }
 
 .faq_box {
@@ -6788,7 +6872,7 @@ button.btn.btn-info.save_button {
     clear: both;
     float: right;
     margin-top: -10px;
-    margin-right: 112px;
+    margin-right: 90px;
     color: gray;
     font-size: 12px;
 }
@@ -6805,7 +6889,7 @@ button.btn.btn-info.save_button {
 
 /* readings.html specific */
 .for_readings {
-    margin-left: 105px;
+    margin-left: 85px;
 }
 
 /* invite_students.html specific */
@@ -6851,12 +6935,8 @@ button.btn.btn-info.save_button {
 /* edit_roster.html specific */
 .stats_box {
     float: right;
-    margin-bottom: 0;
-    margin-left: 0;
-    margin-right: -442px;
-    margin-top: -305px;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
+    margin: 10px 10px 0px 0px;
     width: 250px;
 }
 
@@ -6926,4 +7006,102 @@ button.btn.btn-info.save_button {
 .three_hundred {
     height: 300px;
     width: 300px;
+}
+
+/* recover_password.html specific */
+
+body.gray_background {
+    background-image: none;
+    background-color: #f8f8f9;
+}
+
+.gray_button {
+    float: right;
+    padding: 0px;
+    height: 50px;
+    width: 100px;
+    border-radius: 2px;
+    background-image: none;
+    background-color: #f8f8f9;
+    color: #5c5c5c;
+    border: 1px solid #acb6bf;
+}
+
+
+.btn.btn-warning.span5.gray_button {
+    float: left;
+    margin-left: 280px;
+}
+
+.btn.btn-warning.span5.gray_button:hover {
+    background-image: none;
+    background-color: #f8f8f9;
+    color: #5c5c5c;
+}
+
+.btn.btn-warning.span5.gray_button.create_my_account {
+    margin-left: 230px;
+    width: 150px;
+}
+
+
+.container.lowered {
+    margin-top: 150px;
+}
+
+/* log_in.html specific */
+.log_in_column {
+    margin-left: 225px;
+
+}
+
+.fb_button {
+    float: left;
+    background-color: #3B5998;
+    border: none;
+    border-radius: 2px;
+    padding: 0;
+    margin: 0;
+    height: 60px;
+    width: 340px;
+}
+
+.fb_button_note {
+    float: left;
+    margin-top: 7.5px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    color: #5c5c5c;
+}
+
+.log_in_form {
+    clear: both;
+    padding-top: 7.5px;
+    border-top: 1px solid #5c5c5c;
+}
+
+.log_in_input_top {
+    margin-top: 7.5px;
+    padding-left: 10px;
+    height: 50px;
+    width: 527.5px;
+}
+
+.log_in_input_bottom {
+    padding-left: 10px;
+    margin-bottom: 20px;
+    height: 50px;
+    width: 527.5px;
+}
+
+.log_in_button {
+    float: right;
+    padding: 0px;
+    height: 50px;
+    width: 90px;
+    border-radius: 2px;
+    background-image: none;
+    background-color: #f8f8f9;
+    color: #5c5c5c;
+    border: 1px solid #acb6bf;
 }

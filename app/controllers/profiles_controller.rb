@@ -27,6 +27,17 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def favorites
+    @user = User.find(params[:id])
+    @post = @user.tweets.new(params[:tweet])
+    @header = params[:post].present? ? "#{params[:post].capitalize}" : " "
+    @posts = Favorite.where("(user_id = '#{@user.id}') and status = #{true} and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").order("created_at Desc")
+    respond_to do |format|
+      format.html {render :partial => "favorites", :layout => false if request.xhr?}
+      format.js
+    end
+  end
+
   def search
     @user = User.find_by_username(params[:query])
     if @user.present?

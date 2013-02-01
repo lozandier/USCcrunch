@@ -22,7 +22,7 @@ ul.ir-tabs li.active a:hover{text-decoration:none}ul.ir-tabs-tickers{margin-bott
 }
 
 #conversation_modal .avatar,#conversation_modal .avatar img{
-    width:75px;height:75px;margin:0
+    width:80px;height:80px;margin:0
 }
 #conversation_modal .gradient-section{
     background:0;border:0;padding:0

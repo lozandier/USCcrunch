@@ -2,9 +2,9 @@
 
   <div class="box_l1_ep">
     <% if @user.role == 'student' %>
-      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_student.png", :class => "profile_pic img-rounded fifty_by_fifty") %>
     <% else %>
-      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:height => '50px', :width => '50px' , :class => "profile_pic img-rounded") %>
+      <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original),:height => '50px', :width => '50px' , :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_instructor.png", :class => "profile_pic img-rounded fifty_by_fifty") %>
     <% end %>
     <h3 class="profile_name"><%= @user.fullname %></h3>
     <%= link_to "View my profile page", profile_path(@user), :class => "view_my_profile_page" %>

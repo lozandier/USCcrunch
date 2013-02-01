@@ -21,10 +21,10 @@
       <%end%>
     <%end%>
     <style>
-      body { padding-top: 105px; }
+      body { padding-top: 60px; }
     </style>
   </head>
-  <body style="padding-top: 60px;">
+  <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -38,24 +38,24 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <% if params[:controller] == 'profiles' && params[:action] == 'index'  %>
-                <li class="active"><%= link_to image_tag("/assets/home_icon_blue.png", :height => "30px", :width => "20px")+'Home',profiles_path(:school_name => current_user.school_admin.school)  %></li>
+                <li class="active"><%= link_to image_tag("/assets/home_icon_blue.png", :class => "nav_icon", :height => "30px", :width => "20px")+'Home',profiles_path(:school_name => current_user.school_admin.school)  %></li>
               <% else %>
-                <li><%= link_to image_tag("/assets/home_icon_default.png", :height => "30px", :width => "20px")+'Home', profiles_path(:school_name => current_user.school_admin.school)  %></li>
+                <li><%= link_to image_tag("/assets/home_icon_default.png", :class => "nav_icon", :height => "30px", :width => "20px")+'Home', profiles_path(:school_name => current_user.school_admin.school)  %></li>
               <% end %>
               <% if params[:controller] == 'notifications' && (params[:action] == 'index' || params[:action] == 'posts') %>
-                <li class="active"><%= link_to image_tag("/assets@_blue.png", :height => "30px", :width => "20px")+'Inbox', notifications_path(:school_name => current_user.school_admin.school) %></li>
+                <li class="active"><%= link_to image_tag("/assets@_blue.png", :class => "nav_icon", :height => "30px", :width => "20px")+'Inbox', notifications_path(:school_name => current_user.school_admin.school) %></li>
               <% else %>
-                <li><%= link_to image_tag("/assets/@_grey.png", :height => "30px", :width => "20px")+'Inbox', notifications_path(:school_name => current_user.school_admin.school)  %></li>
+                <li><%= link_to image_tag("/assets/@_grey.png", :class => "nav_icon", :height => "30px", :width => "20px")+'Inbox', notifications_path(:school_name => current_user.school_admin.school)  %></li>
               <% end %>
               <% if params[:controller] == "profiles" && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'edit_password' || params[:action] == 'update' || params[:action] == 'update_password') %>
-                <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :height => "30px", :width => "20px")+"Me", profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
+                <li class="active"><%= link_to image_tag("/assets/my_tweets_icon_blue.png", :class => "nav_icon", :height => "30px", :width => "20px")+"Me", profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
               <% else %>
-                <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :height => "30px", :width => "20px")+"Me", profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
+                <li><%= link_to image_tag("/assets/my_tweets_icon_default.png", :class => "nav_icon", :height => "30px", :width => "20px")+"Me", profile_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
               <% end %>
               <% if params[:controller] == 'classes' && (params[:action] == 'show' || params[:action] == 'edit' || params[:action] == 'roster' || params[:action] == 'invite_students' || params[:action] == 'faqs' || params[:action] == 'importent_links' || params[:action] == 'readings')%>
-                <li class="active"><%= link_to image_tag("/assets/class_blue.png", :height => "20px", :width => "20px")+"Class", class_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
+                <li class="active"><%= link_to image_tag("/assets/class_blue.png", :class => "nav_icon", :height => "20px", :width => "20px")+"Class", class_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
               <% else %>
-                <li><%= link_to image_tag("/assets/class_grey.png", :height => "20px", :width => "20px")+"Class", class_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
+                <li><%= link_to image_tag("/assets/class_grey.png", :class => "nav_icon", :height => "20px", :width => "20px")+"Class", class_path(:school_name => current_user.school_admin.school,:id =>current_user.id) %></li>
               <% end %>
             </ul>
 

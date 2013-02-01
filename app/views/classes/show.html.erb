@@ -32,7 +32,7 @@
     <h2 class="profile_name"><%= @user.class_name.present? ? @user.class_name : "Class" %></h2>
     <br/>
     <p class="bio" style="width: 800px;"><%= @user.class_description.present? ? @user.class_description : " " %></p>
-    <div class="class_content_row" style="margin-left: 200px;">
+    <div class="class_content_row">
       <%= link_to "Syllabus", "", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "FAQ's", "faq('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "Readings", "reading('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
@@ -55,9 +55,9 @@
       <div class="box_l2_hp">
         <div class="instructor_header">Instructor</div>
         <% if @user.role == 'student' %>
-          <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")%>
+          <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded fifty_by_fifty")%>
         <% else %>
-          <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_instructor.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded")%>
+          <%= @user.avatar.present? ? image_tag(@user.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded fifty_by_fifty") : image_tag("/assets/profile_pic_instructor.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded fifty_by_fifty")%>
         <% end %>
         <div class="instructor_name"><%= link_to @user.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>@user.id) %></div>
         <p class="instructor_at_name">&nbsp<%= @user.username %></p>
