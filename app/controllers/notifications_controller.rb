@@ -12,7 +12,7 @@ class NotificationsController < ApplicationController
 
   def announcements
     @user = User.find(params[:id])
-    @header = params[:post].present? ? "#{params[:post].capitalize}" : " "
+    @header = params[:post].present? ? "#{params[:post].capitalize}s" : " "
     @posts = Tweet.where("tweet_id IS NULL and post_box = '#{params[:post]}' and users.school_admin_id = '#{@user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").order('created_at desc').paginate :page => params[:page], :per_page => 10
     respond_to do |format|
       format.js
