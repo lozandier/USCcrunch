@@ -8,9 +8,17 @@
       <%= link_to "1m", graphs_class_path(@user.school_admin.school,@user, :point => '1m'), :remote => true  %>
       <%= link_to "2m", graphs_class_path(@user.school_admin.school,@user, :point => '2m'), :remote => true  %>
       <%= link_to "3m", graphs_class_path(@user.school_admin.school,@user, :point => '3m'), :remote => true  %>
-      <%= link_to "All", graphs_class_path(@user.school_admin.school,@user, :point => 'all'), :remote => true  %>
-      <%= image_tag("/assets/tt.png") %>
+      <%= link_to "All", graphs_class_path(@user.school_admin.school,@user, :point => 'all'), :remote => true  %><br />
+      From: <%= text_field_tag :from, @datess %>
+      To: <%= text_field_tag :to, @tt %>
     </div>
+    <style>
+      #from, #to{
+        width: 75px;
+        height: 12px;
+        margin: 2px 0px;
+      }
+    </style>
     <div class="stats_box_row">
       Posts <span class="stats_num"><%= @posts %></span>
     </div>

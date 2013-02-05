@@ -33,7 +33,11 @@
     <br/>
     <p class="bio" style="width: 800px;"><%= @user.class_description.present? ? @user.class_description : " " %></p>
     <div class="class_content_row">
-      <%= link_to "Syllabus", "", :class => "grey_text", :style => 'color: gray;' %> &#183;
+      <% if @user.syllabus_link.present? %>
+        <%= link_to image_tag(@user.syllabus_link.url(:original),:width => '50px;', :height => '50px;'), @user.syllabus_link.url, :class => "grey_text", :style => 'color: gray;' %> &#183;
+      <% else %>
+        <%= link_to @user.syllabus, "", :class => "grey_text", :style => 'color: gray;', :target => '_blank' %> &#183;
+      <% end %>
       <%= link_to_function "FAQ's", "faq('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "Readings", "reading('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "Important Links", "link('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %>

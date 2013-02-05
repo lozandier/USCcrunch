@@ -1,14 +1,8 @@
-<h2 class="posts_title">
-  Posts
-  <span id="success" style="color: green;display: none;float: right;font-size: 15px;position: relative;top: 30px;">Successfully deleted this post.</span>
-  <%= will_paginate @posts, :param_name => 'index_page', :page_links => false, :previous_label => 'Prev', :next_label => "Next" %>
-</h2>
-<hr />
 <% if @posts.present? %>
   <% for post in @posts.compact %>
-    <div id="post_<%= post.id %>">
+    <div class="posts_box" id="post_<%= post.id %>">
       <div style="float:left;clear:both;"><%= post_picture(post) %></div>
-      <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;">
+      <div class="post" style="width: 1105px;">
         <h5 class="post_name"><%= link_to post.user.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>post.user.id), :style => 'color:black;font-weight:bold;' %></h5>
         <div class="post_at">&nbsp<%= post.user.username %></div>
         <div class="post_time"><%= time_ago_in_words(post.created_at) %></div>
