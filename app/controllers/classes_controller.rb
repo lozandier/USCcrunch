@@ -164,7 +164,7 @@ class ClassesController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if !params[:user][:syllabus_link].present?
+    if params[:user][:syllabus].present?
       params[:user][:syllabus_link] = nil
     end
     if @user.update_attributes(params[:user])
