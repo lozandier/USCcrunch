@@ -168,9 +168,6 @@ class ClassesController < ApplicationController
       params[:user][:syllabus_link] = nil
     end
     if @user.update_attributes(params[:user])
-      if !@user.class_time.present?
-        @user.update_attribute(:class_time, Time.now)
-      end
       flash[:notice] = "Successfully Updated your Class details."
       redirect_to class_path(:school_name => current_user.school_admin.school,:id =>@user.id)
     else
