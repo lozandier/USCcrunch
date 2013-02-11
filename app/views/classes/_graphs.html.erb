@@ -1,6 +1,6 @@
 <div class="span4">
   <div class="squiggly-border"></div>
-  <br /><div class="graph" id="flot-gradient-line_<%= @user.id %>" style="min-height: 400px;min-width: 400px;"></div><br />
+  <br /><div class="graph" id="flot-gradient-line_<%= @user.id %>" style="min-height: 400px;min-width: 400px;left: 20px;"></div><br />
   <div class="stats_box">
     <div class="stats_box_time_row">
       <%= link_to "1d", graphs_class_path(@user.school_admin.school,@user, :point => '1d'), :remote => true  %>
