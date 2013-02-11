@@ -23,12 +23,14 @@
   <%= render :partial => 'profiles/links' %>
 </div>
 
-<div class="span8" id="posts" style="min-height: 700px;">
-  <h2 class="posts_title">Roster</h2>
-  <div class="first_box"></div>
-  <% for student in @users %>
-    <div id ="student_<%= student.id %>">
-      <div class="post" style="border-bottom-color: #E8E8E8;border-bottom-style: solid;border-bottom-width: 1px;height: auto;width: 100%;min-height: 80px;">
+
+<div class="span8" id="posts" style="min-height: 750px;">
+  <h2 class="posts_title">
+    Roster
+  </h2>
+  <div class="posts_box first">
+    <% for student in @users %>
+      <div class="posts_box" id="student_<%= student.id %>" style="min-height: 100px;">
         <%= student.avatar.present? ? image_tag(student.avatar.url(:original) , :width => '50px;', :height => '50px;', :class => "profile_pic img-rounded") : image_tag("/assets/profile_pic_student.png",:width => '50px;',:height => '50px;' , :class => "profile_pic img-rounded") %>
         <div class="search_result_people_name"><%= link_to student.fullname, profile_path(:school_name => current_user.school_admin.school,:id =>student.id)%></div>
         <p class="search_result_people_at_name"><%= student.username %></p>
@@ -36,12 +38,11 @@
         <span id="chart_<%= student.id %>" style="float: left;left: 9px;position: relative;width: 850px;top: 4px;">
         </span>
       </div>
-    </div>
-
-    <script>
-      $("#student_<%= student.id %>").hover(function(){
-        $("#ana_<%= student.id %>").show();
-      })
-    </script>
-  <% end %>
+      <script>
+        $("#student_<%= student.id %>").hover(function(){
+          $("#ana_<%= student.id %>").show();
+        })
+      </script>
+    <% end %>
+  </div>
 </div>

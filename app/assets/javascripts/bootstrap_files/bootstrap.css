@@ -6651,7 +6651,7 @@ body.meshed_background {
 
 .footer {
     clear: both;
-    padding: 10px 0px 10px 40px;
+    padding: 10px 0px 10px 165px;
     width: auto;
     vertical-align: center;
 }
@@ -6935,7 +6935,7 @@ button.btn.btn-info.save_button {
 .stats_box {
     float: right;
     overflow: hidden;
-    margin: -295px -445px 0px 0px;
+    margin: -430px -445px 0px 0px;
     width: 250px;
 }
 
@@ -7039,7 +7039,8 @@ body.gray_background {
 }
 
 .btn.btn-warning.span5.gray_button.create_my_account {
-    margin-left: 230px;
+    color: black;
+    margin-left: 320px;
     width: 150px;
 }
 
@@ -7103,4 +7104,13 @@ body.gray_background {
     background-color: #f8f8f9;
     color: #5c5c5c;
     border: 1px solid #acb6bf;
+}
+
+#ajax_loader_big_div{
+    display:none;
+    height:auto;
+    left:50%;
+    position:fixed;
+    top:35%;
+    z-index:4;
 }

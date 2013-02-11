@@ -6796,12 +6796,3 @@ button.btn.btn-info.save_button {
 .for_readings {
     margin-left: 105px;
 }
-
-#ajax_loader_big_div{
-    display:none;
-    height:auto;
-    left:50%;
-    position:fixed;
-    top:35%;
-    z-index:4;
-}

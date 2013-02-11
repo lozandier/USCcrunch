@@ -29,7 +29,7 @@
     <div class="box_c1_mp extended">
       <div class="cover_photo" style= "background-image : url(<%= @user.theme.present? ? @user.theme : '/assets/cover_photo.jpg'%>)">
         <% if @user.id == current_user.id %>
-          <div class="cover_photo_button"><a href="javascript:changeBGImage(0,<%= current_user.id %>)">switch theme</a></div>
+          <div class="cover_photo_button"><a href="javascript:changeBGImage('<%= current_user.school_admin.school %>',0,<%= current_user.id %>)">switch theme</a></div>
         <% end %>
       </div>
       <%= profile_picture %>

@@ -10,7 +10,8 @@
         <td><%= f.password_field :password, :class => 'input-xlarge', :id => "inputPassword", :placeholder => "Password" %></td>
       </tr>
       <tr>
-        <td><button type="submit" style="background: none; border: none;left: 85px;position: relative;top: -30px;"><%= params[:role] == 'student' ? (image_tag("/assets/login.png", :border=>'0')) : (image_tag("/assets/login copy.png", :border=>'0')) %></button></td>
+        <td><%#= link_to_function "Forgot Password?", "password_login('#{params[:role]}')" %>
+          <button type="submit" style="background: none; border: none;left: 85px;position: relative;top: 0px;"><%= params[:role] == 'student' ? (image_tag("/assets/login.png", :border=>'0')) : (image_tag("/assets/login copy.png", :border=>'0')) %></button></td>
       </tr>
     </table>
   <% end %>

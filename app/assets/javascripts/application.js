@@ -49,6 +49,8 @@ function get_username(ht){
     });
 }
 
+//popups
+
 function conversation(school,user){
     $.ajax({
         url: '/'+school+'/profiles/'+user+'/conversation',
@@ -166,6 +168,8 @@ function hide_popup(){
     }
 }
 
+//preview image
+
 function readURL(input) {
     if (input.files && input.files[0]) {//Check if input has files.
         var reader = new FileReader();//Initialize FileReader.
@@ -191,6 +195,9 @@ function readURL1(input) {
     }
 }
 
+
+//ajax pagination
+
 $(function() {
     $(".pagination a").live("click", function() {
         $.getScript(this.href);
@@ -198,12 +205,16 @@ $(function() {
     });
 });
 
+//ajac loader
+
 jQuery(document).ajaxStart(function(settings){
     jQuery('#ajax_loader_big_div').show();
 });
 jQuery(document).ajaxStop(function(){
     jQuery('#ajax_loader_big_div').hide();
 });
+
+//autocomplete scroll
 
 function more_posts(school,page){
     jQuery('#more_posts_link').remove();
@@ -289,11 +300,11 @@ function school_posts(user_id,student_id, page){
 
 var backImage = ["/assets/Amazing_Flowers_Wallpapers_55.jpg","/assets/scene3.jpg","/assets/rain1.jpg","/assets/moss.jpg","/assets/nature2.jpg"];
 var count = 0;
-function changeBGImage(whichImage,id) {
+function changeBGImage(school,whichImage,id) {
     count++;
     $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
     $.ajax({
-        url:"/profiles/switch_theme",
+        url:"/"+school+"/profiles/switch_theme",
         type:'PUT',
         data:{
             url:backImage[(count-1)],
@@ -305,17 +316,17 @@ function changeBGImage(whichImage,id) {
     if(count == 5){
         count = 0;
     }
-    
+
 }
 
 
 var backImage = ["/assets/Amazing_Flowers_Wallpapers_55.jpg","/assets/scene3.jpg","/assets/rain1.jpg","/assets/moss.jpg","/assets/nature2.jpg"];
 var count = 0;
-function changeclassBGImage(whichImage,id) {
+function changeclassBGImage(school,whichImage,id) {
     count++;
     $(".cover_photo").css("background-image", "url("+backImage[(count-1)]+")");
     $.ajax({
-        url:"/classes/switch_theme",
+        url:"/"+school+"/classes/switch_theme",
         type:'PUT',
         data:{
             url:backImage[(count-1)],
@@ -329,6 +340,8 @@ function changeclassBGImage(whichImage,id) {
     }
 
 }
+
+//onclick extend the box
 
 
 $(document).ready(function(){
@@ -366,10 +379,26 @@ $(document).ready(function(){
     });
 });
 
+//login form for ajax call
+
 function student_login(user){
     $.ajax({
         type:'GET',
         url:"/users/sign_in",
+        data:{
+            role: user
+        },
+        success:function(data){
+
+        }
+    });
+}
+
+
+function password_login(user){
+    $.ajax({
+        type:'GET',
+        url:"/users/password/new",
         data:{
             role: user
         },
@@ -396,6 +425,8 @@ $(document).ajaxError(function(e, XHR, options){
         }
     }
 });
+
+//onclick expand the data
 
 
 function expand(post_id){

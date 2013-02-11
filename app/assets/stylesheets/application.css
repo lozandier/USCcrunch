@@ -306,15 +306,6 @@ a{
     font-size: 15px;
 }
 
-#ajax_loader_big_div{
-    display:none;
-    height:auto;
-    left:50%;
-    position:fixed;
-    top:30%;
-    z-index:4;
-}
-
 #ajax-loader{
     float: right;
     height: 32px;

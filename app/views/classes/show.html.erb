@@ -4,7 +4,7 @@
 
     <div class="cover_photo" style= "background-image : url(<%= @user.class_theme.present? ? @user.class_theme : '/assets/cover_photo.jpg'%>)">
       <% if @user.id == current_user.id %>
-        <div class="cover_photo_button" style="float: right;margin-right: 18px;margin-top: 125px;"><a href="javascript:changeclassBGImage(0,<%= current_user.id %>)">switch theme</a></div>
+        <div class="cover_photo_button" style="float: right;margin-right: 18px;margin-top: 125px;"><a href="javascript:changeclassBGImage('<%= current_user.school_admin.school %>',0,<%= current_user.id %>)">switch theme</a></div>
       <% end %>
     </div>
 
@@ -34,9 +34,9 @@
     <p class="bio" style="width: 800px;"><%= @user.class_description.present? ? @user.class_description : " " %></p>
     <div class="class_content_row">
       <% if @user.syllabus_link.present? %>
-        <%= link_to image_tag(@user.syllabus_link.url(:original),:width => '50px;', :height => '50px;'), @user.syllabus_link.url, :class => "grey_text", :style => 'color: gray;' %> &#183;
+        <%= link_to "Syllabus", @user.syllabus_link.url, :class => "grey_text", :style => 'color: gray;' %> &#183;
       <% else %>
-        <%= link_to @user.syllabus, "", :class => "grey_text", :style => 'color: gray;', :target => '_blank' %> &#183;
+        <%= @user.syllabus.present? ? (link_to "Syllabus",@user.syllabus, :class => "grey_text", :style => 'color: gray;', :target => '_blank' )  : (link_to "Syllabus"," ", :class => "grey_text", :style => 'color: gray;') %>&#183;
       <% end %>
       <%= link_to_function "FAQ's", "faq('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
       <%= link_to_function "Readings", "reading('#{@user.school_admin.school}',#{@user.id})", :class => "grey_text", :style => 'color: gray;' %> &#183;
