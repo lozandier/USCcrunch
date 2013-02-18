@@ -129,6 +129,21 @@ class ClassesController < ApplicationController
         @likesqw1 << [m,@clikes]
         count = count+1
       end
+    elsif params[:point] == 'all'
+      @datess = (current_user.created_at).strftime("%m/%d/%Y")
+      @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and users.school_admin_id = '#{current_user.school_admin_id}' ").joins("left join users on users.id = tweets.user_id").count
+      @replies = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NOT NULL and users.school_admin_id = '#{current_user.school_admin_id}' ").joins("left join users on users.id = tweets.user_id").count
+      @favorites = Favorite.where("favorites.user_id = '#{@user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @user_favorites = Favorite.where("favorites.user_id = '#{current_user.id}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = favorites.user_id").count
+      @likesqw = []
+      @likesqw1 = []
+      @date = (current_user.created_at).strftime("%Y").to_i
+      @time = Date.new(@date, 1).beginning_of_month
+      @time1 = Date.new(@date, 12).end_of_month
+      @likes = Tweet.where("tweets.user_id = '#{@user.id}' and tweets.created_at BETWEEN '#{@time}' AND '#{@time1}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @clikes = Tweet.where("tweets.user_id = '#{current_user.id}' and tweets.created_at BETWEEN '#{@time}' AND '#{@time1}' and users.school_admin_id = '#{current_user.school_admin_id}'").joins("left join users on users.id = tweets.user_id").count
+      @likesqw << [@date,@likes]
+      @likesqw1 << [@date,@clikes]
     else
       @datess = (Time.now - 4.year).strftime("%m/%d/%Y")
       @posts = Tweet.where("tweets.user_id = '#{@user.id}' and reply IS NULL and users.school_admin_id = '#{current_user.school_admin_id}' ").joins("left join users on users.id = tweets.user_id").count

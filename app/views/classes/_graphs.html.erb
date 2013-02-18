@@ -3,12 +3,12 @@
   <br /><div class="graph" id="flot-gradient-line_<%= @user.id %>" style="min-height: 400px;min-width: 400px;left: 20px;"></div><br />
   <div class="stats_box">
     <div class="stats_box_time_row">
-      <%= link_to "1d", graphs_class_path(@user.school_admin.school,@user, :point => '1d'), :remote => true  %>
-      <%= link_to "5d", graphs_class_path(@user.school_admin.school,@user, :point => '5d'), :remote => true  %>
-      <%= link_to "1m", graphs_class_path(@user.school_admin.school,@user, :point => '1m'), :remote => true  %>
-      <%= link_to "2m", graphs_class_path(@user.school_admin.school,@user, :point => '2m'), :remote => true  %>
-      <%= link_to "3m", graphs_class_path(@user.school_admin.school,@user, :point => '3m'), :remote => true  %>
-      <%= link_to "All", graphs_class_path(@user.school_admin.school,@user, :point => 'all'), :remote => true  %><br />
+      <%= link_to "1d", graphs_class_path(@user.school_admin.school,@user, :point => "1d"), :remote => true, :id => "1d_#{@user.id}"  %>
+      <%= link_to "5d", graphs_class_path(@user.school_admin.school,@user, :point => "5d"), :remote => true, :id => "5d_#{@user.id}"   %>
+      <%= link_to "1m", graphs_class_path(@user.school_admin.school,@user, :point => "1m"), :remote => true, :id => "1m_#{@user.id}"   %>
+      <%= link_to "2m", graphs_class_path(@user.school_admin.school,@user, :point => "2m"), :remote => true, :id => "2m_#{@user.id}"   %>
+      <%= link_to "3m", graphs_class_path(@user.school_admin.school,@user, :point => "3m"), :remote => true, :id => "3m_#{@user.id}"   %>
+      <%= link_to "All", graphs_class_path(@user.school_admin.school,@user, :point => "all"), :remote => true, :id => "all_#{@user.id}"  %><br />
       From: <%= text_field_tag :from, @datess %>
       To: <%= text_field_tag :to, @tt %>
     </div>
@@ -38,7 +38,7 @@
 </div>
 <script type="text/javascript">
   jQuery(function($){
-    flot_line('flot-gradient-line_<%= @user.id %>', flot_options_line,<%= @likesqw %>,<%= @likesqw1 %>);
+    flot_line("flot-gradient-line_<%= @user.id %>", flot_options_line,<%= @likesqw %>,<%= @likesqw1 %>);
   });
 </script>
 <style>
